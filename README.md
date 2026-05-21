@@ -1,25 +1,24 @@
 # Dan's Business Path Decision Dashboard
 
-Static private dashboard for comparing Dan's entrepreneurial paths across **Buy / Acquisition**, **Franchise**, and **DIY / Build**.
+Static private dashboard for choosing between two arenas and three entry paths.
 
-## Purpose
+## Architecture
 
-The dashboard is entry-mode-first:
+The dashboard is organized around Dan's actual opportunity set:
 
-- **Buy** when the scarce asset is customers, skilled labor, licenses, route density, reviews, local trust, or existing cash flow.
-- **Franchise** when the franchisor provides an operating system worth royalty/ad-fund drag.
-- **DIY** when brand, content, location, community, and playbook creation are the upside.
+1. **Services** — route-based/local recurring businesses where the scarce assets are customer books, technicians, licenses, reviews, route density, and local trust. These usually skew **acquisition first**, **franchise second**, **DIY only selectively**.
+2. **Multi-Unit** — consumer retail, food/beverage, education, wellness, specialty trade retail, and other repeatable unit concepts. These have more **DIY** potential because Dan can create the brand, site-selection logic, product, content, and operating playbook.
+
+Within each arena, every opportunity is evaluated by entry path: **DIY / Build**, **Franchise**, or **Acquisition / Buy**.
 
 ## Updating
 
-The opportunity catalog is embedded as JSON in `index.html`. Edit the data block near the bottom of the file, or regenerate it from the research CSV in:
-
-`~/.openclaw/workspace/research/2026-05-21 - Wealthy Home Services Category Rankings.csv`
+The catalog is embedded as JSON in `index.html`. Update rows directly or regenerate from research CSVs in `~/.openclaw/workspace/research/`.
 
 ## Local use
 
-Open `index.html` directly in a browser. No build step or dependencies.
+Open `index.html` directly in a browser. No build step, framework, or dependencies.
 
 ## Deployment
 
-Commit locally, then push to GitHub only when approved.
+Commit locally and push only after Dan approves.
