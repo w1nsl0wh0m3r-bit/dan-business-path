@@ -4,17 +4,43 @@ Static private dashboard for choosing between **Services** and **Multi-Unit** bu
 
 Live page: <https://w1nsl0wh0m3r-bit.github.io/dan-business-path/>
 
+## Pages
+
+### index.html — Strategy Dashboard
+The main catalog and ranking surface. Sections from top to bottom:
+
+1. **Arenas** — Services vs Multi-Unit posture definitions
+2. **2×3 Matrix** — which entry path fits each arena
+3. **Strategic Take** — current priority wedge and narrative
+4. **Highest-Ranked Opportunities** — top 15 from live DATA (posture-aware, suppresses DefaultRankEligible=false)
+5. **Full Category Universe** — filterable table (arena, path, market, search) with expandable score drawers
+6. **Ranked by Arena + Path** — reference view: top 10 per cell
+
+All ranking sections derive from the embedded `DATA` array at runtime. The hardcoded table rows in the HTML serve as fallback content before JS loads and are replaced by `render()`.
+
+### operating.html — Operating Layer (Weekly Cockpit)
+Separate page focused on weekly operating decisions, not catalog browsing. Features:
+
+- **Shortlist** — starred items from across the catalog
+- **Pipeline lanes** — None → Researching → Calling → LOI/Term → Dead
+- **Per-card controls** — diligence stage, weekly action note, memo link
+- **Stats bar** — shortlist count, status distribution, gap flags, logic flags
+- **Dynamic change log** — shows last-touched items and live flag counts
+- **Back-links** — each card links to the full detail view on index.html
+
+Cockpit state is stored in browser `localStorage` under `danBusinessPathCockpit.v1`.
+
 ## Current product direction
 
-This is now meant to be a weekly **decision cockpit**, not just a ranked catalog. The top of the page should answer:
+This is a weekly **decision cockpit**, not just a ranked catalog. The operating layer (operating.html) answers:
 
 1. What is on the active shortlist?
 2. What stage is each idea in?
-3. What did Dan/Winslow/Hermes do last?
+3. What did Dan do last?
 4. What changed since the last review?
 5. Which rankings are suspect because the idea/path scores disagree?
 
-The full 179-row universe remains reference material below the cockpit. On 2026-05-22, a gap scan against Obsidian brainstorming added 15 missing categories across compliance micro-routes, property/estate services, resilience services, and distressed acquisition theses, then 6 niche DIY/build-testable categories and 10 trend/buzz-sourced categories with score support.
+The full 179-row universe remains reference material in index.html.
 
 ## Architecture
 
@@ -30,13 +56,13 @@ The original catalog fields remain embedded in `index.html`, but the cockpit nor
 - **Status**: collapsed to `Pursue / Screen / Watch / Kill` for filtering. Micro-statuses stay in the row detail.
 - **Diligence stage**: `None → Researching → Calling → LOI/Term → Dead`.
 - **Shortlist**: local star flag. Defaults to Pursue items and high-scoring eligible items.
-- **This week’s action**: local text note for what happened last.
+- **This week's action**: local text note for what happened last.
 - **Memo / notes link**: local URL/path field for diligence docs.
-- **Score gap flag**: highlights entries where Overall Score `<3.0` but selected path fit `>=4`; these are “easy to do, not necessarily worth doing.”
+- **Score gap flag**: highlights entries where Overall Score `<3.0` but selected path fit `>=4`; these are "easy to do, not necessarily worth doing."
 - **Path logic flag**: highlights entries where `BestPath=Acquisition` but `Acquisition <= 2`.
-- **Metric rationale hover**: each 1–5 sub-score now has a hover tooltip explaining what the score means and pulling the most relevant row rationale — thesis, why, geography, AI edge, financing risk, or kill criteria.
+- **Metric rationale hover**: each 1–5 sub-score has a hover tooltip explaining what the score means and pulling the most relevant row rationale — thesis, why, geography, AI edge, financing risk, or kill criteria. On mobile, tap to expand.
 
-Cockpit state is stored in browser `localStorage` under `danBusinessPathCockpit.v1`; it is not yet synced back to the repo.
+Cockpit state is stored in browser `localStorage` under `danBusinessPathCockpit.v1`; it is not synced back to the repo.
 
 ## Scoring model
 
@@ -63,13 +89,15 @@ Path fit is separate:
 - `PathFitSubtotal`
 - `SelectedPathFit`
 
-`OverallScore`/`Score` should represent category attractiveness independent of path. `SelectedPathFit` should represent whether the recommended path is actually executable.
+`OverallScore`/`Score` represents category attractiveness independent of path. `SelectedPathFit` represents whether the recommended path is actually executable. Both fields should always be equal (`Score` is kept for backward compatibility).
+
+## DATA consistency
+
+Both `index.html` and `operating.html` embed the full DATA array. When updating categories or scores, **both files must be updated together.** The recommended refactor (extract to `catalog.json`) remains deferred because `file://` use does not reliably support `fetch()`.
 
 ## Updating
 
-The catalog is embedded as JSON in `index.html`. Update rows directly for now or regenerate from research CSVs in `~/.openclaw/workspace/research/`.
-
-Recommended next refactor: extract the embedded catalog to `catalog.json`, CSS to `style.css`, and cockpit/rendering logic to `app.js`. Keep the current single-file version until deployment constraints are confirmed because direct `file://` use does not reliably support `fetch()`.
+The catalog is embedded as JSON in both HTML files. Update rows directly for now or regenerate from research CSVs in `~/.openclaw/workspace/research/`.
 
 ## Local use
 
@@ -77,4 +105,8 @@ Open `index.html` directly in a browser. No build step, framework, or dependenci
 
 ## Deployment
 
-Commit locally and push only after Dan approves.
+Commit locally and push. GitHub Pages serves from the default branch.
+
+## Changelog
+
+- **2026-05-22**: Product-quality pass. Synced DATA across both files (operating.html was stale with 179/179 score mismatches). Fixed render() sort to use `OverallScore||Score`. Fixed rank() display. Added mobile scroll hints on catalog table. Made operating.html change log dynamic. Added back-links from cockpit cards to catalog detail. Updated stale copy (category count, footer date).
