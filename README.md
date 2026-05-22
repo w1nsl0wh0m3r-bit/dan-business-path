@@ -14,7 +14,7 @@ This is now meant to be a weekly **decision cockpit**, not just a ranked catalog
 4. What changed since the last review?
 5. Which rankings are suspect because the idea/path scores disagree?
 
-The full 163-row universe remains reference material below the cockpit. On 2026-05-22, a gap scan against Obsidian brainstorming added 15 missing categories across compliance micro-routes, property/estate services, resilience services, and distressed acquisition theses.
+The full 169-row universe remains reference material below the cockpit. On 2026-05-22, a gap scan against Obsidian brainstorming added 15 missing categories across compliance micro-routes, property/estate services, resilience services, and distressed acquisition theses, then 6 niche DIY/build-testable categories with score support.
 
 ## Architecture
 
