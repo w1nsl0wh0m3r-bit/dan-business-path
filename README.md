@@ -18,6 +18,10 @@ The main catalog and ranking surface. Sections from top to bottom:
 
 All ranking sections derive from the embedded `DATA` array at runtime. The hardcoded table rows in the HTML serve as fallback content before JS loads and are replaced by `render()`.
 
+
+### underwriting.html — Economic Underwriting Dashboard
+Separate diligence-grade version for vetting categories economically. It keeps the 179-row universe but re-sorts around `UnderwritingScore` and `UnderwritingVerdict`, with proof/risk columns for unit economics, recurrence, financeability, downside, path fit, theme tags, and economic detail drawers. This is the decision-quality view for “what would need to be true?” rather than browsing themes.
+
 ### operating.html — Operating Layer (Weekly Cockpit)
 Separate page focused on weekly operating decisions, not catalog browsing. Features:
 
