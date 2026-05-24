@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grease Trap Pumping — Acquisition Deep Dive | Dan's Business Path</title>
+<meta name="description" content="Full acquisition deep dive on grease trap pumping businesses. Unit economics, valuation, diligence, deal flow, AI value-add, and 90-day roadmap.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4ead8;--paper2:#eadcc4;--ink:#252018;--muted:#766b5e;--faint:#cdbfaa;--line:rgba(62,49,32,.16);--blue:#315e72;--blue2:#dfeaf0;--clay:#b86f4d;--sage:#6f8062;--gold:#b78b38;--card:rgba(255,251,241,.72);--shadow:0 30px 90px rgba(80,59,34,.16);--spring:cubic-bezier(.16,1,.3,1);--red:#a04040;--redbg:rgba(160,64,64,.08);--greenbg:rgba(111,128,98,.1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;line-height:1.55;background:radial-gradient(circle at 14% -6%,rgba(184,111,77,.22),transparent 34%),radial-gradient(circle at 88% 6%,rgba(49,94,114,.18),transparent 30%),linear-gradient(135deg,rgba(49,94,114,.055) 25%,transparent 25%) 0 0/28px 28px,linear-gradient(225deg,rgba(49,94,114,.045) 25%,transparent 25%) 0 0/28px 28px,linear-gradient(180deg,var(--paper),var(--paper2));min-height:100dvh}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+.shell{max-width:880px;margin:auto;padding:26px 24px 72px}
+nav{position:sticky;top:18px;z-index:10;width:100%;margin:0 0 32px;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:10px;border:1px solid rgba(62,49,32,.14);border-radius:999px;background:rgba(255,251,241,.72);backdrop-filter:blur(18px);box-shadow:0 18px 50px rgba(80,59,34,.12)}
+nav b{padding-left:12px}nav a{color:var(--ink);text-decoration:none;font-size:13px;padding:8px 11px;border-radius:999px;transition:transform .55s var(--spring),background .55s var(--spring)}
+nav a:hover{background:rgba(49,94,114,.09);transform:translateY(-1px)}
+.hero{padding:40px 0 20px}.kicker{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+h1{font-family:"Fraunces",ui-serif,serif;font-weight:650;font-size:clamp(2.35rem,5.4vw,3.55rem);line-height:1.1;margin:0 0 14px;color:var(--ink)}
+h2{font-family:"Fraunces",ui-serif,serif;font-weight:650;font-size:1.6rem;line-height:1.2;margin:48px 0 18px;color:var(--ink)}
+h3{font-size:1.1rem;font-weight:600;margin:28px 0 10px;color:var(--blue)}
+.lede{font-size:1.1rem;color:var(--muted);margin:0 0 28px;max-width:680px}.meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}.tag{display:inline-block;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.04em;border:1px solid var(--line);background:var(--card)}
+.tag-blue{border-color:rgba(49,94,114,.25);color:var(--blue);background:var(--blue2)}.tag-green{border-color:rgba(111,128,98,.25);color:var(--sage);background:var(--greenbg)}.tag-red{border-color:rgba(160,64,64,.2);color:var(--red);background:var(--redbg)}.tag-gold{border-color:rgba(183,139,56,.25);color:#7a5a17;background:rgba(183,139,56,.1)}
+.verdict-box{padding:22px;border-radius:22px;border:2px solid rgba(111,128,98,.3);background:linear-gradient(135deg,rgba(255,251,241,.86),rgba(223,234,240,.48));margin-bottom:36px;box-shadow:var(--shadow)}
+.verdict-box h2{margin-top:0;color:var(--sage)}.verdict-box .one-line{font-size:1.15rem;font-weight:600;margin-bottom:10px}p{margin:0 0 14px}ul,ol{margin:0 0 14px;padding-left:22px}li{margin-bottom:5px}
+.card{padding:18px 20px;border:1px solid var(--line);border-radius:20px;background:rgba(255,251,241,.72);margin-bottom:14px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}.stat-card{padding:16px;border-radius:16px;border:1px solid var(--line);background:rgba(255,251,241,.72);text-align:center}.stat-card b{display:block;font-size:1.6rem;color:var(--blue)}.stat-card small{color:var(--muted);font-size:11px}.red-flag{border-color:rgba(160,64,64,.25);background:var(--redbg)}.green-flag{border-color:rgba(111,128,98,.25);background:var(--greenbg)}.gold-flag{border-color:rgba(183,139,56,.25);background:rgba(183,139,56,.1)}
+table{width:100%;border-collapse:collapse;margin-bottom:18px}th{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}td{padding:8px 10px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top}.comp-table tr:hover{background:rgba(49,94,114,.04)}
+.roadmap-phase{padding:18px 20px;border-radius:18px;border:1px solid var(--line);background:rgba(255,251,241,.72);margin-bottom:14px}.roadmap-phase h3{margin-top:0}.roadmap-phase .phase-label{display:inline-block;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}.phase-30{background:var(--blue2);color:var(--blue)}.phase-60{background:rgba(183,139,56,.12);color:#7a5a17}.phase-90{background:var(--greenbg);color:var(--sage)}
+.formula{padding:14px 18px;border-radius:14px;border:1px dashed rgba(49,94,114,.3);background:rgba(49,94,114,.04);font-family:monospace;font-size:14px;margin-bottom:14px;color:var(--blue)}.source-note{font-size:11px;color:var(--muted);margin-top:36px;padding-top:14px;border-top:1px dashed var(--line)}footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);text-align:center}
+@media(max-width:720px){.shell{padding:10px 8px 44px}h1{font-size:2.2rem}h2{font-size:1.35rem}.grid2,.grid3,.stat-grid{grid-template-columns:1fr}nav{border-radius:16px;flex-wrap:wrap;justify-content:center}table{display:block;overflow-x:auto;white-space:nowrap}}
+</style>
+</head>
+<body>
+<main class="shell">
+
+<nav>
+<b>Dan's decision placemat</b>
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<a href="./index.html">Dashboard</a>
+<a href="./underwriting.html">Underwriting</a>
+<a href="./operating.html">Operating</a>
+</div>
+</nav>
+
+<section class="hero">
+<div class="kicker">Home & Local Services · Acquisition · Compliance Wastewater Routes</div>
+<h1>Grease Trap Pumping — Acquisition Deep Dive</h1>
+<p class="lede">Full acquisition underwriting on grease trap pumping / FOG compliance businesses: route economics, deal comps, diligence traps, financing, target search, digital value-add, and 90-day execution roadmap.</p>
+<div class="meta">
+<span class="tag tag-gold">Screen-high</span>
+<span class="tag tag-blue">Acquisition</span>
+<span class="tag">UW Score: 4.05</span>
+<span class="tag">Overall: 4.00</span>
+<span class="tag tag-gold">Confidence: Medium-High</span>
+<span class="tag">Date: May 24, 2026</span>
+</div>
+</section>
+
+<div class="verdict-box">
+<h2>Executive Verdict</h2>
+<p class="one-line">Acquire / Screen-high — attractive category, but only if the target is a real recurring route book with disposal access, not a messy truck-and-owner job.</p>
+<p><strong>Recommended action:</strong> Build a 100-target off-market map in MA/RI/CT/NJ/NY/South Florida using municipal FOG/hauler lists, Google Maps, restaurant grease-trap keywords, and septic/wastewater businesses that list grease-trap service.</p>
+<p><strong>Why now:</strong> Grease trap pumping sits at the intersection of recurring restaurant compliance, wastewater regulation, route density, and ugly-work labor avoidance. Municipal FOG programs require regular cleaning, and SBA-derived data shows real change-of-ownership activity.</p>
+<p><strong>Why Dan:</strong> This is a compliance database + route-density + technician utilization + disposal logistics problem. The edge is diligence, systems, and acquisition discipline — not brand-building.</p>
+<p><strong>Biggest risk:</strong> The business can be materially nastier and more capital-intensive than lighter route services. Trucks, disposal fees, permits, odors, spills, emergency work, and driver retention can erase the recurring-revenue appeal.</p>
+</div>
+
+<h2>1. Category Definition & Market</h2>
+<p>Grease trap pumping businesses remove fats, oils, grease, and food solids from commercial kitchen traps and interceptors. Customers include restaurants, QSRs, hotels, schools, hospitals, commissaries, grocery prepared-food departments, and property managers.</p>
+<div class="grid3">
+<div class="card green-flag"><strong>Core service</strong><br><small>Scheduled grease trap/interceptor pumping, manifests, compliance records, emergency backups.</small></div>
+<div class="card"><strong>Add-ons</strong><br><small>Used cooking oil, hydro-jetting, drain cleaning, septic pumping, interceptor repair/replacement.</small></div>
+<div class="card gold-flag"><strong>Demand driver</strong><br><small>FOG rules, sewer authority enforcement, backup avoidance, and recurring restaurant operations.</small></div>
+</div>
+<h3>Geographic fit</h3>
+<div class="grid3">
+<div class="card green-flag"><strong>Boston / New England</strong><br><small>Dense restaurant stock, municipal FOG rules, local hauler lists, older buildings. Winter/disposal logistics matter.</small></div>
+<div class="card green-flag"><strong>NY / CT / NJ</strong><br><small>High route density and enforcement, but traffic, labor, and permit complexity increase execution risk.</small></div>
+<div class="card green-flag"><strong>Miami / South Florida</strong><br><small>Year-round service, restaurant growth, strong septic/wastewater market; hurricane/flood logistics require diligence.</small></div>
+</div>
+
+<h2>2. Acquisition Market Landscape</h2>
+<p>There is a market, but exact-match broker inventory is thin. Targets hide inside waste management, septic, liquid waste, drainage, sewer service, restaurant service, and environmental-service listings.</p>
+<table class="comp-table">
+<thead><tr><th>Source / comp</th><th>Revenue</th><th>SDE / margin</th><th>Ask / implied deal</th><th>Multiple / note</th></tr></thead>
+<tbody>
+<tr><td>BizBite / SBA directional dataset</td><td>Typical $900K</td><td>27% margin</td><td>Median implied deal ~$969K</td><td>2.2x–4.0x; 22 SBA acquisition loans under NAICS 562998</td></tr>
+<tr><td>BizBuySell waste/recycling listing snippet</td><td>Not disclosed</td><td>$206K cash flow</td><td>$1.18M ask</td><td>~5.7x cash flow, includes real estate; broad septic/grease remediation</td></tr>
+<tr><td>Rare septic service & grease recycling snippet</td><td>$3.7M</td><td>$1.263M cash flow</td><td>Ask not visible</td><td>Scale proof, not pure grease trap comp</td></tr>
+<tr><td>Adjacent septic broker commentary</td><td>$500K–$2M</td><td>$150K–$400K SDE</td><td>N/A</td><td>2.5x–3.5x SDE for owner-operated septic businesses</td></tr>
+</tbody>
+</table>
+<div class="card gold-flag"><strong>Deal-flow reality check:</strong> Attractive category ≠ thick broker market. A 90-day close is not the base case. A 90-day LOI/no-LOI decision is realistic; sourcing likely requires 6–12 months of off-market work.</div>
+<h3>Roll-up presence</h3>
+<p>Wind River Environmental, backed by Gryphon Investors, publicly offers septic, drain, grease, and wastewater services and has acquired over 100 companies along the Eastern seaboard. That validates strategic interest, but it also means clean multi-truck assets will face competition.</p>
+
+<h2>3. Franchise / Adjacent Benchmark</h2>
+<p>FDDIQ did not surface a dominant pure grease-trap-pumping franchise. Adjacent commercial-kitchen compliance franchises are useful benchmarks but acquisition of independents remains the correct path.</p>
+<table>
+<thead><tr><th>Brand</th><th>Investment</th><th>Royalty</th><th>Item 19 / revenue</th><th>Relevance</th></tr></thead>
+<tbody>
+<tr><td>HOODZ</td><td>2025: $199K–$244K</td><td>10% + 1% ad</td><td>2024 median revenue $439,603</td><td>Kitchen exhaust / restaurant compliance, not pumping</td></tr>
+<tr><td>Cleanest Restaurant Group</td><td>2025: $103K–$144K</td><td>8% + 3% ad</td><td>Item 19 present; median not extracted</td><td>Restaurant cleaning wedge</td></tr>
+<tr><td>Hood Guyz</td><td>2020: $52K–$65K</td><td>10% + 3% ad</td><td>Item 19 present</td><td>Small hood-cleaning adjacent comp</td></tr>
+</tbody>
+</table>
+
+<h2>4. Unit Economics & Route Model</h2>
+<div class="formula">Revenue = active service locations × annual services/location × average ticket + emergency callouts + add-ons</div>
+<div class="stat-grid">
+<div class="stat-card"><b>$125–$315</b><small>Common scheduled indoor/outdoor service range from Greasecycle</small></div>
+<div class="stat-card"><b>$60K–$200K+</b><small>Grease truck cost range, small used/refurbished to premium</small></div>
+<div class="stat-card"><b>15%–24%</b><small>Practical EBITDA range for solid small operators</small></div>
+</div>
+<table>
+<thead><tr><th>Case</th><th>Locations</th><th>Frequency</th><th>Avg ticket</th><th>Revenue</th><th>EBITDA / SDE</th><th>Read</th></tr></thead>
+<tbody>
+<tr><td>Downside</td><td>150</td><td>4x/year</td><td>$225</td><td>$135K</td><td>$11K–$16K</td><td>Too small; owner job</td></tr>
+<tr><td>Base</td><td>500</td><td>4x/year</td><td>$275</td><td>$550K</td><td>$83K–$110K</td><td>Marginal for manager-run</td></tr>
+<tr><td>Better</td><td>800</td><td>5x/year</td><td>$300</td><td>$1.2M</td><td>$216K–$288K</td><td>Strong SBA target if clean</td></tr>
+<tr><td>Upside</td><td>1,500</td><td>5x/year</td><td>$325</td><td>$2.44M</td><td>$536K–$682K</td><td>Platform-quality; competitive</td></tr>
+</tbody>
+</table>
+<p><strong>Underwriting lesson:</strong> Do not buy revenue. Buy route density, manifests, disposal access, truck condition, and transferable non-owner labor.</p>
+
+<h2>5. Valuation & Deal Structure</h2>
+<div class="grid2">
+<div class="card"><h3 style="margin-top:0">Multiple guardrails</h3><p><strong>One-truck owner route:</strong> 1.5x–2.5x SDE<br><strong>Transferable 2–3 truck route:</strong> 2.5x–3.5x SDE<br><strong>Dense managed platform:</strong> 3.5x–4.5x EBITDA</p></div>
+<div class="card"><h3 style="margin-top:0">SBA fit</h3><p>BizBite reports 22 SBA 7(a) acquisition loans under NAICS 562998, median loan ~$824K, implied median deal ~$969K, median term 120 months, median rate 9.75%. Treat as directional but encouraging.</p></div>
+</div>
+<table>
+<thead><tr><th>Layer</th><th>Suggested amount</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>SBA debt</td><td>75%–85%</td><td>Underwrite DSCR after manager/admin replacement</td></tr>
+<tr><td>Buyer equity</td><td>10%–15%</td><td>Plus working-capital reserve</td></tr>
+<tr><td>Seller note / holdback</td><td>10%–15%</td><td>Tie to customer retention, manifest quality, and seller transition</td></tr>
+<tr><td>Working capital</td><td>$75K–$125K+</td><td>Payroll, fuel, disposal fees, insurance, truck maintenance, AR buffer</td></tr>
+</tbody>
+</table>
+
+<h2>6. Quality of Earnings & Diligence Framework</h2>
+<div class="grid2">
+<div class="card green-flag"><strong>Must-have data</strong><ul><li>Route list: customer, trap size, frequency, price, last/next service</li><li>Manifests and disposal invoices</li><li>3 years tax returns/P&L</li><li>Truck maintenance and DOT records</li><li>Permits, insurance, spill/fine history</li><li>AR aging and top-customer concentration</li></ul></div>
+<div class="card red-flag"><strong>QoE traps</strong><ul><li>Emergency/one-time work sold as recurring</li><li>Unpaid spouse/admin labor</li><li>Deferred truck capex</li><li>Disposal agreement not transferable</li><li>Customer list includes closed restaurants</li><li>Cash leakage or weak invoice discipline</li></ul></div>
+</div>
+<h3>100-day post-close plan</h3>
+<ol>
+<li>Ride every route and meet top 30 customers.</li>
+<li>Install KPI dashboard: stops/day, revenue/stop, disposal cost/gallon, drive time, AR days, emergency calls.</li>
+<li>Migrate route data into real software and automate reminders.</li>
+<li>Reprice lowest-margin accounts using trap size/access/frequency data.</li>
+<li>Add adjacent restaurants only after core service continuity is stable.</li>
+</ol>
+
+<h2>7. Target Search Strategy</h2>
+<div class="formula">"grease trap pumping business for sale" · "grease interceptor cleaning business" · "liquid waste disposal business" · "septic and grease pumping business" · "FOG compliance service" · "commercial kitchen grease trap route"</div>
+<div class="grid2">
+<div class="card"><strong>Minimum screen</strong><ul><li>$600K+ revenue</li><li>$150K+ SDE; $250K+ preferred</li><li>300+ recurring commercial accounts</li><li>50%+ scheduled recurring revenue</li><li>Transferable permits/disposal relationship</li></ul></div>
+<div class="card green-flag"><strong>Ideal target</strong><ul><li>$1M–$2M revenue</li><li>$250K–$500K SDE/EBITDA</li><li>2–4 trucks</li><li>500–1,200 recurring accounts</li><li>Dense routes and non-owner driver/team retained</li></ul></div>
+</div>
+<h3>Municipal-list mining</h3>
+<p>For this category, the target databases are municipal FOG / licensed hauler / waste transporter lists — not franchise directories. Mine Boston BWSC, local Boards of Health, Cambridge licensed waste haulers, CT/RI/NJ/NY/FL sewer authority FOG lists, and state environmental permit lists. Filter for “Grease Trap,” “Septic & Grease,” “Liquid Waste,” “Wastewater,” and “Environmental Services.”</p>
+
+<h2>8. Competitive Landscape & Whitespace</h2>
+<p>Competitors include local septic pumpers, dedicated grease specialists, plumbing/drain companies, used cooking oil collectors, hood-cleaning providers, and regional liquid-waste platforms. White space exists in compliance reminders, digital manifests, multi-location restaurant reporting, missed-call capture, and route-density tuck-ins.</p>
+<div class="grid3">
+<div class="card"><strong>SEO wedge</strong><br><small>Local “grease trap cleaning [city]” pages still look under-optimized in many markets.</small></div>
+<div class="card"><strong>Ops wedge</strong><br><small>Price by trap size, hose distance, access, frequency, solids level, and disposal cost.</small></div>
+<div class="card"><strong>Sales wedge</strong><br><small>Property managers and restaurant groups want one reliable vendor and clean paperwork.</small></div>
+</div>
+
+<h2>9. Operator Reality</h2>
+<p>Operators and adjacent septic/pumping sources consistently point to the same hard truths: disposal access is make-or-break, grease waste can cost more to dispose than septic waste, pump trucks are expensive, route density matters more than gross ticket, and dirty-work driver retention is the bottleneck.</p>
+<div class="grid2">
+<div class="card green-flag"><strong>Where operators win</strong><ul><li>Dense scheduled routes</li><li>Strong disposal relationships</li><li>Digital manifests and reminders</li><li>Emergency premium pricing</li><li>Hydro-jet/drain/septic add-ons</li></ul></div>
+<div class="card red-flag"><strong>Where owners lose money</strong><ul><li>Buying trucks before route density</li><li>Underpricing long-drive stops</li><li>Ignoring disposal fees</li><li>Letting restaurant AR age</li><li>Deferred truck maintenance</li></ul></div>
+</div>
+
+<h2>10. AI / Digital Value-Add</h2>
+<div class="grid3">
+<div class="card"><strong>AI receptionist</strong><br><small>Capture emergency calls, trap size, access issues, and book service windows.</small></div>
+<div class="card"><strong>Route optimization</strong><br><small>Cluster stops by ZIP, disposal site, and service frequency to reduce drive time.</small></div>
+<div class="card"><strong>Compliance docs</strong><br><small>Digital manifests, municipal reporting packets, and proof-of-service emails.</small></div>
+<div class="card"><strong>CRM reactivation</strong><br><small>Restaurants not pumped in 90+ days, new openings, multi-location groups.</small></div>
+<div class="card"><strong>Pricing intelligence</strong><br><small>Auto-flag stops below gross margin threshold and enforce emergency premiums.</small></div>
+<div class="card"><strong>AR automation</strong><br><small>Autopay, reminders, card-on-file, and slow-pay restaurant alerts.</small></div>
+</div>
+<p><strong>Realistic margin lift:</strong> 200–500 bps EBITDA if the acquired business currently runs on paper, QuickBooks, and phone memory.</p>
+
+<h2>11. Financing & Capital Structure</h2>
+<p>SBA is plausible but the deal must support DSCR after replacing owner labor. Do not count seller labor as free cash flow unless Dan intends to operate directly. Underwrite manager salary, admin replacement, maintenance capex reserve, truck replacement reserve, working capital, insurance, and disposal fees.</p>
+<div class="card gold-flag"><strong>Example:</strong> A $900K purchase with $275K SDE should not be valued on seller-operated SDE alone. If manager/admin normalization removes $70K and annual debt service is ~$115K, the remaining cushion is thin. Better targets need $250K+ normalized EBITDA/SDE.</div>
+
+<h2>12. Risks & Kill Criteria</h2>
+<div class="card red-flag">
+<p style="margin:0"><strong>Kill the deal if:</strong></p>
+<ul>
+<li>No route-level database with customer, trap size, frequency, price, last service, and next due date.</li>
+<li>Less than 60% of revenue is scheduled recurring service or contracted route work.</li>
+<li>Seller is the only driver/operator and will not provide 6+ month transition.</li>
+<li>Permits or disposal agreements are not transferable or cannot be replaced before close.</li>
+<li>Truck replacement/repair capex exceeds 15% of purchase price and is not priced in.</li>
+<li>Top 10 customers exceed 40% of revenue without contracts and relationship transfer.</li>
+<li>Purchase price is above 3.0x SDE for a one-truck owner-operated route.</li>
+<li>Environmental/spill/fine history is unresolved.</li>
+<li>Normalized DSCR after manager/admin replacement is below 1.35x.</li>
+<li>AR over 60 days is large and not reserved.</li>
+</ul>
+</div>
+
+<h2>13. Expert Call Plan</h2>
+<table>
+<thead><tr><th>Who</th><th>Find</th><th>Questions</th></tr></thead>
+<tbody>
+<tr><td>Operators</td><td>Boston grease specialist; MA/RI septic+grease operator; CT/NJ wastewater hauler; SFL grease/septic operator; UCO collector with pumping</td><td>Stops/day/truck, avg ticket, disposal fees, recurring vs emergency, permits, maintenance, hiring</td></tr>
+<tr><td>Brokers/lenders</td><td>Waste/environmental M&A broker; SBA lender funding NAICS 562998/septic/wastewater</td><td>Deal frequency, clearing multiples, rejected add-backs, collateral treatment, DSCR requirements</td></tr>
+<tr><td>Regulator</td><td>FOG program manager / wastewater pretreatment official</td><td>Hauler licensing, manifests, public lists, frequency rules, common violations</td></tr>
+</tbody>
+</table>
+
+<h2>14. 30 / 60 / 90 Day Acquisition Roadmap</h2>
+<div class="roadmap-phase"><span class="phase-label phase-30">Days 1–30: Map & Verify</span><h3>Build the target universe</h3><ul><li>Build 100-target database across MA/RI/CT/NJ/NY/SFL from municipal hauler/FOG lists.</li><li>Call 10 operators, 3 brokers, 2 disposal facilities, and 2 SBA lenders.</li><li>Model local disposal fees, stops/day, truck capex, and permit transfer rules.</li></ul></div>
+<div class="roadmap-phase"><span class="phase-label phase-60">Days 31–60: Source & Underwrite</span><h3>Move from category to real targets</h3><ul><li>Prioritize 25 owner-operated targets with succession signals.</li><li>Send 10–15 off-market letters/emails.</li><li>Request CIMs/financials for active septic/grease/liquid-waste listings.</li><li>Underwrite 3–5 targets using normalized manager-run EBITDA.</li></ul></div>
+<div class="roadmap-phase"><span class="phase-label phase-90">Days 61–90: LOI or Kill</span><h3>Do not force a deal</h3><ul><li>Submit LOI only if route data, manifests, disposal, permits, and seller transition are clean.</li><li>Structure 10%–20% seller note/retention holdback.</li><li>Conduct ride-alongs and top-customer calls before QoE spend.</li><li>Close only if normalized DSCR >1.35x. Otherwise kill and keep the sourcing list.</li></ul></div>
+
+<h2>15. Final Recommendation</h2>
+<div class="card green-flag"><p><strong>Proceed with acquisition screening, not immediate pursuit.</strong> Grease trap pumping deserves a serious off-market search because it has recurring compliance demand, real SBA acquisition activity, strategic roll-up interest, and clear AI/ops value-add. But it is not as clean as backflow testing: asset intensity, disposal logistics, environmental risk, and labor make diligence harder.</p><p><strong>Ideal deal:</strong> $1M–$2M revenue, $250K–$500K SDE/EBITDA, 2–4 trucks, 500+ recurring commercial accounts, dense routes, transferable permits/disposal, retained non-owner team, and seller note tied to route retention.</p><p><strong>Backup:</strong> If no clean target appears, screen adjacent septic/wastewater businesses where grease trap service is a line item, or examine lower-capex hood cleaning / restaurant compliance route businesses.</p></div>
+
+<h2>16. Dashboard Score Reality Check</h2>
+<p>The UW 4.05 / Overall 4.00 score is directionally fair, but it needs an asterisk. The category is attractive only if route density, permits, disposal access, truck condition, and non-owner labor are real.</p>
+<div class="grid2">
+<div class="card green-flag"><strong>Confirmed</strong><ul><li>Recurring compliance demand</li><li>Acquisition path exists</li><li>AI/ops leverage is real</li><li>Ugly-work defensibility</li><li>Strategic acquirer interest</li></ul></div>
+<div class="card red-flag"><strong>Adjust down</strong><ul><li>Ease of operation</li><li>Manager-run fit for small targets</li><li>90-day broker deal flow</li><li>Capital efficiency</li><li>Environmental/labor risk</li></ul></div>
+</div>
+<p><strong>Is top-10 ranking credible?</strong> Credible as a screen-high acquisition category, not automatic pursue. It is a good category if bought right and a terrible job if bought loosely.</p>
+
+<div class="source-note">
+<strong>Key sources:</strong> FDDIQ database queries for HOODZ, Cleanest Restaurant Group, Hood Guyz; BizBite grease trap cleaning SBA/benchmark page; Greasecycle and Texway pricing guides; Boston Water and Sewer Commission grease trap guidelines; MDC FOG program; NAICS 562998 references; Wind River / Gryphon public acquisition materials; KeeVac grease truck cost guide; CurbWaste/ServiceCore septic economics; BizBuySell snippets for waste/recycling and septic/grease listings. Full memo in Obsidian: <code>Business Transition Engine/FDDIQ/2026-05-24 - Grease Trap Pumping Acquisition Deep Dive.md</code>
+</div>
+
+<footer>
+<a href="./index.html">← Back to Dashboard</a> · Private working document · Updated May 24, 2026
+</footer>
+
+</main>
+</body>
+</html>
