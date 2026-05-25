@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Battery Backup / Generator Monitoring Subscriptions — Deep Dive | Dan's Business Path</title>
+<meta name="description" content="PE-style deep dive on Battery backup / generator monitoring subscriptions: verdict, economics, buybox, risks, expert calls and 30/60/90 roadmap.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4ead8;--paper2:#eadcc4;--ink:#252018;--muted:#766b5e;--faint:#cdbfaa;--line:rgba(62,49,32,.16);--blue:#315e72;--blue2:#dfeaf0;--clay:#b86f4d;--sage:#6f8062;--gold:#b78b38;--card:rgba(255,251,241,.72);--shadow:0 30px 90px rgba(80,59,34,.16);--spring:cubic-bezier(.16,1,.3,1);--red:#a04040;--redbg:rgba(160,64,64,.08);--greenbg:rgba(111,128,98,.1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;line-height:1.55;background:radial-gradient(circle at 14% -6%,rgba(184,111,77,.22),transparent 34%),radial-gradient(circle at 88% 6%,rgba(49,94,114,.18),transparent 30%),linear-gradient(135deg,rgba(49,94,114,.055) 25%,transparent 25%) 0 0/28px 28px,linear-gradient(225deg,rgba(49,94,114,.045) 25%,transparent 25%) 0 0/28px 28px,linear-gradient(180deg,var(--paper),var(--paper2));min-height:100dvh}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+.shell{max-width:860px;margin:auto;padding:26px 24px 72px}
+nav{position:sticky;top:18px;z-index:10;width:100%;margin:0 0 32px;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:10px;border:1px solid rgba(62,49,32,.14);border-radius:999px;background:rgba(255,251,241,.72);backdrop-filter:blur(18px);box-shadow:0 18px 50px rgba(80,59,34,.12)}
+nav b{padding-left:12px}nav a{color:var(--ink);text-decoration:none;font-size:13px;padding:8px 11px;border-radius:999px;transition:transform .55s var(--spring),background .55s var(--spring)}
+nav a:hover{background:rgba(49,94,114,.09);transform:translateY(-1px)}
+.hero{padding:40px 0 20px}.kicker{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+h1{font-family:"Fraunces",ui-serif,serif;font-weight:650;font-size:clamp(2.4rem,5.5vw,3.6rem);line-height:1.1;margin:0 0 14px;color:var(--ink)}
+h2{font-family:"Fraunces",ui-serif,serif;font-weight:650;font-size:1.6rem;line-height:1.2;margin:48px 0 18px;color:var(--ink)}
+h3{font-size:1.1rem;font-weight:600;margin:28px 0 10px;color:var(--blue)}
+.lede{font-size:1.1rem;color:var(--muted);margin:0 0 28px;max-width:640px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}.tag{display:inline-block;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.04em;border:1px solid var(--line);background:var(--card)}
+.tag-blue{border-color:rgba(49,94,114,.25);color:var(--blue);background:var(--blue2)}
+.tag-green{border-color:rgba(111,128,98,.25);color:var(--sage);background:var(--greenbg)}
+.tag-red{border-color:rgba(160,64,64,.2);color:var(--red);background:var(--redbg)}
+.tag-gold{border-color:rgba(183,139,56,.25);color:#7a5a17;background:rgba(183,139,56,.1)}
+.verdict-box{padding:22px;border-radius:22px;border:2px solid rgba(111,128,98,.3);background:linear-gradient(135deg,rgba(255,251,241,.86),rgba(223,234,240,.48));margin-bottom:36px;box-shadow:var(--shadow)}
+.verdict-box h2{margin-top:0;color:var(--sage)}
+.verdict-box .one-line{font-size:1.15rem;font-weight:600;margin-bottom:10px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin-bottom:5px}
+.card{padding:18px 20px;border:1px solid var(--line);border-radius:20px;background:rgba(255,251,241,.72);margin-bottom:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat-card{padding:16px;border-radius:16px;border:1px solid var(--line);background:rgba(255,251,241,.72);text-align:center}
+.stat-card b{display:block;font-size:1.6rem;color:var(--blue)}
+.stat-card small{color:var(--muted);font-size:11px}
+.red-flag{border-color:rgba(160,64,64,.25);background:var(--redbg)}
+.green-flag{border-color:rgba(111,128,98,.25);background:var(--greenbg)}
+.gold-flag{border-color:rgba(183,139,56,.25);background:rgba(183,139,56,.1)}
+table{width:100%;border-collapse:collapse;margin-bottom:18px}
+th{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}
+td{padding:8px 10px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top}
+.comp-table tr:hover{background:rgba(49,94,114,.04)}
+.roadmap-phase{padding:18px 20px;border-radius:18px;border:1px solid var(--line);background:rgba(255,251,241,.72);margin-bottom:14px}
+.roadmap-phase h3{margin-top:0}
+.roadmap-phase .phase-label{display:inline-block;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.phase-30{background:var(--blue2);color:var(--blue)}
+.phase-60{background:rgba(183,139,56,.12);color:#7a5a17}
+.phase-90{background:var(--greenbg);color:var(--sage)}
+.formula{padding:14px 18px;border-radius:14px;border:1px dashed rgba(49,94,114,.3);background:rgba(49,94,114,.04);font-family:monospace;font-size:14px;margin-bottom:14px;color:var(--blue)}
+.source-note{font-size:11px;color:var(--muted);margin-top:36px;padding-top:14px;border-top:1px dashed var(--line)}
+footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);text-align:center}
+@media(max-width:720px){
+.shell{padding:10px 8px 44px}h1{font-size:2.2rem}h2{font-size:1.35rem}
+.grid2,.grid3,.stat-grid{grid-template-columns:1fr}
+nav{border-radius:16px;flex-wrap:wrap;justify-content:center}
+}
+</style>
+</head><body><main class="shell">
+<nav><b>Dan's decision placemat</b><div style="display:flex;gap:6px;flex-wrap:wrap"><a href="./index.html">Dashboard</a><a href="./underwriting.html">Underwriting</a><a href="./operating.html">Operating</a></div></nav>
+<section class="hero"><div class="kicker">Services · Acquisition/DIY · Resilience</div><h1>Battery Backup / Generator Monitoring Subscriptions — Deep Dive</h1><p class="lede">A concise diligence page for Dan's business-path dashboard: category definition, economics, acquisition/build path, risks, expert calls, and 90-day proof plan.</p><div class="meta"><span class="tag tag-green">Screen</span><span class="tag tag-blue">Acquisition</span><span class="tag">UW Score: 4</span><span class="tag tag-gold">Markets: Miami/SFL</span><span class="tag">Date: May 24, 2026</span></div></section>
+<div class="verdict-box"><h2>Executive Verdict</h2><p class="one-line">Interesting Miami/SFL resilience wedge, but the subscription layer must be attached to real installed-base service demand.</p><p><strong>Recommended action:</strong> Acquire a generator/electrical service book or partner into one; sell monitoring, annual maintenance, battery health checks and storm-readiness plans.</p><p><strong>Why now:</strong> Storm anxiety, grid fragility and home electrification make uptime a premium household concern.</p><p><strong>Why Dan:</strong> The edge is underwriting discipline, local-market selection, CRM/AI-enabled follow-up, technician/vendor accountability, and not confusing revenue with transferable cash flow.</p><p><strong>Biggest risk:</strong> Hardware support, licensed electrical labor, low attach rates and false subscription churn can wreck the model.</p></div>
+<h2>1. Category Definition</h2><p>Bull case: demand is tied to property ownership, safety, compliance, breakdowns, or recurring maintenance rather than discretionary taste. A disciplined operator can win with responsiveness, reviews, route density, maintenance plans, and better scheduling/CRM; the buy/acquire path is attractive only if local demand and labor capacity are proven.</p><div class="grid3"><div class="card green-flag"><strong>Demand</strong><br><small>Screen for non-discretionary, recurring, referral or urgent-use cases rather than novelty demand.</small></div><div class="card"><strong>Model</strong><br><small>Best path: Acquisition. Secondary path: DIY. Financing risk: medium.</small></div><div class="card gold-flag"><strong>AI / systems edge</strong><br><small>material ops edge</small></div></div>
+<h2>2. Economics to Underwrite</h2><table><tr><th>Line item</th><th>What to verify</th></tr><tr><td>Ticket / revenue</td><td>Average job or member revenue, repeat frequency, attach revenue, and whether reported revenue is recurring or project-driven.</td></tr><tr><td>Labor</td><td>Fully loaded field/store labor, manager coverage, training time, callbacks/rework, and owner hours removed from SDE.</td></tr><tr><td>CAC</td><td>Referral share, local SEO share, paid-lead dependency, conversion rate, review moat, and seasonality.</td></tr><tr><td>Capex / working capital</td><td>Vehicles, tools, inventory, buildout, deposits, warranty reserves, insurance and licensing burden.</td></tr></table><div class="formula">Manager-loaded EBITDA = gross profit – field labor burden – CAC – G&A – manager comp – maintenance capex reserve</div>
+<h2>3. Buybox / Path</h2><div class="card"><ul><li>Evidence of repeat/referral demand in the target geography.</li><li>Transferable customer/vendor/technician relationships, not founder-only trust.</li><li>Clean job-level data: tickets, margins, close rates, callbacks, reviews and lead sources.</li><li>Ability to run under a paid manager while still clearing Dan's hurdle rate.</li></ul></div>
+<h2>4. Risks & Kill Criteria</h2><div class="grid2"><div class="card red-flag"><strong>Kill fast if:</strong><ul><li>Kill if verified owner/operator economics cannot support a paid manager and still clear 15%+ EBITDA.</li><li>Kill if repeat/referral revenue is weak and paid-lead CAC consumes first-job margin.</li><li>Kill if quality callbacks, seasonality, or licensing require founder-level daily involvement.</li></ul></div><div class="card gold-flag"><strong>Diligence watch-outs</strong><ul><li>Owner add-backs that are actually required labor.</li><li>Paid leads masking weak organic/referral demand.</li><li>Licensing, staffing, warranty or quality risk that prevents multi-site scaling.</li></ul></div></div>
+<h2>5. Expert Calls</h2><ol><li>Three owners/operators in target markets: price, margin, seasonality, staffing and what breaks.</li><li>Two referral sources or customers: why they choose vendors, switching friction and urgency.</li><li>One banker/broker/franchisor where relevant: debtability, resale multiples and buyer competition.</li></ol><p><strong>First proof sprint:</strong> Call 5 owners/operators in Battery backup / generator monitoring subscriptions and 2 customers/referral sources; triangulate ticket, labor hours, repeat rate, callback rate, and manager-run viability.</p>
+<h2>6. 30 / 60 / 90 Roadmap</h2><div class="roadmap-phase"><span class="phase-label phase-30">Days 0-30</span><h3>Validate demand</h3><p>Build local keyword map, call operators, price jobs, inspect reviews, and create a conservative unit model.</p></div><div class="roadmap-phase"><span class="phase-label phase-60">Days 31-60</span><h3>Source / test</h3><p>Run off-market outreach or a demand test; collect real quotes, lead costs, conversion rates and labor constraints.</p></div><div class="roadmap-phase"><span class="phase-label phase-90">Days 61-90</span><h3>Commit or kill</h3><p>Only advance if manager-loaded returns, local demand, staffing and transferability are proven with primary evidence.</p></div>
+<h2>Final Recommendation</h2><p>Interesting Miami/SFL resilience wedge, but the subscription layer must be attached to real installed-base service demand. Keep it on the board only if the next sprint proves local economics after manager compensation and realistic customer acquisition.</p><p class="source-note"><strong>Source note:</strong> Built from dashboard DATA in index.html plus public category benchmarks and regulatory/franchise/operator references already embedded in the Dan Business Path diligence model. Use this as a decision page, not a final QoE report.</p><footer>Dan's Business Path · Deep dive page · May 24, 2026</footer></main></body></html>
