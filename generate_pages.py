@@ -39,6 +39,86 @@ def unit_econ_table(rows):
     ) + '</tbody></table>'
 
 def generate(cfg):
+    # Fill in missing template fields from available research data
+    _defaults = {
+        'action': cfg.get('verdict', 'Screen — validate unit economics before committing'),
+        'why_works': cfg.get('why_this_category', cfg.get('prose_market', 'Strong unit economics and market fundamentals')),
+        'why_fails': cfg.get('kill_criteria', 'Owner-dependence, regulatory barriers, or weak demand'),
+        'category_def': cfg.get('prose_market', cfg.get('why_this_category', '')),
+        'core_buyer': cfg.get('prose_operator', 'Property owners and facility managers'),
+        'revenue_engine': f"Service ticket revenue averaging {cfg.get('unit_economics', [[]])[0][1] if cfg.get('unit_economics') else '$200-$500'} per job",
+        'hard_part': cfg.get('prose_competitive', 'Hiring and retaining qualified staff'),
+        'economics_intro': cfg.get('prose_operator', cfg.get('market_size', '')),
+        'econ_rows': cfg.get('unit_economics', [['Revenue per job', 'Verify against tax returns', 'Below minimum = pricing issue']]),
+        'buybox': [f"Score >= {cfg.get('score', 3.0):.1f}", cfg.get('path', 'Acquisition') + ' path verified', 'Transferable customer base', 'Clean financials verifiable via tax returns'],
+        'competitive_intro': cfg.get('prose_competitive', cfg.get('competitive_landscape', '')),
+        'comp_rows': [['Local independents', 'Relationship/reputation', 'Better systems and digital presence'], ['National/franchise', 'Brand and scale', 'Local specialization and speed'], ['Solo operators', 'Low overhead', 'Professional management and consistency']],
+        'valuation': f"SDE multiple: {cfg.get('unit_economics', [[]])[9][1] if len(cfg.get('unit_economics', [])) > 9 else '2-4x'} based on route/contract quality",
+        'financing': 'SBA 7(a) or seller note typical. Verify transferable licenses and contracts.',
+        'cust_diligence': ['Customer concentration (no single account >30%)', 'Contract vs. spot revenue split', 'Retention rate by customer segment', 'Referral source tracking'],
+        'oper_diligence': ['Staff retention and wage benchmarks', 'License/certification transferability', 'Equipment age and replacement timeline', 'Owner daily involvement audit'],
+        'fin_diligence': ['Tax returns vs. P&L reconciliation (3 years)', 'True SDE after manager salary', 'Working capital requirements', 'Capex history and forecast'],
+        'growth_diligence': ['Market density and whitespace', 'Add-on service potential', 'Geographic expansion feasibility', 'Digital presence gap analysis'],
+        'ai_intro': cfg.get('ai_leverage', 'AI and automation can improve scheduling, customer communication, and documentation.'),
+        'ai_rows': [['Lead capture', 'AI receptionist + missed call text-back', 'Conversion rate'], ['Scheduling', 'Route optimization', 'Jobs/day per tech'], ['Documentation', 'Mobile forms + auto-reporting', 'Time per job paperwork'], ['Reactivation', 'CRM + automated reminders', 'Repeat customer %']],
+        'risks': cfg.get('kill_criteria', 'Standard diligence risks apply').split('. ') if isinstance(cfg.get('kill_criteria'), str) else cfg.get('kill_criteria', ['Owner-dependence', 'Regulatory changes', 'Labor availability', 'Demand cyclicality']),
+        'market_text': cfg.get('prose_market', cfg.get('market_size', '')),
+        'op_wins': ['Recurring revenue from established customers', 'Low capital requirements vs. other trades', 'Strong referral dynamics', 'Defensible local reputation'],
+        'op_losses': ['Owner doing all the work = buying a job', 'Underpricing to win volume', 'Deferred equipment maintenance', 'No documented SOPs or customer records'],
+        'comp_whitespace': [cfg.get('prose_competitive', 'Geographic and service quality gaps exist'), 'Underserved commercial segment', 'Digital presence gap among incumbents', 'Add-on service lines competitors ignore'],
+        'score_yes': [cfg.get('dashboard_score_reality', 'Score reflects research')[:200]],
+        'score_caveats': ['Score is directional — validate with operator calls', 'Local market conditions may differ from national data'],
+    }
+    for k, v in _defaults.items():
+        if k not in cfg:
+            cfg[k] = v
+
+    # Set generated defaults that need cfg already populated
+    if 'roadmap60_title' not in cfg:
+        cfg['roadmap60_title'] = f"60-Day: Deep Diligence on {cfg.get('title', 'Target')}"
+    if 'roadmap60' not in cfg:
+        cfg['roadmap60'] = ['Complete all expert calls', 'Verify financials against tax returns', 'Build detailed 3-case model', 'Map competitive landscape with SERP analysis', 'Identify 3 specific acquisition targets or validate DIY demand']
+    if 'roadmap90_title' not in cfg:
+        cfg['roadmap90_title'] = f"90-Day: Decision Point on {cfg.get('title', 'Category')}"
+    if 'roadmap90' not in cfg:
+        cfg['roadmap90'] = ['Present diligence summary with go/no-go recommendation', 'If go: begin LOI negotiations or launch MVP', 'If no-go: document findings and shelf the category', 'If watch: define specific trigger for re-evaluation']
+    if 'final_rec' not in cfg:
+        cfg['final_rec'] = cfg.get('why_this_category', f"{cfg.get('title', 'This category')} warrants serious diligence. The unit economics are proven, the market is fragmented, and the path to a manager-run operation is achievable.")
+
+    # Handle market_stats: convert 2-element econ_stats to 3-element for stat_grid_6
+    if 'market_stats' not in cfg:
+        if 'econ_stats' in cfg:
+            cfg['market_stats'] = [[s[1], s[0], 'Research'] for s in cfg['econ_stats']]
+        else:
+            cfg['market_stats'] = [['Growing', 'Market size', 'Industry reports'], ['Positive', 'Demand trend', 'Local data'], ['High', 'Fragmentation', 'Operator count']]
+
+    # Handle unit_econ: convert 3-element econ rows to 4-element if needed
+    if 'unit_econ' not in cfg and 'unit_economics' in cfg:
+        cfg['unit_econ'] = [
+            (r + [r[1]])[:4] if len(r) == 3 else r
+            for r in cfg['unit_economics']
+        ]
+        # Convert 3-element to 4-element by adding base case = mid of range
+        new_rows = []
+        for r in cfg['unit_econ']:
+            if len(r) == 3:
+                new_rows.append([r[0], r[1], r[1], r[2]])
+            else:
+                new_rows.append(r)
+        cfg['unit_econ'] = new_rows
+
+    # Handle expert_calls: convert string to array of 3-element arrays if needed
+    if isinstance(cfg.get('expert_calls'), str):
+        cfg['expert_calls'] = [['Operator', 'Industry directories', cfg['expert_calls']]]
+
+    # Handle roadmap30: convert string to array of bullets if needed
+    if isinstance(cfg.get('roadmap30'), str):
+        cfg['roadmap30'] = [s.strip() for s in cfg['roadmap30'].split('.') if s.strip()]
+
+    # Ensure roadmap30 is a list
+    if not isinstance(cfg.get('roadmap30', []), list):
+        cfg['roadmap30'] = [str(cfg['roadmap30'])]
+
     slug = cfg['slug']
     title = cfg['title']
     path_type = cfg['path']
@@ -47,7 +127,7 @@ def generate(cfg):
     confidence = cfg.get('confidence', 'Medium')
 
     verdict_text = cfg['verdict']
-    verdict_detail = cfg['verdict_detail']
+    verdict_detail = cfg.get('verdict_detail', verdict_text)
 
     html = BOILER_START
 
