@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Beverage / Draft Beer Line Cleaning Route — Deep Dive | Dan's Business Path</title>
+<meta name="description" content="Deep-dive investment memo on Beverage / Draft Beer Line Cleaning Route: market demand, unit economics, acquisition buybox, financing, risks, and 90-day roadmap.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FDF6E3;--paper2:#efe2c4;--ink:#231f18;--muted:#756a5c;--line:rgba(35,31,24,.16);--blue:#1a365d;--blue2:#e2edf4;--gold:#B8860B;--gold2:rgba(184,134,11,.13);--sage:#687c55;--red:#963f3f;--card:rgba(255,252,241,.78);--shadow:0 30px 90px rgba(68,49,22,.14);--spring:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;line-height:1.55;background:radial-gradient(circle at 12% -8%,rgba(184,134,11,.18),transparent 32%),radial-gradient(circle at 88% 4%,rgba(26,54,93,.17),transparent 31%),linear-gradient(135deg,rgba(26,54,93,.045) 25%,transparent 25%) 0 0/28px 28px,linear-gradient(225deg,rgba(184,134,11,.04) 25%,transparent 25%) 0 0/28px 28px,linear-gradient(180deg,var(--paper),var(--paper2));min-height:100dvh}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.10;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+.shell{max-width:930px;margin:auto;padding:26px 24px 72px}
+nav{position:sticky;top:18px;z-index:10;width:100%;margin:0 0 34px;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:10px;border:1px solid rgba(35,31,24,.14);border-radius:999px;background:rgba(255,252,241,.76);backdrop-filter:blur(18px);box-shadow:0 18px 50px rgba(68,49,22,.10)}nav b{padding-left:12px}nav a{color:var(--ink);text-decoration:none;font-size:13px;padding:8px 11px;border-radius:999px;transition:transform .55s var(--spring),background .55s var(--spring)}nav a:hover{background:rgba(26,54,93,.09);transform:translateY(-1px)}
+.hero{padding:42px 0 20px}.kicker{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}h1{font-family:"Fraunces",ui-serif,serif;font-weight:650;font-size:clamp(2.3rem,5.8vw,3.9rem);line-height:1.08;margin:0 0 14px;color:var(--ink)}h2{font-family:"Fraunces",ui-serif,serif;font-weight:650;font-size:1.62rem;line-height:1.18;margin:48px 0 18px;color:var(--ink)}h3{font-size:1.08rem;font-weight:700;margin:28px 0 10px;color:var(--blue)}.lede{font-size:1.12rem;color:var(--muted);margin:0 0 28px;max-width:710px}.meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}.tag{display:inline-block;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.04em;border:1px solid var(--line);background:var(--card)}.tag-blue{border-color:rgba(26,54,93,.25);color:var(--blue);background:var(--blue2)}.tag-green{border-color:rgba(104,124,85,.26);color:var(--sage);background:rgba(104,124,85,.11)}.tag-gold{border-color:rgba(184,134,11,.25);color:#765402;background:var(--gold2)}.tag-red{border-color:rgba(150,63,63,.22);color:var(--red);background:rgba(150,63,63,.08)}
+.verdict-box{padding:24px;border-radius:24px;border:2px solid rgba(184,134,11,.35);background:linear-gradient(135deg,rgba(255,252,241,.9),rgba(226,237,244,.56));margin-bottom:36px;box-shadow:var(--shadow)}.verdict-box h2{margin-top:0;color:var(--gold)}.verdict-box .one-line{font-size:1.16rem;font-weight:700;margin-bottom:10px}p{margin:0 0 14px}ul,ol{margin:0 0 14px;padding-left:22px}li{margin-bottom:5px}.card{padding:18px 20px;border:1px solid var(--line);border-radius:20px;background:var(--card);margin-bottom:14px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}.stat-card{padding:16px;border-radius:16px;border:1px solid var(--line);background:var(--card);text-align:center}.stat-card b{display:block;font-size:1.6rem;color:var(--blue)}.stat-card small{color:var(--muted);font-size:11px}.red-flag{border-color:rgba(150,63,63,.25);background:rgba(150,63,63,.08)}.green-flag{border-color:rgba(104,124,85,.25);background:rgba(104,124,85,.10)}.gold-flag{border-color:rgba(184,134,11,.25);background:var(--gold2)}table{width:100%;border-collapse:collapse;margin-bottom:18px}th{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}td{padding:8px 10px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top}.comp-table tr:hover{background:rgba(26,54,93,.04)}.formula{padding:14px 18px;border-radius:14px;border:1px dashed rgba(26,54,93,.3);background:rgba(26,54,93,.045);font-family:ui-monospace,Menlo,monospace;font-size:14px;margin-bottom:14px;color:var(--blue)}.roadmap-phase{padding:18px 20px;border-radius:18px;border:1px solid var(--line);background:var(--card);margin-bottom:14px}.roadmap-phase h3{margin-top:0}.phase-label{display:inline-block;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}.phase-30{background:var(--blue2);color:var(--blue)}.phase-60{background:var(--gold2);color:#765402}.phase-90{background:rgba(104,124,85,.11);color:var(--sage)}.source-note{font-size:11px;color:var(--muted);margin-top:36px;padding-top:14px;border-top:1px dashed var(--line)}footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);text-align:center}
+@media(max-width:720px){.shell{padding:10px 8px 44px}h1{font-size:2.2rem}h2{font-size:1.35rem}.grid2,.grid3,.stat-grid{grid-template-columns:1fr}nav{border-radius:16px;flex-wrap:wrap;justify-content:center}}
+</style>
+</head>
+<body>
+<main class="shell">
+
+<nav><b>Dan's decision placemat</b><div style="display:flex;gap:6px;flex-wrap:wrap"><a href="./index.html">Dashboard</a><a href="./underwriting.html">Underwriting</a><a href="./operating.html">Operating</a></div></nav>
+
+<section class="hero">
+<div class="kicker">Deep Dive · Investment Memo</div>
+<h1>Beverage / Draft Beer Line Cleaning Route</h1>
+<p class="lede">Compliance-like recurring route with strong density in bar-heavy metros, but small-ticket economics require commercial account density and a non-owner route supervisor.</p>
+<div class="meta"><span class="tag tag-gold">CONDITIONAL</span><span class="tag tag-blue">Dan Business Path</span><span class="tag tag-gold">Confidence: Medium</span></div>
+</section>
+
+<div class="verdict-box"><h2>Verdict: CONDITIONAL</h2><p class="one-line">Compliance-like recurring route with strong density in bar-heavy metros, but small-ticket economics require commercial account density and a non-owner route supervisor. Best as acquisition of a beer-line cleaning, draft-system install, and preventive maintenance route — not a startup.</p></div>
+
+<h2>1. Category Definition &amp; Demand Map</h2>
+<ul>
+<li><strong>What is this business?</strong> A route-based service company that cleans and maintains draft beer lines, faucets, couplers, and cooling systems for bars, restaurants, breweries, taprooms, and sports venues on a biweekly or weekly cadence. Many operators also sell draft-system installation, repair, and equipment — which is where margin improves.</li>
+<li><strong>Who are the customers?</strong> Bars, restaurants, breweries, hotel F&amp;B, sports/entertainment venues, and taprooms. Virtually 100% B2B. Key buyers are bar managers, beverage directors, and brewery distribution teams who need clean lines for product quality and health-code compliance.</li>
+<li><strong>Demand drivers:</strong> Brewers Association guidelines recommend cleaning every two weeks; health departments increasingly inspect draft systems; craft beer growth (8,000+ US craft breweries) creates more tap systems; distributor incentive programs sometimes subsidize or require line cleaning. Recurring by nature — every draft account needs it continuously.</li>
+<li><strong>Geographic relevance:</strong> NY/CT/NJ and Boston/NE are exceptionally strong — high bar/restaurant density, craft beer culture, and strict health departments. SFL hospitality corridor (Miami, Tampa, Orlando) is also strong but seasonal tourist bars can churn.</li>
+<li><strong>Market size:</strong> No clean public TAM for line-cleaning specifically; it sits within the broader $4B+ draft beer dispense equipment/service market (Micro Matic estimates). A single metro can support $500K–$2M in cleaning/service revenue.</li>
+</ul>
+
+<h2>2. Economics to Underwrite</h2>
+<table>
+<tr><th>Metric</th><th>Typical Range</th><th>Source</th></tr>
+<tr><td>Revenue per unit</td><td>$400K–$1.5M local route</td><td>estimate; operator/broker comps needed</td></tr>
+<tr><td>SDE / EBITDA margin</td><td>18%–28% after route manager</td><td>estimate from similar compliance route businesses</td></tr>
+<tr><td>Average ticket / service</td><td>$75–$200 per cleaning visit; installs/repairs $300–$2,000+</td><td>Micro Matic pricing guidance; Renny's Draft Solutions case studies</td></tr>
+<tr><td>Customer frequency</td><td>Every 2 weeks (26 visits/year) standard; weekly for high-volume</td><td>Brewers Association Draught Beer Quality Manual</td></tr>
+<tr><td>Route density potential</td><td>Very high in bar-dense metros (NYC, Boston, Chicago)</td><td>operational diligence</td></tr>
+<tr><td>Recurring revenue %</td><td>65%–85% on contracted biweekly accounts</td><td>estimate</td></tr>
+<tr><td>SBA financeable?</td><td>Yes — service route with recurring contracts</td><td>SBA 7(a) lender practice</td></tr>
+</table>
+
+<h2>3. Unit Economics Model (Three-Case)</h2>
+<table>
+<tr><th>Case</th><th>Revenue</th><th>SDE</th><th>SDE Margin</th><th>Entry Price</th><th>Multiple</th><th>Cash-on-Cash Yr 1</th></tr>
+<tr><td>Bear</td><td>$450K</td><td>$85K</td><td>19%</td><td>$255K</td><td>3.0x</td><td>~175%</td></tr>
+<tr><td>Base</td><td>$900K</td><td>$210K</td><td>23%</td><td>$735K</td><td>3.5x</td><td>~130%</td></tr>
+<tr><td>Bull</td><td>$1.5M</td><td>$400K</td><td>27%</td><td>$1.70M</td><td>4.25x</td><td>~95%</td></tr>
+</table>
+<p><strong>Key assumptions:</strong> Entry multiples 3–4.5x SDE at Dan's scale ($200K–$400K SDE). SBA 7(a): 10-year term, ~11% rate (2026), 10% down. Operator partner: Dan can hire a route manager with draft-system experience. The key diligence question is whether accounts stay when the owner exits — contracted/relationship accounts vs. handshake deals.</p>
+
+<h2>4. Path-Specific Buybox</h2>
+<div class="card">
+<h3>Good Acquisition Target</h3>
+<ul>
+<li>Revenue: $500K–$1.5M, SDE: $150K–$400K</li>
+<li>200–600+ recurring accounts on biweekly or weekly cadence</li>
+<li>Trained technicians (not just the owner) with chemical-handling certifications</li>
+<li>Service agreements/contracts (not verbal-only relationships)</li>
+<li>Draft-system install/repair capability (higher-margin upsell)</li>
+<li>Clean vehicle fleet and chemical inventory</li>
+<li>Brewer/distributor referral relationships</li>
+</ul>
+</div>
+<div class="card red-flag">
+<h3>Red Flags</h3>
+<ul>
+<li>Owner is sole technician, accounts are verbal-only</li>
+<li>Poor chemical safety records</li>
+<li>Customer concentration in one restaurant group</li>
+<li>No install/repair revenue</li>
+</ul>
+</div>
+<p>This category is overwhelmingly independent — few franchise systems exist. Comparable service-route franchises for diligence: Micro Matic-trained service providers (training/brand ecosystem, not franchise). If evaluating any franchise, focus on: territory exclusivity, training quality, equipment requirements, royalty vs. independent margin.</p>
+
+<h2>5. Competitive Landscape</h2>
+<ul>
+<li><strong>Competitors:</strong> Local independent draft-line cleaning services, brewery in-house cleaning teams, beverage distributors who offer line cleaning as a value-add, restaurant equipment service companies, and Micro Matic-trained technicians.</li>
+<li><strong>PE/consolidation:</strong> Minimal at the small-route level. Distributors (e.g., Reyes Holdings, Southern Glazer's) sometimes acquire cleaning operations as vertical integration.</li>
+<li><strong>Fragmentation:</strong> Extremely fragmented — mostly 1-5 person operators in each metro. Few regional platforms.</li>
+<li><strong>Moat:</strong> Account relationships and trust (bars don't switch cleaners casually), route density and scheduling discipline, technical skill in draft-system repair, distributor/brewery referral networks, and health-code compliance reputation.</li>
+</ul>
+
+<h2>6. Financing, Valuation &amp; Capital Discipline</h2>
+<ul>
+<li><strong>Deal structure:</strong> Asset purchase — customer lists, service agreements, vehicles, tools, chemical inventory. Seller note tied to account retention (e.g., 20% holdback released after 12 months if 90%+ of accounts remain).</li>
+<li><strong>SBA eligibility:</strong> Strong candidate — recurring B2B revenue, tangible assets (vehicles/equipment), service contracts transferable.</li>
+<li><strong>Down payment at base case ($735K):</strong> ~$73.5K at 10% down.</li>
+<li><strong>Payback period:</strong> ~1.0–1.3 years at base case if account retention holds above 85%.</li>
+<li><strong>Multiple arbitrage:</strong> Buy a sleepy 3.0–3.5x SDE independent, professionalize dispatch/scheduling, add install/repair upsell, build to 4.0–4.5x on exit. Cash-flow play.</li>
+</ul>
+
+<h2>7. 90-Day Roadmap (If Dan Pursues This)</h2>
+<div class="roadmap-phase"><span class="phase-label phase-30">Phase 1 · Days 1–30</span><h3>Market Mapping</h3><p>Map all draft-line cleaning operators in Boston, NY, and SFL target markets. Contact 10–15 brokers specializing in service-route businesses. Request any available FDD or franchise materials. Identify potential operator-partner candidates with draft-system or beverage-service backgrounds.</p></div>
+<div class="roadmap-phase"><span class="phase-label phase-60">Phase 2 · Days 31–60</span><h3>Diligence &amp; Modeling</h3><p>Build three-case acquisition model. Diligence 3–5 targets: verify tax returns, account lists, service agreements, retention rates, technician qualifications, and vehicle/equipment condition. Speak with 2–3 SBA lenders about route-business financing. Interview operator-partner candidates.</p></div>
+<div class="roadmap-phase"><span class="phase-label phase-90">Phase 3 · Days 61–90</span><h3>LOI or Kill</h3><p>Submit LOI on top target with seller note/retention mechanics. Include diligence gates: account verification calls, chemical-safety inspection, vehicle appraisal, and transition-period terms. If no quality target emerges, kill or park the category.</p></div>
+
+<h2>8. Kill Criteria</h2>
+<ul>
+<li>Accounts are handshake-only with no service agreements — retention unprovable</li>
+<li>Owner is sole technician and relationship holder; no transferable goodwill</li>
+<li>Bar/restaurant churn in target market is extreme (e.g., &gt;30% annual account loss)</li>
+<li>Chemical-handling compliance is poor (OSHA/health-code liability)</li>
+<li>Technicians cannot be hired or retained at wages the business can support</li>
+<li>Install/repair revenue is minimal — pure cleaning is too low-margin for a paid manager layer</li>
+<li>SDE disappears after replacing owner labor with route manager salary</li>
+</ul>
+
+<div class="source-note">
+<h2>Sources</h2>
+<ul>
+<li>https://www.brewersassociation.org/educational-publications/draught-beer-quality-manual/</li>
+<li>https://www.micromatic.com/en-us/learn/dispensing-knowledge/learning-resource-center/beer-line-cleaning-and-roi</li>
+<li>https://www.ontraksoftware.com/resource-center/blog/line-cleaning-software/draught-line-cleaning---more-than-a-best-practice.html</li>
+<li>https://draftbeerintelligence.com/wp-content/uploads/2018/05/Economics-of-Line-Cleaning-Watson.pdf</li>
+<li>https://www.rennysdraftsolutions.com/beer-education/draft-line-cleaning-case-studies-for-retailers</li>
+<li>https://www.sba.gov/funding-programs/loans/7a-loans</li>
+</ul>
+</div>
+
+<footer>Deep Dive · Dan's Business Path · 2026</footer>
+</main>
+</body>
+</html>

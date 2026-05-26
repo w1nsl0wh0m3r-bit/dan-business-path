@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sauna / Cold Plunge / Contrast Recovery — Deep Dive | Dan's Business Path</title>
+<meta name="description" content="Deep dive on Sauna / Cold Plunge / Contrast Recovery: demand, unit economics, acquisition buybox, franchising options and 90-day roadmap.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FDF6E3;--paper2:#efe2c4;--ink:#231f18;--muted:#756a5c;--line:rgba(35,31,24,.16);--blue:#1a365d;--blue2:#e2edf4;--gold:#B8860B;--gold2:rgba(184,134,11,.13);--sage:#687c55;--red:#963f3f;--card:rgba(255,252,241,.78);--shadow:0 30px 90px rgba(68,49,22,.14);--spring:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;line-height:1.55;background:radial-gradient(circle at 12% -8%,rgba(184,134,11,.18),transparent 32%),radial-gradient(circle at 88% 4%,rgba(26,54,93,.17),transparent 31%),linear-gradient(135deg,rgba(26,54,93,.045) 25%,transparent 25%) 0 0/28px 28px,linear-gradient(225deg,rgba(184,134,11,.04) 25%,transparent 25%) 0 0/28px 28px,linear-gradient(180deg,var(--paper),var(--paper2));min-height:100dvh}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.10;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+.shell{max-width:930px;margin:auto;padding:26px 24px 72px}
+nav{position:sticky;top:18px;z-index:10;width:100%;margin:0 0 34px;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:10px;border:1px solid rgba(35,31,24,.14);border-radius:999px;background:rgba(255,252,241,.76);backdrop-filter:blur(18px);box-shadow:0 18px 50px rgba(68,49,22,.10)}nav b{padding-left:12px}nav a{color:var(--ink);text-decoration:none;font-size:13px;padding:8px 11px;border-radius:999px;transition:transform .55s var(--spring),background .55s var(--spring)}nav a:hover{background:rgba(26,54,93,.09);transform:translateY(-1px)}
+.hero{padding:42px 0 20px}.kicker{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}h1{font-family:"Fraunces",ui-serif,serif;font-weight:650;font-size:clamp(2.3rem,5.8vw,3.9rem);line-height:1.08;margin:0 0 14px;color:var(--ink)}h2{font-family:"Fraunces",ui-serif,serif;font-weight:650;font-size:1.62rem;line-height:1.18;margin:48px 0 18px;color:var(--ink)}h3{font-size:1.08rem;font-weight:700;margin:28px 0 10px;color:var(--blue)}.lede{font-size:1.12rem;color:var(--muted);margin:0 0 28px;max-width:710px}.meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}.tag{display:inline-block;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.04em;border:1px solid var(--line);background:var(--card)}.tag-blue{border-color:rgba(26,54,93,.25);color:var(--blue);background:var(--blue2)}.tag-green{border-color:rgba(104,124,85,.26);color:var(--sage);background:rgba(104,124,85,.11)}.tag-gold{border-color:rgba(184,134,11,.25);color:#765402;background:var(--gold2)}.tag-red{border-color:rgba(150,63,63,.22);color:var(--red);background:rgba(150,63,63,.08)}
+.verdict-box{padding:24px;border-radius:24px;border:2px solid rgba(184,134,11,.35);background:linear-gradient(135deg,rgba(255,252,241,.9),rgba(226,237,244,.56));margin-bottom:36px;box-shadow:var(--shadow)}.verdict-box h2{margin-top:0;color:var(--gold)}.verdict-box .one-line{font-size:1.16rem;font-weight:700;margin-bottom:10px}p{margin:0 0 14px}ul,ol{margin:0 0 14px;padding-left:22px}li{margin-bottom:5px}.card{padding:18px 20px;border:1px solid var(--line);border-radius:20px;background:var(--card);margin-bottom:14px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}.stat-card{padding:16px;border-radius:16px;border:1px solid var(--line);background:var(--card);text-align:center}.stat-card b{display:block;font-size:1.6rem;color:var(--blue)}.stat-card small{color:var(--muted);font-size:11px}.red-flag{border-color:rgba(150,63,63,.25);background:rgba(150,63,63,.08)}.green-flag{border-color:rgba(104,124,85,.25);background:rgba(104,124,85,.10)}.gold-flag{border-color:rgba(184,134,11,.25);background:var(--gold2)}table{width:100%;border-collapse:collapse;margin-bottom:18px}th{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}td{padding:8px 10px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top}.comp-table tr:hover{background:rgba(26,54,93,.04)}.formula{padding:14px 18px;border-radius:14px;border:1px dashed rgba(26,54,93,.3);background:rgba(26,54,93,.045);font-family:ui-monospace,Menlo,monospace;font-size:14px;margin-bottom:14px;color:var(--blue)}.roadmap-phase{padding:18px 20px;border-radius:18px;border:1px solid var(--line);background:var(--card);margin-bottom:14px}.roadmap-phase h3{margin-top:0}.phase-label{display:inline-block;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}.phase-30{background:var(--blue2);color:var(--blue)}.phase-60{background:var(--gold2);color:#765402}.phase-90{background:rgba(104,124,85,.11);color:var(--sage)}.source-note{font-size:11px;color:var(--muted);margin-top:36px;padding-top:14px;border-top:1px dashed var(--line)}footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);text-align:center}
+@media(max-width:720px){.shell{padding:10px 8px 44px}h1{font-size:2.2rem}h2{font-size:1.35rem}.grid2,.grid3,.stat-grid{grid-template-columns:1fr}nav{border-radius:16px;flex-wrap:wrap;justify-content:center}}
+</style>
+</head>
+<body>
+<main class="shell">
+
+<nav><b>Dan's decision placemat</b><div style="display:flex;gap:6px;flex-wrap:wrap"><a href="./index.html">Dashboard</a><a href="./underwriting.html">Underwriting</a><a href="./operating.html">Operating</a></div></nav>
+
+
+<section class="hero"><div class="kicker">Wellness / Recovery · Acquisition / Franchise Screen</div><h1>Sauna / Cold Plunge / Contrast Recovery — Deep Dive</h1><p class="lede">Conditional: consumer demand is hot, but the category is early and buildout-heavy; prefer a distressed or proven membership studio with utilization data over a de novo wellness lounge.</p><div class="meta"><span class="tag tag-gold">Dan-scale 3-4.5x SDE</span><span class="tag tag-blue">NE / NY / SFL relevance</span><span class="tag">Operator-partner friendly</span></div></section>
+<h2>Verdict: CONDITIONAL</h2>
+<p>Conditional: consumer demand is hot, but the category is early and buildout-heavy; prefer a distressed or proven membership studio with utilization data over a de novo wellness lounge.</p>
+<h2>1. Category Definition &amp; Demand Map</h2>
+<ul><li>What is this business? A recovery studio offering infrared/traditional sauna, cold plunge, contrast therapy, compression, red light and memberships/packages.</li></ul>
+<ul><li>Who are the customers? B2C wellness consumers, athletes, executives, biohacker/longevity customers and local B2B partnerships with gyms, trainers and sports clubs.</li></ul>
+<ul><li>Demand drivers: longevity/wellness trend, athletic recovery, social media discovery, memberships and high-income consumers seeking non-clinical routines.</li></ul>
+<ul><li>Geographic relevance: NYC/CT/NJ/Boston affluent areas and SFL are relevant; dense high-income trade areas matter more than broad regional demand.</li></ul>
+<ul><li>Market size: Global wellness economy is multi-trillion per Global Wellness Institute; sauna/cold plunge is a niche without reliable local TAM, so model by memberships, room utilization and comparable wellness studios.</li></ul>
+<h2>2. Economics to Underwrite</h2>
+<table><tr><th>Metric</th><th>Typical Range</th><th>Source</th></tr>
+<tr><td>Revenue per unit</td><td>$500K-$1.8M studio</td><td>Restore/fitness recovery analogs; estimate</td></tr>
+<tr><td>SDE / EBITDA margin</td><td>12%-28% mature studio; negative during ramp</td><td>estimate</td></tr>
+<tr><td>Average ticket / job</td><td>$35-$75 session; $150-$300 monthly membership</td><td>Othership/Contrast/RēCOVER menus; estimate</td></tr>
+<tr><td>Customer frequency</td><td>Weekly to monthly members; packages</td><td>membership menus</td></tr>
+<tr><td>Route density potential</td><td>Facility model; utilization by room/hour</td><td>operator model</td></tr>
+<tr><td>Recurring revenue %</td><td>40%-75% if membership-led</td><td>estimate</td></tr>
+<tr><td>SBA financeable?</td><td>Yes for profitable acquisition; startup buildout tougher</td><td>SBA 7(a)</td></tr>
+<h2>3. Unit Economics Model (Three-Case)</h2>
+</table>
+<table><tr><th>Case</th><th>Revenue</th><th>SDE</th><th>SDE Margin</th><th>Entry Price</th><th>Multiple</th><th>Cash-on-Cash Year 1</th></tr>
+<tr><td>Bear</td><td>$550K</td><td>$66K</td><td>12%</td><td>$198K</td><td>3.0x</td><td>181%</td></tr>
+<tr><td>Base</td><td>$1000K</td><td>$200K</td><td>20%</td><td>$750K</td><td>3.8x</td><td>114%</td></tr>
+<tr><td>Bull</td><td>$1700K</td><td>$442K</td><td>26%</td><td>$1989K</td><td>4.5x</td><td>69%</td></tr>
+</table>
+<p>**Key assumptions:**</p>
+<ul><li>Entry multiples: 3-4.5x SDE at Dan&#x27;s scale ($200-500K SDE). NOT 8-10x.</li></ul>
+<ul><li>SBA 7(a): 10-year term, ~11% rate (2026), 10% down.</li></ul>
+<ul><li>Cash-on-cash = (SDE - debt service) / down payment; model uses 10-year amortizing debt at 11%.</li></ul>
+<ul><li>Operator partner: Dan can hire/partner with an operator — don&#x27;t penalize lack of direct experience.</li></ul>
+<h2>4. Path-Specific Buybox</h2>
+<p>What makes a GOOD acquisition target in this category?</p>
+<ul><li>Revenue range: $700K-$1.8M with 300+ active members and room utilization history.</li></ul>
+<ul><li>SDE range: $200K-$600K normalized manager-run SDE; below that is too owner-job-like.</li></ul>
+<ul><li>Years in business: 4+ years, with at least 3 years of tax returns/POS data.</li></ul>
+<ul><li>Route density / customer count: 300-800 active members in a 10-15 minute affluent trade area; utilization tracked by room/hour.</li></ul>
+<ul><li>Key assets to verify: lease/buildout/HVAC/plumbing, equipment warranties, sanitation SOPs, membership data, waivers, staff training, brand/reviews.</li></ul>
+<ul><li>Red flags to avoid: unproven location, high capex not reflected in price, weak sanitation/liability process, churn hidden by launch promos.</li></ul>
+<p>What makes a good FRANCHISE candidate?</p>
+<ul><li>Top 3-5 franchise brands with typical franchise fee + royalty: Restore Hyper Wellness, Perspire Sauna Studio, iCRYO, HOTWORX, Pause Studio/contrast concepts; verify franchise fee/royalty in current FDDs.</li></ul>
+<ul><li>FDD highlight: Item 7 buildout, Item 19 membership economics, required equipment refresh and territory rules matter most.</li></ul>
+<ul><li>Unit economics from franchise disclosure: use Item 19 only; if Item 19 is absent, validate with franchisee calls and treat franchisor examples as marketing.</li></ul>
+<h2>5. Competitive Landscape</h2>
+<ul><li>Top 5-10 competitors or roll-ups active in this space: Restore Hyper Wellness, Perspire Sauna Studio, HOTWORX, iCRYO, Othership, Remedy Place, local spas/gyms and boutique recovery studios.</li></ul>
+<ul><li>PE activity: Wellness franchisors and recovery concepts have institutional interest, but unit economics are not yet as seasoned as gyms or salons.</li></ul>
+<ul><li>Fragmentation level: Medium-high; branded concepts are expanding but local boutiques dominate many markets.</li></ul>
+<ul><li>Moat: membership community, premium location, sanitation trust, equipment uptime, programming and partnerships with trainers/athletes.</li></ul>
+<h2>6. Financing, Valuation &amp; Capital Discipline</h2>
+<ul><li>Typical deal structure: asset purchase with 10%-20% seller note/earnout tied to retention; inventory/equipment and lease assignments diligenced separately.</li></ul>
+<ul><li>SBA eligibility and typical loan terms: generally SBA-financeable if tax returns, lease/licensing and cash flow are clean; underwrite 10-year amortization, ~11% coupon and 10%-15% equity.</li></ul>
+<ul><li>Down payment required at Dan&#x27;s scale: roughly $75K-$250K plus working capital for a $750K-$2.0M entry price.</li></ul>
+<ul><li>Payback period at base case: target 2.5-4.0 years on manager-run SDE; walk above 5 years.</li></ul>
+<ul><li>honest multiple arbitrage: ~3x in → 4x out at this scale, earned by professionalizing reporting, de-risking staff/customer concentration and adding repeat revenue.</li></ul>
+<h2>7. 90-Day Roadmap (If Dan Pursues This)</h2>
+<ul><li>Phase 1 (Days 1-30): Market mapping, broker outreach, franchise FDD requests; build NE/NY/SFL competitor and pricing grid.</li></ul>
+<ul><li>Phase 2 (Days 31-60): Operator partner search, financial modeling, site visits; request tax returns, POS/customer cohorts, lease/equipment schedules and labor roster.</li></ul>
+<ul><li>Phase 3 (Days 61-90): LOI on first target or franchise signing decision only if manager-run SDE, debt service coverage and local whitespace survive diligence.</li></ul>
+<h2>8. Kill Criteria</h2>
+<p>What would make this a NO-GO?</p>
+<ul><li>Manager-run SDE below $175K after replacing owner labor.</li></ul>
+<ul><li>Asking price above 4.5x verified SDE without exceptional recurring revenue.</li></ul>
+<ul><li>Seller cannot reconcile P&amp;L to tax returns/POS/bank statements.</li></ul>
+<ul><li>Lease, license, medical/regulatory, insurance or equipment dependency cannot transfer cleanly.</li></ul>
+<ul><li>Membership churn or utilization data cannot support fixed rent/payroll after promo cohorts normalize.</li></ul>
+<h2>Sources</h2>
+<ul><li>https://globalwellnessinstitute.org/industry-research/</li></ul>
+<ul><li>https://www.restore.com/</li></ul>
+<ul><li>https://perspiresaunastudio.com/franchise/</li></ul>
+<ul><li>https://www.hotworx.net/franchise/</li></ul>
+<ul><li>https://www.icryo.com/franchise/</li></ul>
+<ul><li>https://www.sba.gov/funding-programs/loans/7a-loans</li></ul>
+
+<footer>Dan's Business Path · Deep Dive</footer>
+</main>
+</body>
+</html>
