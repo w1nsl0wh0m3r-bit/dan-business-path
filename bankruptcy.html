@@ -93,7 +93,9 @@ footer{padding:40px 0;color:var(--muted);font-size:12px;text-align:center}
 </section>
 
 <div class="tabs">
-  <button data-tab="overview" class="active">Overview</button>
+  <button data-tab="watchlist" class="active">Watchlist</button>
+  <button data-tab="signals">Signals</button>
+  <button data-tab="overview">Overview</button>
   <button data-tab="cases">Cases</button>
   <button data-tab="table">Table</button>
   <button data-tab="queue">To Verify</button>
@@ -114,7 +116,27 @@ footer{padding:40px 0;color:var(--muted);font-size:12px;text-align:center}
 
 <div id="metrics" class="metric-grid"></div>
 
-<section id="overview" class="section active">
+<section id="watchlist" class="section active">
+  <h2>Live Watchlist — 140 Monitored Companies</h2>
+  <p class="note">Companies actively tracked for distress signals. Scored daily by asset quality, distress level, control actionability, and Dan-fit. Sorted by priority score descending.</p>
+  <div id="watchMetrics" class="metric-grid"></div>
+  <div class="filters" style="margin-bottom:18px">
+    <input id="wq" placeholder="Search company, category, state…">
+    <select id="wstage"><option value="">Any stage</option></select>
+    <select id="wfit"><option value="">Any Dan-fit</option></select>
+    <select id="wstate"><option value="">Any status</option></select>
+  </div>
+  <div class="table-shell"><table id="watchTbl"></table></div>
+</section>
+
+<section id="signals" class="section">
+  <h2>Signal Feed</h2>
+  <p class="note">Live distress signals from monitoring sources. Severity: red = immediate action, orange = investigate, yellow = watch, green = informational.</p>
+  <div id="sigMetrics" class="metric-grid"></div>
+  <div id="signalCards" class="cards"></div>
+</section>
+
+<section id="overview" class="section">
   <h2>Pattern Dashboard</h2>
   <p class="note">Plain-English distributions. Click filters above to narrow the whole dashboard.</p>
   <div id="insights" class="cards"></div>
@@ -155,7 +177,7 @@ footer{padding:40px 0;color:var(--muted);font-size:12px;text-align:center}
 <script>
 const esc=s=>(s??'').toString().replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const j=u=>fetch(u,{cache:'no-store'}).then(r=>r.json());
-let ROWS=[],QUEUE=[],BUYERS=[],TAX=[],SUMMARY={};
+let ROWS=[],QUEUE=[],BUYERS=[],TAX=[],SUMMARY={},WATCH=[],SIGNALS=[];
 
 const LABELS={
   'positive_decision_comp':'Positive comp','selective_asset_comp':'Selective asset comp','cautionary_ip_comp':'Cautionary IP comp','avoid_or_negative_comp':'Avoid / negative comp','watch_verify_before_using':'Watch — verify before using',
@@ -249,6 +271,112 @@ function render(){
   metrics(data);insights(data);table(data);cards(data);
 }
 
+/* ---- WATCHLIST (140 monitored companies) ---- */
+function watchMetrics(data){
+  let investigate=data.filter(r=>(r.stage||'').includes('nvestigat')).length;
+  let actionable=data.filter(r=>(r.stage||'').includes('ctionabl')).length;
+  let watch=data.filter(r=>(r.status||'')===''||(r.status||'')==='Watch').length;
+  let withSignal=data.filter(r=>(r.distress_event||0)>50).length;
+  let highDan=data.filter(r=>(r.dan_fit_score||0)>=70).length;
+  let top10=data.filter(r=>(r.priority_score||0)>=70).length;
+  document.getElementById('watchMetrics').innerHTML=[
+    ['Companies',data.length,'monitored'],
+    ['Investigate',investigate,'active diligence'],
+    ['Top priority',top10,'score ≥ 70'],
+    ['High Dan-fit',highDan,'score ≥ 70'],
+    ['With signals',withSignal,'distress > 50'],
+    ['Watch status',watch,'default bucket']
+  ].map(([l,v,n])=>`<div class="metric-card"><div class="metric-value">${esc(v)}</div><div class="metric-label">${esc(l)}</div><div class="metric-note">${esc(n)}</div></div>`).join('');
+}
+
+function sevCls(v){let x=String(v||'').toLowerCase();if(x==='red')return'bad';if(x==='orange')return'warn';if(x==='yellow')return'pri';return'info'}
+
+const watchCols=['name','category','subcategory','hq_state','size_band','status','stage','priority_score','asset_quality','distress_event','control_actionability','dan_fit_score','urgency','confidence','rationale'];
+const watchHeaders=['Company','Category','Sub','State','Size','Status','Stage','Priority','Asset','Distress','Control','Dan-fit','Urgency','Confidence','Rationale'];
+
+function watchCell(c,r){
+  let v=r[c];
+  if(c==='priority_score'||c==='asset_quality'||c==='distress_event'||c==='control_actionability'||c==='dan_fit_score'||c==='urgency'){
+    let n=Number(v||0);
+    let color=n>=70?'var(--green)':n>=40?'var(--gold)':'var(--muted)';
+    return `<span style="color:${color};font-weight:700;font-variant-numeric:tabular-nums">${v?Math.round(n):'—'}</span>`;
+  }
+  if(c==='name'&&r.website)return `<a href="${esc(r.website)}" target="_blank" rel="noopener">${esc(v)}</a>`;
+  if(c==='stage')return `<span class="pill ${sevCls(v)}">${esc(v||'—')}</span>`;
+  if(c==='status')return `<span class="pill info">${esc(v||'—')}</span>`;
+  if(c==='rationale')return `<span style="font-size:12px;color:var(--muted)">${esc((v||'').substring(0,120))}${(v||'').length>120?'…':''}</span>`;
+  return esc(v||'—');
+}
+
+function filteredWatch(){
+  let q=document.getElementById('wq').value.toLowerCase().trim();
+  let stage=document.getElementById('wstage').value;
+  let fit=document.getElementById('wfit').value;
+  let state=document.getElementById('wstate').value;
+  return WATCH.filter(r=>
+    (!q||[r.name,r.category,r.subcategory,r.hq_state,r.notes,r.rationale].join(' ').toLowerCase().includes(q))
+    &&(!stage||(r.stage||'')===stage)
+    &&(!fit||(r.dan_fit_band||'')===fit)
+    &&(!state||(r.status||'')===state)
+  );
+}
+
+function watchTable(data){
+  document.getElementById('watchTbl').innerHTML='<thead><tr>'+watchHeaders.map(h=>`<th>${esc(h)}</th>`).join('')+'</tr></thead><tbody>'+data.map(r=>'<tr>'+watchCols.map(c=>`<td>${watchCell(c,r)}</td>`).join('')+'</tr>').join('')+'</tbody>';
+}
+
+function fillWatchFilters(){
+  let stages=[...new Set(WATCH.map(r=>r.stage).filter(Boolean))].sort();
+  let fits=[...new Set(WATCH.map(r=>r.dan_fit_band).filter(Boolean))].sort();
+  let states=[...new Set(WATCH.map(r=>r.status).filter(Boolean))].sort();
+  stages.forEach(v=>{let o=document.createElement('option');o.value=v;o.textContent=v;document.getElementById('wstage').appendChild(o)});
+  fits.forEach(v=>{let o=document.createElement('option');o.value=v;o.textContent=v;document.getElementById('wfit').appendChild(o)});
+  states.forEach(v=>{let o=document.createElement('option');o.value=v;o.textContent=v;document.getElementById('wstate').appendChild(o)});
+}
+
+function renderWatch(){
+  let data=filteredWatch();
+  watchMetrics(data);
+  watchTable(data);
+}
+
+/* ---- SIGNAL FEED ---- */
+function sigMetrics(data){
+  let red=data.filter(r=>r.severity==='red').length;
+  let orange=data.filter(r=>r.severity==='orange').length;
+  let yellow=data.filter(r=>r.severity==='yellow').length;
+  let green=data.filter(r=>r.severity==='green').length;
+  let newSig=data.filter(r=>r.status==='new').length;
+  document.getElementById('sigMetrics').innerHTML=[
+    ['Signals',data.length,'total active'],
+    ['🔴 Red',red,'immediate action'],
+    ['🟠 Orange',orange,'investigate'],
+    ['🟡 Yellow',yellow,'watch'],
+    ['🟢 Green',green,'informational'],
+    ['New',newSig,'unreviewed']
+  ].map(([l,v,n])=>`<div class="metric-card"><div class="metric-value">${esc(v)}</div><div class="metric-label">${esc(l)}</div><div class="metric-note">${esc(n)}</div></div>`).join('');
+}
+
+function signalCard(r){
+  let sevColors={red:'#c0392b',orange:'#e67e22',yellow:'#f39c12',green:'#27ae60'};
+  let c=sevColors[r.severity]||'var(--muted)';
+  return `<article class="case-card" style="border-left:4px solid ${c}">
+    <div class="case-top"><div><h3 class="case-title">${esc(r.name)}</h3><div class="case-meta">${esc(r.category||'')} • ${esc(r.hq_state||'')}</div></div><span class="pill ${sevCls(r.severity)}">${esc((r.severity||'').toUpperCase())}</span></div>
+    <div class="pill-row">${pill(r.status)}<span class="pill info">${esc(r.signal_type||'')}</span></div>
+    <div class="field"><div class="k">Title</div><div class="v">${esc(r.title||'—')}</div></div>
+    <div class="field"><div class="k">Source</div><div class="v">${r.source_url?`<a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.source_name||'Link')}</a>`:esc(r.source_name||'—')}</div></div>
+    <div class="field"><div class="k">Evidence</div><div class="v" style="font-size:12px">${esc((r.evidence||'').substring(0,250))}${(r.evidence||'').length>250?'…':''}</div></div>
+    <div class="field"><div class="k">Observed</div><div class="v">${esc(r.observed_at||'—')}</div></div>
+    ${r.action_required?`<div class="field"><div class="k">Action</div><div class="v">${esc(r.action_required)}</div></div>`:''}
+  </article>`;
+}
+
+function renderSignals(){
+  let sorted=[...SIGNALS].sort((a,b)=>{const o={red:1,orange:2,yellow:3,green:4};return (o[a.severity]||5)-(o[b.severity]||5)});
+  sigMetrics(sorted);
+  document.getElementById('signalCards').innerHTML=sorted.map(signalCard).join('')||'<div class="empty">No active signals.</div>';
+}
+
 // Tab switching
 document.querySelectorAll('.tabs button').forEach(x=>x.onclick=()=>{
   document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
@@ -270,8 +398,22 @@ Promise.all([
   document.querySelectorAll('input,select').forEach(el=>el.addEventListener('input',render));
   queue();buyers();tax();render();
 }).catch(err=>{
-  document.getElementById('caseCards').innerHTML='<div class="empty">Failed to load data. Ensure JSON files are in ./bankruptcy-tracker/</div>';
+  document.getElementById('caseCards').innerHTML='<div class="empty">Failed to load historical data.</div>';
   console.error(err);
+});
+
+// Load monitoring data
+Promise.all([
+  j('./bankruptcy-tracker/monitored_entities.json'),
+  j('./bankruptcy-tracker/signal_events.json')
+]).then(([w,sig])=>{
+  WATCH=w;SIGNALS=sig;
+  fillWatchFilters();
+  document.querySelectorAll('#wq,#wstage,#wfit,#wstate').forEach(el=>el.addEventListener('input',renderWatch));
+  renderWatch();
+  renderSignals();
+}).catch(err=>{
+  console.warn('Monitor data load failed:',err);
 });
 </script>
 </body></html>
