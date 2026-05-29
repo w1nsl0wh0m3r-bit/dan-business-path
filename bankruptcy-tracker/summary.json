@@ -1,0 +1,328 @@
+{
+  "confidence": [
+    [
+      "medium",
+      127
+    ],
+    [
+      "high",
+      60
+    ],
+    [
+      "low",
+      27
+    ]
+  ],
+  "primary_doc_status": [
+    [
+      "Unknown / not coded",
+      97
+    ],
+    [
+      "primary_doc_breadcrumbs_found_no_free_doc_confirmed",
+      49
+    ],
+    [
+      "primary_doc_found_free",
+      34
+    ],
+    [
+      "free_primary_doc_not_found",
+      18
+    ],
+    [
+      "not_verified",
+      11
+    ],
+    [
+      "free_secondary_sourced_primary_doc_not_pulled",
+      5
+    ]
+  ],
+  "canonical_outcome_type": [
+    [
+      "continuation_uncertain",
+      94
+    ],
+    [
+      "brand_ip_after_liquidation",
+      30
+    ],
+    [
+      "liquidation",
+      21
+    ],
+    [
+      "strategic_absorption",
+      20
+    ],
+    [
+      "brand_ip_licensing",
+      14
+    ],
+    [
+      "weak_relaunch",
+      10
+    ],
+    [
+      "chapter22_or_repeat_distress",
+      8
+    ],
+    [
+      "operating_turnaround",
+      8
+    ],
+    [
+      "Unknown / not coded",
+      5
+    ],
+    [
+      "service_line_carveout",
+      3
+    ],
+    [
+      "asset_absorption",
+      1
+    ]
+  ],
+  "asset_archetype": [
+    [
+      "brand/IP/domain/customer list",
+      112
+    ],
+    [
+      "operating locations/platform",
+      79
+    ],
+    [
+      "subscription/customer file",
+      15
+    ],
+    [
+      "Unknown / not coded",
+      5
+    ],
+    [
+      "regulated/service-line customer file",
+      3
+    ]
+  ],
+  "buyer_type_norm": [
+    [
+      "unknown/mixed",
+      122
+    ],
+    [
+      "lender/creditor-led ownership",
+      32
+    ],
+    [
+      "brand-management/licensing platform",
+      13
+    ],
+    [
+      "watch/no-transaction",
+      11
+    ],
+    [
+      "liquidator/brand asset trader",
+      10
+    ],
+    [
+      "strategic/operator",
+      8
+    ],
+    [
+      "Unknown / not coded",
+      5
+    ],
+    [
+      "digital/IP relaunch operator",
+      3
+    ],
+    [
+      "strategic/ecommerce operator",
+      3
+    ],
+    [
+      "brand-management/licensing platform / digital/IP relaunch operator",
+      1
+    ],
+    [
+      "brand-management/licensing platform / lender/creditor-led ownership",
+      1
+    ],
+    [
+      "credit/special-situations buyer",
+      1
+    ],
+    [
+      "credit/special-situations buyer / lender/creditor-led ownership",
+      1
+    ],
+    [
+      "private-equity/turnaround sponsor",
+      1
+    ],
+    [
+      "strategic/operator / credit/special-situations buyer",
+      1
+    ],
+    [
+      "strategic/operator / private-equity/turnaround sponsor",
+      1
+    ]
+  ],
+  "valuation_reliance": [
+    [
+      "low_needs_price_verification",
+      105
+    ],
+    [
+      "medium_public_reported_price",
+      61
+    ],
+    [
+      "low_no_price_or_undisclosed",
+      21
+    ],
+    [
+      "high_primary_doc_price",
+      12
+    ],
+    [
+      "medium_low_secondary_only",
+      10
+    ],
+    [
+      "Unknown / not coded",
+      5
+    ]
+  ],
+  "survival_status_2026_norm": [
+    [
+      "watch_or_unclear",
+      83
+    ],
+    [
+      "operating_company_dead",
+      48
+    ],
+    [
+      "needs_survival_recheck",
+      28
+    ],
+    [
+      "operating_survived",
+      27
+    ],
+    [
+      "ip_or_brand_survived_only",
+      13
+    ],
+    [
+      "repeat_distress_or_chapter22",
+      10
+    ],
+    [
+      "Unknown / not coded",
+      5
+    ]
+  ],
+  "dan_decision_signal": [
+    [
+      "watch_verify_before_using",
+      98
+    ],
+    [
+      "avoid_or_negative_comp",
+      61
+    ],
+    [
+      "cautionary_ip_comp",
+      35
+    ],
+    [
+      "selective_asset_comp",
+      11
+    ],
+    [
+      "Unknown / not coded",
+      5
+    ],
+    [
+      "positive_decision_comp",
+      4
+    ]
+  ],
+  "corpus_priority": [
+    [
+      "P1_verify_next",
+      98
+    ],
+    [
+      "P0_primary_doc_now",
+      53
+    ],
+    [
+      "P2_backfill_when_relevant",
+      47
+    ],
+    [
+      "P3_low_priority_archive",
+      11
+    ],
+    [
+      "Unknown / not coded",
+      5
+    ]
+  ],
+  "turnaround_grade": [
+    [
+      "C+",
+      57
+    ],
+    [
+      "B+",
+      42
+    ],
+    [
+      "F",
+      31
+    ],
+    [
+      "B-",
+      22
+    ],
+    [
+      "C",
+      14
+    ],
+    [
+      "D+",
+      12
+    ],
+    [
+      "A-",
+      10
+    ],
+    [
+      "D",
+      10
+    ],
+    [
+      "B",
+      8
+    ],
+    [
+      "C-",
+      4
+    ],
+    [
+      "Unknown",
+      4
+    ]
+  ],
+  "total": 214,
+  "generated": "2026-05-12 20:14"
+}

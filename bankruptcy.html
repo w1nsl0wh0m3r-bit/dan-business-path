@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Bankruptcy Tracker — Dan's Decision Placemat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,650&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FDF6E3;--paper2:#F5EDD6;--ink:#1a365d;--blue:#316272;--blue2:rgba(49,98,114,.09);
+  --gold:#B8860B;--sage:#6B8F71;--clay:#B86F4D;--muted:#64748b;--line:#E2D9C8;
+  --card:#FFFEF9;--shadow:0 8px 40px rgba(80,59,34,.09);
+  --red:#c0392b;--orange:#e67e22;--green:#27ae60;--yellow:#f39c12;--purple:#8e44ad;
+  --spring:cubic-bezier(.22,1.2,.36,1);
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;line-height:1.45;background:radial-gradient(circle at 14% -6%,rgba(184,111,77,.22),transparent 34%),radial-gradient(circle at 88% 6%,rgba(49,94,114,.18),transparent 30%),linear-gradient(135deg,rgba(49,94,114,.055) 25%,transparent 25%) 0 0/28px 28px,linear-gradient(225deg,rgba(49,94,114,.045) 25%,transparent 25%) 0 0/28px 28px,linear-gradient(180deg,var(--paper),var(--paper2));min-height:100dvh}
+.shell{max-width:1480px;margin:auto;padding:26px 24px 72px}
+nav{position:sticky;top:18px;z-index:10;width:min(980px,100%);margin:0 auto 40px;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:10px;border:1px solid rgba(62,49,32,.14);border-radius:999px;background:rgba(255,251,241,.72);backdrop-filter:blur(18px);box-shadow:0 18px 50px rgba(80,59,34,.12)}
+nav b{padding-left:12px}.links{display:flex;gap:6px;flex-wrap:wrap}.links a{color:var(--ink);text-decoration:none;font-size:13px;padding:8px 11px;border-radius:999px;transition:transform .55s var(--spring),background .55s var(--spring)}.links a:hover{background:rgba(49,94,114,.09);transform:translateY(-1px)}.links a.active{background:var(--blue);color:#fff}
+h1{font-family:"Fraunces",Georgia,serif;font-weight:650;font-size:clamp(2.3rem,5vw,3.8rem);line-height:.92;letter-spacing:-.06em;margin:18px 0 24px;text-wrap:balance}
+h2{font-family:"Fraunces",Georgia,serif;font-weight:650;font-size:clamp(1.6rem,3vw,2.3rem);letter-spacing:-.05em;line-height:.92;margin:0 0 18px}
+.lede{color:var(--muted);font-size:clamp(1rem,1.8vw,1.2rem);max-width:850px;margin-bottom:32px}
+.kicker{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(49,94,114,.18);background:rgba(255,251,241,.66);border-radius:999px;padding:8px 12px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:12px}.kicker:before{content:"";width:7px;height:7px;border-radius:99px;background:var(--clay)}
+.note{border-left:4px solid var(--clay);padding:15px 18px;background:rgba(184,111,77,.09);border-radius:16px;color:var(--muted);margin:0 0 24px;font-size:14px}
+/* Tabs */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.tabs button{font:inherit;background:rgba(255,251,241,.72);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;font-weight:500;font-size:13px;transition:all .4s var(--spring)}
+.tabs button:hover{transform:translateY(-1px)}
+.tabs button.active{background:var(--blue);color:#fff;border-color:transparent;font-weight:700}
+/* Filters */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.filters input,.filters select{font:inherit;background:rgba(255,251,241,.72);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:10px 13px;font-size:13px}
+.filters input{min-width:240px}
+/* Metrics */
+.metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px}
+.metric-card{border:1px solid var(--line);border-radius:24px;background:var(--card);padding:20px 16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.78);text-align:center}
+.metric-value{font-family:"Fraunces",Georgia,serif;font-size:32px;color:var(--gold);font-variant-numeric:tabular-nums}
+.metric-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);margin-top:4px}
+.metric-note{font-size:11px;color:var(--muted);margin-top:2px}
+/* Cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px}
+.case-card{border:1px solid var(--line);border-radius:28px;background:var(--card);padding:22px;box-shadow:inset 0 1px 0 rgba(255,255,255,.78);transition:transform .5s var(--spring),box-shadow .5s var(--spring)}
+.case-card:hover{transform:translateY(-3px);box-shadow:0 18px 60px rgba(80,59,34,.1)}
+.case-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.case-title{font-family:"Fraunces",Georgia,serif;font-size:20px;margin:0;letter-spacing:-.02em}
+.case-meta{font-size:12px;color:var(--muted);margin-top:2px}
+/* Pills */
+.pill-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;letter-spacing:.02em}
+.pill.good{background:rgba(39,174,96,.12);color:#1a7a3a;border:1px solid rgba(39,174,96,.25)}
+.pill.bad{background:rgba(192,57,43,.1);color:#a93226;border:1px solid rgba(192,57,43,.22)}
+.pill.warn{background:rgba(230,126,34,.1);color:#c0690a;border:1px solid rgba(230,126,34,.22)}
+.pill.pri{background:rgba(184,134,11,.1);color:#8B6914;border:1px solid rgba(184,134,11,.22)}
+.pill.info{background:rgba(49,98,114,.08);color:var(--blue);border:1px solid rgba(49,98,114,.18)}
+/* Fields */
+.field{display:grid;grid-template-columns:80px 1fr;gap:6px;padding:6px 0;border-bottom:1px solid rgba(226,217,200,.4);font-size:13px}
+.field .k{font-weight:700;color:var(--blue);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.field .v{color:var(--ink)}
+.field .muted{color:var(--muted);font-size:12px}
+/* Table */
+.table-shell{overflow:auto;border:1px solid var(--line);border-radius:24px;background:rgba(255,251,241,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.75)}
+.table-shell table{width:100%;border-collapse:collapse;min-width:900px}
+.table-shell th,.table-shell td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}
+.table-shell th{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);background:rgba(49,98,114,.06)}
+/* Bar chart */
+.barchart{margin-bottom:8px}
+.bar-row{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:12px}
+.bar-label{width:180px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0}
+.bar-track{flex:1;height:18px;background:rgba(49,98,114,.06);border-radius:999px;overflow:hidden}
+.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--gold),var(--clay));transition:width .6s var(--spring)}
+.bar-count{width:32px;text-align:right;font-variant-numeric:tabular-nums;flex-shrink:0}
+/* Sections */
+.section{display:none}.section.active{display:block}
+.countline{font-size:13px;color:var(--muted);margin-bottom:16px}
+.empty{text-align:center;padding:40px;color:var(--muted);font-size:15px}
+footer{padding:40px 0;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:940px){.shell{padding:16px}.cards{grid-template-columns:1fr}nav{position:relative;border-radius:24px;flex-direction:column;align-items:flex-start}.metric-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:720px){.shell{padding:14px}.metric-grid{grid-template-columns:1fr 1fr}.filters{flex-direction:column}.filters input{min-width:100%}.bar-label{width:120px}}
+</style>
+</head>
+<body>
+<main class="shell">
+<nav><b>Bankruptcy Tracker</b><div class="links"><a href="./">Dashboard</a><a href="./underwriting.html">Underwriting</a><a href="./operating.html">Operating</a><a href="./bankruptcy.html" class="active">Bankruptcy</a></div></nav>
+
+<section class="hero">
+<div class="kicker">Distressed Consumer / Retail</div>
+<h1>Historical bankruptcy outcomes & live signals.</h1>
+<p class="lede">214 distressed consumer/retail cases with outcome types, buyer families, asset archetypes, and decision signals. Prioritizes what's verified over what's claimed.</p>
+<div class="note">⚠️ <b>How to use this:</b> positive comps are scarce; most rows are cautionary until primary docs, consideration, asset perimeter, and post-close survival are verified. Work the "To Verify" tab before relying on a case in diligence.</div>
+</section>
+
+<div class="tabs">
+  <button data-tab="overview" class="active">Overview</button>
+  <button data-tab="cases">Cases</button>
+  <button data-tab="table">Table</button>
+  <button data-tab="queue">To Verify</button>
+  <button data-tab="buyers">Buyers</button>
+  <button data-tab="taxonomy">Taxonomy</button>
+</div>
+
+<div class="filters">
+  <input id="q" placeholder="Search brand, buyer, outcome, lesson…">
+  <select id="sig"><option value="">Any decision signal</option></select>
+  <select id="pri"><option value="">Any verification priority</option></select>
+  <select id="ctype"><option value="">Any outcome type</option></select>
+  <select id="asset"><option value="">Any asset type</option></select>
+  <select id="buyer"><option value="">Any buyer type</option></select>
+  <select id="year"><option value="">Any year</option></select>
+</div>
+<div id="count" class="countline"></div>
+
+<div id="metrics" class="metric-grid"></div>
+
+<section id="overview" class="section active">
+  <h2>Pattern Dashboard</h2>
+  <p class="note">Plain-English distributions. Click filters above to narrow the whole dashboard.</p>
+  <div id="insights" class="cards"></div>
+</section>
+
+<section id="cases" class="section">
+  <h2>Case Cards</h2>
+  <p class="note">Best default reading mode. Sorted newest-first; capped at 150 visible cards for speed.</p>
+  <div id="caseCards" class="cards"></div>
+</section>
+
+<section id="table" class="section">
+  <h2>Spreadsheet View</h2>
+  <div class="table-shell"><table id="tbl"></table></div>
+</section>
+
+<section id="queue" class="section">
+  <h2>Verification Queue</h2>
+  <p class="note">P0/P1 rows that need primary docs, price proof, asset perimeter, or survival check before use.</p>
+  <div id="queueCards" class="cards"></div>
+</section>
+
+<section id="buyers" class="section">
+  <h2>Buyer Families</h2>
+  <p class="note">Repeat buyers, licensing platforms, lenders, liquidators, and strategic acquirers.</p>
+  <div class="table-shell"><table id="buyerTbl"></table></div>
+</section>
+
+<section id="taxonomy" class="section">
+  <h2>Outcome Taxonomy</h2>
+  <p class="note">Canonical buckets used to normalize messy historical cases.</p>
+  <div id="taxCards" class="cards"></div>
+</section>
+
+<footer>Bankruptcy Tracker v1 — Data refreshed from local pipeline. Last refresh embedded at build time.</footer>
+</main>
+
+<script>
+const esc=s=>(s??'').toString().replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const j=u=>fetch(u,{cache:'no-store'}).then(r=>r.json());
+let ROWS=[],QUEUE=[],BUYERS=[],TAX=[],SUMMARY={};
+
+const LABELS={
+  'positive_decision_comp':'Positive comp','selective_asset_comp':'Selective asset comp','cautionary_ip_comp':'Cautionary IP comp','avoid_or_negative_comp':'Avoid / negative comp','watch_verify_before_using':'Watch — verify before using',
+  'P0_primary_doc_now':'P0 — primary doc now','P1_verify_next':'P1 — verify next','P2_backfill_when_relevant':'P2 — backfill when relevant','P3_low_priority_archive':'P3 — archive',
+  'primary_doc_found_free':'Free primary doc found','primary_doc_breadcrumbs_found_no_free_doc_confirmed':'Breadcrumbs found; primary doc not confirmed','free_primary_doc_not_found':'Free primary doc not found','free_secondary_sourced_primary_doc_not_pulled':'Secondary source only','not_verified':'Not verified','null':'Not coded','Unknown / not coded':'Not coded',
+  'continuation_uncertain':'Continuation uncertain','brand_ip_after_liquidation':'Brand/IP after liquidation','liquidation':'Liquidation','strategic_absorption':'Strategic absorption','brand_ip_licensing':'Brand/IP licensing','weak_relaunch':'Weak relaunch','operating_turnaround':'Operating turnaround','chapter22_or_repeat_distress':'Chapter 22 / repeat distress','service_line_carveout':'Service-line carveout','asset_absorption':'Asset absorption',
+  'low_needs_price_verification':'Low — needs price verification','medium_public_reported_price':'Medium — public reported price','low_no_price_or_undisclosed':'Low — no price / undisclosed','high_primary_doc_price':'High — primary-doc price','medium_low_secondary_only':'Medium-low — secondary only',
+  'watch_or_unclear':'Watch / unclear','operating_company_dead':'Operating company dead','needs_survival_recheck':'Needs survival re-check','operating_survived':'Operating survived','ip_or_brand_survived_only':'IP/brand survived only','repeated_distress_or_dead':'Repeat distress / dead',
+  'brand/IP/domain/customer list':'Brand, IP, domain, or customer list','operating locations/platform':'Operating locations or platform','subscription/customer file':'Subscription / customer file','regulated/service-line customer file':'Regulated service-line customer file',
+  'unknown/mixed':'Unknown / mixed','lender/creditor-led ownership':'Lender / creditor-led','brand-management/licensing platform':'Brand-management / licensing platform','watch/no-transaction':'Watch / no transaction','liquidator/brand asset trader':'Liquidator / brand asset trader','strategic/operating acquirer':'Strategic / operating acquirer','financial sponsor':'Financial sponsor'
+};
+
+const GROUP_LABELS={dan_decision_signal:'Decision Signal',canonical_outcome_type:'Outcome Type',asset_archetype:'Asset Type',buyer_type_norm:'Buyer Type',valuation_reliance:'Price Reliability',survival_status_2026_norm:'Survival Status',corpus_priority:'Verification Priority',primary_doc_status:'Source Status'};
+
+function label(v){if(v===null||v===undefined||v==='')return 'Not coded';let s=String(v);return LABELS[s]||s.replace(/_/g,' ').replace(/\b\w/g,m=>m.toUpperCase()).replace(/\bIp\b/g,'IP').replace(/\bPacer\b/g,'PACER').replace(/\bDtc\b/g,'DTC')}
+function cls(v){let x=String(v||'').toLowerCase();if(x.includes('positive')||x.includes('operating_turnaround')||x.includes('service_line')||x==='high'||x.includes('primary_doc_found'))return'good';if(x.includes('avoid')||x.includes('negative')||x.includes('liquidation')||x.includes('dead')||x.includes('repeat'))return'bad';if(x.includes('p0')||x.includes('watch')||x.includes('uncertain')||x.includes('needs'))return'warn';if(x.includes('p1')||x.includes('selective')||x.includes('caution'))return'pri';return'info'}
+function pill(v){return `<span class="pill ${cls(v)}">${esc(label(v))}</span>`}
+function link(n,u){return u?`<a target="_blank" rel="noopener" href="${esc(u)}">${esc(n||'Open source')}</a>`:esc(n||'')}
+function uniq(f){return [...new Set(ROWS.map(r=>r[f]).filter(v=>v!==null&&v!==undefined&&v!==''))].sort((a,b)=>label(a).localeCompare(label(b)))}
+function fill(id,f){let el=document.getElementById(id);uniq(f).forEach(v=>{let o=document.createElement('option');o.value=v;o.textContent=label(v);el.appendChild(o)})}
+
+function filtered(){
+  let q=document.getElementById('q').value.toLowerCase().trim();
+  let tests=[['sig','dan_decision_signal'],['pri','corpus_priority'],['ctype','canonical_outcome_type'],['asset','asset_archetype'],['buyer','buyer_type_norm'],['year','event_year']];
+  return ROWS.filter(r=>
+    (!q||[r.brand,r.category,r.acquirer,r.buyer_family,r.buyer_type_norm,r.post_close_outcome,r.dan_pattern_lesson,r.why_it_matters,r.next_verification_step,r.source_name].join(' ').toLowerCase().includes(q))
+    &&tests.every(([id,f])=>!document.getElementById(id).value||String(r[f]??'')===document.getElementById(id).value)
+  );
+}
+
+function metrics(data){
+  let p0=data.filter(r=>r.corpus_priority==='P0_primary_doc_now').length;
+  let p1=data.filter(r=>r.corpus_priority==='P1_verify_next').length;
+  let pos=data.filter(r=>r.dan_decision_signal==='positive_decision_comp').length;
+  let neg=data.filter(r=>r.dan_decision_signal==='avoid_or_negative_comp').length;
+  let free=data.filter(r=>r.primary_doc_status==='primary_doc_found_free').length;
+  let watch=data.filter(r=>r.dan_decision_signal==='watch_verify_before_using').length;
+  document.getElementById('metrics').innerHTML=[
+    ['Rows',ROWS.length,'total corpus'],['Showing',data.length,'after filters'],
+    ['Positive',pos,'usable comps'],['Avoid',neg,'negative comps'],
+    ['Free docs',free,'primary-doc rows'],['P0 / P1',p0+' / '+p1,'verification queue']
+  ].map(([l,v,n])=>`<div class="metric-card"><div class="metric-value">${esc(v)}</div><div class="metric-label">${esc(l)}</div><div class="metric-note">${esc(n)}</div></div>`).join('');
+}
+
+const cols=['brand','event_year','category','buyer_family','buyer_type_norm','canonical_outcome_type','asset_archetype','turnaround_grade','dan_decision_signal','survival_status_2026_norm','valuation_reliance','corpus_priority','primary_doc_status','reported_price_or_consideration','post_close_outcome','dan_pattern_lesson','next_verification_step','source_name'];
+
+function cell(c,r){
+  let val=r[c];
+  if(c==='source_name')return link(r.source_name,r.source_url||r.source_doc_url);
+  if(['buyer_type_norm','canonical_outcome_type','dan_decision_signal','survival_status_2026_norm','valuation_reliance','corpus_priority','primary_doc_status'].includes(c))return pill(val);
+  if(c==='asset_archetype')return esc(label(val));
+  return esc(val);
+}
+
+function table(data){
+  document.getElementById('tbl').innerHTML='<thead><tr>'+cols.map(c=>`<th>${esc(label(c))}</th>`).join('')+'</tr></thead><tbody>'+data.map(r=>'<tr>'+cols.map(c=>`<td>${cell(c,r)}</td>`).join('')+'</tr>').join('')+'</tbody>';
+}
+
+function caseCard(r){
+  return`<article class="case-card"><div class="case-top"><div><h3 class="case-title">${esc(r.brand)}</h3><div class="case-meta">${esc(r.event_year||'')} • ${esc(r.category||'Uncategorized')}</div></div><div>${pill(r.turnaround_grade)}</div></div><div class="pill-row">${pill(r.dan_decision_signal)}${pill(r.corpus_priority)}${pill(r.canonical_outcome_type)}</div><div class="field"><div class="k">Buyer</div><div class="v">${esc(r.acquirer||'Unknown')} <span class="muted">(${esc(label(r.buyer_type_norm))})</span></div></div><div class="field"><div class="k">Asset</div><div class="v">${esc(label(r.asset_archetype))}${r.asset_package?' — '+esc(r.asset_package):''}</div></div><div class="field"><div class="k">Price</div><div class="v">${esc(r.reported_price_or_consideration||'Undisclosed / not found')} <span class="muted">${esc(label(r.valuation_reliance))}</span></div></div><div class="field"><div class="k">Outcome</div><div class="v">${esc(r.post_close_outcome||r.result_status_2026||'Unknown')}</div></div><div class="field"><div class="k">Lesson</div><div class="v">${esc(r.dan_pattern_lesson||r.why_it_matters||'')}</div></div><div class="field"><div class="k">Next</div><div class="v">${esc(r.next_verification_step||'')}</div></div><div class="field"><div class="k">Source</div><div class="v">${link(r.source_name||r.source_doc_type,r.source_url||r.source_doc_url)}</div></div></article>`;
+}
+
+function cards(data){document.getElementById('caseCards').innerHTML=data.slice(0,150).map(caseCard).join('')||'<div class="empty">No matching cases.</div>'}
+
+function queue(){
+  document.getElementById('queueCards').innerHTML=QUEUE.map(r=>`<article class="case-card"><div class="case-top"><div><h3 class="case-title">${esc(r.brand)}</h3><div class="case-meta">${esc(r.event_year||'')} • ${esc(label(r.current_primary_doc_status))}</div></div>${pill(r.corpus_priority)}</div><div class="pill-row">${pill(r.dan_decision_signal)}${pill(r.valuation_reliance)}</div><div class="field"><div class="k">Gap</div><div class="v">${esc(label(r.gap_type))}</div></div><div class="field"><div class="k">Action</div><div class="v">${esc(r.recommended_action)}</div></div><div class="field"><div class="k">Search</div><div class="v">${esc(r.query)}</div></div></article>`).join('')||'<div class="empty">No verification items.</div>';
+}
+
+function buyers(){
+  let cs=['buyer_family','buyer_type_norm','deal_count','positive_count','cautionary_count','repeat_distress_count','representative_brands','pattern_note','monitoring_action'];
+  document.getElementById('buyerTbl').innerHTML='<thead><tr>'+cs.map(c=>`<th>${esc(label(c))}</th>`).join('')+'</tr></thead><tbody>'+BUYERS.map(r=>'<tr>'+cs.map(c=>`<td>${c==='buyer_type_norm'?pill(r[c]):esc(r[c])}</td>`).join('')+'</tr>').join('')+'</tbody>';
+}
+
+function tax(){
+  document.getElementById('taxCards').innerHTML=TAX.map(t=>`<article class="case-card"><div class="case-top"><h3 class="case-title">${esc(label(t.canonical_outcome_type))}</h3>${pill(t.default_dan_signal)}</div><p style="color:var(--muted);font-size:13px;margin:10px 0">${esc(t.definition)}</p><div class="field"><div class="k">Score</div><div class="v">${esc(t.decision_score)}</div></div></article>`).join('');
+}
+
+function insights(data){
+  let groups=['dan_decision_signal','corpus_priority','canonical_outcome_type','asset_archetype','buyer_type_norm','valuation_reliance','survival_status_2026_norm','primary_doc_status'];
+  document.getElementById('insights').innerHTML=groups.map(g=>{
+    let counts={};data.forEach(r=>{let k=r[g]||'Unknown / not coded';counts[k]=(counts[k]||0)+1});
+    let arr=Object.entries(counts).sort((a,b)=>b[1]-a[1]);let max=Math.max(1,...arr.map(x=>x[1]));
+    return`<article class="case-card" style="grid-column:span 1"><h2 style="font-size:16px;margin-bottom:12px">${esc(GROUP_LABELS[g]||label(g))}</h2>`+
+    arr.slice(0,10).map(([k,v])=>`<div class="bar-row"><div class="bar-label" title="${esc(label(k))}">${esc(label(k))}</div><div class="bar-track"><div class="bar-fill" style="width:${100*v/max}%"></div></div><div class="bar-count">${v}</div></div>`).join('')+'</article>';
+  }).join('');
+}
+
+function render(){
+  let data=filtered();
+  document.getElementById('count').textContent=`Showing ${data.length} of ${ROWS.length} cases`;
+  metrics(data);insights(data);table(data);cards(data);
+}
+
+// Tab switching
+document.querySelectorAll('.tabs button').forEach(x=>x.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+  x.classList.add('active');
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(x.dataset.tab).classList.add('active');
+});
+
+// Load data and render
+Promise.all([
+  j('./bankruptcy-tracker/rows.json'),
+  j('./bankruptcy-tracker/queue.json'),
+  j('./bankruptcy-tracker/buyers.json'),
+  j('./bankruptcy-tracker/taxonomy.json'),
+  j('./bankruptcy-tracker/summary.json')
+]).then(([r,q,b,t,s])=>{
+  ROWS=r;QUEUE=q;BUYERS=b;TAX=t;SUMMARY=s;
+  [['sig','dan_decision_signal'],['pri','corpus_priority'],['ctype','canonical_outcome_type'],['asset','asset_archetype'],['buyer','buyer_type_norm'],['year','event_year']].forEach(([id,f])=>fill(id,f));
+  document.querySelectorAll('input,select').forEach(el=>el.addEventListener('input',render));
+  queue();buyers();tax();render();
+}).catch(err=>{
+  document.getElementById('caseCards').innerHTML='<div class="empty">Failed to load data. Ensure JSON files are in ./bankruptcy-tracker/</div>';
+  console.error(err);
+});
+</script>
+</body></html>

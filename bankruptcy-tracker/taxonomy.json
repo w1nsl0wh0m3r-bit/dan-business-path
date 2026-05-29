@@ -1,0 +1,86 @@
+[
+  {
+    "canonical_outcome_type": "operating_turnaround",
+    "definition": "Operating business survived with meaningful unit/platform continuity; best analogue for live distressed acquisition.",
+    "decision_score": 5,
+    "default_dan_signal": "positive",
+    "updated_at": "2026-05-12T09:55:22"
+  },
+  {
+    "canonical_outcome_type": "service_line_carveout",
+    "definition": "Separable service/regulated/customer-file business survived while parent/banner failed.",
+    "decision_score": 5,
+    "default_dan_signal": "positive",
+    "updated_at": "2026-05-12T09:55:22"
+  },
+  {
+    "canonical_outcome_type": "strategic_absorption",
+    "definition": "Assets survived by being absorbed into a stronger strategic/platform buyer; often good lesson, not standalone turnaround.",
+    "decision_score": 4,
+    "default_dan_signal": "selective_positive",
+    "updated_at": "2026-05-12T09:55:22"
+  },
+  {
+    "canonical_outcome_type": "asset_absorption",
+    "definition": "Specific assets/customer files transferred to incumbent; banner not preserved.",
+    "decision_score": 3,
+    "default_dan_signal": "lesson_only",
+    "updated_at": "2026-05-12T09:55:22"
+  },
+  {
+    "canonical_outcome_type": "brand_ip_licensing",
+    "definition": "Brand/IP survives mainly through licensing/portfolio model; original operating company usually dead.",
+    "decision_score": 3,
+    "default_dan_signal": "mixed",
+    "updated_at": "2026-05-12T09:55:22"
+  },
+  {
+    "canonical_outcome_type": "brand_or_operating_continuation",
+    "definition": "Ongoing/watch case or continuation without enough proof of durable turnaround.",
+    "decision_score": 3,
+    "default_dan_signal": "watch",
+    "updated_at": "2026-05-12T09:55:22"
+  },
+  {
+    "canonical_outcome_type": "continuation_uncertain",
+    "definition": "Continued in some form but proof is incomplete; needs survival verification before use.",
+    "decision_score": 3,
+    "default_dan_signal": "verify",
+    "updated_at": "2026-05-12T09:55:22"
+  },
+  {
+    "canonical_outcome_type": "mixed_relaunch_or_absorption",
+    "definition": "Hybrid/unclear relaunch or absorption; useful only with explicit caveats.",
+    "decision_score": 3,
+    "default_dan_signal": "verify",
+    "updated_at": "2026-05-12T09:55:22"
+  },
+  {
+    "canonical_outcome_type": "brand_ip_after_liquidation",
+    "definition": "Stores/operating engine liquidated; brand/domain/customer file bought cheap; weak standalone odds.",
+    "decision_score": 2,
+    "default_dan_signal": "negative",
+    "updated_at": "2026-05-12T09:55:22"
+  },
+  {
+    "canonical_outcome_type": "weak_relaunch",
+    "definition": "Legal/brand continuation but weak operating evidence, contraction, or unclear economics.",
+    "decision_score": 2,
+    "default_dan_signal": "negative_watch",
+    "updated_at": "2026-05-12T09:55:22"
+  },
+  {
+    "canonical_outcome_type": "chapter22_or_repeat_distress",
+    "definition": "Repeat bankruptcy/distress after prior restructuring; strong warning that prior emergence was not success.",
+    "decision_score": 1,
+    "default_dan_signal": "avoid",
+    "updated_at": "2026-05-12T09:55:22"
+  },
+  {
+    "canonical_outcome_type": "liquidation",
+    "definition": "Operating company shut down; little durable brand/platform value evident.",
+    "decision_score": 1,
+    "default_dan_signal": "avoid",
+    "updated_at": "2026-05-12T09:55:22"
+  }
+]
