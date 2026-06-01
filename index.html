@@ -31659,8 +31659,30 @@ function sortData(arr){if(manualOrder)return manualOrder.map(c=>arr.find(r=>r.Ca
 function enableDragDrop(){var rows=tbody.querySelectorAll('tr.main-row'),dragRow=null;for(var i=0;i<rows.length;i++){(function(row){row.draggable=true;row.ondragstart=function(e){dragRow=row;row.classList.add('dragging');e.dataTransfer.effectAllowed='move'};row.ondragend=function(){row.classList.remove('dragging');var ov=document.querySelectorAll('.drag-over');for(var j=0;j<ov.length;j++)ov[j].classList.remove('drag-over');dragRow=null};row.ondragover=function(e){e.preventDefault();if(dragRow&&dragRow!==row)row.classList.add('drag-over')};row.ondragleave=function(){row.classList.remove('drag-over')};row.ondrop=function(e){e.preventDefault();row.classList.remove('drag-over');if(!dragRow||dragRow===row)return;var allR=tbody.querySelectorAll('tr.main-row'),cats=[];for(var k=0;k<allR.length;k++)cats.push(allR[k].getAttribute('data-category'));var dc=dragRow.getAttribute('data-category');var rc=row.getAttribute('data-category');cats.splice(cats.indexOf(dc),1);cats.splice(cats.indexOf(rc),0,dc);manualOrder=cats;document.getElementById('sort-indicator').textContent='(manual)';document.getElementById('rank-status').textContent='Unsaved';render()}})(rows[i])}}
 function saveRanks(){if(!manualOrder){document.getElementById('rank-status').textContent='Auto-sorted';return}localStorage.setItem('dan-rank-order',JSON.stringify(manualOrder));document.getElementById('rank-status').textContent='Saved ✓';setTimeout(()=>document.getElementById('rank-status').textContent='',3000)}
 function clearManualOrder(){manualOrder=null;localStorage.removeItem('dan-rank-order');document.getElementById('sort-indicator').textContent='(Blended↓)';document.getElementById('rank-status').textContent='';render()}
-function render(){tbody.innerHTML=sortData(DATA.filter(ok)).map((r,i)=>`<tr class="main-row" data-category="${r.Category}"><td><small>#${i+1}</small> <b>${r.Category}</b>${r.UnderwritingVerdict?`<br><span class=\"verdict verdict-v-${slugV(r.UnderwritingVerdict)}\">${r.UnderwritingVerdict}</span>`:''}<br><button class="details-toggle" type="button" onclick="const row=this.closest('tr').nextElementSibling,d=row.querySelector('details'),open=row.style.display!=='table-row';row.style.display=open?'table-row':'none';d.open=open;this.textContent=open?'hide details':'details'">details</button></td><td class="blended-cell" style="${scoreStyle(((r.UnderwritingScore||0)+(r.OverallScore||r.Score||0))/2)}"><b>${(((r.UnderwritingScore||0)+(r.OverallScore||r.Score||0))/2).toFixed(2)}</b></td><td>${r.Arena}</td><td class="mode-${r.BestPath}"><b>${r.BestPath==='Acquisition'?'Buy':r.BestPath}</b>${altText(r)}</td><td class="score" style="${scoreStyle(r.UnderwritingScore||0)}">${r.UnderwritingScore||'-'}</td><td class="score" style="${scoreStyle(r.OverallScore||r.Score)}">${r.OverallScore||r.Score}</td><td><b>${r.SelectedPathFit||r[r.BestPath]||'-'}/5 ${r.BestPath==='Acquisition'?'Buy':r.BestPath}</b></td><td>${rationaleSummary(r)}</td><td>${r.FeasibilityVerdict?`<span style="display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.04em;${r.FeasibilityVerdict==='Active Sourcing'?'background:#e8f5e9;color:#2e7d32;border:1px solid #4caf50':r.FeasibilityVerdict==='Validation Sprint'?'background:#e3f2fd;color:#1565c0;border:1px solid #2196f3':r.FeasibilityVerdict==='Watchlist'?'background:#fff3e0;color:#e65100;border:1px solid #ff9800':'background:#ffebee;color:#b71c1c;border:1px solid #f44336'}">${r.FeasibilityVerdict}</span>`:''}</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;color:var(--muted)" title="${esc(r.FeasibilityNotes||'')}">${esc(r.FeasibilityNotes||'')}</td></tr><tr class="details-row" style="display:none"><td colspan="10">${detail(r)}</td></tr>`).join('')}function rank(id,ar,key){document.getElementById(id).innerHTML=DATA.filter(r=>r.Arena===ar).sort((a,b)=>(b.UnderwritingScore||0)-(a.UnderwritingScore||0)||b[key]-a[key]||b.Score-a.Score).slice(0,10).map(r=>`<li><b>${r.Category}</b><br><span class="mode-${key}">UW ${r.UnderwritingScore||'-'} · vibe ${(r.OverallScore||r.Score).toFixed(2)}</span></li>`).join('')}document.getElementById('combos').innerHTML=COMBOS.map((c,i)=>`<div class="combo"><b>#${i+1} ${c[0]}</b><span class="mode-${c[1]}">${c[1]==='Acquisition'?'Buy':c[1]}</span><span><b>${c[2]}</b><br>${c[3]}</span></div>`).join('');rank('svcBuy','Services','Acquisition');rank('svcFr','Services','Franchise');rank('svcDiy','Services','DIY');rank('muDiy','Multi-Unit','DIY');rank('muFr','Multi-Unit','Franchise');rank('muBuy','Multi-Unit','Acquisition');
+function render(){tbody.innerHTML=sortData(DATA.filter(ok)).map((r,i)=>`<tr class="main-row" data-category="${r.Category}"><td><small>#${i+1}</small> <b>${r.Category}</b>${r.UnderwritingVerdict?`<br><span class=\"verdict verdict-v-${slugV(r.UnderwritingVerdict)}\">${r.UnderwritingVerdict}</span>`:''}<br><button class="details-toggle" type="button" onclick="const row=this.closest('tr').nextElementSibling,d=row.querySelector('details'),open=row.style.display!=='table-row';row.style.display=open?'table-row':'none';d.open=open;this.textContent=open?'hide details':'details'">details</button></td><td class="blended-cell" style="${scoreStyle(((r.UnderwritingScore||0)+(r.OverallScore||r.Score||0))/2)}"><b>${(((r.UnderwritingScore||0)+(r.OverallScore||r.Score||0))/2).toFixed(2)}</b></td><td>${r.Arena}</td><td class="mode-${r.BestPath}"><b>${r.BestPath==='Acquisition'?'Buy':r.BestPath}</b>${altText(r)}</td><td class="score" style="${scoreStyle(r.UnderwritingScore||0)}">${r.UnderwritingScore||'-'}</td><td class="score" style="${scoreStyle(r.OverallScore||r.Score)}">${r.OverallScore||r.Score}</td><td><b>${r.SelectedPathFit||r[r.BestPath]||'-'}/5 ${r.BestPath==='Acquisition'?'Buy':r.BestPath}</b></td><td>${rationaleSummary(r)}</td><td>${verdictPillHtml(r)}</td><td>${notesCellHtml(r)}</td></tr><tr class="details-row" style="display:none"><td colspan="10">${detail(r)}</td></tr>`).join('')}function rank(id,ar,key){document.getElementById(id).innerHTML=DATA.filter(r=>r.Arena===ar).sort((a,b)=>(b.UnderwritingScore||0)-(a.UnderwritingScore||0)||b[key]-a[key]||b.Score-a.Score).slice(0,10).map(r=>`<li><b>${r.Category}</b><br><span class="mode-${key}">UW ${r.UnderwritingScore||'-'} · vibe ${(r.OverallScore||r.Score).toFixed(2)}</span></li>`).join('')}document.getElementById('combos').innerHTML=COMBOS.map((c,i)=>`<div class="combo"><b>#${i+1} ${c[0]}</b><span class="mode-${c[1]}">${c[1]==='Acquisition'?'Buy':c[1]}</span><span><b>${c[2]}</b><br>${c[3]}</span></div>`).join('');rank('svcBuy','Services','Acquisition');rank('svcFr','Services','Franchise');rank('svcDiy','Services','DIY');rank('muDiy','Multi-Unit','DIY');rank('muFr','Multi-Unit','Franchise');rank('muBuy','Multi-Unit','Acquisition');
 render();const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.08});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Load saved notes and verdicts from localStorage
+(function(){
+  try {
+    const saved = JSON.parse(localStorage.getItem('dan-feasibility-edits') || '{}');
+    DATA.forEach(r => {
+      const key = r.Category;
+      if (saved[key]) {
+        if (saved[key].verdict !== undefined) r.FeasibilityVerdict = saved[key].verdict;
+        if (saved[key].notes !== undefined) r.FeasibilityNotes = saved[key].notes;
+      }
+    });
+  } catch(e) {}
+})();
+
+function saveFeasibilityEdit(category, field, value) {
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem('dan-feasibility-edits') || '{}'); } catch(e) {}
+  if (!saved[category]) saved[category] = {};
+  saved[category][field] = value;
+  localStorage.setItem('dan-feasibility-edits', JSON.stringify(saved));
+}
 
 // Feasibility verdict filter
 let currentVerdict = '';
@@ -31668,12 +31690,83 @@ function filterVerdict(v) {
   currentVerdict = v;
   document.querySelectorAll('.vbtn').forEach(b => b.classList.remove('active'));
   document.getElementById('vbtn-' + (v || 'all')).classList.add('active');
-  applyFilters();
+  render();
 }
 function getVerdictFilter(d) {
   if (!currentVerdict) return true;
   if (currentVerdict === 'none') return !d.FeasibilityVerdict;
   return d.FeasibilityVerdict === currentVerdict;
+}
+
+// Inline verdict picker
+function verdictPillHtml(r) {
+  const v = r.FeasibilityVerdict || '';
+  const colors = v==='Active Sourcing'?'background:#e8f5e9;color:#2e7d32;border:1px solid #4caf50':v==='Validation Sprint'?'background:#e3f2fd;color:#1565c0;border:1px solid #2196f3':v==='Watchlist'?'background:#fff3e0;color:#e65100;border:1px solid #ff9800':v==='Kill'?'background:#ffebee;color:#b71c1c;border:1px solid #f44336':'background:rgba(0,0,0,.04);color:#999;border:1px dashed #ccc';
+  const label = v || 'Set\u2026';
+  return '<span class="vdpill" style="display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.04em;cursor:pointer;'+colors+'" onclick="openVerdictPicker(this,\''+esc(r.Category)+'\')">'+label+' \u25BE</span>';
+}
+
+function openVerdictPicker(el, category) {
+  document.querySelectorAll('.vd-picker').forEach(p => p.remove());
+  const options = ['Active Sourcing','Validation Sprint','Watchlist','Kill','(clear)'];
+  const picker = document.createElement('div');
+  picker.className = 'vd-picker';
+  picker.style.cssText = 'position:fixed;z-index:999;background:#fff;border:1px solid #ccc;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.15);padding:4px 0;min-width:160px';
+  picker.innerHTML = options.map(o => {
+    const isClear = o === '(clear)';
+    const col = o==='Active Sourcing'?'#2e7d32':o==='Validation Sprint'?'#1565c0':o==='Watchlist'?'#e65100':o==='Kill'?'#b71c1c':'#999';
+    return '<div style="padding:6px 14px;cursor:pointer;font-size:12px;font-weight:600;color:'+(isClear?'#999':col)+'" onmouseover="this.style.background=\'#f0f0f0\'" onmouseout="this.style.background=\'transparent\'" onclick="setVerdict(\''+category+'\',\''+(isClear?'':o)+'\')">'+o+'</div>';
+  }).join('');
+  const rect = el.getBoundingClientRect();
+  picker.style.top = (rect.bottom + 4) + 'px';
+  picker.style.left = rect.left + 'px';
+  document.body.appendChild(picker);
+  setTimeout(() => document.addEventListener('click', function handler(e) {
+    if (!picker.contains(e.target) && e.target !== el) {
+      picker.remove();
+      document.removeEventListener('click', handler);
+    }
+  }), 10);
+}
+
+function setVerdict(category, value) {
+  const r = DATA.find(d => d.Category === category);
+  if (r) {
+    r.FeasibilityVerdict = value;
+    saveFeasibilityEdit(category, 'verdict', value);
+  }
+  document.querySelectorAll('.vd-picker').forEach(p => p.remove());
+  render();
+}
+
+// Inline notes editing
+function notesCellHtml(r) {
+  const n = r.FeasibilityNotes || '';
+  const display = n ? esc(n.length > 80 ? n.slice(0,80)+'\u2026' : n) : '<span style="color:#bbb;font-style:italic">Add note\u2026</span>';
+  return '<div class="notes-cell" data-category="'+esc(r.Category)+'" style="max-width:200px;min-height:20px;font-size:12px;color:'+(n?'var(--muted)':'#bbb')+';cursor:text;padding:2px 4px;border-radius:4px;position:relative;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+esc(n)+'" onclick="editNote(this,\''+esc(r.Category)+'\')">'+(n?'\u270F\uFE0F ':'')+display+'</div>';
+}
+
+function editNote(el, category) {
+  const r = DATA.find(d => d.Category === category);
+  const current = r ? (r.FeasibilityNotes || '') : '';
+  const td = el.closest('td');
+  td.innerHTML = '<textarea class="note-editor" data-category="'+category+'" style="width:200px;height:60px;font-size:12px;font-family:inherit;padding:4px;border:1px solid var(--blue);border-radius:6px;resize:vertical">'+esc(current)+'</textarea>';
+  const ta = td.querySelector('textarea');
+  ta.focus();
+  ta.setSelectionRange(ta.value.length, ta.value.length);
+  function save() {
+    const val = ta.value.trim();
+    if (r) {
+      r.FeasibilityNotes = val;
+      saveFeasibilityEdit(category, 'notes', val);
+    }
+    render();
+  }
+  ta.addEventListener('blur', save);
+  ta.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); save(); }
+    if (e.key === 'Escape') { render(); }
+  });
 }
 
 </script>
