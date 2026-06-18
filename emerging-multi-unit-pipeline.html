@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Emerging Multi-Unit Pipeline | Dan's Business Path</title>
+<meta name="description" content="Founder-led 2-10 unit consumer businesses worth deeper diligence for Dan's business acquisition path.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4ead8;--paper2:#eadcc4;--ink:#252018;--muted:#766b5e;--line:rgba(62,49,32,.16);--blue:#315e72;--blue2:#dfeaf0;--clay:#b86f4d;--sage:#6f8062;--gold:#b78b38;--card:rgba(255,251,241,.74);--shadow:0 30px 90px rgba(80,59,34,.16);--spring:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;line-height:1.5;background:radial-gradient(circle at 14% -6%,rgba(184,111,77,.22),transparent 34%),radial-gradient(circle at 88% 6%,rgba(49,94,114,.18),transparent 30%),linear-gradient(180deg,var(--paper),var(--paper2));min-height:100dvh}body:after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+.shell{max-width:1280px;margin:auto;padding:26px 24px 72px}nav{position:sticky;top:18px;z-index:10;width:min(1040px,100%);margin:0 auto 46px;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:10px;border:1px solid rgba(62,49,32,.14);border-radius:999px;background:rgba(255,251,241,.72);backdrop-filter:blur(18px);box-shadow:0 18px 50px rgba(80,59,34,.12)}nav b{padding-left:12px}.links{display:flex;gap:6px;flex-wrap:wrap}.links a{color:var(--ink);text-decoration:none;font-size:13px;padding:8px 11px;border-radius:999px}.links a:hover{background:rgba(49,94,114,.09)}
+.kicker{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(49,94,114,.18);background:rgba(255,251,241,.66);border-radius:999px;padding:8px 12px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:700}.kicker:before{content:"";width:7px;height:7px;border-radius:99px;background:var(--clay)}h1{font-family:"Fraunces",Georgia,serif;font-weight:650;font-size:clamp(3.1rem,7vw,7.2rem);line-height:.9;letter-spacing:-.06em;max-width:1080px;margin:18px 0 22px}h2{font-family:"Fraunces",Georgia,serif;font-weight:650;font-size:clamp(2rem,4vw,4.2rem);letter-spacing:-.045em;line-height:.95;margin:0 0 20px}h3{font-size:22px;margin:0 0 9px;letter-spacing:-.02em}.lede{max-width:900px;color:var(--muted);font-size:clamp(1.05rem,1.8vw,1.32rem)}section{padding:42px 0}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{border:1px solid var(--line);border-radius:26px;background:var(--card);padding:22px;box-shadow:inset 0 1px 0 rgba(255,255,255,.78)}.hero-card{border:1px solid rgba(49,94,114,.2);border-radius:34px;background:linear-gradient(135deg,rgba(255,251,241,.88),rgba(223,234,240,.56));padding:28px;box-shadow:var(--shadow)}p,li{color:var(--muted)}.tag{display:inline-block;margin:4px 4px 0 0;padding:6px 9px;border-radius:999px;border:1px solid var(--line);font-size:12px;color:var(--ink);background:rgba(255,255,255,.36)}.pill{display:inline-block;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:700}.go{background:rgba(111,128,98,.14);color:var(--sage)}.watch{background:rgba(183,139,56,.16);color:#765402}.kill{background:rgba(184,111,77,.12);color:var(--clay)}.note{border-left:4px solid var(--clay);padding:15px 18px;background:rgba(184,111,77,.09);border-radius:16px;color:var(--muted)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}.controls input,.controls select{font:inherit;background:rgba(255,251,241,.8);border:1px solid var(--line);border-radius:999px;padding:10px 13px;color:var(--ink)}.controls input{min-width:280px}.table-shell{overflow:auto;border:1px solid var(--line);border-radius:22px;background:rgba(255,251,241,.5)}table{width:100%;border-collapse:collapse;min-width:1120px}th,td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}th{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--blue);background:rgba(49,94,114,.06)}tr:last-child td{border-bottom:0}.ranknum{font-family:"Fraunces",Georgia,serif;color:var(--gold);font-size:28px;line-height:1}.brand{font-weight:800;color:var(--ink)}.score{font-weight:900;color:var(--blue);font-variant-numeric:tabular-nums}.shortlist{display:grid;grid-template-columns:52px 1fr 110px;gap:14px;align-items:start;padding:15px 0;border-bottom:1px solid var(--line)}.shortlist:last-child{border-bottom:0}.num{font-family:"Fraunces",Georgia,serif;color:var(--gold);font-size:34px;line-height:1}.verdict{font-weight:800;color:var(--blue);text-align:right}.source{font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:18px}footer{padding:36px 0;color:var(--muted);font-size:13px}@media(max-width:900px){.shell{padding:16px}.grid2,.grid3{grid-template-columns:1fr}nav{position:relative;border-radius:24px;align-items:flex-start;flex-direction:column}.shortlist{grid-template-columns:38px 1fr}.verdict{grid-column:2;text-align:left}.controls input{min-width:100%;width:100%}h1{font-size:3rem}}
+</style>
+</head>
+<body>
+<main class="shell">
+<nav><b>Dan's decision placemat</b><div class="links"><a href="./index.html">Dashboard</a><a href="./underwriting.html">Underwriting</a><a href="./operating.html">Operating</a><a href="./consumer-porting-2026.html">Consumer Porting</a><a href="./bankruptcy.html">Bankruptcy</a></div></nav>
+
+<section class="hero-card">
+<span class="kicker">2-10 Unit Consumer Pipeline</span>
+<h1>Founder-led concepts before they get obvious.</h1>
+<p class="lede">HTML working page for the June 12 emerging multi-unit cash-on-cash pipeline. The filter is simple: roughly 2-10 locations, visible customer love, founder-led or founder-like ownership, and a plausible path for Dan to help scale through capital, operating discipline, site selection, or acquisition/JV structure.</p>
+<span class="tag">45 candidates</span><span class="tag">Desk research only</span><span class="tag">No outreach yet</span><span class="tag">CoC inferred, not verified</span><span class="tag">Source: Obsidian 260612 pipeline</span>
+</section>
+
+<section>
+<h2>The answer.</h2>
+<div class="grid3">
+<div class="card"><h3>Bagels are still the lead lane.</h3><p>Limited SKU, breakfast repeat, visible line/sellout cues, small-box potential, and premium pricing. Layla, Bart's, Starship, Nervous Charlie's, and Gables are cleaner Dan-fit than already-scaled PopUp or Jeff's.</p><span class="pill go">Primary lane</span></div>
+<div class="card"><h3>Retail can beat food on CoC.</h3><p>Scandy Candy and Goodies have smaller boxes, lower labor, and cleaner inventory operations than food. The diligence question is repeat purchase after novelty, not whether the store can open cheaply.</p><span class="pill watch">Trend durability test</span></div>
+<div class="card"><h3>Dessert works only with systems.</h3><p>FIGO, Cafe Panna, Holey Grail, Sidecar, and Smoosh are attractive gross-margin categories, but cold chain, skilled production, freshness promises, and founder taste are the scaling traps.</p><span class="pill watch">Ops proof needed</span></div>
+</div>
+</section>
+
+<section>
+<h2>Dan shortlist.</h2>
+<p class="note">If we run a proof sprint, I would not start with all 45. Start with ten lanes that cover the highest-potential patterns: premium bagels, hub-and-spoke bakery, specialty retail, dessert, differentiated fast casual, and one recurring consumer-service lane.</p>
+<div class="card" id="shortlist"></div>
+</section>
+
+<section id="pipeline">
+<h2>Full candidate pipeline.</h2>
+<div class="controls">
+<input id="q" placeholder="Search brand, category, market, risk...">
+<select id="category"><option value="All">All categories</option></select>
+<select id="fit"><option value="All">All fit scores</option><option value="8">Fit 8+</option><option value="7">Fit 7+</option><option value="6">Fit 6+</option></select>
+</div>
+<div class="table-shell">
+<table>
+<thead><tr><th>#</th><th>Brand</th><th>Category</th><th>Market</th><th>Units</th><th>CoC</th><th>Fit</th><th>Why interesting</th><th>Next diligence</th><th>Main risk</th></tr></thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+</section>
+
+<section>
+<h2>Proof sprint.</h2>
+<div class="grid2">
+<div class="card"><h3>Two-week no-outreach sprint</h3><ol><li>Exact current unit map and opening timeline.</li><li>Google/Yelp rating snapshot by unit.</li><li>Menu and price scrape.</li><li>Peak-hour throughput from reviews, social, delivery availability, and map traffic cues.</li><li>Box-size and likely rent estimate.</li></ol></div>
+<div class="card"><h3>Decision outputs</h3><ol><li>Production model: in-store, commissary, hub-and-spoke, imported, or cold-chain dependent.</li><li>Founder/operator and capital-status check.</li><li>Category comp set and franchise/FDD benchmarks where available.</li><li>Cash-on-cash hypothesis with capex, AUV, margin, labor, and payback sensitivity.</li><li>Promote, comp-only, watch, or kill.</li></ol></div>
+</div>
+</section>
+
+<section>
+<h2>Source notes.</h2>
+<div class="card source">
+<p><b>Important caveat:</b> location counts, reviews, ownership/capital status, and expansion plans are public-source estimates from the June 12 pass. Cash-on-cash scores are reasoned inferences from format, footprint, menu mix, throughput cues, and franchise/category comparables; they are not verified unit economics.</p>
+<p><b>Primary source memo:</b> /Users/winslow/Documents/Business-Research/Business Transition Engine/Business Path Deep Dives/260612 emerging-multi-unit-cash-on-cash-pipeline.md</p>
+<p><b>Key links in source memo:</b> Eater LA for Layla volume; Restaurant Business for Bonrue 3-to-10 plan; Philadelphia Inquirer for Bart's Bala Cynwyd; Review-Journal for Coffee Class; FIGO company/contact and ANBB branding page; Miami Herald and Scandy company page; WFAA for Starship; MySA for Nervous Charlie's; Holey Grail company/Heritage/Fortune/Longbeachize; Business Insider for Jeff's Bagel Run.</p>
+</div>
+</section>
+
+<footer>Private working page. Emerging multi-unit cash-on-cash pipeline - updated from June 12, 2026 memo.</footer>
+</main>
+
+<script>
+const TOP = [
+  ["Layla Bagels","Premium bagels / LA","Best overall signal: 2-3 units, reported 600 weekday and 1,200-1,400 weekend bagels at store 1, Tartine/Gjusta founder credibility.","Mystery shop Santa Monica/Beverly Hills; measure throughput; model bake/commissary constraints.","Promote"],
+  ["Bart's Bagels","Bagels / Philadelphia","Less sexy than Layla, possibly more investable: brother-led, local love, Main Line suburban portability.","Shop West Philly and Bala Cynwyd; check production bottleneck and catering/dozen mix.","Promote"],
+  ["Starship Bagel","Bagels / Dallas","Strong Sunbelt proof point for premium bagels outside NYC/LA; nationally acclaimed and 3 units.","Mystery shop Dallas locations; verify founder role and wholesale/catering upside.","Promote"],
+  ["Nervous Charlie's","Bagels / Austin","3-unit Austin brand; repeat breakfast behavior and regional Texas rollout potential.","Verify South Lamar opening, peak lines, production model, and founder involvement.","Promote"],
+  ["FIGO Il Gelato","Gelato / NYC","5 NYC units and possible acquisition angle if the $7M revenue claim is real; bad ops may be opportunity.","Mystery shop all 5 stores; get real P&L; verify leases and Federico's operating role.","Acquisition candidate"],
+  ["Scandy Candy / BonBon","Specialty candy retail","Small boxes, high gross margin, low labor, and social demand; best retail side bet if repeat purchase persists.","Verify import margins, repeat purchase, inventory turns, trend decay, and copycat count.","Promote with caution"],
+  ["The Coffee Class / Almond & Oat","Coffee/bakery / Vegas","6-unit local group; good brand-building, but flagship complexity may hide weak small-format economics.","Split small cafe vs flagship economics; check pastry production and labor.","Watch/promote"],
+  ["Saigon Hustle","Vietnamese fast casual / Houston","Differentiated drive-thru Vietnamese model with app, loyalty, catering, and modern fast-casual infrastructure.","Verify drive-thru throughput, menu speed, food cost, and founder willingness.","Promote"],
+  ["Goodies","Specialty home retail / SoCal","Low-labor retail concept with taste, ecommerce potential, and small-box portability.","Check inventory turns, product sourcing, repeat purchase, and whether taste scales beyond founder.","Watch"],
+  ["Pet hygiene clusters","Recurring consumer service","Not a named cult brand, but Scenthound-like local clusters may offer recurring, non-food economics.","Source target-level local groomer/pet-spa clusters and validate labor retention.","Category sprint"]
+];
+
+const DATA = [
+  {n:1,b:"Layla Bagels",c:"Bagels/coffee",m:"LA",u:"2-3",coc:9,fit:9,w:"Eater reported 600 weekday bagels and 1,200-1,400 weekend bagels at store 1; founder Sergio Espana has Tartine/Gjusta credibility.",d:"Mystery shop Santa Monica/BH; measure throughput by hour; model commissary vs in-store bake; lease/buildout check.",r:"Quality may be founder/process dependent; LA rents."},
+  {n:2,b:"Bonrue Bakery",c:"Bakery/cafe",m:"Utah",u:"3",coc:9,fit:9,w:"Restaurant Business reports 3 to 10 locations in two years using hub-and-spoke central production.",d:"Pull menu prices and daypart mix; estimate hub capex and store box cost; check ownership.",r:"Premium bakery labor, spoilage, morning concentration."},
+  {n:3,b:"Bart's Bagels",c:"Bagels",m:"Philadelphia",u:"2-3",coc:8,fit:8,w:"Brother-led local bagel brand moving from city to Main Line suburb with local reputation.",d:"Shop West Philly and Bala Cynwyd; check production constraint and catering/dozen mix.",r:"Philly bagel competition; production consistency."},
+  {n:4,b:"The Coffee Class / Almond & Oat",c:"Coffee/bakery/cafe",m:"Las Vegas",u:"6",coc:7,fit:8,w:"Founder-led Vegas group with sixth shop and flagship; strong brand-building but possible capex creep.",d:"Split small shop vs flagship economics; assess Almond & Oat as lighter format.",r:"Flagship complexity, capex creep, daypart labor."},
+  {n:5,b:"FIGO Il Gelato Italiano",c:"Gelato/dessert",m:"NYC",u:"5",coc:8,fit:8,w:"Five NYC locations, premium gelato margin, early franchising claims, possible acquisition candidate.",d:"FDD review; mystery shop volume; compare Anita/Grom/Venchi rents and buildout.",r:"FDD unknown; supply-chain/technician dependence."},
+  {n:6,b:"Scandy Candy",c:"Specialty candy retail",m:"Miami",u:"1-2",coc:9,fit:8,w:"Viral Coral Gables launch, Swedish founder story, small box, high-margin retail, low kitchen complexity.",d:"Verify second location timing; import cost; mall vs street economics; repeat purchase after spike.",r:"Trend fragility, import costs, low moat."},
+  {n:7,b:"Starship Bagel",c:"Bagels",m:"Dallas",u:"3",coc:8,fit:8,w:"Nationally acclaimed Dallas bagel brand with third location and strong local love.",d:"Shop Dallas locations; watch bake labor and sellout cadence; check wholesale/catering.",r:"Competition, founder quality dependency."},
+  {n:8,b:"Nervous Charlie's",c:"Bagels",m:"Austin",u:"3",coc:8,fit:8,w:"Top-rated Austin bagel shop opening South Lamar unit; repeat breakfast behavior fits porting thesis.",d:"Mystery shop peak lines; measure sandwich vs dozen mix; check founder and commissary feasibility.",r:"Austin rents, product consistency."},
+  {n:9,b:"Holey Grail Donuts",c:"Premium donuts",m:"HI/LA",u:"6",coc:6,fit:7,w:"Cult taro donut, made-to-order, real ingredients; customer love is high.",d:"Treat as category case study; review unit buildout, labor, ingredient procurement, cap table.",r:"Prior funding/celebrity investors, trend and supply risk."},
+  {n:10,b:"Jeff's Bagel Run",c:"Bagels",m:"FL/TX",u:"15+",coc:8,fit:7,w:"Tight menu and tech-enabled systems; likely already professionalized but instructive.",d:"Use as comp; pull FDD if franchising; benchmark POS/AI bake systems.",r:"May be too late/institutionalized."},
+  {n:11,b:"Pizzeria Sei",c:"Pizza",m:"LA",u:"2",coc:6,fit:7,w:"National acclaim and second location; possible high AUV.",d:"Study throughput, oven capex, labor, and founder dependence.",r:"Founder-dependent product; limited throughput."},
+  {n:12,b:"The Win-Dow",c:"Burgers",m:"LA",u:"4-5",coc:8,fit:7,w:"Perpetual lines, affordable minimalist burger menu, high-throughput simple ops.",d:"Assess unit box, labor, margins, and whether local group would partner.",r:"Hamburger competition; labor/rent."},
+  {n:13,b:"Prince Street Pizza",c:"Pizza slices",m:"NYC/LA/Miami",u:"~10",coc:7,fit:7,w:"Cult square slice with lines and social traction across markets.",d:"Use as slice-shop comp; verify ownership and expansion structure.",r:"Brand controversies, already too visible."},
+  {n:14,b:"Sushi Nikkei",c:"Nikkei sushi",m:"Long Beach",u:"2",coc:5,fit:6,w:"Local second-unit sushi/Nikkei operator with strong ticket potential.",d:"Check chef labor, food cost, and actual unit-level margin.",r:"Skilled labor, high COGS, chef dependence."},
+  {n:15,b:"Bagels With Deli",c:"Bagels/deli",m:"Delray Beach",u:"2",coc:7,fit:6,w:"Two Delray locations, breakfast/lunch repeat, possible local cluster platform.",d:"Verify volumes, catering, deli complexity, and ownership.",r:"Less cult signal; ops complexity beyond bagels."},
+  {n:16,b:"Gables Bagels",c:"Bagels",m:"Indiana",u:"2",coc:8,fit:7,w:"Entering affluent Indy suburb; bagel category with small-town/suburban portability.",d:"Verify current unit count and peak volume.",r:"Need better volume proof."},
+  {n:17,b:"Pete's Bagels",c:"Bagels/cafe",m:"St. Petersburg",u:"3-4",coc:7,fit:6,w:"Tampa Bay bagel/cafe cluster with local following.",d:"Review quality complaints and operating consistency.",r:"Quality consistency complaints; brand drift."},
+  {n:18,b:"Loveski Deli",c:"Deli/bagels",m:"Bay Area",u:"3",coc:5,fit:6,w:"Chef-led deli/bagel concept entering SF.",d:"Assess rent, labor, and whether chef halo scales.",r:"Bay Area rents and chef dependence."},
+  {n:19,b:"Settepani Bakery",c:"Bakery/cafe",m:"NYC",u:"2-3",coc:6,fit:5,w:"Longstanding family bakery/cafe with local love.",d:"Check whether there is an inflection or just mature steady-state.",r:"Mature, may not be at inflection."},
+  {n:20,b:"Rose Ave Bakery",c:"Filipino bakery/cafe",m:"DC",u:"2",coc:7,fit:7,w:"Cult DC bakery with lines and second-location momentum.",d:"Study production bottleneck, wholesale potential, and founder dependency.",r:"Founder-dependent, production bottleneck."},
+  {n:21,b:"Warda Patisserie",c:"Bakery/cafe",m:"Detroit",u:"2",coc:6,fit:6,w:"National award reputation and second cafe.",d:"Assess whether brand can become platform vs artisan shop.",r:"Founder artistry hard to scale."},
+  {n:22,b:"Yafa Cafe",c:"Middle Eastern cafe",m:"Brooklyn",u:"2",coc:7,fit:6,w:"Community-loved Palestinian/Yemeni cafe with second Brooklyn shop.",d:"Study daypart demand and portability outside Brooklyn.",r:"Politics/community specificity; NYC rents."},
+  {n:23,b:"Kismet Rotisserie",c:"Chicken/QSR",m:"LA",u:"3",coc:7,fit:7,w:"Chef-founded rotisserie format that could be repeatable.",d:"Check lunch/dinner throughput and prep labor.",r:"Chef reputation, CA labor."},
+  {n:24,b:"Handover by The Handroll Bar",c:"Sushi handroll",m:"Austin",u:"2",coc:5,fit:5,w:"Compact handroll format with second-shop proof.",d:"Verify labor, perishability, and bar throughput.",r:"Labor, perishability, limited audience."},
+  {n:25,b:"Yalla Motek",c:"Mediterranean",m:"Miami",u:"6-7",coc:7,fit:7,w:"Miami awards and busy mall/urban locations; possible fast-casual spinoff.",d:"Separate Motek vs Yalla economics and mall rent exposure.",r:"Already somewhat scaled; labor."},
+  {n:26,b:"Talkin' Tacos",c:"Tacos",m:"South Florida",u:"~10",coc:7,fit:6,w:"Social-forward halal taco culture with Florida rollout.",d:"Verify franchise commitments and unit economics.",r:"May already be franchising aggressively."},
+  {n:27,b:"Rreal Tacos",c:"Tacos",m:"Atlanta",u:"~9",coc:7,fit:6,w:"Atlanta local favorite near 10-unit regional cluster.",d:"Assess bar complexity, catering, and franchise posture.",r:"Bar complexity; already near upper range."},
+  {n:28,b:"Birdcall",c:"Chicken",m:"Denver/AZ/TX",u:"~10",coc:7,fit:6,w:"Tech-forward chicken concept with kiosk posture.",d:"Use as chicken tech/ops comp more than target.",r:"Institutionalization, chicken saturation."},
+  {n:29,b:"Sidecar Doughnuts",c:"Premium donuts",m:"CA/TX",u:"~8",coc:7,fit:7,w:"Strong reviews and made-fresh-hourly premium donut model.",d:"Check fry labor, small-box economics, and coffee attach.",r:"Labor and freshness promise."},
+  {n:30,b:"Better Half / Hold Out",c:"Cafe/bar/burger",m:"Austin",u:"2-3",coc:5,fit:5,w:"Local cult hospitality group with multi-concept campus feel.",d:"Use as local platform comp; avoid if complexity dominates.",r:"Not simple or portable."},
+  {n:31,b:"Coffee Dose",c:"Coffee",m:"OC/LA",u:"5",coc:8,fit:7,w:"Strong social identity, coffee margin, merch, small boxes.",d:"Assess whether edgy brand ports beyond OC/LA.",r:"Brand voice may not port everywhere."},
+  {n:32,b:"Cafe Panna",c:"Ice cream",m:"NYC",u:"2",coc:8,fit:7,w:"Cult ice cream with second Brooklyn location and CPG potential.",d:"Verify domain/status; check batch production and cold chain.",r:"NYC rent, founder taste dependence."},
+  {n:33,b:"Smoosh Cookies",c:"Cookies/dessert",m:"Texas",u:"4-5",coc:8,fit:6,w:"Cookie/ice cream sandwich niche with small-footprint dessert economics.",d:"Check production simplicity and category competition.",r:"Cookie category crowded."},
+  {n:34,b:"The Salty Donut",c:"Premium donuts/coffee",m:"FL/TX/NC",u:"~10",coc:7,fit:6,w:"Premium donut brand with strong press and new markets.",d:"Use as comp; check maturity and capex.",r:"May be too mature; capex/corporate team."},
+  {n:35,b:"Goodies",c:"Specialty home retail",m:"LA/SoCal",u:"2-3",coc:8,fit:7,w:"Affordable home-retail concept with product identity and ecommerce potential.",d:"Check inventory turns, sourcing, repeat purchase, and founder taste transferability.",r:"Inventory turns, trend taste risk."},
+  {n:36,b:"Scenthound-like local pet spa clusters",c:"Pet hygiene",m:"Various",u:"2-10",coc:8,fit:7,w:"Recurring need and membership potential with many underbranded local operators.",d:"Find target-level clusters; validate groomer retention and membership behavior.",r:"Needs target-level sourcing."},
+  {n:37,b:"Dogdrop",c:"Dog daycare",m:"LA/Denver",u:"~4",coc:6,fit:5,w:"Urban dog daycare with membership model.",d:"Check funding/cap table, labor ratios, space economics.",r:"Capex, regulation, labor."},
+  {n:38,b:"Ject",c:"Aesthetic medspa",m:"NYC/LA",u:"~7",coc:5,fit:5,w:"Urban injectable brand with repeat high-margin services.",d:"Check regulatory/provider labor and outside capital.",r:"Medical/regulatory, PE crowding."},
+  {n:39,b:"Chillhouse",c:"Nail/wellness",m:"NYC",u:"2",coc:4,fit:5,w:"Strong brand/social traction and studio + CPG model.",d:"Assess utilization and service labor.",r:"Labor, utilization, trend."},
+  {n:40,b:"Othership",c:"Sauna/ice bath",m:"NYC/Toronto",u:"3-4",coc:3,fit:4,w:"High social traction and premium wellness community.",d:"Use as comp; avoid heavy buildout unless economics are proven.",r:"Capex heavy; not Dan CoC priority."},
+  {n:41,b:"Blended",c:"Smoothies/bowls",m:"Dallas",u:"3-4",coc:8,fit:6,w:"Local wellness beverage repeat with small footprint.",d:"Check founder, volume, and differentiation vs smoothie competition.",r:"Smoothie category commoditized."},
+  {n:42,b:"Bluestone Lane local challengers",c:"Coffee/cafe",m:"Various",u:"2-10",coc:6,fit:5,w:"Premium Australian-style cafe pattern persists with local challengers.",d:"Find named local targets before spending time.",r:"Category placeholder; cafe capex varies."},
+  {n:43,b:"Saigon Hustle",c:"Vietnamese fast casual",m:"Houston",u:"3-4",coc:8,fit:8,w:"Modern fast-casual Vietnamese with drive-thru option, app, loyalty, and catering.",d:"Verify drive-thru throughput, menu speed, food cost, and founder willingness.",r:"Drive-thru capex; category education."},
+  {n:44,b:"Cava Mezze-style local Mediterranean cafes",c:"Mediterranean",m:"DC/NY/ATL",u:"2-10",coc:7,fit:6,w:"Strong lunch repeat category with local premium gaps.",d:"Find named deals; separate bowl throughput from full-service complexity.",r:"Category may be crowded."},
+  {n:45,b:"Premium kids party/play cafes",c:"Kids/family",m:"Sunbelt/suburbs",u:"2-5",coc:7,fit:7,w:"Birthday/event deposits, parent reviews, and weekday membership potential.",d:"Source target-level play cafes; verify event revenue can carry fixed costs.",r:"Weekday utilization, safety/liability."}
+];
+
+const shortlist = document.getElementById("shortlist");
+shortlist.innerHTML = TOP.map((x,i)=>`<div class="shortlist"><div class="num">${i+1}</div><div><h3>${x[0]}</h3><p><b>${x[1]}</b></p><p>${x[2]}</p><p><b>Next:</b> ${x[3]}</p></div><div class="verdict">${x[4]}</div></div>`).join("");
+
+const tbody = document.getElementById("tbody");
+const q = document.getElementById("q");
+const cat = document.getElementById("category");
+const fit = document.getElementById("fit");
+const cats = [...new Set(DATA.map(d=>d.c))].sort();
+cat.innerHTML += cats.map(c=>`<option>${c}</option>`).join("");
+function pill(f){return f>=8?"go":f>=6?"watch":"kill"}
+function render(){
+  const query = q.value.toLowerCase();
+  const c = cat.value;
+  const f = fit.value;
+  tbody.innerHTML = DATA.filter(d => {
+    const hay = `${d.b} ${d.c} ${d.m} ${d.w} ${d.d} ${d.r}`.toLowerCase();
+    return (!query || hay.includes(query)) && (c==="All" || d.c===c) && (f==="All" || d.fit>=Number(f));
+  }).map(d => `<tr><td><span class="ranknum">${d.n}</span></td><td><span class="brand">${d.b}</span></td><td>${d.c}</td><td>${d.m}</td><td>${d.u}</td><td><span class="score">${d.coc}</span></td><td><span class="pill ${pill(d.fit)}">${d.fit}</span></td><td>${d.w}</td><td>${d.d}</td><td>${d.r}</td></tr>`).join("");
+}
+[q,cat,fit].forEach(el=>el.addEventListener("input",render));
+render();
+</script>
+</body>
+</html>
