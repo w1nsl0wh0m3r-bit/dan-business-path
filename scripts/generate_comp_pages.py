@@ -18,7 +18,7 @@ OUT_DIR = os.path.join(BASE_DIR, "swedish-candy")
 BRANDS = {
     "ScandyCandy": {
         "slug": "scandycandy",
-        "lede": "Founder-led pure Swedish candy retailer in South Florida, founded 2024 by two brothers from Helsingborg. Viral opening (sold out in 9 days). Now 3 locations + ecommerce.",
+        "lede": "Founder-led pure Swedish candy retailer in South Florida, founded 2024 by two brothers from Helsingborg. Viral opening (sold out in 9 days). Now 3 open locations + UTC Sarasota coming soon + ecommerce.",
         "posture": "Target watch / proof-only",
         "markets": "South Florida (Miami, Coral Gables, Palm Beach)",
         "confidence": "High",
@@ -42,6 +42,7 @@ BRANDS = {
             "Aug 30, 2025: Reopened with restocked shelves.",
             "Nov 1, 2025: Palm Beach seasonal location opened at Royal Poinciana Plaza.",
             "Dec 2025: SACC Florida membership spotlight feature.",
+            "June 2026: UTC Sarasota tenant page and Bradenton Herald report ScandyCandy is coming to The Mall at University Town Center; job postings list store roles at 140 University Town Center Dr.",
         ],
         "social": [
             "Instagram: active, growing (handle not publicly confirmed in search results).",
@@ -51,11 +52,12 @@ BRANDS = {
         "revenue": [
             "Not publicly disclosed. No third-party revenue estimates available.",
             "Scale signal: sold entire store inventory in 9 days — strong demand signal.",
-            "3 physical locations + online store + warehouse.",
+            "3 open physical locations + UTC Sarasota announced + online store + warehouse.",
             "Pricing: ~$14-16/lb pick-and-mix (standard for market).",
         ],
         "openings": [
             "Current: Coral Gables (flagship), Coconut Grove, Palm Beach (seasonal).",
+            "Opening announced: The Mall at University Town Center, 140 University Town Center Dr, Sarasota, FL.",
             "Palm Beach is seasonal pop-up inside The Current at Royal Poinciana Plaza.",
             "No announced expansion beyond South Florida yet.",
         ],
@@ -63,7 +65,7 @@ BRANDS = {
     },
     "BonBon": {
         "slug": "bonbon",
-        "lede": "Category-defining NYC Swedish candy retailer + ecommerce/wholesale. Founded 2017, 6 NYC stores, ~$10M revenue, 55 employees. The brand that sparked the TikTok Swedish candy craze.",
+        "lede": "Category-defining NYC Swedish candy retailer + ecommerce/wholesale. Founded 2017, 6 mapped open stores plus Greenwich CT announced, ~$10M revenue estimate, 55 employees. The brand that sparked the TikTok Swedish candy craze.",
         "posture": "Comp / strategic-capital only",
         "markets": "NYC/Brooklyn, Hamptons/Long Island",
         "confidence": "High",
@@ -87,6 +89,7 @@ BRANDS = {
             "BuzzFeed feature: 'often-sold-out candy store ships over 1,000 orders a day.'",
             "2025-26: Opened Sag Harbor (Hamptons), Upper East Side, Williamsburg locations.",
             "6 retail locations confirmed on FAQ page as of 2026.",
+            "Spring 2026: Greenwich Girl / BonBon social snippets say BonBon is opening at 12 West Putnam Avenue, Greenwich, CT in summer 2026.",
         ],
         "social": [
             "Instagram: <strong>71.9K followers</strong> (@bonbonnyc_) as of mid-2026.",
@@ -102,7 +105,8 @@ BRANDS = {
             "Label as directional estimate — no audited financials public.",
         ],
         "openings": [
-            "Current: 6 locations — Allen St (LES), Degraw St (Red Hook), Sag Harbor, Lexington Ave (UES), Greenwich Ave (West Village), Driggs Ave (Williamsburg).",
+            "Current: 6 mapped open locations — Allen St (LES), Degraw St (Red Hook), Sag Harbor, Lexington Ave (UES), Greenwich Ave (West Village), Driggs Ave (Williamsburg).",
+            "Opening announced: Greenwich, CT at 12 West Putnam Avenue, summer 2026.",
             "Growing ecommerce business shipping nationwide.",
             "Careers email active (careers@bonbonnyc.com) — team growing.",
         ],
@@ -323,7 +327,7 @@ BRANDS = {
         ],
         "openings": [
             "Current (11): East Village, West Village, Upper West Side, Rockefeller Center (NYC); Back Bay (Boston); West Loop (Chicago); Georgetown (DC); Walnut St (Philadelphia); Chestnut St (San Francisco); The Grove + Abbot Kinney (Venice/LA).",
-            "Hoboken, NJ announced.",
+            "Hoboken, NJ announced after public vote / Hoboken Girl and social snippets; exact address not surfaced yet.",
             "Aggressive multi-city expansion model.",
         ],
         "diligence": "Not a pure Swedish candy play — global pick-and-mix. But 11 locations in <2 years is the benchmark. Founded by a single young founder. Key question: unit economics and whether Swedish-only is a constraint or advantage vs. their broader approach.",
@@ -1422,6 +1426,41 @@ BRANDS = {
         "revenue": ["Not available."],
         "openings": ["No verified location information."],
         "diligence": "Could not find public information on this brand. May need direct research or removal from the universe if unverified.",
+    },
+    "Coney's Candies": {
+        "slug": "coney-s-candies",
+        "lede": "Opening-announced Waconia, Minnesota candy shop combining Swedish candy, dirty soda, ice cream, and cotton candy. Not Swedish-pure, but relevant as a new small-market Swedish-candy-forward entrant.",
+        "posture": "Watch / local opening proof",
+        "markets": "Waconia, MN",
+        "confidence": "Medium",
+        "site": "https://coneyscandies.com/",
+        "ig": "https://www.instagram.com/coneyscandies/",
+        "founder": [
+            "MSP Business Journal reports <strong>Crystal Jensen</strong> is opening Coney's Candies.",
+            "Founder/owner background beyond the opening coverage was not deeply surfaced in this sweep.",
+        ],
+        "origin": [
+            "Official site says Coney's is opening in Waconia in summer 2026.",
+            "Concept mixes Swedish candy with dirty soda, ice cream, and the founder's cotton candy brand.",
+            "The shop is positioned as an old-fashioned Main Street candy/soda-shop format rather than a pure Swedish candy store.",
+        ],
+        "news": [
+            "MSP Business Journal reported the shop is opening at 136 Main St W in Waconia in July 2026.",
+            "Official site says 'Opening in Waconia Summer 2026' and highlights Swedish candy, dirty soda, and ice cream.",
+        ],
+        "social": [
+            "Instagram: @coneyscandies; public snippet shows opening-summer-2026 positioning.",
+            "Exact follower count should be treated as drifting and was not used as a hard diligence fact.",
+        ],
+        "revenue": [
+            "No revenue data surfaced.",
+            "Revenue model is likely multi-category: Swedish candy + ice cream + dirty soda + cotton candy.",
+            "Useful as a small-market, broader-sweets comp rather than a pure Swedish-candy acquisition target.",
+        ],
+        "openings": [
+            "Opening announced: 136 Main St W, Waconia, MN; summer / July 2026.",
+        ],
+        "diligence": "Keep as a map/universe comp, not a target. The signal is geographic diffusion into Minnesota small-market Main Street retail and a broader sweets model that may be more durable than Swedish-only.",
     },
     "Swedish Crave": {
         "slug": "swedish-crave",
