@@ -157,8 +157,8 @@ const html = `<!doctype html>
 <section class="hero-card">
 <span class="kicker">Source of truth - updated 2026-06-19</span>
 <h1>Emerging multi-unit and consumer brand pipeline.</h1>
-<p class="lede">This page supersedes the stale June 12 45-candidate view. It now opens directly into the full consumer-brand sourcing universe, with source links, map links, Instagram links, corrected named-operator context, proof sprint re-rating, and the Swedish candy downgrade.</p>
-<span class="tag">${corpus.length} consumer brand corpus rows</span><span class="tag">${top20Raw.length} definitive consumer brand ranks shown</span><span class="tag">45 scored ranking candidates</span><span class="tag">${operators.length} corrected named-operator rows</span><span class="tag">${proof.length} proof-sprint rows</span><span class="tag">No outreach / no spend</span>
+<p class="lede">This page supersedes the stale June 12 45-candidate view. It now opens directly into the full consumer-brand sourcing universe, with source links, map links, Instagram links, corrected named-operator context, proof sprint re-rating, Swedish candy validation, and frozen-yogurt chain additions.</p>
+<span class="tag">${corpus.length} consumer brand corpus rows</span><span class="tag">45 scored ranking candidates retained in source files</span><span class="tag">${operators.length} corrected named-operator rows</span><span class="tag">${proof.length} proof-sprint rows</span><span class="tag">No outreach / no spend</span>
 </section>
 
 <section>
@@ -166,14 +166,14 @@ const html = `<!doctype html>
 <div class="grid5">
 <div class="metric"><strong>${corpus.length}</strong><span>consumer corpus rows</span></div>
 <div class="metric"><strong>45</strong><span>scored ranking candidates</span></div>
-<div class="metric"><strong>${top20.length}</strong><span>definitive top ranks</span></div>
+<div class="metric"><strong>${corpus.filter((r) => r.category === "Frozen Dessert").length}</strong><span>frozen dessert rows</span></div>
 <div class="metric"><strong>${operators.length}</strong><span>named-operator v2 rows</span></div>
 <div class="metric"><strong>${proof.length}</strong><span>proof sprint rows</span></div>
 </div>
 </section>
 
 <section id="corpus">
-<h2>Full 152-row consumer brand corpus.</h2>
+<h2>Full ${corpus.length}-row consumer brand corpus.</h2>
 <p class="note">This is the full sourcing universe, not proofed diligence. Rows can be targets, watch names, or comps. Use it to find lanes and candidates, then require proof sprint work before action.</p>
 <div class="controls"><input id="corpusSearch" placeholder="Search corpus..."><select id="corpusStatus"><option value="All">All statuses</option></select><select id="corpusCategory"><option value="All">All categories</option></select></div>
 <div class="table-shell"><table><thead><tr><th>Rank</th><th>Name</th><th>Links</th><th>Category</th><th>Subcategory</th><th>Geography</th><th>Units</th><th>Status</th><th>Dan entry path</th><th>Caveat</th><th>First proof question</th></tr></thead><tbody id="corpusBody"></tbody></table></div>
@@ -198,7 +198,7 @@ const html = `<!doctype html>
 <div class="card source">
 <p><b>Canonical public URL:</b> https://w1nsl0wh0m3r-bit.github.io/dan-business-path/emerging-multi-unit-pipeline.html</p>
 <p><b>Update rule:</b> after every material proof sprint, deep dive batch, or action-plan rerating, update this page first. Scratch files in the OpenClaw workspace are not the dashboard of record.</p>
-<p><b>Data sources:</b> 152-row consumer corpus, top-20 ranking/action-plan files used for posture context, v2 named-operator universe, named-operator proof sprint 25, and Swedish candy commoditization review.</p>
+<p><b>Data sources:</b> consumer corpus, top-20 ranking/action-plan files used for posture context, v2 named-operator universe, named-operator proof sprint 25, Swedish candy commoditization review, and June 19 frozen-yogurt chain addendum.</p>
 <p><b>Repeatable build:</b> run <code>node scripts/update_pipeline_source_of_truth.mjs</code> from the repo root.</p>
 </div>
 </section>
