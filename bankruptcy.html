@@ -87,36 +87,21 @@ footer{padding:40px 0;color:var(--muted);font-size:12px;text-align:center}
 
 <section class="hero">
 <div class="kicker">Distressed Consumer / Retail</div>
-<h1>Historical bankruptcy outcomes & live signals.</h1>
-<p class="lede">214 distressed consumer/retail cases with outcome types, buyer families, asset archetypes, and decision signals. Prioritizes what's verified over what's claimed.</p>
+<h1>Bankruptcy tracker & live signals.</h1>
+<p class="lede">Live watchlist of monitored companies plus 214 historical distressed consumer/retail cases with outcome types, buyer families, and decision signals.</p>
 <div class="note">⚠️ <b>How to use this:</b> positive comps are scarce; most rows are cautionary until primary docs, consideration, asset perimeter, and post-close survival are verified. Work the "To Verify" tab before relying on a case in diligence.</div>
 </section>
 
 <div class="tabs">
-  <button data-tab="watchlist" class="active">Watchlist</button>
-  <button data-tab="signals">Signals</button>
+  <button data-tab="signals" class="active">Signals</button>
   <button data-tab="overview">Overview</button>
   <button data-tab="cases">Cases</button>
-  <button data-tab="table">Table</button>
   <button data-tab="queue">To Verify</button>
   <button data-tab="buyers">Buyers</button>
   <button data-tab="taxonomy">Taxonomy</button>
 </div>
 
-<div class="filters">
-  <input id="q" placeholder="Search brand, buyer, outcome, lesson…">
-  <select id="sig"><option value="">Any decision signal</option></select>
-  <select id="pri"><option value="">Any verification priority</option></select>
-  <select id="ctype"><option value="">Any outcome type</option></select>
-  <select id="asset"><option value="">Any asset type</option></select>
-  <select id="buyer"><option value="">Any buyer type</option></select>
-  <select id="year"><option value="">Any year</option></select>
-</div>
-<div id="count" class="countline"></div>
-
-<div id="metrics" class="metric-grid"></div>
-
-<section id="watchlist" class="section active">
+<section id="watchlist">
   <h2>Live Watchlist — 140 Monitored Companies</h2>
   <p class="note">Companies actively tracked for distress signals. Scored daily by asset quality, distress level, control actionability, and Dan-fit. Sorted by priority score descending.</p>
   <div id="watchMetrics" class="metric-grid"></div>
@@ -129,7 +114,24 @@ footer{padding:40px 0;color:var(--muted);font-size:12px;text-align:center}
   <div class="table-shell"><table id="watchTbl"></table></div>
 </section>
 
-<section id="signals" class="section">
+<section id="historical">
+  <h2>Historical Bankruptcy Outcomes</h2>
+  <p class="note">214 distressed consumer/retail cases with outcomes, buyers, asset types, and decision signals. Use the filters below to narrow.</p>
+  <div id="histMetrics" class="metric-grid"></div>
+  <div class="filters" style="margin-bottom:18px">
+    <input id="hq" placeholder="Search brand, buyer, outcome, lesson…">
+    <select id="hsig"><option value="">Any decision signal</option></select>
+    <select id="hpri"><option value="">Any verification priority</option></select>
+    <select id="hctype"><option value="">Any outcome type</option></select>
+    <select id="hasset"><option value="">Any asset type</option></select>
+    <select id="hbuyer"><option value="">Any buyer type</option></select>
+    <select id="hyear"><option value="">Any year</option></select>
+  </div>
+  <div id="histCount" class="countline"></div>
+  <div class="table-shell"><table id="tbl"></table></div>
+</section>
+
+<section id="signals" class="section active">
   <h2>Signal Feed</h2>
   <p class="note">Live distress signals from monitoring sources. Severity: red = immediate action, orange = investigate, yellow = watch, green = informational.</p>
   <div id="sigMetrics" class="metric-grid"></div>
@@ -146,11 +148,6 @@ footer{padding:40px 0;color:var(--muted);font-size:12px;text-align:center}
   <h2>Case Cards</h2>
   <p class="note">Best default reading mode. Sorted newest-first; capped at 150 visible cards for speed.</p>
   <div id="caseCards" class="cards"></div>
-</section>
-
-<section id="table" class="section">
-  <h2>Spreadsheet View</h2>
-  <div class="table-shell"><table id="tbl"></table></div>
 </section>
 
 <section id="queue" class="section">
@@ -200,8 +197,8 @@ function uniq(f){return [...new Set(ROWS.map(r=>r[f]).filter(v=>v!==null&&v!==un
 function fill(id,f){let el=document.getElementById(id);uniq(f).forEach(v=>{let o=document.createElement('option');o.value=v;o.textContent=label(v);el.appendChild(o)})}
 
 function filtered(){
-  let q=document.getElementById('q').value.toLowerCase().trim();
-  let tests=[['sig','dan_decision_signal'],['pri','corpus_priority'],['ctype','canonical_outcome_type'],['asset','asset_archetype'],['buyer','buyer_type_norm'],['year','event_year']];
+  let q=document.getElementById('hq').value.toLowerCase().trim();
+  let tests=[['hsig','dan_decision_signal'],['hpri','corpus_priority'],['hctype','canonical_outcome_type'],['hasset','asset_archetype'],['hbuyer','buyer_type_norm'],['hyear','event_year']];
   return ROWS.filter(r=>
     (!q||[r.brand,r.category,r.acquirer,r.buyer_family,r.buyer_type_norm,r.post_close_outcome,r.dan_pattern_lesson,r.why_it_matters,r.next_verification_step,r.source_name].join(' ').toLowerCase().includes(q))
     &&tests.every(([id,f])=>!document.getElementById(id).value||String(r[f]??'')===document.getElementById(id).value)
@@ -215,7 +212,7 @@ function metrics(data){
   let neg=data.filter(r=>r.dan_decision_signal==='avoid_or_negative_comp').length;
   let free=data.filter(r=>r.primary_doc_status==='primary_doc_found_free').length;
   let watch=data.filter(r=>r.dan_decision_signal==='watch_verify_before_using').length;
-  document.getElementById('metrics').innerHTML=[
+  document.getElementById('histMetrics').innerHTML=[
     ['Rows',ROWS.length,'total corpus'],['Showing',data.length,'after filters'],
     ['Positive',pos,'usable comps'],['Avoid',neg,'negative comps'],
     ['Free docs',free,'primary-doc rows'],['P0 / P1',p0+' / '+p1,'verification queue']
@@ -267,7 +264,7 @@ function insights(data){
 
 function render(){
   let data=filtered();
-  document.getElementById('count').textContent=`Showing ${data.length} of ${ROWS.length} cases`;
+  document.getElementById('histCount').textContent=`Showing ${data.length} of ${ROWS.length} cases`;
   metrics(data);insights(data);table(data);cards(data);
 }
 
@@ -394,8 +391,8 @@ Promise.all([
   j('./bankruptcy-tracker/summary.json')
 ]).then(([r,q,b,t,s])=>{
   ROWS=r;QUEUE=q;BUYERS=b;TAX=t;SUMMARY=s;
-  [['sig','dan_decision_signal'],['pri','corpus_priority'],['ctype','canonical_outcome_type'],['asset','asset_archetype'],['buyer','buyer_type_norm'],['year','event_year']].forEach(([id,f])=>fill(id,f));
-  document.querySelectorAll('input,select').forEach(el=>el.addEventListener('input',render));
+  [['hsig','dan_decision_signal'],['hpri','corpus_priority'],['hctype','canonical_outcome_type'],['hasset','asset_archetype'],['hbuyer','buyer_type_norm'],['hyear','event_year']].forEach(([id,f])=>fill(id,f));
+  document.querySelectorAll('#hq,#hsig,#hpri,#hctype,#hasset,#hbuyer,#hyear').forEach(el=>el.addEventListener('input',render));
   queue();buyers();tax();render();
 }).catch(err=>{
   document.getElementById('caseCards').innerHTML='<div class="empty">Failed to load historical data.</div>';
