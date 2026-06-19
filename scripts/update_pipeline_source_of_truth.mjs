@@ -152,23 +152,13 @@ const html = `<!doctype html>
 </head>
 <body>
 <main class="shell">
-<nav><b>Dan's source-of-truth pipeline</b><div class="links"><a href="./index.html">Dashboard</a><a href="#top20">Top 20</a><a href="#corpus">152 Corpus</a><a href="#operators">Operators</a><a href="./operating.html">Operating</a></div></nav>
+<nav><b>Dan's source-of-truth pipeline</b><div class="links"><a href="./index.html">Dashboard</a><a href="#corpus">Full List</a><a href="#operators">Operators</a><a href="./operating.html">Operating</a></div></nav>
 
 <section class="hero-card">
 <span class="kicker">Source of truth - updated 2026-06-19</span>
 <h1>Emerging multi-unit and consumer brand pipeline.</h1>
-<p class="lede">This page supersedes the stale June 12 45-candidate view. It now reflects the expanded consumer-brand corpus, definitive top-20 ranking, corrected named-operator universe, proof sprint re-rating, and the Swedish candy downgrade.</p>
+<p class="lede">This page supersedes the stale June 12 45-candidate view. It now opens directly into the full consumer-brand sourcing universe, with source links, map links, Instagram links, corrected named-operator context, proof sprint re-rating, and the Swedish candy downgrade.</p>
 <span class="tag">${corpus.length} consumer brand corpus rows</span><span class="tag">${top20Raw.length} definitive consumer brand ranks shown</span><span class="tag">45 scored ranking candidates</span><span class="tag">${operators.length} corrected named-operator rows</span><span class="tag">${proof.length} proof-sprint rows</span><span class="tag">No outreach / no spend</span>
-</section>
-
-<section>
-<h2>Current decision stack.</h2>
-<div class="card">
-<div class="stack"><div><span class="pill go">Act only after numbers</span></div><div><h3>Wanderlust Creamery</h3><p>Only live capital signal. Treat as a diligence gate for a secured bridge / structured note if the Facebook ask is current and the store-level package supports it.</p></div><div><b>No valuation talk yet</b></div></div>
-<div class="stack"><div><span class="pill go">Passive proof</span></div><div><h3>Starship, Cookie Society, Botolino</h3><p>DFW backyard sprint before founder conversations: traffic, staffing, menu/pricing, sellouts, production quality, competition, and 30% haircut economics.</p></div><div><b>Mystery-shop first</b></div></div>
-<div class="stack"><div><span class="pill watch">Pass / watch</span></div><div><h3>Swedish candy</h3><p>Category is real, but BUBS/Sockerbit mass retail and copycats compress the specialty-store moat. ScandyCandy stays watch-only despite raw rank #5.</p></div><div><b>No approach now</b></div></div>
-<div class="stack"><div><span class="pill comp">Separate decision</span></div><div><h3>Jeff's Bagel Run</h3><p>Pass on brand acquisition. Only evaluate a franchisee / area-developer path if Dan explicitly wants an operator-build route.</p></div><div><b>FDD path only</b></div></div>
-</div>
 </section>
 
 <section>
@@ -182,16 +172,9 @@ const html = `<!doctype html>
 </div>
 </section>
 
-<section id="top20">
-<h2>Definitive top 20 consumer brands.</h2>
-<p class="note">Raw rank is useful, but actionability wins. Current re-rank: Wanderlust diligence gate, then Starship / Cookie Society / Botolino proof sprint. ScandyCandy is haircut to watch-only after the Swedish candy commoditization review.</p>
-<div class="controls"><input id="topSearch" placeholder="Search top 20..."><select id="topPosture"><option value="All">All postures</option></select></div>
-<div class="table-shell"><table><thead><tr><th>Rank</th><th>Brand</th><th>Links</th><th>Category</th><th>Market</th><th>Units</th><th>Score</th><th>Posture</th><th>Why</th><th>Next proof question</th><th>Key risk</th></tr></thead><tbody id="topBody"></tbody></table></div>
-</section>
-
 <section id="corpus">
-<h2>Broader 152-row consumer brand corpus.</h2>
-<p class="note">This is a sourcing universe, not proofed diligence. Rows can be targets, watch names, or comps. Use it to find lanes and candidates, then require proof sprint work before action.</p>
+<h2>Full 152-row consumer brand corpus.</h2>
+<p class="note">This is the full sourcing universe, not proofed diligence. Rows can be targets, watch names, or comps. Use it to find lanes and candidates, then require proof sprint work before action.</p>
 <div class="controls"><input id="corpusSearch" placeholder="Search corpus..."><select id="corpusStatus"><option value="All">All statuses</option></select><select id="corpusCategory"><option value="All">All categories</option></select></div>
 <div class="table-shell"><table><thead><tr><th>Rank</th><th>Name</th><th>Links</th><th>Category</th><th>Subcategory</th><th>Geography</th><th>Units</th><th>Status</th><th>Dan entry path</th><th>Caveat</th><th>First proof question</th></tr></thead><tbody id="corpusBody"></tbody></table></div>
 </section>
@@ -215,7 +198,7 @@ const html = `<!doctype html>
 <div class="card source">
 <p><b>Canonical public URL:</b> https://w1nsl0wh0m3r-bit.github.io/dan-business-path/emerging-multi-unit-pipeline.html</p>
 <p><b>Update rule:</b> after every material proof sprint, deep dive batch, or action-plan rerating, update this page first. Scratch files in the OpenClaw workspace are not the dashboard of record.</p>
-<p><b>Data sources:</b> top-20 ranking CSV, 20-brand Winslow action plan, 152-row consumer corpus, v2 named-operator universe, named-operator proof sprint 25, and Swedish candy commoditization review.</p>
+<p><b>Data sources:</b> 152-row consumer corpus, top-20 ranking/action-plan files used for posture context, v2 named-operator universe, named-operator proof sprint 25, and Swedish candy commoditization review.</p>
 <p><b>Repeatable build:</b> run <code>node scripts/update_pipeline_source_of_truth.mjs</code> from the repo root.</p>
 </div>
 </section>
@@ -250,12 +233,6 @@ function textFilter(rows, query, keys) {
   const q = norm(query);
   return rows.filter(r => !q || keys.some(k => norm(r[k]).includes(q)));
 }
-const topSearch = document.getElementById("topSearch"), topPosture = document.getElementById("topPosture"), topBody = document.getElementById("topBody");
-options(topPosture, TOP20, "posture");
-function renderTop() {
-  const rows = textFilter(TOP20, topSearch.value, ["brand","category","market","posture","why","next","risk"]).filter(r => topPosture.value === "All" || r.posture === topPosture.value);
-  renderTable(rows, topBody, [r=>'<span class="ranknum">'+r.rank+'</span>', r=>'<span class="brand">'+esc(r.brand)+'</span>', r=>linkButtons(r.links), r=>esc(r.category), r=>esc(r.market), r=>esc(r.units), r=>esc(r.score), r=>pill(r.posture), r=>esc(r.why), r=>esc(r.next), r=>esc(r.risk)]);
-}
 const corpusSearch = document.getElementById("corpusSearch"), corpusStatus = document.getElementById("corpusStatus"), corpusCategory = document.getElementById("corpusCategory"), corpusBody = document.getElementById("corpusBody");
 options(corpusStatus, CORPUS, "status"); options(corpusCategory, CORPUS, "category");
 function renderCorpus() {
@@ -274,8 +251,8 @@ function renderOperators() {
   const rows = textFilter(OPERATORS, operatorSearch.value, ["name","category","geography","status","entry","risk","question"]).filter(r => operatorStatus.value === "All" || r.status === operatorStatus.value);
   renderTable(rows, operatorBody, [r=>esc(r.rank), r=>'<span class="brand">'+esc(r.name)+'</span>', r=>linkButtons(r.links), r=>esc(r.category), r=>esc(r.geography), r=>esc(r.units), r=>pill(r.status), r=>esc(r.entry), r=>esc(r.risk), r=>esc(r.question)]);
 }
-[[topSearch,topPosture,renderTop],[corpusSearch,corpusStatus,renderCorpus],[corpusCategory,corpusCategory,renderCorpus],[proofSearch,proofStatus,renderProof],[operatorSearch,operatorStatus,renderOperators]].forEach(([a,b,fn]) => { a.addEventListener("input",fn); b.addEventListener("input",fn); });
-renderTop(); renderCorpus(); renderProof(); renderOperators();
+[[corpusSearch,corpusStatus,renderCorpus],[corpusCategory,corpusCategory,renderCorpus],[proofSearch,proofStatus,renderProof],[operatorSearch,operatorStatus,renderOperators]].forEach(([a,b,fn]) => { a.addEventListener("input",fn); b.addEventListener("input",fn); });
+renderCorpus(); renderProof(); renderOperators();
 </script>
 </body>
 </html>
