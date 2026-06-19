@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sugar Shane's Bake Shop (Atlanta) — Acquisition Deep Dive | Dan's Business Path</title>
+<meta name="description" content="Full acquisition deep dive on Sugar Shane's Bake Shop, a 3-unit Atlanta gourmet cookie brand. Unit economics, venture studio analysis, competitive landscape, and 90-day roadmap.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4ead8;--paper2:#eadcc4;--ink:#252018;--muted:#766b5e;--faint:#cdbfaa;--line:rgba(62,49,32,.16);--blue:#315e72;--blue2:#dfeaf0;--clay:#b86f4d;--sage:#6f8062;--gold:#b78b38;--card:rgba(255,251,241,.72);--shadow:0 30px 90px rgba(80,59,34,.16);--spring:cubic-bezier(.16,1,.3,1);--red:#a04040;--redbg:rgba(160,64,64,.08);--greenbg:rgba(111,128,98,.1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;line-height:1.55;background:radial-gradient(circle at 14% -6%,rgba(184,111,77,.22),transparent 34%),radial-gradient(circle at 88% 6%,rgba(49,94,114,.18),transparent 30%),linear-gradient(135deg,rgba(49,94,114,.055) 25%,transparent 25%) 0 0/28px 28px,linear-gradient(225deg,rgba(49,94,114,.045) 25%,transparent 25%) 0 0/28px 28px,linear-gradient(180deg,var(--paper),var(--paper2));min-height:100dvh}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+.shell{max-width:860px;margin:auto;padding:26px 24px 72px}
+nav{position:sticky;top:18px;z-index:10;width:100%;margin:0 0 32px;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:10px;border:1px solid rgba(62,49,32,.14);border-radius:999px;background:rgba(255,251,241,.72);backdrop-filter:blur(18px);box-shadow:0 18px 50px rgba(80,59,34,.12)}
+nav b{padding-left:12px}nav a{color:var(--ink);text-decoration:none;font-size:13px;padding:8px 11px;border-radius:999px;transition:transform .55s var(--spring),background .55s var(--spring)}
+nav a:hover{background:rgba(49,94,114,.09);transform:translateY(-1px)}
+.hero{padding:40px 0 20px}.kicker{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+h1{font-family:"Fraunces",ui-serif,serif;font-weight:650;font-size:clamp(2.4rem,5.5vw,3.6rem);line-height:1.1;margin:0 0 14px;color:var(--ink)}
+h2{font-family:"Fraunces",ui-serif,serif;font-weight:650;font-size:1.6rem;line-height:1.2;margin:48px 0 18px;color:var(--ink)}
+h3{font-size:1.1rem;font-weight:600;margin:28px 0 10px;color:var(--blue)}
+.lede{font-size:1.1rem;color:var(--muted);margin:0 0 28px;max-width:640px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}.tag{display:inline-block;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.04em;border:1px solid var(--line);background:var(--card)}
+.tag-blue{border-color:rgba(49,94,114,.25);color:var(--blue);background:var(--blue2)}
+.tag-green{border-color:rgba(111,128,98,.25);color:var(--sage);background:var(--greenbg)}
+.tag-red{border-color:rgba(160,64,64,.2);color:var(--red);background:var(--redbg)}
+.tag-gold{border-color:rgba(183,139,56,.25);color:#7a5a17;background:rgba(183,139,56,.1)}
+.verdict-box{padding:22px;border-radius:22px;border:2px solid rgba(160,64,64,.25);background:linear-gradient(135deg,rgba(255,251,241,.86),rgba(160,64,64,.06));margin-bottom:36px;box-shadow:var(--shadow)}
+.verdict-box h2{margin-top:0;color:var(--red)}
+.verdict-box .one-line{font-size:1.15rem;font-weight:600;margin-bottom:10px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin-bottom:5px}
+.card{padding:18px 20px;border:1px solid var(--line);border-radius:20px;background:rgba(255,251,241,.72);margin-bottom:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat-card{padding:16px;border-radius:16px;border:1px solid var(--line);background:rgba(255,251,241,.72);text-align:center}
+.stat-card b{display:block;font-size:1.6rem;color:var(--blue)}
+.stat-card small{color:var(--muted);font-size:11px}
+.red-flag{border-color:rgba(160,64,64,.25);background:var(--redbg)}
+.green-flag{border-color:rgba(111,128,98,.25);background:var(--greenbg)}
+.gold-flag{border-color:rgba(183,139,56,.25);background:rgba(183,139,56,.1)}
+table{width:100%;border-collapse:collapse;margin-bottom:18px}
+th{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}
+td{padding:8px 10px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top}
+.comp-table tr:hover{background:rgba(49,94,114,.04)}
+.roadmap-phase{padding:18px 20px;border-radius:18px;border:1px solid var(--line);background:rgba(255,251,241,.72);margin-bottom:14px}
+.roadmap-phase h3{margin-top:0}
+.roadmap-phase .phase-label{display:inline-block;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.phase-30{background:var(--blue2);color:var(--blue)}
+.phase-60{background:rgba(183,139,56,.12);color:#7a5a17}
+.phase-90{background:var(--greenbg);color:var(--sage)}
+.formula{padding:14px 18px;border-radius:14px;border:1px dashed rgba(49,94,114,.3);background:rgba(49,94,114,.04);font-family:monospace;font-size:14px;margin-bottom:14px;color:var(--blue)}
+.source-note{font-size:11px;color:var(--muted);margin-top:36px;padding-top:14px;border-top:1px dashed var(--line)}
+footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);text-align:center}
+.callout{padding:14px 18px;border-radius:14px;border-left:4px solid var(--clay);background:rgba(184,111,77,.06);margin-bottom:14px}
+.callout-red{border-left-color:var(--red);background:var(--redbg)}
+.callout-green{border-left-color:var(--sage);background:var(--greenbg)}
+@media(max-width:720px){
+.shell{padding:10px 8px 44px}h1{font-size:2.2rem}h2{font-size:1.35rem}
+.grid2,.grid3,.stat-grid{grid-template-columns:1fr}
+nav{border-radius:16px;flex-wrap:wrap;justify-content:center}
+}
+</style>
+</head>
+<body>
+<main class="shell">
+
+<nav>
+<b>Dan's decision placemat</b>
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<a href="./index.html">Dashboard</a>
+<a href="./underwriting.html">Underwriting</a>
+<a href="./operating.html">Operating</a>
+</div>
+</nav>
+
+<section class="hero">
+<div class="kicker">Consumer Food Brand · Multi-Unit · Atlanta</div>
+<h1>Sugar Shane's Bake Shop — Acquisition Deep Dive</h1>
+<p class="lede">Full acquisition-focused diligence on Sugar Shane's, a 3-unit Atlanta gourmet cookie brand. Unit economics, venture studio equity analysis, competitive landscape, category decline assessment, and 90-day roadmap.</p>
+<div class="meta">
+<span class="tag tag-red">PASS</span>
+<span class="tag tag-blue">Acquisition</span>
+<span class="tag">UW Score: 3.8 → adjusted 3.0</span>
+<span class="tag tag-gold">Confidence: Medium-High</span>
+<span class="tag">Date: June 19, 2026</span>
+</div>
+</section>
+
+<!-- VERDICT -->
+<div class="verdict-box">
+<h2>Executive Verdict: PASS</h2>
+<p class="one-line">A genuinely strong consumer brand that is not acquirable on Dan-fit terms.</p>
+<p><strong>Why pass:</strong> Three structural obstacles — (1) founder Shane Quillin has already launched his next venture (The Baking Social) with venture studio Founders Row, meaning his creative energy has migrated to a different entity; (2) the gourmet cookie category is in decline, with Crumbl franchisees reporting Q1 2026 sales down 40-60% YoY; (3) the venture studio relationship (Jamie Weeks) creates governance complexity for any acquisition structure.</p>
+<p><strong>Why it scored #4:</strong> The dashboard had incorrect data — founder name (Shane Willis vs. actual Shane Quillin), location count (4 vs. actual 3 after Ponce City Market closure), and founder background ("self-taught" vs. actual ex-Amazon Senior Program Manager). Corrected, this drops out of the top 10.</p>
+<p><strong>Recommended action:</strong> Watch from distance. Revisit in Q1 2027 if The Baking Social succeeds and Quillin formally exits Sugar Shane's day-to-day.</p>
+</div>
+
+<!-- KEY STATS -->
+<div class="stat-grid">
+<div class="stat-card"><b>3</b><small>Locations (was 4)</small></div>
+<div class="stat-card"><b>$6</b><small>Per cookie (premium)</small></div>
+<div class="stat-card"><b>4.7★</b><small>Yelp (368 reviews)</small></div>
+<div class="stat-card"><b>2020</b><small>Founded (LLC filed 1/27/20)</small></div>
+<div class="stat-card"><b>2.1★</b><small>Glassdoor (2 reviews)</small></div>
+<div class="stat-card"><b>$1.0-1.2M</b><small>Est. acquisition value</small></div>
+</div>
+
+<!-- CATEGORY DEFINITION -->
+<h2>1. Category Definition &amp; Market</h2>
+<p>Sugar Shane's is a premium gourmet cookie shop serving individual cookies ($6 each), brownies, banana bread, and seasonal specialties. The model mirrors Crumbl Cookies: <strong>weekly rotating menu</strong> (2-3 new flavors per week), themed releases (pop culture, seasonal, nostalgic), and late-night hours (open to midnight on weekends). The brand differentiates on premium pricing, local Atlanta cultural relevance, and multiple cookie texture styles (flat &amp; soft, flat &amp; crispy, thick &amp; soft, thick &amp; crispy).</p>
+
+<h3>Product line &amp; revenue streams</h3>
+<ul>
+<li><strong>Cookies</strong> (core product): "Boneless Chip" (signature — chocolate chip without chocolate), "Betty White," "Dashing Delta," rotating weekly flavors</li>
+<li><strong>Brownies &amp; baked goods</strong>: Sea Salt Brookie, Cheesecake Brownie, banana bread, pound cake, cinnamon rolls</li>
+<li><strong>Merch</strong>: Hats ($28), hoodies ($45), tees ($30) — "Eat a Damn Cookie" brand voice</li>
+<li><strong>Nationwide shipping</strong>: Cookie tins via WooCommerce</li>
+<li><strong>Delivery</strong>: Toast POS, Uber Eats, DoorDash</li>
+</ul>
+
+<h3>Demand drivers</h3>
+<div class="grid2">
+<div class="card green-flag">
+<strong>Tailwinds</strong>
+<ul style="margin-bottom:0">
+<li>Premiumization of desserts</li>
+<li>Instagram/TikTok food content culture</li>
+<li>Late-night impulse purchase occasion</li>
+<li>Weekly menu rotation drives repeat visits</li>
+</ul>
+</div>
+<div class="card red-flag">
+<strong>Headwinds</strong>
+<ul style="margin-bottom:0">
+<li>Gourmet cookie category saturation (Crumbl 700+ locations)</li>
+<li>Crumbl Q1 2026 sales down 40-60% per franchisees</li>
+<li>GLP-1 weight loss drugs reducing sugar consumption</li>
+<li>Post-COVID dessert boom cooling</li>
+</ul>
+</div>
+</div>
+
+<h3>Geographic fit for Dan's target markets</h3>
+<div class="grid3">
+<div class="card gold-flag"><strong>Atlanta (home)</strong><br><small>Strong — dense food culture, social media savvy, late-night dining. But already saturated.</small></div>
+<div class="card"><strong>Boston / NE</strong><br><small>Moderate — dessert culture exists but cookie-specific demand weaker; late-night hours less viable in suburbs</small></div>
+<div class="card"><strong>Miami / SFL</strong><br><small>Weak — hot climate, Latino pastry tradition dominates, different dessert preferences</small></div>
+</div>
+
+<!-- ACQUISITION MARKET -->
+<h2>2. Acquisition Market Landscape</h2>
+<p><strong>Deal flow reality: thin to nonexistent.</strong> Sugar Shane's is not for sale, has never been marketed, and the founder's venture studio relationship makes a clean acquisition structurally difficult. This is a "nice brand, can't buy it" situation.</p>
+
+<div class="callout callout-red">
+<strong>Blocking check — ownership verification:</strong> No PE/VC ownership of Sugar Shane's, LLC confirmed. Georgia SoS filing (Control #20015231, filed 1/27/2020) shows a single LLC. HOWEVER, founder Shane Quillin has launched a SEPARATE entity — The Baking Social — as a partnership with Founders Row (Jamie Weeks' venture studio). This is the critical structural complication.
+</div>
+
+<table class="comp-table">
+<tr><th>Factor</th><th>Assessment</th></tr>
+<tr><td>Broker availability</td><td>Thin. Sunbelt Atlanta, local restaurant brokers. No evidence of ever being marketed.</td></tr>
+<tr><td>Listing frequency</td><td>Gourmet cookie brands rarely appear on BizBuySell. Brand equity doesn't transfer cleanly in listings.</td></tr>
+<tr><td>Seller profile</td><td>Not a retiring operator. Not distressed. Not a PE target. Most likely scenario: Quillin divests cookie retail to focus on The Baking Social.</td></tr>
+<tr><td>Competition for deals</td><td>If marketed: local ATL restaurant groups, Crumbl competitors, micro-PE. But Founders Row effectively has right of first refusal.</td></tr>
+<tr><td>PE/roll-up presence</td><td>Crumbl (franchise, 700+), Insomnia (PE-backed). No PE interest in independent artisan brands at this scale.</td></tr>
+</table>
+
+<!-- UNIT ECONOMICS -->
+<h2>3. Unit Economics &amp; Operating Model</h2>
+<p>All revenue figures are <strong>modeled estimates</strong> from public signals (Yelp review velocity, pricing, hours, location count). Actual revenue is unknown — no financials have been shared.</p>
+
+<h3>Per-location revenue estimate</h3>
+<table>
+<tr><th>Location</th><th>Address</th><th>Est. Annual Rev</th><th>Logic</th></tr>
+<tr><td>Midtown (flagship)</td><td>398 14th St NW</td><td>$700K-$900K</td><td>Near Georgia Tech, highest review velocity (368 Yelp reviews), underground "lab" kitchen</td></tr>
+<tr><td>Sandy Springs</td><td>1110 Hammond Dr</td><td>$400K-$600K</td><td>Affluent suburb, 120 Yelp reviews, opened 2024</td></tr>
+<tr><td>Kennesaw</td><td>Old Highway 41</td><td>$300K-$450K</td><td>Suburban, newest location, limited review data</td></tr>
+<tr><td><strong>Ponce City Market</strong></td><td><em>Closed 12/31/2025</em></td><td><em>Was ~$400K-$600K</em></td><td>Short-term lease not renewed. Premier food hall location abandoned.</td></tr>
+<tr><td>Shipping + merch + catering</td><td>Online</td><td>$250K-$450K</td><td>WooCommerce shipping, merch line, corporate catering</td></tr>
+<tr><td><strong>System total (current)</strong></td><td></td><td><strong>$1.7M-$2.5M</strong></td><td>Base case ~$2.0M</td></tr>
+</table>
+
+<h3>Cost structure (cookie shop benchmarks)</h3>
+<table>
+<tr><th>Line item</th><th>% of revenue</th><th>Notes</th></tr>
+<tr><td>COGS (ingredients + packaging)</td><td>25-30%</td><td>Flour, butter, chocolate, boxes. Premium ingredients.</td></tr>
+<tr><td>Labor (bakers + counter)</td><td>30-35%</td><td>3rd shift bakers $15-16/hr (confirmed Glassdoor). ~20-30 employees system-wide.</td></tr>
+<tr><td>Rent (3 locations + kitchen)</td><td>10-14%</td><td>Midtown retail + suburban strip malls + basement central kitchen</td></tr>
+<tr><td>Utilities + insurance</td><td>5-7%</td><td>Commercial kitchens are energy-intensive</td></tr>
+<tr><td>Marketing + platform fees</td><td>3-5%</td><td>Brevo email, social, Toast/UberEats fees (15-30%)</td></tr>
+<tr><td>G&amp;A + misc</td><td>3-5%</td><td></td></tr>
+<tr><td><strong>SDE margin</strong></td><td><strong>15-20%</strong></td><td>~$300K-$400K at $2.0M revenue</td></tr>
+</table>
+
+<div class="formula">
+Revenue: $2.0M × 18% SDE margin = $360K SDE<br>
+At 30% revenue haircut: $1.4M × 15% = $210K SDE<br>
+Manager-run (owner exits): SDE drops 30-50% to $180K-$250K
+</div>
+
+<!-- VALUATION -->
+<h2>4. Valuation &amp; Deal Structure</h2>
+<h3>Bakery valuation benchmarks</h3>
+<table>
+<tr><th>Tier</th><th>Multiple</th><th>Source</th></tr>
+<tr><td>Single-location retail bakery</td><td>2.0-3.5x SDE</td><td>CT Acquisitions (2026)</td></tr>
+<tr><td>Multi-location retail (2-4 stores)</td><td>2.5-4.0x SDE</td><td>CT Acquisitions (2026)</td></tr>
+<tr><td>Bakery SDE range</td><td>2.27x-3.09x SDE</td><td>Peak Business Valuation</td></tr>
+<tr><td>Bakery EBITDA range</td><td>3.67x-4.38x EBITDA</td><td>Peak Business Valuation</td></tr>
+</table>
+
+<h3>Sugar Shane's valuation scenarios</h3>
+<table>
+<tr><th>Scenario</th><th>Revenue</th><th>SDE</th><th>Multiple</th><th>Value</th></tr>
+<tr><td>Downside (30% haircut)</td><td>$1.2M-$1.4M</td><td>$180K-$220K</td><td>2.5x</td><td>$450K-$550K</td></tr>
+<tr><td><strong>Base case</strong></td><td><strong>$1.8M-$2.2M</strong></td><td><strong>$300K-$380K</strong></td><td><strong>3.0x</strong></td><td><strong>$900K-$1.1M</strong></td></tr>
+<tr><td>Optimistic</td><td>$2.3M-$2.5M</td><td>$400K-$480K</td><td>3.5x</td><td>$1.4M-$1.7M</td></tr>
+</table>
+
+<h3>SBA 7(a) acquisition math (base case)</h3>
+<div class="grid2">
+<div class="card">
+<ul style="margin-bottom:0">
+<li>Purchase price: $1,000,000</li>
+<li>SBA loan (85%): $850,000</li>
+<li>Down payment: $150,000</li>
+<li>Working capital: $75,000</li>
+<li>Total equity: $225,000</li>
+</ul>
+</div>
+<div class="card">
+<ul style="margin-bottom:0">
+<li>Rate: ~10% (Prime + 2.75%)</li>
+<li>Term: 10 years</li>
+<li>Annual debt service: ~$136,000</li>
+<li>SDE after debt: $164K-$244K</li>
+<li><strong>CoC return: 73-109%</strong></li>
+<li><strong>Payback: ~1.0-1.4 years</strong></li>
+</ul>
+</div>
+</div>
+
+<div class="callout callout-red">
+<strong>The catch:</strong> CoC looks spectacular on paper. But SDE assumes the current operator runs it. Dan is a minority co-investor with ~30 hrs/week. If Quillin exits and a manager replaces him, SDE drops 30-50%. Manager-run SDE could be $150K-$250K, making debt service coverage tight. And if the category decline hits (Crumbl -40-60%), revenue could fall below break-even.
+</div>
+
+<!-- FOUNDER ANALYSIS -->
+<h2>5. Founder &amp; Venture Studio Analysis</h2>
+
+<h3>Shane Quillin — the real story</h3>
+<div class="callout callout-red">
+<strong>Dashboard correction:</strong> The dashboard lists the founder as "Shane Willis." The actual founder is <strong>Shane Quillin</strong>. The "Shane Willis" error traces to one social media poster (CraftToCrumb) and propagated. All authoritative sources — PRNewswire, Bake Magazine, BizJournals, Georgia SoS filings — confirm "Shane Quillin."
+</div>
+
+<p><strong>Background:</strong> University of Tennessee, Knoxville graduate. <strong>Former Senior Program Manager at Amazon</strong> with 8 years in transportation/supply chain management. NOT "self-taught" as the dashboard states — Quillin has serious corporate operating experience. Inspired by Levain Bakery in NYC (late 2019 trip), started baking at home, sold biscotti through a friend's coffee stand, then formed Sugar Shane's, LLC in March 2020. Won Dessert Wars Champion 2021.</p>
+
+<div class="card">
+<strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/shane-quillin-a1237649/">linkedin.com/in/shane-quillin-a1237649</a> — "Owner of Sugar Shane's," 2K followers, Atlanta GA<br>
+<strong>Management style (from employee reviews):</strong> Charismatic with customers, micromanager with staff. Pattern consistent across 4 years (2022-2026): "very nit picky about everything from baking the cookies to how you check out the customers," "always losing his mind and putting blame on the staff."
+</div>
+
+<h3>The Founders Row / Baking Social complication</h3>
+<p>This is the single most important finding for the acquisition thesis:</p>
+
+<table>
+<tr><th>Entity</th><th>What it is</th><th>Ownership</th><th>Dan's interest</th></tr>
+<tr><td><strong>Sugar Shane's, LLC</strong></td><td>Cookie retail (3 locations + shipping + merch)</td><td>100% Shane Quillin (single-member LLC)</td><td>This is what Dan would buy</td></tr>
+<tr><td><strong>The Baking Social</strong></td><td>Baking class concept (opening Fall 2026 at The Battery ATL)</td><td>Partnership: Shane Quillin + Founders Row</td><td>NOT Dan's — this is Founders Row's play</td></tr>
+</table>
+
+<p><strong>Founders Row</strong> is a venture studio founded by <strong>Jamie Weeks</strong> — formerly the largest Orangetheory Fitness franchisee and founder of Sweathouz (SWTHZ). He describes Founders Row as "a venture studio built as an alternative to traditional private equity," operating a "deal-by-deal model via a Founder Partnership Vehicle." The Baking Social is Founders Row's second investment (after Hot Box Pretzels).</p>
+
+<div class="callout">
+<strong>What this means for Dan:</strong> Quillin's creative energy and venture backing now sit in The Baking Social. The weekly cookie menu that drives Sugar Shane's brand is Quillin's creative output — and he's now channeling that creativity into a different business. Dan would be buying the legacy retail operation from a founder who's already building his next thing. Any acquisition conversation would also run through Jamie Weeks, who thinks in PE/venture terms.
+</div>
+
+<!-- COMPETITIVE LANDSCAPE -->
+<h2>6. Competitive Landscape</h2>
+<h3>Atlanta cookie market</h3>
+<table class="comp-table">
+<tr><th>Competitor</th><th>ATL Locations</th><th>Price/Cookie</th><th>Threat</th></tr>
+<tr><td><strong>Crumbl</strong></td><td>8-12 metro ATL (36 in GA)</td><td>$4-5</td><td>🔴 HIGH — same model, national scale, lower price</td></tr>
+<tr><td><strong>Insomnia Cookies</strong></td><td>3-5 in ATL</td><td>$3-4</td><td>🟡 MEDIUM — late-night delivery, college focus</td></tr>
+<tr><td><strong>Tiff's Treats</strong></td><td>Growing ATL presence</td><td>$3-5</td><td>🟡 MEDIUM — warm cookie delivery, Texas origin</td></tr>
+<tr><td><strong>Sugar Shane's</strong></td><td>3</td><td>$6</td><td>—</td></tr>
+<tr><td>Haute Cookie</td><td>1-2 suburban</td><td>$5-6</td><td>🟢 LOW</td></tr>
+<tr><td>Heidi's Heavenly Cookies</td><td>1-2</td><td>$5-6</td><td>🟢 LOW</td></tr>
+</table>
+
+<h3>The Crumbl problem</h3>
+<p>Crumbl has 36 Georgia locations with 8-12 in metro Atlanta. They charge 20-25% less per cookie, have national brand recognition and app-based ordering, and use the <strong>same weekly-rotating-menu model</strong> that Sugar Shane's uses. They're backed by a franchise system with $800K-$1.4M per-unit buildout capacity.</p>
+
+<div class="callout callout-red">
+<strong>Category decline signal:</strong> Per r/CrumblCookies (Q1 2026), franchisees report sales down <strong>40-60% vs. 2025</strong>. Multiple threads discuss store closures and saturation. The gourmet cookie boom is cooling. Sugar Shane's Ponce City Market closure (Dec 2025) — the highest-foot-traffic venue in their portfolio — aligns with this trend.
+</div>
+
+<!-- DILIGENCE -->
+<h2>7. Quality of Earnings &amp; Diligence Framework</h2>
+
+<h3>Red flags identified</h3>
+<div class="grid2">
+<div class="card red-flag">
+<strong>🚩 Employee culture</strong><br>
+<small>Glassdoor 2.1/5 (2 reviews). Indeed detailed ratings 1.0 across WLB, pay, management, culture. Consistent micromanagement complaints across 4 years. 3rd shift baker at $15-16/hr (midnight-7am) signals retention difficulty.</small>
+</div>
+<div class="card red-flag">
+<strong>🚩 Location closure</strong><br>
+<small>Ponce City Market closed 12/31/2025. "Short-term lease not renewed." This was the highest-foot-traffic location. Either a strategic lease exit or a profitability problem — either way, a demand signal.</small>
+</div>
+<div class="card red-flag">
+<strong>🚩 Owner dependence</strong><br>
+<small>Weekly menu (2-3 new cookies/week) is Quillin's creative output. Doesn't transfer to a manager. Employee reviews confirm he's involved in every detail — "nit picky about everything from baking to checkout."</small>
+</div>
+<div class="card red-flag">
+<strong>🚩 Venture studio entanglement</strong><br>
+<small>Quillin's Founders Row partnership on The Baking Social means any Sugar Shane's acquisition runs through Jamie Weeks, who has his own agenda for Quillin's brand value.</small>
+</div>
+</div>
+
+<h3>Walk-away criteria</h3>
+<ul>
+<li>If Crumbl continues declining → entire category in trouble, pass</li>
+<li>If Quillin won't sell Sugar Shane's separately from The Baking Social → buying a complicated package</li>
+<li>If Founders Row has equity in Sugar Shane's LLC → PE ownership = pass</li>
+<li>If per-location revenue is under $300K → unit economics don't work</li>
+<li>If employee turnover exceeds 100%/year → operational chaos, not fixable without replacing founder</li>
+</ul>
+
+<!-- OPERATOR REALITY -->
+<h2>8. Operator Reality</h2>
+
+<h3>Employee voice — pattern analysis</h3>
+<table>
+<tr><th>Source</th><th>Date</th><th>Quote/Pattern</th></tr>
+<tr><td>Indeed</td><td>Jan 2026</td><td>"The owner of the store is extremely charismatic" — ✅ customer charm</td></tr>
+<tr><td>Indeed</td><td>Aug 2025</td><td>"Fun environment... be ready to work hard and get those desserts out efficiently" — neutral</td></tr>
+<tr><td>Glassdoor</td><td>Apr 2025</td><td>"No consistent company culture or management" — shift lead, 3.0/5</td></tr>
+<tr><td>Glassdoor</td><td>Sep 2023</td><td>"Terrible Job. Owner is Terrible. Bugs and Mold Everywhere." "The Owner is always losing his mind and putting blame on the staff." — manager, 1.0/5</td></tr>
+<tr><td>Indeed</td><td>Feb 2022</td><td>"The work environment would be better if the owner was not present. He is very nit picky about everything... Expects way too much with little to no encouragement." — AM Baker, 1.0/5</td></tr>
+</table>
+
+<p><strong>Pattern:</strong> Charismatic founder with weak management systems. Classic "good product, bad operations" profile. The ddacquire framework says bad ops = acquisition leverage, but management culture is harder to fix than IT infrastructure. The company's growth has outpaced its operational maturity.</p>
+
+<h3>What's hard about this business</h3>
+<ul>
+<li><strong>3rd shift labor:</strong> Midnight-7am baking at $15-16/hr is brutal. Finding and retaining bakers is the #1 operational challenge.</li>
+<li><strong>Menu complexity:</strong> 2-3 new cookies/week = constant R&amp;D, ingredient sourcing, production planning, waste management.</li>
+<li><strong>Social media treadmill:</strong> Brand depends on Instagram/TikTok content. Stop posting = stop growing.</li>
+<li><strong>Multi-unit coordination:</strong> Central kitchen feeds all locations. Rotating menu across 3 stores is operationally complex.</li>
+</ul>
+
+<!-- FINANCING -->
+<h2>9. Financing &amp; Capital Structure</h2>
+<table>
+<tr><th>Component</th><th>Amount</th><th>Notes</th></tr>
+<tr><td>SBA 7(a) loan</td><td>$850K</td><td>10yr, Prime + 2.75%, ~10%. DSCR 2.2x at $300K SDE.</td></tr>
+<tr><td>Equity (Dan)</td><td>$150K</td><td>15% down payment</td></tr>
+<tr><td>Working capital line</td><td>$75K</td><td>Revolving bank line</td></tr>
+<tr><td>Seller note (if available)</td><td>$0-$150K</td><td>Contingent on performance. Unlikely — Quillin is not a motivated seller.</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>$1.0M-$1.15M</strong></td><td></td></tr>
+</table>
+
+<div class="callout">
+<strong>The real financing question:</strong> The numbers work IF revenue holds. The scenario that matters: <strong>Quillin exits, manager takes over, revenue drops 25%.</strong> At $1.35M revenue and $200K SDE, debt service of $136K leaves $64K for the owner — a 28% CoC on $225K equity. Still positive but no longer spectacular. If revenue drops 40% (Crumbl-decline scenario), SDE falls below debt service.
+</div>
+
+<!-- ROADMAP -->
+<h2>10. 30 / 60 / 90 Day Roadmap</h2>
+
+<div class="roadmap-phase">
+<span class="phase-label phase-30">Days 1-30 · Watch &amp; Monitor</span>
+<h3>Research and signal tracking</h3>
+<ul>
+<li>Monitor Sugar Shane's social media for traffic/review velocity trends</li>
+<li>Track The Baking Social launch (Fall 2026 at The Battery) — does Quillin formally step back from Sugar Shane's?</li>
+<li>Monitor Crumbl Q2-Q3 2026 sales for category signal</li>
+<li>Check Georgia SoS for entity structure changes (new LLCs, amendments)</li>
+<li>Set Google Alerts for "Sugar Shane's" + "sale" OR "acquisition" OR "Founders Row"</li>
+</ul>
+</div>
+
+<div class="roadmap-phase">
+<span class="phase-label phase-60">Days 31-60 · Assessment</span>
+<h3>Category and target evaluation</h3>
+<ul>
+<li>If category decline accelerates → PASS, move on</li>
+<li>If The Baking Social launches successfully and Quillin reduces Sugar Shane's involvement → the brand may become available on better terms</li>
+<li>Build relationship with Sunbelt Atlanta or local restaurant brokers for off-market deal flow</li>
+<li>Research comparable acquisitions (independent multi-unit food brands that sold)</li>
+</ul>
+</div>
+
+<div class="roadmap-phase">
+<span class="phase-label phase-90">Days 61-90 · Decision Point</span>
+<h3>Close or kill</h3>
+<ul>
+<li><strong>Most likely outcome:</strong> PASS — structural obstacles don't resolve in 90 days</li>
+<li><strong>Alternative:</strong> If Quillin signals openness to selling cookie retail to fund The Baking Social, prepare LOI framework ($900K-$1.1M ceiling)</li>
+<li><strong>Revisit trigger:</strong> Q1 2027 — check if The Baking Social is operating, Quillin has exited day-to-day, and a professional GM is running operations</li>
+</ul>
+</div>
+
+<!-- DASHBOARD REALITY CHECK -->
+<h2>11. Dashboard Score Reality Check</h2>
+<table>
+<tr><th>Metric</th><th>Dashboard</th><th>Corrected</th><th>Impact</th></tr>
+<tr><td>Founder name</td><td>"Shane Willis"</td><td><strong>Shane Quillin</strong></td><td>🟡 Identity error</td></tr>
+<tr><td>Location count</td><td>"4-unit"</td><td><strong>3-unit</strong></td><td>🔴 Overstates scale</td></tr>
+<tr><td>Founder background</td><td>"Self-taught"</td><td><strong>Ex-Amazon Sr. Program Manager</strong></td><td>🟢 Actually stronger</td></tr>
+<tr><td>Economic proof points</td><td>"4 verified locations"</td><td><strong>3 locations</strong></td><td>🔴 Overstates</td></tr>
+<tr><td>Risk: venture studio</td><td>"unclear"</td><td><strong>Confirmed — separate entity launched</strong></td><td>🔴 Worse than unclear</td></tr>
+<tr><td>OverallScore</td><td>3.95</td><td><strong>3.2</strong></td><td>Category decline + founder migration</td></tr>
+<tr><td>UnderwritingScore</td><td>3.8</td><td><strong>3.0</strong></td><td>Unknown revenue + employee culture issues</td></tr>
+<tr><td>FeasibilityVerdict</td><td>"Actionable"</td><td><strong>"Watch — structural obstacles"</strong></td><td>Not actionable in current state</td></tr>
+<tr><td>PickedOver</td><td>"low"</td><td><strong>"medium"</strong></td><td>Founder already partnered with venture studio</td></tr>
+</table>
+
+<p><strong>Is the #4 ranking credible?</strong> No. The #4 ranking was based on incorrect data (wrong founder name, wrong location count, no awareness of the Ponce City Market closure, no awareness of the Crumbl category decline signal). After this deep dive, Sugar Shane's should drop out of the top 10. It's a good brand in a declining category with a founder who's already building his next thing.</p>
+
+<!-- FINAL RECOMMENDATION -->
+<h2>12. Final Recommendation</h2>
+<div class="callout callout-red">
+<strong>PASS.</strong> Sugar Shane's is a good brand with real consumer love, but it is not acquirable on Dan-fit terms. The founder has moved to his next venture. The category is declining. The venture studio relationship creates governance complexity. Employee culture issues suggest operational problems beyond simple fixes. The brand's creative engine (Quillin's weekly menu design) doesn't transfer to a buyer.
+</div>
+
+<p><strong>Backup path:</strong> Watch list. Revisit Q1 2027 if The Baking Social is operating, Quillin has fully transitioned, Sugar Shane's cookie retail is offered as a clean standalone asset, and a professional GM is running operations.</p>
+
+<p><strong>Top 5 next actions:</strong></p>
+<ol>
+<li>Update dashboard: correct founder name, location count, background — adjust scores down</li>
+<li>Monitor The Baking Social launch timeline (Fall 2026)</li>
+<li>Set Google Alerts for Sugar Shane's + Founders Row</li>
+<li>Track Crumbl Q2/Q3 2026 sales for category signal</li>
+<li>Build broker relationship with Sunbelt Atlanta for off-market ATL food deals</li>
+</ol>
+
+<p class="source-note">
+Sources: PRNewswire (12/23/2025), Craft to Crumb (12/29/2025), Bake Magazine (12/23/2025), Tone to ATL (1/2/2026), Authority Magazine (5/26/2024), Shoutout Atlanta (12/2021), Georgia SoS filings, Glassdoor, Indeed, Yelp, CT Acquisitions bakery valuation (2026), Peak Business Valuation, Crumbl franchise data, r/CrumblCookies. All revenue figures are modeled estimates from public signals.
+</p>
+
+<footer>
+Dan's Business Path · Sugar Shane's Bake Shop Acquisition Deep Dive · Generated June 19, 2026 by Hermes
+</footer>
+
+</main>
+</body>
+</html>
