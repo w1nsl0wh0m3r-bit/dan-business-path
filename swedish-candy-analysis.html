@@ -51,27 +51,24 @@ tr:last-child td{border-bottom:none}
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 
 <div class="card grid4">
-<div><b>Live Map Rows</b><strong>60</strong></div>
-<div><b>Audit Universe</b><strong>71</strong></div>
-<div><b>Delta</b><strong>+11 records</strong></div>
-<div><b>Action</b><strong>Reconcile before scoring</strong></div>
+<div><b>Previous Map</b><strong>60 rows / 31 brands</strong></div>
+<div><b>Audit Universe</b><strong>71 records</strong></div>
+<div><b>Current Map</b><strong>73 rows / 35 brands</strong></div>
+<div><b>Status</b><strong>✅ Reconciled</strong></div>
 </div>
 
-<p>The live site map (<a href="swedish-candy-map.html">swedish-candy-map.html</a>) runs on a 60-row / 31-brand baseline (commit 10c9320). The June 19 exhaustive re-audit identified 71 records across ~38 brands. The 11-record gap comes from stores confirmed in research but not yet added to the live TABLE_ROWS:</p>
+<p><strong>Reconciliation complete</strong> (commits d1a3f89 + 2d9134c). The live map now reflects both the audit universe gap and the opening-soon sweep:</p>
 
 <table>
-<thead><tr><th>Brand</th><th>Missing Stores</th><th>Evidence</th><th>On Comp Page?</th></tr></thead>
+<thead><tr><th>Batch</th><th>Added</th><th>Commit</th><th>Details</th></tr></thead>
 <tbody>
-<tr><td>The Sweetish Fish</td><td>Chestnut Hill MA, Seaport MA, Sandwich MA (truck)</td><td>Cape News, WBZ-TV, Boston.com, official site</td><td>✅ Page exists (0 map rows)</td></tr>
-<tr><td>The Pirate Candy Shop</td><td>Tampa FL, St. Petersburg FL</td><td>Delta report: "Tampa + St. Pete confirmed"</td><td>✅ Page exists (0 map rows)</td></tr>
-<tr><td>Sugar Moose Candy</td><td>Kaysville UT, Salt Lake City UT (9th &amp; 9th)</td><td>Instagram (@wasatcheats), "SLC IS NOW OPEN"</td><td>✅ Page exists (0 map rows)</td></tr>
-<tr><td>Swedish Moose Candy Co.</td><td>Provo UT, American Fork UT (2 additional beyond St. George)</td><td>SLUG Mag profile, Explore Utah Valley</td><td>✅ Page exists (1 of 3 stores mapped)</td></tr>
-<tr><td>Lil Sweet Treat</td><td>Hoboken NJ (announced Apr 2026)</td><td>Hoboken Girl, Instagram</td><td>✅ May already be in 11 rows</td></tr>
-<tr><td>Swedie Pop</td><td>Cerritos CA (Los Cerritos Center mall)</td><td>Indeed job posting, official site</td><td>✅ Already on map</td></tr>
+<tr><td>Winslow — opening sweep</td><td>+4 rows</td><td>d1a3f89</td><td>ScandyCandy Sarasota FL, BonBon Greenwich CT, Coney's Candies Waconia MN, Lil Sweet Treat Hoboken NJ (announced)</td></tr>
+<tr><td>Hermes — audit gap</td><td>+9 rows</td><td>2d9134c</td><td>The Sweetish Fish (Chestnut Hill + Seaport + Sandwich truck), The Pirate Candy Shop (Tampa + St. Pete), Sugar Moose Candy (Kaysville + SLC), Swedish Moose (Provo + American Fork)</td></tr>
+<tr><td><strong>Net new</strong></td><td><strong>+13 rows, +4 brands</strong></td><td></td><td>3 new brands added to map: The Sweetish Fish, The Pirate Candy Shop, Sugar Moose Candy</td></tr>
 </tbody>
 </table>
 
-<div class="note blue"><strong>Recommendation:</strong> Add the 7 confirmed missing stores (Sweetish Fish ×3, Pirate ×2, Sugar Moose ×2) and 2 Swedish Moose additional locations to the live map TABLE_ROWS in a future patch. This brings the map to 69 rows. The remaining 2 records (Hoboken announced, Swedie Pop already present) explain the remaining gap. Do NOT update posture labels or scoring on the live site until this reconciliation is merged.</div>
+<div class="note green"><strong>Reconciled.</strong> The remaining gap vs. the 71-record audit universe is now ~2 records — explained by the Lil Sweet Treat Hoboken (table-only, exact address pending) and Swedie Pop Cerritos (already present). The map is the most complete it's been. No further reconciliation needed.</div>
 
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 <h2>2. Competitive Taxonomy</h2>
