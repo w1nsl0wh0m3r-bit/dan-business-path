@@ -1,0 +1,88 @@
+---
+title: Situation Room Board Surgery
+date: 2026-07-19
+status: complete
+tags:
+  - business-transition
+  - situation-room
+  - target-pipeline
+---
+
+# Situation Room Board Surgery — 2026-07-19
+
+## Decision
+
+The board is now an operator pipeline rather than a flat list of things that look interesting. The underlying universe remains 175 entries across 27 categories, but the live dashboard now distinguishes 61 active targets, 73 watch items and 41 operating comps. The prior hardcoded cards incorrectly showed 85 / 56 / 34 even though the embedded dataset actually contained 77 / 58 / 40 before this review.
+
+The reduction to 61 active targets is intentional. Generic lane hypotheses, unnamed franchisee clusters and stale internal-only pet names no longer count as actionable companies. The strongest current lanes remain visible, but category evidence is no longer confused with something Dan can pursue.
+
+Dashboard: `/Users/winslow/Projects/dan-business-path/consumer-target-map.html`
+
+Rollback copy: `/Users/winslow/Projects/dan-business-path/consumer-target-map.html.bak-sprint5-20260719`
+
+## What changed
+
+| Change | Before | After | Operator implication |
+|---|---:|---:|---|
+| Total universe | 175 embedded records | 175 pipeline entries | No records silently deleted |
+| Active targets | 77 actual / 85 displayed | 61 actual and displayed | Sixteen weak or generic entries removed from active count |
+| Watch | 58 actual / 56 displayed | 73 actual and displayed | Hypotheses and unverified names stay visible without masquerading as deals |
+| Comps | 40 actual / 34 displayed | 41 actual and displayed | Bathhouse moved to benchmark, not pursuit |
+| Publicly sourced | Not displayed | 144 / 175 (82%) | Evidence gap is now explicit |
+| Needs public evidence | Not displayed | 31 | 20 unsupported plus 11 internal-only records |
+| Pipeline classification | None | Eight explicit types | Separates acquisitions, JVs, rights, comps, watches and sourcing instructions |
+| Next action | Inconsistent | Present on all 175 entries | Every live row has a concrete gate or sourcing instruction |
+
+## Material judgment calls
+
+1. **Bathhouse is a comp, not a target.** Its institutional capital and flagship build profile make it useful proof of demand but a poor fit for Dan's entry constraints. Sauna House and Urban Sweat remain JV/watch candidates.
+2. **Dedicated padel remains gated.** Ultra Padel was demoted from target to watch. Epic remains a potential JV only if a real-estate/operator advantage appears.
+3. **Luxury repair remains actionable.** Leather Spa, The Cobblers, Rago Brothers and Cobbler Concierge were normalized to their actual service footprint and classified as acquisition or JV candidates.
+4. **Generic concepts no longer inflate the target count.** GLP-1 meal delivery, bottle-shop/sober-bar concepts, independent drive-through coffee, generic yoga/barre, IV lounges and IV/med-spa hybrids are watch-level sourcing instructions until a named 2–10-unit company is found.
+5. **Internal-only pet names were demoted.** Poochies Dallas, Paws Fur Grooming Mobile, UrbanWagz, Puptown, Woofinwaggle and Brandyapple require current public verification before returning to active status. Happy K-9 was corrected to two locations with a public source and remains an acquisition screen.
+6. **Bagel facts were refreshed.** Layla is now three Los Angeles locations; Starship and Layla have public sources and explicit JV gates.
+
+## Classification rules
+
+- `acquisition_target`: named operating company where buying the entity or assets is the plausible entry.
+- `jv_candidate`: named operator where territory, licensing, development or operating partnership is the likely structure.
+- `franchise_rights`: a named franchise or franchisee-entity path, not a generic category.
+- `operating_target`: named company that passes the current active screen but whose entry structure is not yet resolved.
+- `watchlist`: named company or concept that needs a gating fact before diligence.
+- `operating_comp`: proof point retained for economics, buzz or format comparison; not counted as actionable.
+- `lane_hypothesis` / `sourcing_instruction`: a research direction that must produce a named 2–10-unit operator.
+
+## Evidence-state rules
+
+- `verified_public`: at least one recorded HTTP(S) source. This confirms that a public evidence trail exists; it does not certify every field.
+- `internal_only`: the only evidence is a prior internal memo or non-link note.
+- `unsupported`: no source is recorded in the embedded dataset.
+
+This distinction matters: the 82% sourced score is a coverage measure, not a claim that 82% of all operating facts are freshly verified. Unit counts and ownership can still change and should be refreshed before outreach.
+
+## Test evidence
+
+| Test | Result | Evidence |
+|---|---|---|
+| Embedded dataset parses | Pass | 175 unique records; no duplicate IDs or names |
+| Inline JavaScript syntax | Pass | `new Function()` compile test |
+| Dynamic status reconciliation | Pass | 61 target / 73 watch / 41 comp = 175 |
+| Evidence reconciliation | Pass | 144 public / 11 internal / 20 unsupported = 175 |
+| Browser render | Pass | 175 table rows rendered in Chrome from local file |
+| Evidence filter | Pass | Unsupported filter returns 20 rows |
+| Target filter | Pass | Target filter returns 61 rows |
+| Corrected facts | Pass | Browser shows Layla 3, Happy K-9 2 and Leather Spa 7 footprint points |
+| Source rendering | Pass | HTTP sources render as links; internal notes render as plain text |
+| Rollback path | Pass | Pre-surgery HTML copy retained beside dashboard |
+
+## Residual gaps
+
+- Twenty records have no recorded source and eleven rely only on internal research. They are visible in the red evidence queue rather than silently trusted.
+- Several financial fields remain directional proxies with low or medium confidence; this sprint fixed pipeline semantics, not every underwriting assumption.
+- `last_verified` is only populated where the record already carried an update date. A future sourcing pass should timestamp individual facts, not merely records.
+- The dashboard is a single-file artifact with manual overrides. A future refactor should move the dataset and audit log into separate structured files, but that is not required to use the board now.
+
+## Next action
+
+Use the evidence filter as the cleanup queue. Do not add any new “target” unless it is a named company with public evidence, an explicit pipeline type and a concrete next action. The next business sprint should use this stricter standard when screening party-first kids/family operators.
+

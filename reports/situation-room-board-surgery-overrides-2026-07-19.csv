@@ -1,0 +1,27 @@
+id,name,prior_status,new_status,manual_change,reason
+starship-bagel,Starship Bagel,target,target,Added official source; classified JV candidate,Founder-aligned growth path
+layla-bagels,Layla Bagels,target,target,Units 2 to 3; official source; JV gate,Current operating footprint and Miami structure
+happy-k9-fort-worth,Happy K9 Fort Worth,target,target,Units 1 to 2; official source; acquisition target,Corrected public footprint
+bathhouse-nyc,Bathhouse,target,comp,Reclassified operating comp,Institutional flagship economics do not fit entry constraints
+sauna-house,Sauna House,watch,watch,Classified JV candidate,Experienced-operator path only
+urban-sweat,Urban Sweat,watch,watch,Classified JV candidate,Verify economics and porting appetite
+ultra-padel-club,Ultra Padel Club,target,watch,Demoted to watch,Dedicated padel fails without real-estate advantage
+epic-padel,Epic Padel,watch,watch,Classified JV candidate,Site/operator partnership gate
+leather-spa,Leather Spa,target,target,Footprint 3 to 7; acquisition target,Corrected intake and facility footprint
+the-cobblers,The Cobblers,target,target,Footprint 2 to 1 centralized plus ship-in; JV candidate,Corrected operating model
+rago-brothers,Rago Brothers,target,target,Footprint 2 to 1 centralized plus national reach; acquisition target,Corrected operating model
+cobbler-concierge,Cobbler Concierge,watch,watch,Clarified 2 intake points plus ship-in; acquisition screen,Corrected operating model
+glp1-meal-delivery,GLP-1-Targeted Meal Delivery,target,watch,Reclassified lane hypothesis,Not a named operating target
+temple-respondent,NA Bottle Shop / Bottle Shop Concept,target,watch,Reclassified lane hypothesis,Identity unresolved
+getaway-sober-bar,Getaway / Sober Bar Concept,target,watch,Reclassified lane hypothesis,Mixes a company and generic concept
+independent-drive-thru-coffee,Independent Drive-Thru Coffee Operators,target,watch,Reclassified sourcing instruction,Not a named operating target
+club-pilates-franchisee-clusters,Club Pilates Franchisee Clusters,target,watch,Reclassified franchise-rights sourcing,No named franchisee entity
+independent-yoga-barre-hybrids,Independent Yoga/Barre Hybrids,target,watch,Reclassified sourcing instruction,Not a named operating target
+ivme-independent-iv-lounges,Independent IV Lounges,target,watch,Reclassified sourcing instruction,Not a named operating target
+iv-medspa-hybrid,IV/Med-Spa Hybrid Operators,target,watch,Reclassified sourcing instruction,Not a named operating target
+poochies-dallas,Poochies Dallas,target,watch,Demoted pending public reverification,Internal-only evidence
+paws-fur-grooming-mobile,Paws Fur Grooming Mobile,target,watch,Demoted pending public reverification,Internal-only evidence
+urbanwagz,UrbanWagz,target,watch,Demoted pending public reverification,Internal-only evidence
+puptown-mobile-grooming,Puptown Mobile Grooming,target,watch,Demoted pending public reverification,Internal-only evidence
+woofinwaggle,Woofinwaggle,target,watch,Demoted pending public reverification,Internal-only evidence
+brandyapple-grooming,Brandyapple Grooming,target,watch,Demoted pending public reverification,Internal-only evidence
