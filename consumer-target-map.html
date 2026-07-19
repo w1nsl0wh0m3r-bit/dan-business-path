@@ -3,145 +3,260 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Consumer Target Map | Dan's Business Path</title>
-<meta name="description" content="Situation room: 1-10 unit consumer companies worth tracking for partnership and acquisition.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<title>Situation Room — Consumer Target Map V2</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
-:root{--paper:#0e1116;--paper2:#161a22;--ink:#e8e4d8;--muted:#8a8578;--line:rgba(232,228,216,.10);--blue:#5b9ab8;--blue2:rgba(91,154,184,.08);--clay:#d4825c;--sage:#7faa6f;--gold:#c9a050;--card:rgba(22,26,34,.82);--shadow:0 20px 60px rgba(0,0,0,.4);--green:#5a9e4e;--red:#c65550;--amber:#d4a040}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;line-height:1.5;background:var(--paper);min-height:100vh}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 20% -5%,rgba(212,130,92,.06),transparent 40%),radial-gradient(circle at 80% 5%,rgba(91,154,184,.05),transparent 35%)}
-.shell{display:flex;flex-direction:column;height:100vh;overflow:hidden}
-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--line);background:var(--paper2);flex-shrink:0}
-nav b{font-family:"Fraunces",Georgia,serif;font-size:16px;letter-spacing:-.02em;padding-left:4px}
-nav .links{display:flex;gap:4px;flex-wrap:wrap}
-nav .links a{color:var(--muted);text-decoration:none;font-size:12px;padding:6px 10px;border-radius:999px;transition:all .2s}
-nav .links a:hover{color:var(--ink);background:var(--blue2)}
-.kicker{display:inline-flex;gap:6px;align-items:center;border:1px solid rgba(91,154,184,.20);background:var(--blue2);border-radius:999px;padding:4px 10px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:700}
-.kicker:before{content:"";width:6px;height:6px;border-radius:99px;background:var(--clay);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.main{display:flex;flex:1;overflow:hidden}
-.map-wrap{flex:1;position:relative;min-width:0}
-#map{position:absolute;inset:0;background:#0a0d12}
-.sidebar{width:420px;min-width:420px;border-left:1px solid var(--line);background:var(--paper2);display:flex;flex-direction:column;overflow:hidden}
-.sidebar-header{padding:14px 16px 10px;border-bottom:1px solid var(--line);flex-shrink:0}
-.sidebar-header h2{font-family:"Fraunces",Georgia,serif;font-size:18px;font-weight:650;margin:0 0 10px}
-.filters{display:flex;flex-wrap:wrap;gap:6px}
-.filters input,.filters select{font:inherit;font-size:12px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 9px;color:var(--ink);outline:none}
-.filters input{flex:1;min-width:140px}
-.filters input:focus,.filters select:focus{border-color:var(--blue)}
-.filter-row{display:flex;gap:6px;width:100%;margin-bottom:6px}
-.stats{display:flex;gap:12px;padding:8px 16px;border-bottom:1px solid var(--line);font-size:11px;color:var(--muted);flex-shrink:0}
-.stats span b{color:var(--ink);font-weight:600}
-.list{flex:1;overflow-y:auto;padding:4px 0}
-.list-item{padding:10px 16px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s;display:flex;gap:10px;align-items:flex-start}
-.list-item:hover{background:var(--blue2)}
-.list-item.active{background:var(--blue2);border-left:3px solid var(--blue)}
-.list-item-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px}
-.list-item-content{flex:1;min-width:0}
-.list-item-name{font-weight:600;font-size:13px;color:var(--ink);margin-bottom:2px}
-.list-item-meta{font-size:11px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap}
-.list-item-meta .units{color:var(--gold);font-weight:600}
-.badge{display:inline-block;padding:2px 7px;border-radius:999px;font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
-.b-target{background:rgba(95,158,78,.15);color:var(--green)}
-.b-watch{background:rgba(212,160,64,.15);color:var(--amber)}
-.b-comp{background:rgba(91,154,184,.15);color:var(--blue)}
-.b-kill{background:rgba(198,85,80,.15);color:var(--red)}
-.detail-panel{position:fixed;top:0;right:-480px;width:460px;height:100vh;background:var(--paper2);border-left:1px solid var(--line);box-shadow:var(--shadow);transition:right .3s ease;z-index:1000;overflow-y:auto;padding:0}
-.detail-panel.open{right:0}
-.detail-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;background:var(--paper);border:1px solid var(--line);color:var(--ink);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;z-index:2}
-.detail-close:hover{background:var(--blue2)}
-.detail-content{padding:28px 24px}
-.detail-content .kicker{margin-bottom:12px}
-.detail-content h2{font-family:"Fraunces",Georgia,serif;font-size:28px;font-weight:650;line-height:1.05;margin:0 0 6px;letter-spacing:-.03em}
-.detail-content .sub{font-size:13px;color:var(--muted);margin-bottom:20px}
-.detail-content .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
-.detail-content .meta-item{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
-.detail-content .meta-item label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.10em;color:var(--muted);margin-bottom:3px}
-.detail-content .meta-item span{font-size:13px;font-weight:600}
-.detail-content h3{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);margin:22px 0 6px;font-weight:700}
-.detail-content p,.detail-content li{font-size:13px;color:var(--ink);line-height:1.6}
-.detail-content .field-box{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px}
-.detail-content .field-box.blue{border-left:3px solid var(--blue)}
-.detail-content .field-box.green{border-left:3px solid var(--green)}
-.detail-content .field-box.clay{border-left:3px solid var(--clay)}
-.detail-content .field-box.gold{border-left:3px solid var(--gold)}
-.detail-content .sources{margin-top:16px}
-.detail-content .sources a{display:inline-block;font-size:11px;color:var(--blue);text-decoration:none;margin:2px 6px 2px 0;padding:3px 8px;border:1px solid var(--line);border-radius:999px}
-.detail-content .sources a:hover{background:var(--blue2)}
-.legend{position:absolute;bottom:20px;left:20px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;backdrop-filter:blur(20px);z-index:500;max-width:200px}
-.legend h4{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 8px;font-weight:700}
-.legend-item{display:flex;align-items:center;gap:8px;font-size:11px;margin:3px 0;cursor:pointer;transition:opacity .2s}
-.legend-item:hover{opacity:.7}
-.legend-item .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.legend-item .count{color:var(--muted);margin-left:auto;font-size:10px}
-.leaflet-popup-content-wrapper{background:var(--paper2)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:12px!important}
-.leaflet-popup-tip{background:var(--paper2)!important}
-.leaflet-popup-content{margin:12px 14px!important;font-family:"Space Grotesk",sans-serif!important}
-.leaflet-popup-content b{font-family:"Fraunces",Georgia,serif;font-size:15px;display:block;margin-bottom:4px}
-.leaflet-popup-content .popup-meta{font-size:11px;color:var(--muted)}
-.leaflet-container a{color:var(--blue)!important}
-.leaflet-control-zoom a{background:var(--paper2)!important;color:var(--ink)!important;border-color:var(--line)!important}
-.leaflet-control-zoom a:hover{background:var(--blue2)!important}
-.empty-state{padding:40px 20px;text-align:center;color:var(--muted);font-size:13px}
-@media(max-width:1024px){.sidebar{width:340px;min-width:340px}}
-@media(max-width:768px){.main{flex-direction:column}.sidebar{width:100%;min-width:0;max-height:45vh;border-left:none;border-top:1px solid var(--line)}.map-wrap{min-height:55vh}.detail-panel{width:100%;right:-100%}.detail-panel.open{right:0}.legend{display:none}}
+:root {
+  --paper: #0d1117;
+  --paper2: #161b22;
+  --paper3: #21262d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --line: #30363d;
+  --accent: #58a6ff;
+  --green: #22c55e;
+  --yellow: #eab308;
+  --red: #ef4444;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--paper); color: var(--text); font-family: var(--font); font-size: 14px; line-height: 1.5; }
+
+/* Summary cards */
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; padding: 16px 20px; }
+.summary-card { background: var(--paper2); border: 1px solid var(--line); border-radius: 10px; padding: 16px; text-align: center; }
+.summary-card .num { font-size: 32px; font-weight: 800; letter-spacing: -0.03em; }
+.summary-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+
+/* Toolbar */
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 20px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper2); position: sticky; top: 0; z-index: 100; }
+.toolbar button, .toolbar select { background: var(--paper3); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 8px 14px; font-size: 13px; cursor: pointer; font-family: var(--font); }
+.toolbar button:hover { border-color: var(--accent); }
+.toolbar button.active { background: var(--accent); color: #000; border-color: var(--accent); }
+.toolbar select { padding: 7px 10px; }
+.toolbar .spacer { flex: 1; }
+.toolbar input[type="search"] { background: var(--paper3); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; font-size: 13px; width: 200px; font-family: var(--font); }
+
+/* Map + Table layout */
+.content { display: none; padding: 0; }
+.content.active { display: block; }
+
+/* Map */
+#mapView { height: calc(100vh - 200px); width: 100%; }
+#map { height: 100%; width: 100%; }
+.map-detail { position: fixed; top: 200px; right: 20px; width: 360px; max-height: 500px; overflow-y: auto; background: var(--paper2); border: 1px solid var(--line); border-radius: 10px; padding: 0; z-index: 200; display: none; }
+.map-detail.visible { display: block; }
+.map-detail-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--paper2); }
+.map-detail-body { padding: 16px; }
+.map-detail h3 { font-size: 18px; }
+.map-detail .close-btn { cursor: pointer; color: var(--muted); font-size: 20px; }
+
+/* Table */
+.table-wrap { overflow-x: auto; padding: 0 20px 40px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: var(--paper2); text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--line); cursor: pointer; white-space: nowrap; position: sticky; top: 0; font-weight: 600; color: var(--muted); text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; }
+th:hover { color: var(--accent); }
+th.sorted-asc::after { content: ' ↑'; color: var(--accent); }
+th.sorted-desc::after { content: ' ↓'; color: var(--accent); }
+td { padding: 8px 12px; border-bottom: 1px solid var(--line); }
+tr:hover { background: var(--paper2); }
+.conviction-cell { font-weight: 700; text-align: center; font-size: 15px; }
+.urgency-high { color: var(--red); font-weight: 700; font-size: 11px; }
+.urgency-medium { color: var(--yellow); font-weight: 600; font-size: 11px; }
+.status-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.status-target { background: rgba(34,197,94,0.15); color: var(--green); }
+.status-watch { background: rgba(234,179,8,0.15); color: var(--yellow); }
+.status-comp { background: rgba(139,148,158,0.15); color: var(--muted); }
+.cat-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+/* Legend */
+.legend { display: flex; flex-wrap: wrap; gap: 8px; padding: 8px 20px 16px; }
+.legend-item { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--muted); border-left: 3px solid; padding-left: 6px; }
+.legend-item b { color: var(--text); }
+
+/* Detail panel (table) */
+.detail-row { display: none; }
+.detail-row.visible { display: table-row; background: var(--paper3) !important; }
+.detail-row td { padding: 16px; }
+.detail-content { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 12px; }
+.detail-section h4 { font-size: 12px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.detail-section p { color: var(--text); margin-bottom: 8px; line-height: 1.6; }
+.detail-section .field { color: var(--muted); }
+
+/* Financial cells */
+.financial { font-family: 'SF Mono', Monaco, monospace; font-size: 12px; color: var(--accent); }
+.financial-low { color: var(--muted); }
+
+/* Confidence badge */
+.confidence-badge { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; }
+.confidence-high { background: rgba(34,197,94,0.15); color: var(--green); }
+.confidence-medium { background: rgba(234,179,8,0.15); color: var(--yellow); }
+.confidence-low { background: rgba(239,68,68,0.15); color: var(--red); }
+
+/* Header */
+header { padding: 20px 20px 0; }
+header h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.03em; }
+header .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+/* Ranking cards */
+.rank-section { padding: 20px; }
+.rank-section h2 { font-size: 18px; margin-bottom: 12px; }
+.rank-card { background: var(--paper2); border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.rank-card table { font-size: 12px; }
+.rank-card th { font-size: 10px; }
+.rank-card td { padding: 6px 10px; }
+.rank-num { font-weight: 800; font-size: 14px; width: 30px; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .toolbar { position: static; }
+  .map-detail { position: static; width: 100%; max-height: none; margin: 16px 20px; }
+  .detail-content { grid-template-columns: 1fr; }
+  table { font-size: 12px; }
+  th, td { padding: 6px 8px; }
+}
 </style>
 </head>
 <body>
-<div class="shell">
-<nav>
-<b>Consumer Target Map</b>
-<div class="links">
-<a href="./index.html">Dashboard</a>
-<a href="./emerging-multi-unit-pipeline.html">Pipeline</a>
-<a href="./swedish-candy-analysis.html">Swedish Candy</a>
+
+<header>
+  <h1>🎯 Situation Room — Consumer Target Map</h1>
+  <div class="subtitle">V2 — Scored, ranked, and expanded · 175 targets across 27 categories · Updated 2026-07-19</div>
+</header>
+
+<!-- Summary Cards -->
+<div class="summary-grid">
+  <div class="summary-card"><div class="num" style="color:var(--green)">85</div><div class="label">Active Targets</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--yellow)">56</div><div class="label">Watching</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--muted)">34</div><div class="label">Comps</div></div>
+  <div class="summary-card"><div class="num">5.2</div><div class="label">Avg Conviction</div></div>
+  <div class="summary-card"><div class="num">$271K</div><div class="label">Avg Check (Targets)</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--red)">13</div><div class="label">High Urgency</div></div>
 </div>
-</nav>
-<div class="main">
-<div class="map-wrap">
+
+<!-- Toolbar -->
+<div class="toolbar">
+  <button id="btnTable" class="active" onclick="showView('table')">📊 Table</button>
+  <button id="btnMap" onclick="showView('map')">🗺️ Map</button>
+  <button id="btnRank" onclick="showView('rank')">🏆 Rankings</button>
+  <span class="spacer"></span>
+  <select id="filterStatus" onchange="applyFilters()">
+    <option value="">All Statuses</option>
+    <option value="target">🎯 Targets Only</option>
+    <option value="watch">👁️ Watch Only</option>
+    <option value="comp">📊 Comps Only</option>
+  </select>
+  <select id="filterCategory" onchange="applyFilters()">
+    <option value="">All Categories</option>
+    <option value="Aging-in-Place & Mobility">Aging-in-Place & Mobility</option>
+    <option value="Auto Services">Auto Services</option>
+    <option value="Bagels">Bagels</option>
+    <option value="Bakery">Bakery</option>
+    <option value="Beauty & Aesthetics">Beauty & Aesthetics</option>
+    <option value="Beverage">Beverage</option>
+    <option value="Boutique Fitness">Boutique Fitness</option>
+    <option value="Drive-Thru Coffee">Drive-Thru Coffee</option>
+    <option value="Experiential Entertainment">Experiential Entertainment</option>
+    <option value="Fast Casual">Fast Casual</option>
+    <option value="Food & Beverage">Food & Beverage</option>
+    <option value="Frozen Dessert">Frozen Dessert</option>
+    <option value="GLP-1 & Weight-Loss Services">GLP-1 & Weight-Loss Services</option>
+    <option value="Home Technology Services">Home Technology Services</option>
+    <option value="IV Hydration & Recovery">IV Hydration & Recovery</option>
+    <option value="Kids Haircuts & Family Grooming">Kids Haircuts & Family Grooming</option>
+    <option value="Luxury Repair & Circular Care">Luxury Repair & Circular Care</option>
+    <option value="Med Spa & Wellness">Med Spa & Wellness</option>
+    <option value="Non-Alcoholic & Sober Social">Non-Alcoholic & Sober Social</option>
+    <option value="Padel & Racquet Social">Padel & Racquet Social</option>
+    <option value="Pet Services">Pet Services</option>
+    <option value="Pilates Reformer & Boutique">Pilates Reformer & Boutique</option>
+    <option value="Plant Workshop & Retail">Plant Workshop & Retail</option>
+    <option value="Social Bathhouse">Social Bathhouse</option>
+    <option value="Swedish Candy">Swedish Candy</option>
+    <option value="Tabletop & Hobby Social">Tabletop & Hobby Social</option>
+    <option value="Youth Sports & Kids">Youth Sports & Kids</option>
+  </select>
+  <select id="filterCheck" onchange="applyFilters()">
+    <option value="">All Check Sizes</option>
+    <option value="0-150">< $150K</option>
+    <option value="150-300">$150-300K</option>
+    <option value="300-500">$300-500K</option>
+    <option value="500-9999">$500K+</option>
+  </select>
+  <input type="search" id="searchBox" placeholder="🔍 Search..." oninput="applyFilters()">
+</div>
+
+<!-- Category Legend -->
+<div class="legend">
+<span class="legend-item" style="border-color:#50C878">Youth Sports & Kids <b>(48)</b></span><span class="legend-item" style="border-color:#4A90D9">Pet Services <b>(24)</b></span><span class="legend-item" style="border-color:#6B6B6B">Auto Services <b>(16)</b></span><span class="legend-item" style="border-color:#D4A574">Bakery <b>(5)</b></span><span class="legend-item" style="border-color:#FF6B9D">Swedish Candy <b>(5)</b></span><span class="legend-item" style="border-color:#20B2AA">Social Bathhouse <b>(5)</b></span><span class="legend-item" style="border-color:#DAA520">Luxury Repair & Circular Care <b>(5)</b></span><span class="legend-item" style="border-color:#FF1493">GLP-1 & Weight-Loss Services <b>(5)</b></span><span class="legend-item" style="border-color:#8B4513">Drive-Thru Coffee <b>(5)</b></span><span class="legend-item" style="border-color:#00BFFF">IV Hydration & Recovery <b>(5)</b></span><span class="legend-item" style="border-color:#8B6914">Bagels <b>(4)</b></span><span class="legend-item" style="border-color:#A8D8EA">Frozen Dessert <b>(4)</b></span><span class="legend-item" style="border-color:#FF8C42">Food & Beverage <b>(4)</b></span><span class="legend-item" style="border-color:#00CED1">Padel & Racquet Social <b>(4)</b></span><span class="legend-item" style="border-color:#8B4513">Tabletop & Hobby Social <b>(4)</b></span><span class="legend-item" style="border-color:#FFB347">Kids Haircuts & Family Grooming <b>(4)</b></span><span class="legend-item" style="border-color:#7B68EE">Non-Alcoholic & Sober Social <b>(4)</b></span><span class="legend-item" style="border-color:#C71585">Pilates Reformer & Boutique <b>(4)</b></span><span class="legend-item" style="border-color:#DDA0DD">Med Spa & Wellness <b>(3)</b></span><span class="legend-item" style="border-color:#FF6347">Boutique Fitness <b>(3)</b></span><span class="legend-item" style="border-color:#228B22">Plant Workshop & Retail <b>(3)</b></span><span class="legend-item" style="border-color:#B0C4DE">Aging-in-Place & Mobility <b>(3)</b></span><span class="legend-item" style="border-color:#E8743B">Fast Casual <b>(2)</b></span><span class="legend-item" style="border-color:#9370DB">Experiential Entertainment <b>(2)</b></span><span class="legend-item" style="border-color:#FF69B4">Beauty & Aesthetics <b>(2)</b></span><span class="legend-item" style="border-color:#6B8E23">Beverage <b>(1)</b></span><span class="legend-item" style="border-color:#708090">Home Technology Services <b>(1)</b></span>
+</div>
+
+<!-- Table View -->
+<div id="tableView" class="content active">
+<div class="table-wrap">
+<table id="dataTable">
+<thead>
+<tr>
+<th onclick="sortTable('conviction_score')" title="Conviction score 1-10">Conviction</th>
+<th onclick="sortTable('name')">Name</th>
+<th onclick="sortTable('category')">Category</th>
+<th onclick="sortTable('status')">Status</th>
+<th onclick="sortTable('units')">Units</th>
+<th onclick="sortTable('check_size_k')" title="Est. check size">Check $</th>
+<th onclick="sortTable('cash_on_cash_potential')" title="Cash-on-cash potential 1-5">CoC</th>
+<th onclick="sortTable('time_to_revenue_months')" title="Time to revenue (months)">Time</th>
+<th onclick="sortTable('est_payback_months')" title="Est. payback (months)">Payback</th>
+<th onclick="sortTable('urgency')">Urgency</th>
+<th onclick="sortTable('hq_city')">Location</th>
+</tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+</div>
+</div>
+
+<!-- Map View -->
+<div id="mapView" class="content">
 <div id="map"></div>
-<div class="legend" id="legend"></div>
 </div>
-<div class="sidebar">
-<div class="sidebar-header">
-<span class="kicker">Situation Room</span>
-<h2>Targets &middot; <span id="totalCount">0</span> tracked</h2>
-<div class="filters">
-<div class="filter-row">
-<input id="searchInput" placeholder="Search name, city, story..." oninput="applyFilters()">
-<select id="statusFilter" onchange="applyFilters()">
-<option value="">All Statuses</option>
-<option value="target">&#127919; Target</option>
-<option value="watch">&#128065; Watch</option>
-<option value="comp">&#128202; Comp</option>
-<option value="kill">&#10005; Kill</option>
-</select>
+
+<!-- Rankings View -->
+<div id="rankView" class="content">
+<div class="rank-section">
+  <h2>🏆 Top 20 by Conviction</h2>
+  <div class="rank-card">
+  <table>
+  <thead><tr><th>#</th><th>Target</th><th>Category</th><th>Conviction</th><th>CoC</th><th>Check</th><th>Urgency</th></tr></thead>
+  <tbody id="rankConviction"></tbody>
+  </table>
+  </div>
+
+  <h2>⚡ Top 10 Fastest Money (CoC × Speed)</h2>
+  <div class="rank-card">
+  <table>
+  <thead><tr><th>#</th><th>Target</th><th>Category</th><th>CoC</th><th>Time to Rev</th><th>Payback</th></tr></thead>
+  <tbody id="rankFast"></tbody>
+  </table>
+  </div>
+
+  <h2>⚡ Top 10 High Urgency</h2>
+  <div class="rank-card">
+  <table>
+  <thead><tr><th>#</th><th>Target</th><th>Category</th><th>Conviction</th><th>Why Urgent</th></tr></thead>
+  <tbody id="rankUrgent"></tbody>
+  </table>
+  </div>
+
+  <h2>💀 Kill List (Bottom 20)</h2>
+  <div class="rank-card">
+  <table>
+  <thead><tr><th>#</th><th>Target</th><th>Category</th><th>Score</th><th>Status</th></tr></thead>
+  <tbody id="rankKill"></tbody>
+  </table>
+  </div>
 </div>
-<div class="filter-row">
-<select id="categoryFilter" onchange="applyFilters()">
-<option value="">All Categories</option>
-</select>
-<select id="unitFilter" onchange="applyFilters()">
-<option value="">All Sizes</option>
-<option value="1-2">1-2 units</option>
-<option value="3-5">3-5 units</option>
-<option value="6-10">6-10 units</option>
-</select>
-</div>
-</div>
-</div>
-<div class="stats" id="statsBar"></div>
-<div class="list" id="targetList"></div>
-</div>
-</div>
-</div>
-<div class="detail-panel" id="detailPanel">
-<button class="detail-close" onclick="closeDetail()">&times;</button>
-<div class="detail-content" id="detailContent"></div>
 </div>
 
 <script>
@@ -173,7 +288,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 10,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 3,
+    "check_size_k": 350,
+    "urgency": "medium",
+    "est_revenue_low_k": 800,
+    "est_revenue_high_k": 1800,
+    "est_margin_pct": 22,
+    "est_sde_low_k": 120,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 300,
+    "est_payback_months": 24,
+    "model_confidence": "medium"
   },
   {
     "id": "wanderlust-creamery",
@@ -202,7 +331,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 10,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "medium",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "cookie-society",
@@ -231,7 +374,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 7,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 28,
+    "model_confidence": "medium"
   },
   {
     "id": "botolino-gelato",
@@ -260,7 +417,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 10,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "medium",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "scandycandy",
@@ -289,7 +460,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 2,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 100,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 500,
+    "est_margin_pct": 35,
+    "est_sde_low_k": 40,
+    "est_sde_high_k": 120,
+    "est_capex_per_unit_k": 100,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "utopia-bagels",
@@ -315,7 +500,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 3,
+    "check_size_k": 350,
+    "urgency": "low",
+    "est_revenue_low_k": 800,
+    "est_revenue_high_k": 1800,
+    "est_margin_pct": 22,
+    "est_sde_low_k": 120,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 300,
+    "est_payback_months": 24,
+    "model_confidence": "low"
   },
   {
     "id": "layla-bagels",
@@ -344,7 +543,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 10,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 3,
+    "check_size_k": 350,
+    "urgency": "medium",
+    "est_revenue_low_k": 800,
+    "est_revenue_high_k": 1800,
+    "est_margin_pct": 22,
+    "est_sde_low_k": 120,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 300,
+    "est_payback_months": 24,
+    "model_confidence": "medium"
   },
   {
     "id": "sunday-morning-cinnamon-rolls",
@@ -373,7 +586,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 7,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 28,
+    "model_confidence": "medium"
   },
   {
     "id": "supermoon-bakehouse",
@@ -402,7 +629,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 28,
+    "model_confidence": "medium"
   },
   {
     "id": "sugar-shane-s",
@@ -428,7 +669,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 28,
+    "model_confidence": "low"
   },
   {
     "id": "bonbon",
@@ -454,7 +709,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 2,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 100,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 500,
+    "est_margin_pct": 35,
+    "est_sde_low_k": 40,
+    "est_sde_high_k": 120,
+    "est_capex_per_unit_k": 100,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "sweetish-candy",
@@ -480,7 +749,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 2,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 100,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 500,
+    "est_margin_pct": 35,
+    "est_sde_low_k": 40,
+    "est_sde_high_k": 120,
+    "est_capex_per_unit_k": 100,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "dolce-neve-gelato",
@@ -506,7 +789,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 10,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "coffee-project-ny",
@@ -532,7 +829,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 180,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 28,
+    "model_confidence": "low"
   },
   {
     "id": "third-culture-bakery",
@@ -558,7 +869,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 28,
+    "model_confidence": "low"
   },
   {
     "id": "saturday-candy-co",
@@ -584,7 +909,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 2,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 100,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 500,
+    "est_margin_pct": 35,
+    "est_sde_low_k": 40,
+    "est_sde_high_k": 120,
+    "est_capex_per_unit_k": 100,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "sockerbit",
@@ -610,7 +949,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 2,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 100,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 500,
+    "est_margin_pct": 35,
+    "est_sde_low_k": 40,
+    "est_sde_high_k": 120,
+    "est_capex_per_unit_k": 100,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "birria-landia",
@@ -636,7 +989,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 4,
+    "check_size_k": 500,
+    "urgency": "low",
+    "est_revenue_low_k": 800,
+    "est_revenue_high_k": 2000,
+    "est_margin_pct": 15,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 600,
+    "est_payback_months": 36,
+    "model_confidence": "low"
   },
   {
     "id": "arepa-zone",
@@ -662,7 +1029,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 4,
+    "check_size_k": 500,
+    "urgency": "low",
+    "est_revenue_low_k": 800,
+    "est_revenue_high_k": 2000,
+    "est_margin_pct": 15,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 600,
+    "est_payback_months": 36,
+    "model_confidence": "low"
   },
   {
     "id": "whipped-urban-dessert-lab",
@@ -688,7 +1069,21 @@ const TARGETS = [
     "sources": [],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "top20"
+    "source_file": "top20",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 10,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "angie-s-pet-spa",
@@ -719,7 +1114,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 8,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
   },
   {
     "id": "yuppy-puppy-pet-spa",
@@ -751,7 +1160,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 8,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
   },
   {
     "id": "the-ark-pet-spa-hotel",
@@ -780,7 +1203,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "low"
   },
   {
     "id": "rose-city-dogs",
@@ -808,7 +1245,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "low"
   },
   {
     "id": "the-bark-park-pet-resort",
@@ -836,7 +1287,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "low"
   },
   {
     "id": "rover-oaks-pet-resort",
@@ -865,7 +1330,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "low"
   },
   {
     "id": "paw-commons",
@@ -894,7 +1373,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "low"
   },
   {
     "id": "playtime-pet-resort",
@@ -923,7 +1416,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "low"
   },
   {
     "id": "wiggles-pet-resort",
@@ -952,7 +1459,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "low"
   },
   {
     "id": "bubbles-pet-spa",
@@ -983,7 +1504,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 8,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
   },
   {
     "id": "canine-to-five",
@@ -1012,7 +1547,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "low"
   },
   {
     "id": "bark-a-bout",
@@ -1041,7 +1590,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "low"
   },
   {
     "id": "whiskers-resort-pet-spa",
@@ -1070,7 +1633,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "low"
   },
   {
     "id": "suite-paws-pet-resort-spa",
@@ -1099,7 +1676,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "low"
   },
   {
     "id": "giving-tree-pet-resort",
@@ -1128,7 +1719,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "low"
   },
   {
     "id": "steve-wallen-swim-school",
@@ -1156,7 +1761,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "king-s-swim-academy",
@@ -1184,7 +1803,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "kids-first-swim-schools",
@@ -1216,7 +1849,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "lowcountry-swim-school",
@@ -1248,7 +1895,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "swimkids-swim-school",
@@ -1280,7 +1941,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "aquakids-swim-school",
@@ -1312,7 +1987,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "hubbard-family-swim-school",
@@ -1344,7 +2033,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "little-fins-swim-school",
@@ -1372,7 +2075,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "south-kic-group-goldfish-wisconsin",
@@ -1400,7 +2117,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "wally-wombats",
@@ -1429,7 +2160,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "hyper-kidz",
@@ -1461,7 +2206,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 7,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "scramble",
@@ -1493,7 +2252,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "play-street-museum",
@@ -1525,7 +2298,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 7,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "kidstrong-dfw-multi-unit-operators",
@@ -1554,7 +2341,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "soccer-shots-north-carolina-operators",
@@ -1586,7 +2387,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "i9-sports-local-multi-territory-franchisees",
@@ -1615,7 +2430,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "foss-swim-school",
@@ -1647,7 +2476,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "swimright-academy",
@@ -1679,7 +2522,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "motor-city-autospa-paint-protection-solutions",
@@ -1711,7 +2568,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "auto-film-specialists",
@@ -1743,7 +2614,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "midwest-tinting",
@@ -1774,7 +2659,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "dynamic-tint",
@@ -1806,7 +2705,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "exclusive-paint-protection",
@@ -1838,7 +2751,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "finishing-touch-auto-spa",
@@ -1870,7 +2797,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "chicago-auto-pros",
@@ -1902,7 +2843,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "clean-wraps",
@@ -1934,7 +2889,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "the-art-of-tint",
@@ -1966,7 +2935,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "oasis-auto-spa",
@@ -1998,7 +2981,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "doubletake-auto-spa",
@@ -2030,7 +3027,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "elite-window-tinting",
@@ -2062,7 +3073,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "ghost-shield-film",
@@ -2094,7 +3119,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "supreme-auto-spa-nj",
@@ -2126,7 +3165,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "firehouse-auto-spa",
@@ -2158,7 +3211,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "tint-world-local-multi-unit-operators",
@@ -2190,7 +3257,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "v2_operators"
+    "source_file": "v2_operators",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 300,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "boston-gymnastics-academy-gymnastic-academy-of-boston-medford",
@@ -2220,7 +3301,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "extra-innings-watertown-boston-prime-facility",
@@ -2250,7 +3345,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "planet-gym-little-flippers-swim-school",
@@ -2280,7 +3389,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "british-swim-school-of-city-of-boston",
@@ -2310,7 +3433,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "goldfish-swim-school-brookline-boston-suburbs",
@@ -2340,7 +3477,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "my-gym-boston",
@@ -2370,7 +3521,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "the-little-gym-somerville-assembly-row",
@@ -2400,7 +3565,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "soccer-stars-greater-boston",
@@ -2430,7 +3609,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "boston-bolts",
@@ -2460,7 +3653,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "nefc",
@@ -2490,7 +3697,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "seacoast-united-massachusetts-azzurri",
@@ -2520,7 +3741,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "new-england-surf",
@@ -2550,7 +3785,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "jcc-greater-boston-sports-camp",
@@ -2580,7 +3829,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "ymca-of-greater-boston-youth-sports-camps",
@@ -2610,7 +3873,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "bcyf-summer-programs",
@@ -2640,7 +3917,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "lexington-recreation-summer-sports-clinics",
@@ -2670,7 +3961,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "chestnut-hill-sports-club",
@@ -2700,7 +4005,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "asa-hoops-behn-basketball-camp",
@@ -2730,7 +4049,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "us-sports-institute-massachusetts",
@@ -2760,7 +4093,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "the-base",
@@ -2790,7 +4137,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "boston-scores",
@@ -2820,7 +4181,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "kidstrong-boston-area-units",
@@ -2850,7 +4225,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "i9-sports-greater-boston-territories",
@@ -2880,7 +4269,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "d1-training-boston-area-ma-watchlist",
@@ -2910,7 +4313,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "youth_sports"
+    "source_file": "youth_sports",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "vio-med-spa",
@@ -2938,7 +4355,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "surprise_me"
+    "source_file": "surprise_me",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 400,
+    "urgency": "low",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1500,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 150,
+    "est_sde_high_k": 400,
+    "est_capex_per_unit_k": 400,
+    "est_payback_months": 24,
+    "model_confidence": "low"
   },
   {
     "id": "daisy-smart-home",
@@ -2965,7 +4396,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "surprise_me"
+    "source_file": "surprise_me",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 100,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 150,
+    "est_capex_per_unit_k": 100,
+    "est_payback_months": 20,
+    "model_confidence": "low"
   },
   {
     "id": "face-foundrie",
@@ -2994,7 +4439,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "fresh_research"
+    "source_file": "fresh_research",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 400,
+    "urgency": "low",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1500,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 150,
+    "est_sde_high_k": 400,
+    "est_capex_per_unit_k": 400,
+    "est_payback_months": 24,
+    "model_confidence": "low"
   },
   {
     "id": "skiptown",
@@ -3027,7 +4486,21 @@ const TARGETS = [
     "buzz_signals": [
       "Charlotte-based, proven corporate model, just launched nationwide franchising. Rotondo is a serious franchise operator — led Tropical Smoothie Cafe to 1,400+ locations. Franchise Times called it 'new shining star in pet care.'",
       "Tech-enabled pet care facility — daycare, grooming, boarding, plus a dog bar concept."
-    ]
+    ],
+    "conviction_score": 7,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
   },
   {
     "id": "jetset-pilates",
@@ -3055,7 +4528,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "fresh_research"
+    "source_file": "fresh_research",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 250,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 24,
+    "model_confidence": "low"
   },
   {
     "id": "bodybar-pilates",
@@ -3084,7 +4571,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "fresh_research"
+    "source_file": "fresh_research",
+    "conviction_score": 1,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 250,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 24,
+    "model_confidence": "low"
   },
   {
     "id": "pickleball-kingdom",
@@ -3113,7 +4614,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "fresh_research"
+    "source_file": "fresh_research",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "the-picklr",
@@ -3141,7 +4656,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "fresh_research"
+    "source_file": "fresh_research",
+    "conviction_score": 2,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "ace-pickleball-club",
@@ -3169,7 +4698,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "fresh_research"
+    "source_file": "fresh_research",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "ismash",
@@ -3197,7 +4740,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "fresh_research"
+    "source_file": "fresh_research",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 350,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 22,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 250,
+    "est_capex_per_unit_k": 400,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "cork-and-candles",
@@ -3225,7 +4782,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "fresh_research"
+    "source_file": "fresh_research",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 350,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 22,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 250,
+    "est_capex_per_unit_k": 400,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "fuzz-wax-bar",
@@ -3253,7 +4824,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "fresh_research"
+    "source_file": "fresh_research",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 24,
+    "model_confidence": "low"
   },
   {
     "id": "sugaring-nyc",
@@ -3285,7 +4870,21 @@ const TARGETS = [
     "buzz_signals": [
       "Growing brand in a differentiated niche. Low capital barrier makes multi-unit accessible.",
       "Hair removal concept using sugar paste (sugar, lemon, water) instead of traditional wax."
-    ]
+    ],
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 200,
+    "est_payback_months": 24,
+    "model_confidence": "medium"
   },
   {
     "id": "hteo",
@@ -3312,7 +4911,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
-    "source_file": "fresh_research"
+    "source_file": "fresh_research",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "low",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1500,
+    "est_margin_pct": 18,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 250,
+    "est_capex_per_unit_k": 400,
+    "est_payback_months": 36,
+    "model_confidence": "low"
   },
   {
     "id": "breadless",
@@ -3343,7 +4956,21 @@ const TARGETS = [
     "buzz_signals": [
       "Early-stage but structurally aligned with massive demographic shift (GLP-1 medications, metabolic health awareness). Strong operational DNA.",
       "Chefless nutrition concept built for the GLP-1 era — no bread, no deep fryers, no hoods."
-    ]
+    ],
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "low",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1500,
+    "est_margin_pct": 18,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 250,
+    "est_capex_per_unit_k": 400,
+    "est_payback_months": 36,
+    "model_confidence": "low"
   },
   {
     "id": "negranti-creamery",
@@ -3374,7 +5001,21 @@ const TARGETS = [
     "buzz_signals": "Only sheep milk ice cream in the US; artisan creamery with own flock; SLO County cult following",
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "discovery_cron"
+    "source_file": "discovery_cron",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "low",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1500,
+    "est_margin_pct": 18,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 250,
+    "est_capex_per_unit_k": 400,
+    "est_payback_months": 36,
+    "model_confidence": "low"
   },
   {
     "id": "vanguard-key-clubs",
@@ -3405,7 +5046,21 @@ const TARGETS = [
     "buzz_signals": "30-year family legacy; second generation joining; just launched franchising spring 2026; local Seacoast loyalty",
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "discovery_cron"
+    "source_file": "discovery_cron",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "medium",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 250,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 24,
+    "model_confidence": "medium"
   },
   {
     "id": "sul-and-beans",
@@ -3436,7 +5091,21 @@ const TARGETS = [
     "buzz_signals": "Founder also created SomiSomi (33 locations); K-wave cultural tailwind; expanding to Texas and Las Vegas in 2026",
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "discovery_cron"
+    "source_file": "discovery_cron",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "low",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1500,
+    "est_margin_pct": 18,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 250,
+    "est_capex_per_unit_k": 400,
+    "est_payback_months": 36,
+    "model_confidence": "low"
   },
   {
     "id": "alexis-lauren-medspa",
@@ -3467,7 +5136,21 @@ const TARGETS = [
     "buzz_signals": "Female-founded luxury medspa; The Vault membership innovation; franchise launched Jan 2026; Franchise Times coverage",
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "discovery_cron"
+    "source_file": "discovery_cron",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 400,
+    "urgency": "low",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1500,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 150,
+    "est_sde_high_k": 400,
+    "est_capex_per_unit_k": 400,
+    "est_payback_months": 24,
+    "model_confidence": "low"
   },
   {
     "id": "othership",
@@ -3499,7 +5182,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 9,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 4,
+    "check_size_k": 600,
+    "urgency": "medium",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1500,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 400,
+    "est_capex_per_unit_k": 600,
+    "est_payback_months": 36,
+    "model_confidence": "low"
   },
   {
     "id": "bathhouse-nyc",
@@ -3531,7 +5228,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 9,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 4,
+    "check_size_k": 600,
+    "urgency": "medium",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1500,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 400,
+    "est_capex_per_unit_k": 600,
+    "est_payback_months": 36,
+    "model_confidence": "low"
   },
   {
     "id": "sauna-house",
@@ -3563,7 +5274,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 9,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 4,
+    "check_size_k": 600,
+    "urgency": "medium",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1500,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 400,
+    "est_capex_per_unit_k": 600,
+    "est_payback_months": 36,
+    "model_confidence": "low"
   },
   {
     "id": "worldsprings",
@@ -3594,7 +5319,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 4,
+    "check_size_k": 600,
+    "urgency": "low",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1500,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 400,
+    "est_capex_per_unit_k": 600,
+    "est_payback_months": 36,
+    "model_confidence": "low"
   },
   {
     "id": "urban-sweat",
@@ -3625,7 +5364,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 7,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 4,
+    "check_size_k": 600,
+    "urgency": "low",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1500,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 400,
+    "est_capex_per_unit_k": 600,
+    "est_payback_months": 36,
+    "model_confidence": "low"
   },
   {
     "id": "padel-haus",
@@ -3657,7 +5410,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 8,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 4,
+    "check_size_k": 800,
+    "urgency": "high",
+    "est_revenue_low_k": 600,
+    "est_revenue_high_k": 2000,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 150,
+    "est_sde_high_k": 500,
+    "est_capex_per_unit_k": 800,
+    "est_payback_months": 40,
+    "model_confidence": "low"
   },
   {
     "id": "reserve-padel",
@@ -3689,7 +5456,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 8,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 4,
+    "check_size_k": 800,
+    "urgency": "high",
+    "est_revenue_low_k": 600,
+    "est_revenue_high_k": 2000,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 150,
+    "est_sde_high_k": 500,
+    "est_capex_per_unit_k": 800,
+    "est_payback_months": 40,
+    "model_confidence": "low"
   },
   {
     "id": "ultra-padel-club",
@@ -3720,7 +5501,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 7,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 4,
+    "check_size_k": 800,
+    "urgency": "high",
+    "est_revenue_low_k": 600,
+    "est_revenue_high_k": 2000,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 150,
+    "est_sde_high_k": 500,
+    "est_capex_per_unit_k": 800,
+    "est_payback_months": 40,
+    "model_confidence": "low"
   },
   {
     "id": "epic-padel",
@@ -3751,7 +5546,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 4,
+    "check_size_k": 800,
+    "urgency": "low",
+    "est_revenue_low_k": 600,
+    "est_revenue_high_k": 2000,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 150,
+    "est_sde_high_k": 500,
+    "est_capex_per_unit_k": 800,
+    "est_payback_months": 40,
+    "model_confidence": "low"
   },
   {
     "id": "leather-spa",
@@ -3783,7 +5592,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 10,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 3,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "medium",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 35,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 250,
+    "est_capex_per_unit_k": 150,
+    "est_payback_months": 12,
+    "model_confidence": "medium"
   },
   {
     "id": "jeeves-new-york",
@@ -3814,7 +5637,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 9,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 3,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "medium",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 35,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 250,
+    "est_capex_per_unit_k": 150,
+    "est_payback_months": 12,
+    "model_confidence": "medium"
   },
   {
     "id": "the-cobblers",
@@ -3846,7 +5683,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 10,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 3,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "medium",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 35,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 250,
+    "est_capex_per_unit_k": 150,
+    "est_payback_months": 12,
+    "model_confidence": "medium"
   },
   {
     "id": "rago-brothers",
@@ -3878,7 +5729,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 9,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 3,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "medium",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 35,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 250,
+    "est_capex_per_unit_k": 150,
+    "est_payback_months": 12,
+    "model_confidence": "medium"
   },
   {
     "id": "cobbler-concierge",
@@ -3909,7 +5774,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 7,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 3,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 35,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 250,
+    "est_capex_per_unit_k": 150,
+    "est_payback_months": 12,
+    "model_confidence": "low"
   },
   {
     "id": "snakes-lattes",
@@ -3941,7 +5820,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 180,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "hex-co",
@@ -3973,7 +5866,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 180,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "mox-boarding-house",
@@ -4004,7 +5911,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 180,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "game-kastle",
@@ -4035,7 +5956,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 180,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "planthouse",
@@ -4067,7 +6002,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 250,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 150,
+    "est_capex_per_unit_k": 150,
+    "est_payback_months": 28,
+    "model_confidence": "low"
   },
   {
     "id": "rewild",
@@ -4098,7 +6047,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 250,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 150,
+    "est_capex_per_unit_k": 150,
+    "est_payback_months": 28,
+    "model_confidence": "low"
   },
   {
     "id": "the-sill",
@@ -4130,7 +6093,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 250,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 150,
+    "est_capex_per_unit_k": 150,
+    "est_payback_months": 28,
+    "model_confidence": "low"
   },
   {
     "id": "pigtails-crewcuts",
@@ -4162,7 +6139,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 180,
+    "est_capex_per_unit_k": 180,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "sharkey-s-cuts-for-kids",
@@ -4194,7 +6185,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 180,
+    "est_capex_per_unit_k": 180,
+    "est_payback_months": 20,
+    "model_confidence": "medium"
   },
   {
     "id": "cookie-cutters-haircuts-for-kids",
@@ -4225,7 +6230,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 180,
+    "est_capex_per_unit_k": 180,
+    "est_payback_months": 20,
+    "model_confidence": "low"
   },
   {
     "id": "snip-its",
@@ -4256,7 +6275,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 200,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 80,
+    "est_sde_high_k": 180,
+    "est_capex_per_unit_k": 180,
+    "est_payback_months": 20,
+    "model_confidence": "low"
   },
   {
     "id": "mobility-city",
@@ -4287,7 +6320,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 700,
+    "est_margin_pct": 22,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 180,
+    "est_capex_per_unit_k": 150,
+    "est_payback_months": 24,
+    "model_confidence": "low"
   },
   {
     "id": "101-mobility",
@@ -4318,7 +6365,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 700,
+    "est_margin_pct": 22,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 180,
+    "est_capex_per_unit_k": 150,
+    "est_payback_months": 24,
+    "model_confidence": "low"
   },
   {
     "id": "next-day-access",
@@ -4349,7 +6410,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_new_lanes"
+    "source_file": "t904_new_lanes",
+    "conviction_score": 3,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 700,
+    "est_margin_pct": 22,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 180,
+    "est_capex_per_unit_k": 150,
+    "est_payback_months": 24,
+    "model_confidence": "low"
   },
   {
     "id": "jeff-s-bagel-run",
@@ -4381,7 +6456,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_missing_bagels"
+    "source_file": "t904_missing_bagels",
+    "conviction_score": 10,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 12,
+    "entry_difficulty": 3,
+    "check_size_k": 350,
+    "urgency": "medium",
+    "est_revenue_low_k": 800,
+    "est_revenue_high_k": 1800,
+    "est_margin_pct": 22,
+    "est_sde_low_k": 120,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 300,
+    "est_payback_months": 24,
+    "model_confidence": "medium"
   },
   {
     "id": "poochies-dallas",
@@ -4412,7 +6501,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_missing_pet"
+    "source_file": "t904_missing_pet",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
   },
   {
     "id": "paws-fur-grooming-mobile",
@@ -4443,7 +6546,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_missing_pet"
+    "source_file": "t904_missing_pet",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
   },
   {
     "id": "urbanwagz",
@@ -4474,7 +6591,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_missing_pet"
+    "source_file": "t904_missing_pet",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
   },
   {
     "id": "puptown-mobile-grooming",
@@ -4505,7 +6636,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_missing_pet"
+    "source_file": "t904_missing_pet",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
   },
   {
     "id": "woofinwaggle",
@@ -4536,7 +6681,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_missing_pet"
+    "source_file": "t904_missing_pet",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
   },
   {
     "id": "happy-k9-fort-worth",
@@ -4567,7 +6726,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_missing_pet"
+    "source_file": "t904_missing_pet",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
   },
   {
     "id": "brandyapple-grooming",
@@ -4598,7 +6771,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_missing_pet"
+    "source_file": "t904_missing_pet",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
   },
   {
     "id": "bubbly-paws-charlotte",
@@ -4629,7 +6816,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_missing_pet"
+    "source_file": "t904_missing_pet",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 150,
+    "urgency": "low",
+    "est_revenue_low_k": 200,
+    "est_revenue_high_k": 600,
+    "est_margin_pct": 28,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 120,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
   },
   {
     "id": "snapology-franchisee-clusters",
@@ -4660,7 +6861,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_missing_kids"
+    "source_file": "t904_missing_kids",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "icode-franchisee-clusters",
@@ -4691,7 +6906,21 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_missing_kids"
+    "source_file": "t904_missing_kids",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
   },
   {
     "id": "code-ninjas-franchisee-clusters",
@@ -4722,207 +6951,1275 @@ const TARGETS = [
     ],
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
-    "source_file": "t904_missing_kids"
+    "source_file": "t904_missing_kids",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 3,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 900,
+    "est_margin_pct": 20,
+    "est_sde_low_k": 50,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 30,
+    "model_confidence": "low"
+  },
+  {
+    "id": "found-weightloss",
+    "name": "Found",
+    "category": "GLP-1 & Weight-Loss Services",
+    "subcategory": "GLP-1-adjacent wellness platform",
+    "units": 1,
+    "units_text": "Digital-first weight care platform, physical expansion potential",
+    "hq_city": "New York",
+    "hq_state": "",
+    "lat": 40.71,
+    "lng": -74.0,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "Massive demand wave",
+      "15%+ adult GLP-1 penetration projected",
+      "Services layer barely exists",
+      "Recurring membership model"
+    ],
+    "team": "",
+    "story": "Biggest consumer health shift of our lifetime. 15%+ of US adults projected on GLP-1 drugs by 2027. The SERVICES layer around GLP-1 — nutrition, muscle preservation, body contouring, behavioral support — is wide open.",
+    "traction": "Digital platform with physical expansion path",
+    "funding": "VC backed",
+    "entry_path": "JV/licensing or build",
+    "dan_value_add": "Capital + consumer brand + operational systems",
+    "first_diligence": "Service layer unit economics, regulatory/clinical compliance, insurance/reimbursement, retention",
+    "sources": [
+      "https://www.newhope.com/investments/in-the-post-ozempic-economy-investors-bet-on-opportunities-to-provide-support"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 8,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "high",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 120,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 18,
+    "model_confidence": "low"
+  },
+  {
+    "id": "noom-weightloss",
+    "name": "Noom",
+    "category": "GLP-1 & Weight-Loss Services",
+    "subcategory": "GLP-1-adjacent behavior coaching",
+    "units": 1,
+    "units_text": "Digital platform with GLP-1 program; potential physical retail",
+    "hq_city": "New York",
+    "hq_state": "",
+    "lat": 40.71,
+    "lng": -74.0,
+    "founded": null,
+    "status": "comp",
+    "buzz_signals": [
+      "GLP-1 program launched",
+      "Digital-to-physical potential"
+    ],
+    "team": "",
+    "story": "Established weight-loss behavior platform now offering GLP-1 support. Too scaled to acquire directly, but proves demand for the coaching/support layer.",
+    "traction": "Large-scale digital platform",
+    "funding": "VC backed",
+    "entry_path": "Comp — too scaled",
+    "dan_value_add": "Reference for service model",
+    "first_diligence": "N/A (comp)",
+    "sources": [
+      "https://www.forbes.com/health/weight-loss/glp-1-statistics/"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 4,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 120,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 18,
+    "model_confidence": "low"
+  },
+  {
+    "id": "body-contouring-medspa-independents",
+    "name": "Body Contouring Med-Spa Independents",
+    "category": "GLP-1 & Weight-Loss Services",
+    "subcategory": "GLP-1 loose-skin/body services",
+    "units": 3,
+    "units_text": "Fragmented local operators — skin tightening, body contouring post-weight-loss",
+    "hq_city": "Multiple",
+    "hq_state": "",
+    "lat": 40.0,
+    "lng": -98.0,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "GLP-1 weight-loss drives body-contouring demand",
+      "Fragmented local operators",
+      "Combine with med-spa thesis"
+    ],
+    "team": "",
+    "story": "GLP-1 weight loss creates massive demand for loose-skin and body-contouring services. Fragmented local med-spas are the acquisition target. Combine with med-spa rollup thesis.",
+    "traction": "Fragmented operators with growing demand",
+    "funding": "Bootstrap",
+    "entry_path": "Acquire local operators",
+    "dan_value_add": "Capital + brand + digital + clinical protocols",
+    "first_diligence": "Licensing/regulatory, clinical labor, equipment capex, local demand",
+    "sources": [
+      "https://www.goodrx.com/classes/glp-1-agonists/glp-1-trends"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 7,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "high",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 120,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 18,
+    "model_confidence": "low"
+  },
+  {
+    "id": "glp1-meal-delivery",
+    "name": "GLP-1-Targeted Meal Delivery",
+    "category": "GLP-1 & Weight-Loss Services",
+    "subcategory": "GLP-1 nutrition services",
+    "units": 1,
+    "units_text": "Emerging: meal delivery specifically for GLP-1 patients (high-protein, portion-controlled)",
+    "hq_city": "National",
+    "hq_state": "",
+    "lat": 39.0,
+    "lng": -98.0,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "Emerging category — few dedicated operators",
+      "High-protein/portion-controlled demand"
+    ],
+    "team": "",
+    "story": "GLP-1 patients need high-protein, portion-controlled nutrition. Meal delivery targeting this demographic is nascent. Combine with existing meal-delivery operators or build.",
+    "traction": "Emerging category — few dedicated operators",
+    "funding": "Bootstrap/VC",
+    "entry_path": "Build or acquire meal-delivery operator",
+    "dan_value_add": "Capital + supply chain + brand + GLP-1 positioning",
+    "first_diligence": "COGS, logistics, retention, regulatory",
+    "sources": [
+      "https://www.kff.org/medicare/what-to-know-about-the-balance-model-for-glp-1s-in-medicare-and-medicaid/"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "high",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 120,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 18,
+    "model_confidence": "low"
+  },
+  {
+    "id": "glp1-fitness-strength",
+    "name": "GLP-1 Muscle-Preservation Fitness",
+    "category": "GLP-1 & Weight-Loss Services",
+    "subcategory": "GLP-1-adjacent strength training",
+    "units": 1,
+    "units_text": "Emerging: strength training concepts targeting GLP-1 users for muscle preservation",
+    "hq_city": "National",
+    "hq_state": "",
+    "lat": 39.0,
+    "lng": -98.0,
+    "founded": null,
+    "status": "watch",
+    "buzz_signals": [
+      "Muscle preservation is a known GLP-1 side effect",
+      "Fitness concepts starting to target GLP-1 users"
+    ],
+    "team": "",
+    "story": "GLP-1 patients lose muscle mass alongside fat. Strength training concepts targeting this need are emerging. Watch for dedicated operators or franchise concepts.",
+    "traction": "Nascent category",
+    "funding": "Bootstrap",
+    "entry_path": "Watch for dedicated operators",
+    "dan_value_add": "N/A (watch)",
+    "first_diligence": "N/A (watch)",
+    "sources": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12403326/"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 1200,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 120,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 18,
+    "model_confidence": "low"
+  },
+  {
+    "id": "temple-respondent",
+    "name": "NA Bottle Shop / Bottle Shop Concept",
+    "category": "Non-Alcoholic & Sober Social",
+    "subcategory": "NA retail + social",
+    "units": 2,
+    "units_text": "NA bottle shops emerging in NYC/LA/Austin; Boisson was category pioneer (now closed); whitespace for successors",
+    "hq_city": "New York",
+    "hq_state": "",
+    "lat": 40.71,
+    "lng": -74.0,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "Boisson proved demand then over-expanded",
+      "Gen Z drinking at historic lows",
+      "NA market growing rapidly"
+    ],
+    "team": "",
+    "story": "Gen Z drinking at historic lows. NA beverage market exploding. Boisson proved demand but over-expanded. The successor — disciplined NA bottle shop + community/events — is the opportunity.",
+    "traction": "Category pioneered but gap left by Boisson closure",
+    "funding": "Bootstrap",
+    "entry_path": "Build or acquire assets from failed operators",
+    "dan_value_add": "Capital + brand + curation + community/events",
+    "first_diligence": "Inventory turn, retail rent, event revenue mix, e-commerce",
+    "sources": [
+      "https://www.thenabeveragecompany.com/blogs/the-na-life/non-alcoholic-beverage-trends-in-2025"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 7,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "medium",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 24,
+    "model_confidence": "low"
+  },
+  {
+    "id": "getaway-sober-bar",
+    "name": "Getaway / Sober Bar Concept",
+    "category": "Non-Alcoholic & Sober Social",
+    "subcategory": "alcohol-free social venue",
+    "units": 2,
+    "units_text": "Sober bars in NYC and other cities; membership model with NA cocktails",
+    "hq_city": "New York",
+    "hq_state": "",
+    "lat": 40.71,
+    "lng": -74.0,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "Membership model with NA cocktails",
+      "Social infrastructure for sober-curious",
+      "Small-format proof"
+    ],
+    "team": "",
+    "story": "Full sober bar concept. NA cocktails at premium prices. Membership model. Social infrastructure for sober-curious consumers.",
+    "traction": "Small-format proof in major cities",
+    "funding": "Bootstrap",
+    "entry_path": "Acquire or JV",
+    "dan_value_add": "Capital + brand + programming + expansion",
+    "first_diligence": "Unit economics, rent, membership retention, F&B margin",
+    "sources": [
+      "https://www.beveragedaily.com/Article/2026/01/29/alcohol-free-drink-trends-sober-curious-consumers-brand-building/"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "medium",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 24,
+    "model_confidence": "low"
+  },
+  {
+    "id": "adaptogen-bar-concept",
+    "name": "Adaptogen / Functional Beverage Bar",
+    "category": "Non-Alcoholic & Sober Social",
+    "subcategory": "functional beverage social",
+    "units": 1,
+    "units_text": "Emerging: bars featuring adaptogenic and functional beverages (kava, mocktails, nootropics)",
+    "hq_city": "National",
+    "hq_state": "",
+    "lat": 40.0,
+    "lng": -98.0,
+    "founded": null,
+    "status": "watch",
+    "buzz_signals": [
+      "Kava bars gaining traction",
+      "Adaptogen beverages crossing from niche to mainstream"
+    ],
+    "team": "",
+    "story": "Functional beverage bars featuring kava, adaptogens, and nootropics. Early-stage but culturally aligned with wellness/sober-curious trends. Watch for operators with proof.",
+    "traction": "Early-stage concepts appearing",
+    "funding": "Bootstrap",
+    "entry_path": "Watch for operators with proof",
+    "dan_value_add": "N/A (watch)",
+    "first_diligence": "N/A (watch)",
+    "sources": [
+      "https://www.fliprogram.com/blog/how-to-open-a-sober-bar"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 24,
+    "model_confidence": "low"
+  },
+  {
+    "id": "listen-bar",
+    "name": "Listen Bar / NA Event Concept",
+    "category": "Non-Alcoholic & Sober Social",
+    "subcategory": "NA pop-up/event brand",
+    "units": 1,
+    "units_text": "Pop-up and event-based NA social brand; potential for permanent venue",
+    "hq_city": "New York",
+    "hq_state": "",
+    "lat": 40.71,
+    "lng": -74.0,
+    "founded": null,
+    "status": "watch",
+    "buzz_signals": [
+      "Event-based model with low overhead",
+      "Could transition to permanent venue"
+    ],
+    "team": "",
+    "story": "Event/pop-up NA social brand with potential for permanent venue. Low-capex entry path. Watch for venue transition.",
+    "traction": "Event-based proof",
+    "funding": "Bootstrap",
+    "entry_path": "Watch for venue transition",
+    "dan_value_add": "N/A (watch)",
+    "first_diligence": "N/A (watch)",
+    "sources": [
+      "https://www.beveragedaily.com/Article/2026/01/29/alcohol-free-drink-trends-sober-curious-consumers-brand-building/"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 250,
+    "urgency": "low",
+    "est_revenue_low_k": 300,
+    "est_revenue_high_k": 800,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 60,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 250,
+    "est_payback_months": 24,
+    "model_confidence": "low"
+  },
+  {
+    "id": "7-brew-franchisee",
+    "name": "7 Brew Franchisee/Area Dev",
+    "category": "Drive-Thru Coffee",
+    "subcategory": "drive-thru coffee franchisee",
+    "units": 1,
+    "units_text": "Blackstone-backed, 244% growth, still pre-national. Franchisee/area-development rights available.",
+    "hq_city": "Fayetteville, AR",
+    "hq_state": "",
+    "lat": 36.06,
+    "lng": -94.16,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "244% growth (Yelp data)",
+      "Blackstone-backed",
+      "Pre-national — territories still available",
+      "Daily-repeat product"
+    ],
+    "team": "",
+    "story": "Highest-growth drive-thru coffee in the US. 244% growth, Blackstone-backed. Still pre-national — you can get major territories. Low capex, daily repeat, high margin, scalable.",
+    "traction": "Fastest-growing QSR coffee concept",
+    "funding": "Blackstone backed",
+    "entry_path": "Franchisee/area development",
+    "dan_value_add": "Capital for multi-unit development + territory rights",
+    "first_diligence": "FDD Item 19 economics, territory quality, buildout cost, site selection, labor model",
+    "sources": [
+      "https://dailycoffeenews.com/2026/06/24/report-drive-through-coffee-and-chicken-among-fastest-growing-us-brand-categories/"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 9,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 450,
+    "urgency": "high",
+    "est_revenue_low_k": 1200,
+    "est_revenue_high_k": 2500,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 250,
+    "est_sde_high_k": 600,
+    "est_capex_per_unit_k": 450,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
+  },
+  {
+    "id": "dutch-bros-franchisee",
+    "name": "Dutch Bros Franchisee",
+    "category": "Drive-Thru Coffee",
+    "subcategory": "drive-thru coffee franchisee",
+    "units": 1,
+    "units_text": "Public company; franchisee path limited but territory economics still interesting",
+    "hq_city": "Grants Pass, OR",
+    "hq_state": "",
+    "lat": 42.44,
+    "lng": -123.33,
+    "founded": null,
+    "status": "watch",
+    "buzz_signals": [
+      "Public company — full financial transparency",
+      "Proven drive-thru coffee model"
+    ],
+    "team": "",
+    "story": "Public company — direct franchisee path is limited. But unit economics are publicly disclosed and prove the model. Use as comp for independent drive-thru coffee.",
+    "traction": "Public comp with disclosed unit economics",
+    "funding": "Public company",
+    "entry_path": "Watch/comp only",
+    "dan_value_add": "N/A (comp)",
+    "first_diligence": "N/A (watch/comp)",
+    "sources": [
+      "https://1851franchise.com/top-coffee-cafe-franchises-to-watch-2026-2732420"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 450,
+    "urgency": "low",
+    "est_revenue_low_k": 1200,
+    "est_revenue_high_k": 2500,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 250,
+    "est_sde_high_k": 600,
+    "est_capex_per_unit_k": 450,
+    "est_payback_months": 18,
+    "model_confidence": "low"
+  },
+  {
+    "id": "ellianos-coffee",
+    "name": "Elliano's Coffee",
+    "category": "Drive-Thru Coffee",
+    "subcategory": "drive-thru coffee franchise",
+    "units": 5,
+    "units_text": "Established drive-thru franchise with territories available",
+    "hq_city": "Gainesville, FL",
+    "hq_state": "",
+    "lat": 29.65,
+    "lng": -82.32,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "Established drive-thru franchise",
+      "Territories available",
+      "Proven model"
+    ],
+    "team": "",
+    "story": "Established drive-thru coffee franchise with available territories. Lower growth than 7 Brew but proven model and accessible entry.",
+    "traction": "Multi-unit franchise system",
+    "funding": "Franchise system",
+    "entry_path": "Franchisee/area development",
+    "dan_value_add": "Capital for multi-unit development",
+    "first_diligence": "FDD Item 19, territory quality, buildout cost, competitive density",
+    "sources": [
+      "https://www.franchising.com/sponsored/20260323_drivethru_coffee_franchise__investment_opportunities_with_ellianos.html"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 7,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 450,
+    "urgency": "high",
+    "est_revenue_low_k": 1200,
+    "est_revenue_high_k": 2500,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 250,
+    "est_sde_high_k": 600,
+    "est_capex_per_unit_k": 450,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
+  },
+  {
+    "id": "scooters-coffee",
+    "name": "Scooter's Coffee",
+    "category": "Drive-Thru Coffee",
+    "subcategory": "drive-thru coffee franchise",
+    "units": 5,
+    "units_text": "400+ units; strong Midwest presence and expansion",
+    "hq_city": "Omaha, NE",
+    "hq_state": "",
+    "lat": 41.26,
+    "lng": -96.07,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "400+ units proving scale",
+      "Strong Midwest presence"
+    ],
+    "team": "",
+    "story": "400+ unit drive-thru coffee franchise. Strong Midwest base with expansion. Proven model at scale.",
+    "traction": "400+ unit system",
+    "funding": "Franchise system",
+    "entry_path": "Franchisee/area development",
+    "dan_value_add": "Capital + multi-unit ops",
+    "first_diligence": "FDD Item 19, territory quality, brand vs 7 Brew/Dutch Bros",
+    "sources": [
+      "https://www.jackintheboxfranchising.com/blog/best-coffee-franchises-start"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 450,
+    "urgency": "high",
+    "est_revenue_low_k": 1200,
+    "est_revenue_high_k": 2500,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 250,
+    "est_sde_high_k": 600,
+    "est_capex_per_unit_k": 450,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
+  },
+  {
+    "id": "independent-drive-thru-coffee",
+    "name": "Independent Drive-Thru Coffee Operators",
+    "category": "Drive-Thru Coffee",
+    "subcategory": "independent drive-thru coffee",
+    "units": 3,
+    "units_text": "Local 2-5 unit independent drive-thru coffee operators",
+    "hq_city": "Multiple",
+    "hq_state": "",
+    "lat": 40.0,
+    "lng": -98.0,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "Fragmented local operators",
+      "Full control vs franchise model"
+    ],
+    "team": "",
+    "story": "Acquire local independent drive-thru coffee operators (2-5 units). Add brand, systems, and scale. Lower growth than 7 Brew but full control.",
+    "traction": "Fragmented local operators",
+    "funding": "Bootstrap",
+    "entry_path": "Acquire + modernize",
+    "dan_value_add": "Capital + brand + operational systems",
+    "first_diligence": "Unit economics, brand rebuild cost, labor model, site quality",
+    "sources": [],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 7,
+    "cash_on_cash_potential": 5,
+    "time_to_revenue_months": 8,
+    "entry_difficulty": 3,
+    "check_size_k": 450,
+    "urgency": "high",
+    "est_revenue_low_k": 1200,
+    "est_revenue_high_k": 2500,
+    "est_margin_pct": 25,
+    "est_sde_low_k": 250,
+    "est_sde_high_k": 600,
+    "est_capex_per_unit_k": 450,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
+  },
+  {
+    "id": "independent-pilates-reformer-studios",
+    "name": "Independent Pilates Reformer Studios",
+    "category": "Pilates Reformer & Boutique",
+    "subcategory": "independent boutique fitness",
+    "units": 3,
+    "units_text": "Thousands of independent reformer studios with aging founders; 2-5 unit acquisitions",
+    "hq_city": "Multiple",
+    "hq_state": "",
+    "lat": 40.0,
+    "lng": -98.0,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "Market doubling in 10 years",
+      "Thousands of independents with aging founders",
+      "Equipment creates switching cost"
+    ],
+    "team": "",
+    "story": "Pilates reformer market: $7.65B (2025) → $16.81B (2035). Thousands of independent studios with aging founders. Reformer equipment is the moat. Acquire 2-5 unit independents.",
+    "traction": "Fragmented independent studios nationwide",
+    "funding": "Bootstrap",
+    "entry_path": "Acquire + modernize",
+    "dan_value_add": "Capital + digital booking + brand + instructor retention",
+    "first_diligence": "Instructor retention, equipment condition, membership retention, lease terms",
+    "sources": [
+      "https://thepilatesbusiness.com/franchise-vs-independent-pilates-studios-the-2026-trade-offs/"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 7,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "medium",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 700,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 280,
+    "est_payback_months": 24,
+    "model_confidence": "medium"
+  },
+  {
+    "id": "club-pilates-franchisee-clusters",
+    "name": "Club Pilates Franchisee Clusters",
+    "category": "Pilates Reformer & Boutique",
+    "subcategory": "boutique fitness franchisee",
+    "units": 1,
+    "units_text": "800+ unit franchise system; franchisee cluster acquisitions",
+    "hq_city": "National",
+    "hq_state": "",
+    "lat": 33.0,
+    "lng": -117.0,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "800+ units proving demand",
+      "Franchisee succession opportunities"
+    ],
+    "team": "",
+    "story": "Club Pilates has 800+ units. The opportunity is acquiring multi-unit franchisee clusters from operators looking to exit. Proven model, disclosed economics.",
+    "traction": "800+ unit franchise system",
+    "funding": "Franchise system",
+    "entry_path": "Franchisee cluster acquisition",
+    "dan_value_add": "Capital for multi-unit buyout",
+    "first_diligence": "FDD Item 19, franchisee financial health, territory quality, transfer fees",
+    "sources": [
+      "https://thepilatesbusiness.com/franchise-vs-independent-pilates-studios-the-2026-trade-offs/"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "medium",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 700,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 280,
+    "est_payback_months": 24,
+    "model_confidence": "medium"
+  },
+  {
+    "id": "solidcore-slt-adjacent",
+    "name": "Solidcore/SLT-Adjacent Boutique Fitness",
+    "category": "Pilates Reformer & Boutique",
+    "subcategory": "premium boutique fitness",
+    "units": 1,
+    "units_text": "Premium Lagree/boutique fitness brands; franchisee or acquisition path",
+    "hq_city": "Multiple",
+    "hq_state": "",
+    "lat": 39.0,
+    "lng": -98.0,
+    "founded": null,
+    "status": "watch",
+    "buzz_signals": [
+      "Premium positioning",
+      "Strong brand loyalty"
+    ],
+    "team": "",
+    "story": "Premium boutique fitness concepts (Solidcore, SLT, Pure Barre). Watch for franchisee opportunities or acquisition of smaller premium brands.",
+    "traction": "Established premium brands",
+    "funding": "VC backed",
+    "entry_path": "Watch for franchisee opportunities",
+    "dan_value_add": "N/A (watch)",
+    "first_diligence": "N/A (watch)",
+    "sources": [
+      "https://marketintelo.com/report/fitness-franchise-market"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 5,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "low",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 700,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 280,
+    "est_payback_months": 24,
+    "model_confidence": "low"
+  },
+  {
+    "id": "independent-yoga-barre-hybrids",
+    "name": "Independent Yoga/Barre Hybrids",
+    "category": "Pilates Reformer & Boutique",
+    "subcategory": "boutique fitness independents",
+    "units": 3,
+    "units_text": "Independent yoga/barre/Pilates hybrid studios (2-5 units)",
+    "hq_city": "Multiple",
+    "hq_state": "",
+    "lat": 40.0,
+    "lng": -98.0,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "Hybrid models showing strong membership retention",
+      "Fragmented independent landscape"
+    ],
+    "team": "",
+    "story": "Independent hybrid studios combining yoga, barre, and reformer Pilates. Acquisition targets with recurring membership revenue.",
+    "traction": "Fragmented independents",
+    "funding": "Bootstrap",
+    "entry_path": "Acquire",
+    "dan_value_add": "Capital + brand + digital + instructor systems",
+    "first_diligence": "Instructor retention, membership churn, lease terms, brand rebuild",
+    "sources": [],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 6,
+    "entry_difficulty": 3,
+    "check_size_k": 300,
+    "urgency": "medium",
+    "est_revenue_low_k": 400,
+    "est_revenue_high_k": 700,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 100,
+    "est_sde_high_k": 200,
+    "est_capex_per_unit_k": 280,
+    "est_payback_months": 24,
+    "model_confidence": "medium"
+  },
+  {
+    "id": "prime-iv-franchisee",
+    "name": "Prime IV Franchisee",
+    "category": "IV Hydration & Recovery",
+    "subcategory": "IV hydration franchisee",
+    "units": 1,
+    "units_text": "208 locations, $100M revenue, 35 new agreements. Franchisee/area dev available.",
+    "hq_city": "National",
+    "hq_state": "",
+    "lat": 33.0,
+    "lng": -117.0,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "208 locations + $100M revenue proves model",
+      "35 new agreements = active growth",
+      "Recurring membership model"
+    ],
+    "team": "",
+    "story": "Prime IV: 208 locations, $100M systemwide revenue, 35 new franchise agreements. Model: nurse + space + supplies + memberships. Low capex, recurring revenue, wellness positioning.",
+    "traction": "208 locations, $100M revenue",
+    "funding": "Franchise system",
+    "entry_path": "Franchisee/area development",
+    "dan_value_add": "Capital for multi-unit development",
+    "first_diligence": "FDD Item 19, nurse staffing, regulatory compliance, membership retention",
+    "sources": [
+      "https://athletechnews.com/prime-iv-hydration-wellness-200-locations-100-million-in-revenue/"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 8,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 350,
+    "urgency": "high",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1000,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 150,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
+  },
+  {
+    "id": "ivme-independent-iv-lounges",
+    "name": "Independent IV Lounges",
+    "category": "IV Hydration & Recovery",
+    "subcategory": "independent IV hydration",
+    "units": 3,
+    "units_text": "Fragmented local IV hydration lounges; acquisition targets",
+    "hq_city": "Multiple",
+    "hq_state": "",
+    "lat": 40.0,
+    "lng": -98.0,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "Only ~500-800 locations nationally",
+      "Thousands of markets unserved",
+      "Fragmented independents"
+    ],
+    "team": "",
+    "story": "Fragmented independent IV lounges nationwide. Only ~500-800 locations exist — thousands of markets unserved. Acquire local operators and modernize.",
+    "traction": "Fragmented local operators",
+    "funding": "Bootstrap",
+    "entry_path": "Acquire + modernize",
+    "dan_value_add": "Capital + brand + clinical protocols + digital booking",
+    "first_diligence": "Nurse staffing, regulatory compliance, local demand, membership model",
+    "sources": [
+      "https://www.idealconsultingco.com/blog/iv-therapy-franchise-vs-med-spa-franchise"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 7,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 350,
+    "urgency": "high",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1000,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 150,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
+  },
+  {
+    "id": "iv-medspa-hybrid",
+    "name": "IV/Med-Spa Hybrid Operators",
+    "category": "IV Hydration & Recovery",
+    "subcategory": "IV + med-spa combination",
+    "units": 2,
+    "units_text": "Operators combining IV hydration with med-spa/aesthetics services",
+    "hq_city": "Multiple",
+    "hq_state": "",
+    "lat": 40.0,
+    "lng": -98.0,
+    "founded": null,
+    "status": "target",
+    "buzz_signals": [
+      "Higher revenue per visit via cross-sell",
+      "Bolt-on potential with med-spa thesis"
+    ],
+    "team": "",
+    "story": "Combining IV hydration with med-spa/aesthetics creates higher revenue per visit and cross-sell. Acquire operators offering both or bolt IV onto med-spa acquisitions.",
+    "traction": "Operators combining IV + aesthetics",
+    "funding": "Bootstrap",
+    "entry_path": "Acquire or bolt-on",
+    "dan_value_add": "Capital + clinical + brand",
+    "first_diligence": "Clinical staffing, regulatory, cross-sell economics, capex",
+    "sources": [
+      "https://www.franchiseresales.com/why-anti-aging-wellness-franchise-opportunities-are-booming/"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 7,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 350,
+    "urgency": "high",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1000,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 150,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 18,
+    "model_confidence": "medium"
+  },
+  {
+    "id": "recovery-lounge-concept",
+    "name": "Recovery Lounge Concept",
+    "category": "IV Hydration & Recovery",
+    "subcategory": "recovery + wellness lounge",
+    "units": 2,
+    "units_text": "Recovery lounges combining IV, sauna, cold plunge, compression",
+    "hq_city": "Multiple",
+    "hq_state": "",
+    "lat": 40.0,
+    "lng": -98.0,
+    "founded": null,
+    "status": "watch",
+    "buzz_signals": [
+      "Multi-service recovery lounges emerging",
+      "Combines with social bathhouse thesis"
+    ],
+    "team": "",
+    "story": "Combining IV hydration with sauna/cold plunge/compression into one recovery lounge. Watch for multi-service operators with strong membership retention.",
+    "traction": "Emerging multi-service concepts",
+    "funding": "Bootstrap/VC",
+    "entry_path": "Watch for operators with proof",
+    "dan_value_add": "N/A (watch)",
+    "first_diligence": "N/A (watch)",
+    "sources": [
+      "https://1851franchise.com/best-health-and-wellness-franchises-2026-2730886"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 350,
+    "urgency": "low",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1000,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 150,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 18,
+    "model_confidence": "low"
+  },
+  {
+    "id": "iv-at-home-concept",
+    "name": "IV At-Home / Mobile Service",
+    "category": "IV Hydration & Recovery",
+    "subcategory": "mobile IV hydration",
+    "units": 2,
+    "units_text": "Mobile/on-demand IV hydration services",
+    "hq_city": "Multiple",
+    "hq_state": "",
+    "lat": 40.0,
+    "lng": -98.0,
+    "founded": null,
+    "status": "watch",
+    "buzz_signals": [
+      "Lower capex model",
+      "On-demand/mobile positioning"
+    ],
+    "team": "",
+    "story": "Mobile IV hydration (nurse visits home/office). Lower capex but logistics-heavy. Watch for operators with proven dispatch and retention.",
+    "traction": "Mobile operators in various markets",
+    "funding": "Bootstrap",
+    "entry_path": "Watch for operators with proven dispatch",
+    "dan_value_add": "N/A (watch)",
+    "first_diligence": "N/A (watch)",
+    "sources": [
+      "https://www.idealconsultingco.com/blog/iv-therapy-franchise-vs-med-spa-franchise"
+    ],
+    "last_updated": "2026-07-19",
+    "added_date": "2026-07-19",
+    "source_file": "v2_buzzy_lanes",
+    "conviction_score": 6,
+    "cash_on_cash_potential": 4,
+    "time_to_revenue_months": 4,
+    "entry_difficulty": 2,
+    "check_size_k": 350,
+    "urgency": "low",
+    "est_revenue_low_k": 500,
+    "est_revenue_high_k": 1000,
+    "est_margin_pct": 30,
+    "est_sde_low_k": 150,
+    "est_sde_high_k": 350,
+    "est_capex_per_unit_k": 350,
+    "est_payback_months": 18,
+    "model_confidence": "low"
   }
 ];
 
-const CATEGORY_COLORS = {
-'Youth Sports & Kids': '#7faa6f',
-'Pet Services': '#d4825c',
-'Auto Services': '#c9a050',
-'Bakery': '#e8967d',
-'Bagels': '#c9a850',
-'Frozen Dessert': '#5b9ab8',
-'Swedish Candy': '#d4565c',
-'Fast Casual': '#e0a060',
-'Beverage': '#6b8eb5',
-'Med Spa & Wellness': '#c070a0',
-'Beauty & Aesthetics': '#c070a0',
-'Home Technology Services': '#7090c0',
-'Consumer Services': '#999999',
-};
+const CATEGORY_COLORS = {"Bagels": "#8B6914", "Bakery": "#D4A574", "Swedish Candy": "#FF6B9D", "Frozen Dessert": "#A8D8EA", "Food & Beverage": "#FF8C42", "Fast Casual": "#E8743B", "Beverage": "#6B8E23", "Pet Services": "#4A90D9", "Auto Services": "#6B6B6B", "Youth Sports & Kids": "#50C878", "Boutique Fitness": "#FF6347", "Med Spa & Wellness": "#DDA0DD", "Beauty & Aesthetics": "#FF69B4", "Experiential Entertainment": "#9370DB", "Home Technology Services": "#708090", "Social Bathhouse": "#20B2AA", "Padel & Racquet Social": "#00CED1", "Luxury Repair & Circular Care": "#DAA520", "Tabletop & Hobby Social": "#8B4513", "Plant Workshop & Retail": "#228B22", "Kids Haircuts & Family Grooming": "#FFB347", "Aging-in-Place & Mobility": "#B0C4DE", "GLP-1 & Weight-Loss Services": "#FF1493", "Non-Alcoholic & Sober Social": "#7B68EE", "Drive-Thru Coffee": "#8B4513", "Pilates Reformer & Boutique": "#C71585", "IV Hydration & Recovery": "#00BFFF"};
+let currentSort = { key: 'conviction_score', dir: 'desc' };
+let filtered = [...TARGETS];
 
-let map, markerLayer, markers = {};
-let activeCategory = null;
-
-function init() {
-map = L.map('map', { zoomControl: true, attributionControl: false }).setView([39.5, -98.35], 4);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
-maxZoom: 18, subdomains: 'abcd',
-}).addTo(map);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
-maxZoom: 18, subdomains: 'abcd', pane: 'shadowPane'
-}).addTo(map);
-markerLayer = L.layerGroup().addTo(map);
-
-const cats = [...new Set(TARGETS.map(t => t.category))].sort();
-const sel = document.getElementById('categoryFilter');
-cats.forEach(c => {
-const opt = document.createElement('option');
-opt.value = c; opt.textContent = c;
-sel.appendChild(opt);
-});
-buildLegend();
-applyFilters();
+function convictionColor(s) {
+  if (s >= 8) return '#22c55e';
+  if (s >= 5) return '#eab308';
+  return '#ef4444';
 }
 
-function buildLegend() {
-const cats = [...new Set(TARGETS.map(t => t.category))].sort();
-const legend = document.getElementById('legend');
-let html = '<h4>Categories</h4>';
-cats.forEach(c => {
-const color = CATEGORY_COLORS[c] || '#999';
-const count = TARGETS.filter(t => t.category === c).length;
-html += '<div class="legend-item" onclick="toggleCategory(\'' + c + '\')">' +
-'<div class="dot" style="background:' + color + '"></div>' +
-'<span>' + c + '</span>' +
-'<span class="count">' + count + '</span></div>';
-});
-legend.innerHTML = html;
+function urgencyBadge(u) {
+  if (u === 'high') return '<span class="urgency-high">⚡ HIGH</span>';
+  if (u === 'medium') return '<span class="urgency-medium">◐ MED</span>';
+  return '';
 }
 
-function toggleCategory(cat) {
-activeCategory = (activeCategory === cat) ? null : cat;
-applyFilters();
+function confidenceBadge(c) {
+  const cls = c === 'high' ? 'confidence-high' : c === 'medium' ? 'confidence-medium' : 'confidence-low';
+  return `<span class="confidence-badge ${cls}">${c}</span>`;
 }
 
+// ===== TABLE =====
+function renderTable() {
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = filtered.map((t, i) => `
+    <tr onclick="toggleDetail('detail-${i}')" style="cursor:pointer">
+      <td class="conviction-cell" style="color:${convictionColor(t.conviction_score)}">${t.conviction_score}</td>
+      <td><b>${t.name}</b></td>
+      <td><span class="cat-dot" style="background:${CATEGORY_COLORS[t.category]||'#888'}"></span>${t.category}</td>
+      <td><span class="status-badge status-${t.status}">${t.status}</span></td>
+      <td>${t.units || '—'}</td>
+      <td class="financial">$${t.check_size_k}K</td>
+      <td style="text-align:center">${'⭐'.repeat(t.cash_on_cash_potential)}</td>
+      <td>${t.time_to_revenue_months}mo</td>
+      <td>${t.est_payback_months}mo</td>
+      <td>${urgencyBadge(t.urgency)}</td>
+      <td>${t.hq_city || '—'}</td>
+    </tr>
+    <tr class="detail-row" id="detail-${i}">
+      <td colspan="11">
+        <div class="detail-content">
+          <div class="detail-section">
+            <h4>Story</h4>
+            <p>${t.story}</p>
+            <h4>Traction</h4>
+            <p>${t.traction || '—'}</p>
+            <h4>Entry Path</h4>
+            <p>${t.entry_path || '—'}</p>
+            <h4>Dan's Value Add</h4>
+            <p>${t.dan_value_add || '—'}</p>
+          </div>
+          <div class="detail-section">
+            <h4>Financial Proxy</h4>
+            <p>
+              <span class="field">Revenue:</span> $${t.est_revenue_low_k}–${t.est_revenue_high_k}K/unit<br>
+              <span class="field">Margin:</span> ${t.est_margin_pct}%<br>
+              <span class="field">SDE:</span> $${t.est_sde_low_k}–${t.est_sde_high_k}K/unit<br>
+              <span class="field">Capex/Unit:</span> $${t.est_capex_per_unit_k}K<br>
+              <span class="field">Payback:</span> ${t.est_payback_months}mo<br>
+              <span class="field">Confidence:</span> ${confidenceBadge(t.model_confidence)}
+            </p>
+            <h4>First Diligence</h4>
+            <p>${t.first_diligence || '—'}</p>
+            <h4>Buzz Signals</h4>
+            <p>${(t.buzz_signals||[]).join('<br>• ') || '—'}</p>
+            ${t.sources && t.sources.length ? `<h4>Sources</h4><p>${t.sources.map(s=>`<a href="${s}" target="_blank">${s.substring(0,60)}...</a>`).join('<br>')}</p>` : ''}
+          </div>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function toggleDetail(id) {
+  const row = document.getElementById(id);
+  if (row) row.classList.toggle('visible');
+}
+
+// ===== SORT =====
+function sortTable(key) {
+  if (currentSort.key === key) {
+    currentSort.dir = currentSort.dir === 'asc' ? 'desc' : 'asc';
+  } else {
+    currentSort.key = key;
+    currentSort.dir = key === 'name' || key === 'category' || key === 'status' || key === 'hq_city' || key === 'urgency' ? 'asc' : 'desc';
+  }
+  applyFilters();
+  // Update header indicators
+  document.querySelectorAll('th').forEach(th => th.classList.remove('sorted-asc', 'sorted-desc'));
+}
+
+// ===== FILTERS =====
 function applyFilters() {
-const search = document.getElementById('searchInput').value.toLowerCase();
-const status = document.getElementById('statusFilter').value;
-const category = document.getElementById('categoryFilter').value;
-const unitFilter = document.getElementById('unitFilter').value;
+  const status = document.getElementById('filterStatus').value;
+  const category = document.getElementById('filterCategory').value;
+  const checkRange = document.getElementById('filterCheck').value;
+  const search = document.getElementById('searchBox').value.toLowerCase();
 
-const filtered = TARGETS.filter(t => {
-if (search) {
-const haystack = (t.name + ' ' + (t.hq_city||'') + ' ' + (t.story||'') + ' ' + (t.category||'')).toLowerCase();
-if (!haystack.includes(search)) return false;
-}
-if (status && t.status !== status) return false;
-const cat = category || activeCategory;
-if (cat && t.category !== cat) return false;
-if (unitFilter) {
-const parts = unitFilter.split('-');
-const min = parseInt(parts[0]); const max = parseInt(parts[1]);
-const u = t.units || 0;
-if (u < min || u > max) return false;
-}
-return true;
-});
-renderList(filtered);
-renderMarkers(filtered);
-renderStats(filtered);
-}
+  filtered = TARGETS.filter(t => {
+    if (status && t.status !== status) return false;
+    if (category && t.category !== category) return false;
+    if (checkRange) {
+      const [lo, hi] = checkRange.split('-').map(Number);
+      if (t.check_size_k < lo || t.check_size_k > hi) return false;
+    }
+    if (search) {
+      const hay = (t.name + t.category + t.story + (t.buzz_signals||[]).join(' ')).toLowerCase();
+      if (!hay.includes(search)) return false;
+    }
+    return true;
+  });
 
-function renderList(items) {
-const list = document.getElementById('targetList');
-document.getElementById('totalCount').textContent = items.length;
-if (items.length === 0) {
-list.innerHTML = '<div class="empty-state">No targets match filters.<br>Try widening your search.</div>';
-return;
-}
-list.innerHTML = items.map(t => {
-const color = CATEGORY_COLORS[t.category] || '#999';
-return '<div class="list-item" onclick="selectTarget(\'' + t.id + '\')" data-id="' + t.id + '">' +
-'<div class="list-item-dot" style="background:' + color + '"></div>' +
-'<div class="list-item-content">' +
-'<div class="list-item-name">' + t.name + '</div>' +
-'<div class="list-item-meta">' +
-'<span class="units">' + (t.units || '?') + ' units</span>' +
-'<span>' + (t.hq_city || '') + (t.hq_state ? ', ' + t.hq_state : '') + '</span>' +
-'<span class="badge b-' + t.status + '">' + t.status + '</span>' +
-'</div>' +
-'<div class="list-item-meta" style="margin-top:2px;font-size:10px">' + t.category + '</div>' +
-'</div></div>';
-}).join('');
+  // Sort
+  const key = currentSort.key;
+  const dir = currentSort.dir === 'asc' ? 1 : -1;
+  filtered.sort((a, b) => {
+    let va = a[key], vb = b[key];
+    if (typeof va === 'string') return va.localeCompare(vb) * dir;
+    return (va - vb) * dir;
+  });
+
+  renderTable();
+  if (document.getElementById('mapView').classList.contains('active')) updateMap();
 }
 
-function renderMarkers(items) {
-markerLayer.clearLayers();
-markers = {};
-items.forEach(t => {
-if (!t.lat || !t.lng) return;
-const color = CATEGORY_COLORS[t.category] || '#999';
-const marker = L.circleMarker([t.lat, t.lng], {
-radius: 8, fillColor: color, color: '#0a0d12',
-weight: 2, opacity: 1, fillOpacity: 0.85
-});
-const statusIcon = {target:'Target', watch:'Watch', comp:'Comp', kill:'Kill'}[t.status] || '';
-marker.bindPopup(
-'<b>' + t.name + '</b>' +
-'<div class="popup-meta">' + statusIcon + ' &middot; ' + (t.units || '?') + ' units &middot; ' + t.category + '</div>' +
-'<div class="popup-meta">' + (t.hq_city || '') + (t.hq_state ? ', ' + t.hq_state : '') + '</div>' +
-'<div style="margin-top:8px"><a href="#" onclick="selectTarget(\'' + t.id + '\'); return false;">View details &rarr;</a></div>',
-{maxWidth: 260}
-);
-marker.on('click', function() { selectTarget(t.id, false); });
-marker.addTo(markerLayer);
-markers[t.id] = marker;
-});
+// ===== VIEWS =====
+function showView(view) {
+  document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.toolbar button').forEach(b => b.classList.remove('active'));
+  if (view === 'table') {
+    document.getElementById('tableView').classList.add('active');
+    document.getElementById('btnTable').classList.add('active');
+  } else if (view === 'map') {
+    document.getElementById('mapView').classList.add('active');
+    document.getElementById('btnMap').classList.add('active');
+    if (!map._loaded) initMap();
+    setTimeout(() => map.invalidateSize(), 100);
+  } else if (view === 'rank') {
+    document.getElementById('rankView').classList.add('active');
+    document.getElementById('btnRank').classList.add('active');
+    renderRankings();
+  }
 }
 
-function renderStats(items) {
-const targets = items.filter(t => t.status === 'target').length;
-const watch = items.filter(t => t.status === 'watch').length;
-const comp = items.filter(t => t.status === 'comp').length;
-const geocoded = items.filter(t => t.lat && t.lng).length;
-document.getElementById('statsBar').innerHTML =
-'<span><b>' + targets + '</b> targets</span>' +
-'<span><b>' + watch + '</b> watch</span>' +
-'<span><b>' + comp + '</b> comp</span>' +
-'<span><b>' + geocoded + '</b> mapped</span>';
+// ===== RANKINGS =====
+function renderRankings() {
+  const targets = TARGETS.filter(t => t.status === 'target');
+
+  // Top 20 by conviction
+  const byConviction = [...targets].sort((a,b) => b.conviction_score - a.conviction_score);
+  document.getElementById('rankConviction').innerHTML = byConviction.slice(0,20).map((t,i) =>
+    `<tr><td class="rank-num">${i+1}</td><td><b>${t.name}</b></td><td>${t.category}</td><td style="color:${convictionColor(t.conviction_score)};font-weight:700;text-align:center">${t.conviction_score}</td><td>${'⭐'.repeat(t.cash_on_cash_potential)}</td><td>$${t.check_size_k}K</td><td>${urgencyBadge(t.urgency)}</td></tr>`
+  ).join('');
+
+  // Top 10 fast money (CoC / time_to_revenue)
+  const byFast = [...targets].sort((a,b) => (b.cash_on_cash_potential/a.time_to_revenue_months) - (a.cash_on_cash_potential/a.time_to_revenue_months));
+  document.getElementById('rankFast').innerHTML = byFast.slice(0,10).map((t,i) =>
+    `<tr><td class="rank-num">${i+1}</td><td><b>${t.name}</b></td><td>${t.category}</td><td>${'⭐'.repeat(t.cash_on_cash_potential)}</td><td>${t.time_to_revenue_months}mo</td><td>${t.est_payback_months}mo</td></tr>`
+  ).join('');
+
+  // Top 10 urgent
+  const byUrgent = [...targets].filter(t => t.urgency === 'high').sort((a,b) => b.conviction_score - a.conviction_score);
+  document.getElementById('rankUrgent').innerHTML = byUrgent.slice(0,10).map((t,i) =>
+    `<tr><td class="rank-num">${i+1}</td><td><b>${t.name}</b></td><td>${t.category}</td><td style="color:${convictionColor(t.conviction_score)};font-weight:700;text-align:center">${t.conviction_score}</td><td>${(t.story||'').substring(0,100)}...</td></tr>`
+  ).join('');
+
+  // Bottom 20 kill list
+  const byKill = [...TARGETS].sort((a,b) => a.conviction_score - b.conviction_score);
+  document.getElementById('rankKill').innerHTML = byKill.slice(0,20).map((t,i) =>
+    `<tr><td class="rank-num">${i+1}</td><td>${t.name}</td><td>${t.category}</td><td style="color:${convictionColor(t.conviction_score)};font-weight:700;text-align:center">${t.conviction_score}</td><td><span class="status-badge status-${t.status}">${t.status}</span></td></tr>`
+  ).join('');
 }
 
-function selectTarget(id, fly) {
-if (fly === undefined) fly = true;
-const t = TARGETS.find(function(x) { return x.id === id; });
-if (!t) return;
-document.querySelectorAll('.list-item').forEach(function(el) { el.classList.remove('active'); });
-const li = document.querySelector('[data-id="' + id + '"]');
-if (li) { li.classList.add('active'); li.scrollIntoView({block:'nearest'}); }
-if (fly && markers[id]) {
-map.flyTo([t.lat, t.lng], 7, {duration: 0.8});
-setTimeout(function() { if (markers[id]) markers[id].openPopup(); }, 600);
-}
-const color = CATEGORY_COLORS[t.category] || '#999';
-const statusBadge = '<span class="badge b-' + t.status + '">' + t.status.toUpperCase() + '</span>';
-const sources = (t.sources || []).map(function(s) {
-let label = s;
-try { label = new URL(s).hostname.replace('www.',''); } catch(e) {}
-return '<a href="' + s + '" target="_blank">' + label + '</a>';
-}).join('');
-const buzzList = (t.buzz_signals || []).filter(function(b) { return b; }).map(function(b) {
-return '<li>' + b + '</li>';
-}).join('');
-
-document.getElementById('detailContent').innerHTML =
-'<span class="kicker" style="color:' + color + ';border-color:' + color + '33;background:' + color + '11">' + t.category + (t.subcategory ? ' &middot; ' + t.subcategory : '') + '</span>' +
-'<h2>' + t.name + '</h2>' +
-'<div class="sub">' + statusBadge + ' ' + (t.units || '?') + ' units &middot; ' + (t.hq_city || '') + (t.hq_state ? ', ' + t.hq_state : '') + (t.founded ? ' &middot; Founded ' + t.founded : '') + '</div>' +
-'<div class="meta-grid">' +
-'<div class="meta-item"><label>Units</label><span>' + (t.units_text || t.units || '\u2014') + '</span></div>' +
-'<div class="meta-item"><label>Funding</label><span>' + (t.funding || 'Bootstrap') + '</span></div>' +
-'<div class="meta-item"><label>Entry Path</label><span>' + (t.entry_path ? t.entry_path.substring(0,60) : '\u2014') + '</span></div>' +
-'<div class="meta-item"><label>Status</label><span style="text-transform:capitalize">' + t.status + '</span></div>' +
-'</div>' +
-(t.story ? '<h3>Story</h3><div class="field-box"><p>' + t.story + '</p></div>' : '') +
-(t.traction ? '<h3>Traction</h3><div class="field-box gold"><p>' + t.traction + '</p></div>' : '') +
-(t.team ? '<h3>Team</h3><div class="field-box"><p>' + t.team + '</p></div>' : '') +
-(buzzList ? '<h3>Buzz Signals</h3><div class="field-box green"><ul style="margin:0;padding-left:18px">' + buzzList + '</ul></div>' : '') +
-(t.dan_value_add ? '<h3>Dan\'s Value Add</h3><div class="field-box blue"><p>' + t.dan_value_add + '</p></div>' : '') +
-(t.first_diligence ? '<h3>First Diligence Question</h3><div class="field-box clay"><p>' + t.first_diligence + '</p></div>' : '') +
-(sources ? '<div class="sources">' + sources + '</div>' : '') +
-'<div style="margin-top:20px;font-size:10px;color:var(--muted)">Added: ' + (t.added_date || '?') + ' &middot; Updated: ' + (t.last_updated || '?') + '</div>';
-
-document.getElementById('detailPanel').classList.add('open');
+// ===== MAP =====
+let map, markerLayer;
+function initMap() {
+  map = L.map('map').setView([39.5, -98.35], 4);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap', maxZoom: 19
+  }).addTo(map);
+  markerLayer = L.layerGroup().addTo(map);
+  map._loaded = true;
+  updateMap();
 }
 
-function closeDetail() {
-document.getElementById('detailPanel').classList.remove('open');
-document.querySelectorAll('.list-item').forEach(function(el) { el.classList.remove('active'); });
+function updateMap() {
+  if (!markerLayer) return;
+  markerLayer.clearLayers();
+  filtered.filter(t => t.lat && t.lng).forEach(t => {
+    const color = t.status === 'target' ? convictionColor(t.conviction_score) : t.status === 'watch' ? '#eab308' : '#6b7280';
+    const marker = L.circleMarker([t.lat, t.lng], {
+      radius: t.status === 'target' ? Math.max(6, t.conviction_score) : 5,
+      fillColor: color, color: '#000', weight: 1, fillOpacity: 0.8
+    });
+    marker.bindPopup(`
+      <div style="font-family:sans-serif;min-width:200px">
+        <b>${t.name}</b><br>
+        <span style="color:${color}">${t.status} · Conviction ${t.conviction_score}</span><br>
+        <small>${t.category}</small><br>
+        <small>Check: $${t.check_size_k}K · CoC: ${'⭐'.repeat(t.cash_on_cash_potential)}</small><br><br>
+        <small>${(t.story||'').substring(0,150)}</small>
+      </div>
+    `);
+    marker.addTo(markerLayer);
+  });
 }
 
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeDetail(); });
-init();
+// Init
+applyFilters();
 </script>
 </body>
 </html>
