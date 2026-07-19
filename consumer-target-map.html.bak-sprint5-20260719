@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Situation Room — Consumer Target Map V3</title>
+<title>Situation Room — Consumer Target Map V2</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -65,11 +65,6 @@ tr:hover { background: var(--paper2); }
 .urgency-high { color: var(--red); font-weight: 700; font-size: 11px; }
 .urgency-medium { color: var(--yellow); font-weight: 600; font-size: 11px; }
 .status-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
-.pipeline-badge, .evidence-badge { display: inline-block; padding: 2px 7px; border-radius: 999px; font-size: 10px; font-weight: 700; white-space: nowrap; }
-.pipeline-badge { color: #cbd5e1; background: #1e293b; border: 1px solid #334155; }
-.evidence-verified_public { color: #86efac; background: #052e16; }
-.evidence-internal_only { color: #fde68a; background: #422006; }
-.evidence-unsupported { color: #fca5a5; background: #450a0a; }
 .status-target { background: rgba(34,197,94,0.15); color: var(--green); }
 .status-watch { background: rgba(234,179,8,0.15); color: var(--yellow); }
 .status-comp { background: rgba(139,148,158,0.15); color: var(--muted); }
@@ -128,17 +123,17 @@ header .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
 
 <header>
   <h1>🎯 Situation Room — Consumer Target Map</h1>
-  <div class="subtitle" id="subtitleLine">V3 — Operator-grade pipeline · 176 entries across 27 categories · Evidence audited 2026-07-19</div>
+  <div class="subtitle">V2 — Scored, ranked, and expanded · 175 targets across 27 categories · Updated 2026-07-19</div>
 </header>
 
 <!-- Summary Cards -->
 <div class="summary-grid">
-  <div class="summary-card"><div class="num" id="sumEntries">—</div><div class="label">Pipeline Entries</div></div>
-  <div class="summary-card"><div class="num" id="sumTargets" style="color:var(--green)">—</div><div class="label">Active Targets</div></div>
-  <div class="summary-card"><div class="num" id="sumWatch" style="color:var(--yellow)">—</div><div class="label">Watching</div></div>
-  <div class="summary-card"><div class="num" id="sumComps" style="color:var(--muted)">—</div><div class="label">Comps</div></div>
-  <div class="summary-card"><div class="num" id="sumSourced">—</div><div class="label">Publicly Sourced</div></div>
-  <div class="summary-card"><div class="num" id="sumNeedsEvidence" style="color:var(--red)">—</div><div class="label">Needs Public Evidence</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--green)">85</div><div class="label">Active Targets</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--yellow)">56</div><div class="label">Watching</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--muted)">34</div><div class="label">Comps</div></div>
+  <div class="summary-card"><div class="num">5.2</div><div class="label">Avg Conviction</div></div>
+  <div class="summary-card"><div class="num">$271K</div><div class="label">Avg Check (Targets)</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--red)">13</div><div class="label">High Urgency</div></div>
 </div>
 
 <!-- Toolbar -->
@@ -190,17 +185,11 @@ header .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
     <option value="300-500">$300-500K</option>
     <option value="500-9999">$500K+</option>
   </select>
-  <select id="filterEvidence" onchange="applyFilters()">
-    <option value="">All Evidence States</option>
-    <option value="verified_public">✓ Publicly Verified</option>
-    <option value="internal_only">◐ Internal Only</option>
-    <option value="unsupported">! Unsupported</option>
-  </select>
   <input type="search" id="searchBox" placeholder="🔍 Search..." oninput="applyFilters()">
 </div>
 
 <!-- Category Legend -->
-<div class="legend" id="categoryLegend">
+<div class="legend">
 <span class="legend-item" style="border-color:#50C878">Youth Sports & Kids <b>(48)</b></span><span class="legend-item" style="border-color:#4A90D9">Pet Services <b>(24)</b></span><span class="legend-item" style="border-color:#6B6B6B">Auto Services <b>(16)</b></span><span class="legend-item" style="border-color:#D4A574">Bakery <b>(5)</b></span><span class="legend-item" style="border-color:#FF6B9D">Swedish Candy <b>(5)</b></span><span class="legend-item" style="border-color:#20B2AA">Social Bathhouse <b>(5)</b></span><span class="legend-item" style="border-color:#DAA520">Luxury Repair & Circular Care <b>(5)</b></span><span class="legend-item" style="border-color:#FF1493">GLP-1 & Weight-Loss Services <b>(5)</b></span><span class="legend-item" style="border-color:#8B4513">Drive-Thru Coffee <b>(5)</b></span><span class="legend-item" style="border-color:#00BFFF">IV Hydration & Recovery <b>(5)</b></span><span class="legend-item" style="border-color:#8B6914">Bagels <b>(4)</b></span><span class="legend-item" style="border-color:#A8D8EA">Frozen Dessert <b>(4)</b></span><span class="legend-item" style="border-color:#FF8C42">Food & Beverage <b>(4)</b></span><span class="legend-item" style="border-color:#00CED1">Padel & Racquet Social <b>(4)</b></span><span class="legend-item" style="border-color:#8B4513">Tabletop & Hobby Social <b>(4)</b></span><span class="legend-item" style="border-color:#FFB347">Kids Haircuts & Family Grooming <b>(4)</b></span><span class="legend-item" style="border-color:#7B68EE">Non-Alcoholic & Sober Social <b>(4)</b></span><span class="legend-item" style="border-color:#C71585">Pilates Reformer & Boutique <b>(4)</b></span><span class="legend-item" style="border-color:#DDA0DD">Med Spa & Wellness <b>(3)</b></span><span class="legend-item" style="border-color:#FF6347">Boutique Fitness <b>(3)</b></span><span class="legend-item" style="border-color:#228B22">Plant Workshop & Retail <b>(3)</b></span><span class="legend-item" style="border-color:#B0C4DE">Aging-in-Place & Mobility <b>(3)</b></span><span class="legend-item" style="border-color:#E8743B">Fast Casual <b>(2)</b></span><span class="legend-item" style="border-color:#9370DB">Experiential Entertainment <b>(2)</b></span><span class="legend-item" style="border-color:#FF69B4">Beauty & Aesthetics <b>(2)</b></span><span class="legend-item" style="border-color:#6B8E23">Beverage <b>(1)</b></span><span class="legend-item" style="border-color:#708090">Home Technology Services <b>(1)</b></span>
 </div>
 
@@ -214,8 +203,6 @@ header .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
 <th onclick="sortTable('name')">Name</th>
 <th onclick="sortTable('category')">Category</th>
 <th onclick="sortTable('status')">Status</th>
-<th onclick="sortTable('pipeline_type')">Pipeline Type</th>
-<th onclick="sortTable('evidence_state')">Evidence</th>
 <th onclick="sortTable('units')">Units</th>
 <th onclick="sortTable('check_size_k')" title="Est. check size">Check $</th>
 <th onclick="sortTable('cash_on_cash_potential')" title="Cash-on-cash potential 1-5">CoC</th>
@@ -8029,406 +8016,8 @@ const TARGETS = [
     "est_capex_per_unit_k": 350,
     "est_payback_months": 18,
     "model_confidence": "low"
-  },
-  {
-    "id": "t1",
-    "name": "Artbag Creations",
-    "category": "Luxury Repair & Circular Care",
-    "status": "target",
-    "city": "New York / Coral Springs",
-    "state": "NY/FL",
-    "lat": 40.7685,
-    "lng": -73.9679,
-    "conviction_score": 9,
-    "coc_potential": 5,
-    "time_to_revenue": "3mo",
-    "entry_difficulty": 3,
-    "check_size": "$500K-$1.5M",
-    "urgency": "critical",
-    "model_confidence": "medium",
-    "story": "Black-owned luxury handbag restoration boutique on Madison Ave for 90 years. Confirmed CLOSING. Live transition opportunity. Coral Springs FL location may continue.",
-    "traction": "90 years operating. Madison Ave flagship. Amsterdam News featured.",
-    "first_diligence": "1. Verify Madison Ave closure status. 2. Assess Coral Springs operations. 3. Identify owner transition timeline. 4. Assess brand + craftsmanship team transfer.",
-    "buzz_signals": "Black-owned luxury icon closing. Preservation opportunity.",
-    "sources": "Amsterdam News 2022; Lipstick Alley; artbag.com",
-    "rev_range": "$1-3M",
-    "margin_pct": "30-40%",
-    "sde_range": "$300K-$800K",
-    "capex_per_unit": "Low",
-    "payback_months": "12-18"
-  },
-  {
-    "id": "t2",
-    "name": "Leather Surgeons",
-    "category": "Luxury Repair & Circular Care",
-    "status": "target",
-    "city": "Stamford",
-    "state": "CT",
-    "lat": 41.0534,
-    "lng": -73.5387,
-    "conviction_score": 8,
-    "coc_potential": 4,
-    "time_to_revenue": "3mo",
-    "entry_difficulty": 3,
-    "check_size": "$500K-$1.5M",
-    "urgency": "medium",
-    "model_confidence": "medium",
-    "story": "30-year luxury handbag repair specialist. Hermès/Chanel focus. 4.9 stars, 238 reviews.",
-    "traction": "30 years. 4.9★. Premium brand focus.",
-    "first_diligence": "1. Identify founder/owner. 2. Assess revenue scale. 3. Greenwich CT affluent market.",
-    "buzz_signals": "Top-rated in affluent CT market.",
-    "sources": "leathersurgeons.com; Yelp",
-    "rev_range": "$500K-$1.5M",
-    "margin_pct": "35%",
-    "sde_range": "$150K-$400K",
-    "capex_per_unit": "Low",
-    "payback_months": "12-24"
-  },
-  {
-    "id": "t3",
-    "name": "Pasquale Shoe Repair",
-    "category": "Luxury Repair & Circular Care",
-    "status": "target",
-    "city": "Los Angeles",
-    "state": "CA",
-    "lat": 34.0489,
-    "lng": -118.345,
-    "conviction_score": 8,
-    "coc_potential": 4,
-    "time_to_revenue": "3mo",
-    "entry_difficulty": 4,
-    "check_size": "$1-2.5M",
-    "urgency": "medium",
-    "model_confidence": "medium",
-    "story": "\"Best shoe repair in the world\" per press. Pasquale Fabrizio, multi-gen (uncle DiFabrizio crafted custom shoes for celebrities). LA landmark.",
-    "traction": "Multi-generational. Celebrity clientele. Trademarked brand.",
-    "first_diligence": "1. Approach Fabrizio family. 2. Assess succession. 3. Brand equity valuation.",
-    "buzz_signals": "Press-acclaimed world-class craftsmanship.",
-    "sources": "LA Times 2004; Trademarkia; pasqualeshoerepair.com",
-    "rev_range": "$800K-$2M",
-    "margin_pct": "35-40%",
-    "sde_range": "$250K-$600K",
-    "capex_per_unit": "Low",
-    "payback_months": "12-24"
-  },
-  {
-    "id": "t4",
-    "name": "Pete's Cobbler Bench",
-    "category": "Luxury Repair & Circular Care",
-    "status": "target",
-    "city": "Washington",
-    "state": "DC",
-    "lat": 38.9072,
-    "lng": -77.0369,
-    "conviction_score": 7,
-    "coc_potential": 4,
-    "time_to_revenue": "3mo",
-    "entry_difficulty": 3,
-    "check_size": "$300K-$800K",
-    "urgency": "low",
-    "model_confidence": "low",
-    "story": "Premier DC high-end shoe and handbag repair. \"Exquisite\" services per website.",
-    "traction": "DC market coverage for platform thesis.",
-    "first_diligence": "1. Identify owner. 2. Assess years in business. 3. Revenue scale.",
-    "buzz_signals": "DC premier repair destination.",
-    "sources": "petescobblersbench.com",
-    "rev_range": "$400K-$1M",
-    "margin_pct": "35%",
-    "sde_range": "$120K-$300K",
-    "capex_per_unit": "Low",
-    "payback_months": "12-24"
-  },
-  {
-    "id": "t5",
-    "name": "Sunset Shoe Repair",
-    "category": "Luxury Repair & Circular Care",
-    "status": "target",
-    "city": "San Francisco",
-    "state": "CA",
-    "lat": 37.753,
-    "lng": -122.493,
-    "conviction_score": 7,
-    "coc_potential": 4,
-    "time_to_revenue": "3mo",
-    "entry_difficulty": 3,
-    "check_size": "$300K-$800K",
-    "urgency": "low",
-    "model_confidence": "low",
-    "story": "Repairing SF soles since 1900. 125+ years. Shoe repair + cleaning + leather goods.",
-    "traction": "125+ year legacy. SF Bay Area coverage.",
-    "first_diligence": "1. Verify ownership. 2. Assess generational status. 3. Revenue scale.",
-    "buzz_signals": "Historic SF business.",
-    "sources": "sunsetshoerepairsf.com",
-    "rev_range": "$300K-$800K",
-    "margin_pct": "35%",
-    "sde_range": "$80K-$250K",
-    "capex_per_unit": "Low",
-    "payback_months": "12-24"
-  },
-  {
-    "id": "t6",
-    "name": "Bagelsaurus",
-    "category": "Bagels",
-    "status": "target",
-    "city": "Cambridge",
-    "state": "MA",
-    "lat": 42.3916,
-    "lng": -71.1312,
-    "conviction_score": 8,
-    "coc_potential": 4,
-    "time_to_revenue": "6mo",
-    "entry_difficulty": 3,
-    "check_size": "$400K-$1M",
-    "urgency": "medium",
-    "model_confidence": "medium",
-    "story": "Founder Jordan Renouf. Cambridge MA. Cult following. \"New-school\" premium bagel leader in Boston.",
-    "traction": "Cult following. Multiple TikTok features. Cambridge hotspot.",
-    "first_diligence": "1. Meet Jordan Renouf. 2. Assess expansion appetite. 3. Unit economics.",
-    "buzz_signals": "Boston premium bagel leader.",
-    "sources": "Facebook; TikTok",
-    "rev_range": "$600K-$1.2M",
-    "margin_pct": "20-25%",
-    "sde_range": "$120K-$300K",
-    "capex_per_unit": "$300-500K",
-    "payback_months": "18-24"
-  },
-  {
-    "id": "t7",
-    "name": "Rebelle Artisan Bagels",
-    "category": "Bagels",
-    "status": "target",
-    "city": "Cambridge / Providence",
-    "state": "MA/RI",
-    "lat": 42.3736,
-    "lng": -71.1097,
-    "conviction_score": 8,
-    "coc_potential": 4,
-    "time_to_revenue": "6mo",
-    "entry_difficulty": 3,
-    "check_size": "$400K-$1M",
-    "urgency": "medium",
-    "model_confidence": "medium",
-    "story": "Founder Milena Pagan. Hand-rolled traditional techniques. Best Bagels 2017 and 2018. Expanded from Providence to Cambridge.",
-    "traction": "Best Bagels 2017, 2018. Multi-location.",
-    "first_diligence": "1. Meet Milena Pagan. 2. Multi-market expansion potential. 3. Unit economics.",
-    "buzz_signals": "Award-winning artisan bagels.",
-    "sources": "rebelleartisanbagels.com",
-    "rev_range": "$500K-$1M",
-    "margin_pct": "20-25%",
-    "sde_range": "$100K-$250K",
-    "capex_per_unit": "$300-500K",
-    "payback_months": "18-24"
-  },
-  {
-    "id": "t8",
-    "name": "Brick Street Bagels",
-    "category": "Bagels",
-    "status": "watch",
-    "city": "Boston (South Boston)",
-    "state": "MA",
-    "lat": 42.3398,
-    "lng": -71.0468,
-    "conviction_score": 6,
-    "coc_potential": 4,
-    "time_to_revenue": "6mo",
-    "entry_difficulty": 4,
-    "check_size": "$300K-$700K",
-    "urgency": "low",
-    "model_confidence": "low",
-    "story": "2-year pop-up known for drawing lines. Opened first permanent South Boston location. Emerging.",
-    "traction": "Pop-up → permanent. Strong demand signal.",
-    "first_diligence": "1. Identify founder. 2. Monitor permanent location performance.",
-    "buzz_signals": "Pop-up success translating to brick-mortar.",
-    "sources": "Facebook",
-    "rev_range": "$300K-$700K",
-    "margin_pct": "20%",
-    "sde_range": "$60K-$140K",
-    "capex_per_unit": "$200-400K",
-    "payback_months": "24+",
-    "diligence_note": "Watch — too early to acquire. Monitor trajectory."
-  },
-  {
-    "id": "t9",
-    "name": "OneTrack Club",
-    "category": "Social Run Clubs",
-    "status": "target",
-    "city": "New York (global)",
-    "state": "NY",
-    "lat": 40.7128,
-    "lng": -74.006,
-    "conviction_score": 7,
-    "coc_potential": 4,
-    "time_to_revenue": "6mo",
-    "entry_difficulty": 3,
-    "check_size": "$200K-$600K",
-    "urgency": "medium",
-    "model_confidence": "low",
-    "story": "Founders Anthony & Laura Fletcher. Turned free run club into fast-growing business. Seed raising. Global membership model.",
-    "traction": "Fast growth. Membership + coaching + events.",
-    "first_diligence": "1. Review seed raise terms. 2. Assess revenue scale. 3. Unit economics.",
-    "buzz_signals": "Running club boom. Brooks record revenue partly driven by run clubs.",
-    "sources": "onetrack.club; Instagram; Modern Retail",
-    "rev_range": "$500K-$2M",
-    "margin_pct": "30-40%",
-    "sde_range": "$100K-$500K",
-    "capex_per_unit": "Low (no real estate)",
-    "payback_months": "12-18"
-  },
-  {
-    "id": "t10",
-    "name": "Bridge Runners NYC",
-    "category": "Social Run Clubs",
-    "status": "watch",
-    "city": "New York",
-    "state": "NY",
-    "lat": 40.7128,
-    "lng": -74.006,
-    "conviction_score": 5,
-    "coc_potential": 3,
-    "time_to_revenue": "12mo",
-    "entry_difficulty": 4,
-    "check_size": "$100K-$300K",
-    "urgency": "low",
-    "model_confidence": "low",
-    "story": "OG NYC run crew. Founded the urban running movement. Cultural icon. Paved way for run club boom.",
-    "traction": "Cultural icon status. Influential.",
-    "first_diligence": "1. Identify revenue model. 2. Monetization potential.",
-    "buzz_signals": "Pioneer of urban run club movement.",
-    "sources": "LinkedIn; Instagram",
-    "rev_range": "$200K-$600K",
-    "margin_pct": "Unknown",
-    "sde_range": "Unknown",
-    "capex_per_unit": "Minimal",
-    "payback_months": "Unknown"
-  },
-  {
-    "id": "t11",
-    "name": "Independent Mobile Pet Grooming Operators",
-    "category": "Mobile Pet Grooming",
-    "status": "target",
-    "city": "Multiple Markets",
-    "state": "Multi",
-    "lat": 42.3601,
-    "lng": -71.0589,
-    "conviction_score": 8,
-    "coc_potential": 5,
-    "time_to_revenue": "3mo",
-    "entry_difficulty": 2,
-    "check_size": "$150K-$400K per route",
-    "urgency": "high",
-    "model_confidence": "medium",
-    "story": "Route-based mobile pet grooming. $6.89B market (2024) growing rapidly. Independent operators are roll-up targets. Van = $50-80K capex. 4-6 week recurring cycle.",
-    "traction": "Zoomin Groomin +1,613% growth signal. DapperTails scaling. Independents are prey.",
-    "first_diligence": "1. Build Google Maps density screen for Boston/NE + SFL + DFW. 2. Identify 10-15 candidates per market. 3. Assess route revenue, van condition, owner transition readiness.",
-    "buzz_signals": "Massive market growth. Route density = natural monopoly.",
-    "sources": "Moego pet blog; Centergrowth; YouTube",
-    "rev_range": "$150K-$400K per van",
-    "margin_pct": "35-45%",
-    "sde_range": "$50K-$150K per route",
-    "capex_per_unit": "$50-80K",
-    "payback_months": "12-18"
   }
 ];
-
-// Imported from the pre-map kids/family research after current operating proof was reverified.
-TARGETS.push({
-  id: "jam-time",
-  name: "Jam Time",
-  category: "Youth Sports & Kids",
-  subcategory: "Party-first indoor play and enrichment",
-  units: 4,
-  units_text: "4 Greater Boston locations",
-  hq_city: "Greater Boston",
-  hq_state: "MA",
-  lat: 42.28,
-  lng: -71.35,
-  founded: null,
-  status: "target",
-  buzz_signals: ["Four current Boston-area addresses", "$450/$550/$800 party ladder", "Public calendar exposes current booked and available party slots"],
-  team: "Founder/operator ownership requires verification",
-  story: "Four-site local indoor play and enrichment operator with open play, classes, parties, events and space rental. Best current party-first acquisition/JV diligence target.",
-  traction: "$18 open play; paid classes; visible current party bookings across a four-site local footprint",
-  funding: "Private / unknown",
-  entry_path: "Acquisition or founder-stays JV after public ownership and store-level economics work",
-  dan_value_add: "Store-level underwriting, governance, booking yield, management bench and multi-unit systems",
-  first_diligence: "Map entities, leases, review velocity, hiring depth and public party-slot utilization by location",
-  sources: ["https://www.jamtime.com/Party.php", "https://jamtime.com/Hours.php", "https://mail.jamtime.com/CalendarMallNatick.php"],
-  last_updated: "2026-07-19",
-  added_date: "2026-07-19",
-  source_file: "party_first_kids_sprint_20260719",
-  conviction_score: 9,
-  cash_on_cash_potential: 4,
-  time_to_revenue_months: 1,
-  entry_difficulty: 4,
-  check_size_k: 750,
-  urgency: "medium",
-  est_revenue_low_k: 300,
-  est_revenue_high_k: 700,
-  est_margin_pct: 15,
-  est_sde_low_k: 0,
-  est_sde_high_k: 180,
-  est_capex_per_unit_k: 350,
-  est_payback_months: 48,
-  model_confidence: "low"
-});
-
-// Manual audit overrides preserve the original dataset while making judgment changes explicit.
-const PIPELINE_OVERRIDES = {
-  "starship-bagel": { sources: ["https://www.starshipbagel.com/locations"], evidence_state: "verified_public", pipeline_type: "jv_candidate", next_action: "Founder-aligned growth/JV diligence: request no outreach until store-level public proxy work is complete." },
-  "layla-bagels": { units: 3, units_text: "3 active Los Angeles locations", sources: ["https://www.laylabagels.com/"], evidence_state: "verified_public", pipeline_type: "jv_candidate", next_action: "Resolve Miami rights, economics, governance and operator accountability before investment diligence." },
-  "happy-k9-fort-worth": { units: 2, units_text: "2 Fort Worth-area locations", sources: ["https://happyk9.com/locations/"], evidence_state: "verified_public", pipeline_type: "acquisition_target", next_action: "Confirm ownership, manager depth, groomer concentration and whether both units are included in a potential process." },
-  "play-street-museum": { units: 30, units_text: "30+ locations per current franchisor site", status: "comp", pipeline_type: "operating_comp", next_action: "Retain as reservation-play and party-format benchmark; above the 1–10-unit mandate." },
-  "hyper-kidz": { units: 18, units_text: "18+ locations per current official locator", status: "comp", pipeline_type: "operating_comp", next_action: "Retain as large-box party comp; above the 1–10-unit mandate." },
-  "bathhouse-nyc": { status: "comp", pipeline_type: "operating_comp", next_action: "Retain as category benchmark; do not pursue institutionally capitalized flagship economics." },
-  "sauna-house": { pipeline_type: "jv_candidate", next_action: "Watch for experienced-operator JV or discounted second-generation asset; no standalone greenfield build." },
-  "urban-sweat": { pipeline_type: "jv_candidate", next_action: "Verify unit economics and operator appetite for a Boston/NY/South Florida JV." },
-  "ultra-padel-club": { status: "watch", pipeline_type: "watchlist", next_action: "Do not advance without a real-estate partner and proof that utilization survives a downside case." },
-  "epic-padel": { pipeline_type: "jv_candidate", next_action: "Watch for site/operator partnership; dedicated padel remains killed absent real-estate advantage." },
-  "leather-spa": { units: 7, units_text: "6 intake/retail points plus a 20,000 sf service facility", pipeline_type: "acquisition_target", next_action: "Map ownership, service capacity, B2B mix and willingness to partner outside New York." },
-  "the-cobblers": { units: 1, units_text: "Centralized service operation with national ship-in", pipeline_type: "jv_candidate", next_action: "Validate current ownership, volume, unit economics and expansion appetite after prior reported funding." },
-  "rago-brothers": { units: 1, units_text: "Centralized repair operation with national B2B/ship-in reach", pipeline_type: "acquisition_target", next_action: "Assess founder succession, B2B customer concentration, capacity and digital intake opportunity." },
-  "cobbler-concierge": { units: 2, units_text: "2 intake locations plus ship-in service", pipeline_type: "acquisition_target", next_action: "Verify ownership, throughput, repair labor bench and acquisition/JV openness using public evidence first." },
-  "glp1-meal-delivery": { status: "watch", pipeline_type: "lane_hypothesis", next_action: "Replace the category hypothesis with a named 2–10-unit operator before it can become a target." },
-  "temple-respondent": { status: "watch", pipeline_type: "lane_hypothesis", next_action: "Resolve the actual company identity and unit count; a respondent/concept label is not an actionable target." },
-  "getaway-sober-bar": { status: "watch", pipeline_type: "lane_hypothesis", next_action: "Separate Getaway from the generic sober-bar thesis and verify a currently operating 2–10-unit company." },
-  "independent-drive-thru-coffee": { status: "watch", pipeline_type: "sourcing_instruction", next_action: "Source named 2–10-unit operators; do not count a generic operator class as a target." },
-  "club-pilates-franchisee-clusters": { status: "watch", pipeline_type: "franchise_rights", next_action: "Identify named 2–10-unit franchisee entities with transferable units and public ownership evidence." },
-  "independent-yoga-barre-hybrids": { status: "watch", pipeline_type: "sourcing_instruction", next_action: "Replace the aggregate with named multi-unit operators that meet the acquisition screen." },
-  "ivme-independent-iv-lounges": { status: "watch", pipeline_type: "sourcing_instruction", next_action: "Identify named 2–10-unit independent IV operators; generic lane does not qualify as a target." },
-  "iv-medspa-hybrid": { status: "watch", pipeline_type: "sourcing_instruction", next_action: "Identify named operators and separate recurring wellness economics from med-spa procedure revenue." },
-  "poochies-dallas": { status: "watch", evidence_state: "internal_only", next_action: "Reverify current operation, exact locations and ownership before restoring target status." },
-  "paws-fur-grooming-mobile": { status: "watch", evidence_state: "internal_only", next_action: "Reverify current operation, route density and ownership before restoring target status." },
-  "urbanwagz": { status: "watch", evidence_state: "internal_only", next_action: "Reverify current operation, exact locations and ownership before restoring target status." },
-  "puptown-mobile-grooming": { status: "watch", evidence_state: "internal_only", next_action: "Reverify route density, fleet ownership and current operation before restoring target status." },
-  "woofinwaggle": { status: "watch", evidence_state: "internal_only", next_action: "Reverify current operation, exact locations and ownership before restoring target status." },
-  "brandyapple-grooming": { status: "watch", evidence_state: "internal_only", next_action: "Reverify current operation, exact locations and ownership before restoring target status." }
-};
-
-function hasPublicSource(t) {
-  return (t.sources || []).some(s => typeof s === 'string' && /^https?:\/\//i.test(s));
-}
-
-function inferPipelineType(t) {
-  if (t.pipeline_type) return t.pipeline_type;
-  if (t.status === 'comp') return 'operating_comp';
-  if (t.status === 'watch') return 'watchlist';
-  const entry = (t.entry_path || '').toLowerCase();
-  const name = (t.name || '').toLowerCase();
-  if (entry.includes('acqui') || entry.includes('buy')) return 'acquisition_target';
-  if (entry.includes('jv') || entry.includes('partner')) return 'jv_candidate';
-  if (name.includes('franchisee') || name.includes('territor') || entry.includes('franchise')) return 'franchise_rights';
-  return 'operating_target';
-}
-
-TARGETS.forEach(t => {
-  Object.assign(t, PIPELINE_OVERRIDES[t.id] || {});
-  t.sources = Array.isArray(t.sources) ? t.sources : (t.sources ? [t.sources] : []);
-  t.buzz_signals = Array.isArray(t.buzz_signals) ? t.buzz_signals : (t.buzz_signals ? [t.buzz_signals] : []);
-  t.pipeline_type = inferPipelineType(t);
-  t.evidence_state = t.evidence_state || (hasPublicSource(t) ? 'verified_public' : ((t.sources || []).length ? 'internal_only' : 'unsupported'));
-  t.last_verified = t.last_updated || null;
-  t.next_action = t.next_action || (t.first_diligence && !/^n\/?a/i.test(t.first_diligence) ? t.first_diligence : (t.status === 'comp' ? 'Retain as benchmark; no pursuit.' : t.status === 'watch' ? 'Verify units, ownership, buzz and economics.' : 'Complete public-evidence screen before any outreach.'));
-});
 
 const CATEGORY_COLORS = {"Bagels": "#8B6914", "Bakery": "#D4A574", "Swedish Candy": "#FF6B9D", "Frozen Dessert": "#A8D8EA", "Food & Beverage": "#FF8C42", "Fast Casual": "#E8743B", "Beverage": "#6B8E23", "Pet Services": "#4A90D9", "Auto Services": "#6B6B6B", "Youth Sports & Kids": "#50C878", "Boutique Fitness": "#FF6347", "Med Spa & Wellness": "#DDA0DD", "Beauty & Aesthetics": "#FF69B4", "Experiential Entertainment": "#9370DB", "Home Technology Services": "#708090", "Social Bathhouse": "#20B2AA", "Padel & Racquet Social": "#00CED1", "Luxury Repair & Circular Care": "#DAA520", "Tabletop & Hobby Social": "#8B4513", "Plant Workshop & Retail": "#228B22", "Kids Haircuts & Family Grooming": "#FFB347", "Aging-in-Place & Mobility": "#B0C4DE", "GLP-1 & Weight-Loss Services": "#FF1493", "Non-Alcoholic & Sober Social": "#7B68EE", "Drive-Thru Coffee": "#8B4513", "Pilates Reformer & Boutique": "#C71585", "IV Hydration & Recovery": "#00BFFF"};
 let currentSort = { key: 'conviction_score', dir: 'desc' };
@@ -8451,39 +8040,6 @@ function confidenceBadge(c) {
   return `<span class="confidence-badge ${cls}">${c}</span>`;
 }
 
-function evidenceBadge(state) {
-  const labels = { verified_public: '✓ public', internal_only: '◐ internal', unsupported: '! unsupported' };
-  return `<span class="evidence-badge evidence-${state}">${labels[state] || state}</span>`;
-}
-
-function pipelineLabel(type) {
-  return (type || '').replaceAll('_', ' ');
-}
-
-function sourceMarkup(source) {
-  if (/^https?:\/\//i.test(source)) return `<a href="${source}" target="_blank" rel="noopener">${source.substring(0,72)}${source.length > 72 ? '…' : ''}</a>`;
-  return `<span>${source}</span>`;
-}
-
-function updateDashboardSummary() {
-  const targets = TARGETS.filter(t => t.status === 'target').length;
-  const watch = TARGETS.filter(t => t.status === 'watch').length;
-  const comps = TARGETS.filter(t => t.status === 'comp').length;
-  const sourced = TARGETS.filter(hasPublicSource).length;
-  document.getElementById('sumEntries').textContent = TARGETS.length;
-  document.getElementById('sumTargets').textContent = targets;
-  document.getElementById('sumWatch').textContent = watch;
-  document.getElementById('sumComps').textContent = comps;
-  document.getElementById('sumSourced').textContent = `${Math.round(100 * sourced / TARGETS.length)}%`;
-  document.getElementById('sumNeedsEvidence').textContent = TARGETS.length - sourced;
-  document.getElementById('subtitleLine').textContent = `V3 — Operator-grade pipeline · ${TARGETS.length} entries across ${Object.keys(CATEGORY_COLORS).length} categories · Evidence audited 2026-07-19`;
-
-  const counts = TARGETS.reduce((acc, t) => ((acc[t.category] = (acc[t.category] || 0) + 1), acc), {});
-  document.getElementById('categoryLegend').innerHTML = Object.entries(counts).sort((a,b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([category, count]) =>
-    `<span class="legend-item" style="border-color:${CATEGORY_COLORS[category] || '#888'}">${category} <b>(${count})</b></span>`
-  ).join('');
-}
-
 // ===== TABLE =====
 function renderTable() {
   const tbody = document.getElementById('tableBody');
@@ -8493,8 +8049,6 @@ function renderTable() {
       <td><b>${t.name}</b></td>
       <td><span class="cat-dot" style="background:${CATEGORY_COLORS[t.category]||'#888'}"></span>${t.category}</td>
       <td><span class="status-badge status-${t.status}">${t.status}</span></td>
-      <td><span class="pipeline-badge">${pipelineLabel(t.pipeline_type)}</span></td>
-      <td>${evidenceBadge(t.evidence_state)}</td>
       <td>${t.units || '—'}</td>
       <td class="financial">$${t.check_size_k}K</td>
       <td style="text-align:center">${'⭐'.repeat(t.cash_on_cash_potential)}</td>
@@ -8504,7 +8058,7 @@ function renderTable() {
       <td>${t.hq_city || '—'}</td>
     </tr>
     <tr class="detail-row" id="detail-${i}">
-      <td colspan="13">
+      <td colspan="11">
         <div class="detail-content">
           <div class="detail-section">
             <h4>Story</h4>
@@ -8513,10 +8067,6 @@ function renderTable() {
             <p>${t.traction || '—'}</p>
             <h4>Entry Path</h4>
             <p>${t.entry_path || '—'}</p>
-            <h4>Pipeline Classification</h4>
-            <p>${pipelineLabel(t.pipeline_type)} · ${evidenceBadge(t.evidence_state)} · Last verified: ${t.last_verified || 'not recorded'}</p>
-            <h4>Next Action</h4>
-            <p>${t.next_action}</p>
             <h4>Dan's Value Add</h4>
             <p>${t.dan_value_add || '—'}</p>
           </div>
@@ -8534,7 +8084,7 @@ function renderTable() {
             <p>${t.first_diligence || '—'}</p>
             <h4>Buzz Signals</h4>
             <p>${(t.buzz_signals||[]).join('<br>• ') || '—'}</p>
-            ${t.sources && t.sources.length ? `<h4>Sources</h4><p>${t.sources.map(sourceMarkup).join('<br>')}</p>` : '<h4>Sources</h4><p>None recorded — evidence gap.</p>'}
+            ${t.sources && t.sources.length ? `<h4>Sources</h4><p>${t.sources.map(s=>`<a href="${s}" target="_blank">${s.substring(0,60)}...</a>`).join('<br>')}</p>` : ''}
           </div>
         </div>
       </td>
@@ -8565,19 +8115,17 @@ function applyFilters() {
   const status = document.getElementById('filterStatus').value;
   const category = document.getElementById('filterCategory').value;
   const checkRange = document.getElementById('filterCheck').value;
-  const evidence = document.getElementById('filterEvidence').value;
   const search = document.getElementById('searchBox').value.toLowerCase();
 
   filtered = TARGETS.filter(t => {
     if (status && t.status !== status) return false;
     if (category && t.category !== category) return false;
-    if (evidence && t.evidence_state !== evidence) return false;
     if (checkRange) {
       const [lo, hi] = checkRange.split('-').map(Number);
       if (t.check_size_k < lo || t.check_size_k > hi) return false;
     }
     if (search) {
-      const hay = (t.name + t.category + t.story + t.pipeline_type + t.evidence_state + t.next_action + (t.buzz_signals||[]).join(' ')).toLowerCase();
+      const hay = (t.name + t.category + t.story + (t.buzz_signals||[]).join(' ')).toLowerCase();
       if (!hay.includes(search)) return false;
     }
     return true;
@@ -8670,7 +8218,6 @@ function updateMap() {
         <b>${t.name}</b><br>
         <span style="color:${color}">${t.status} · Conviction ${t.conviction_score}</span><br>
         <small>${t.category}</small><br>
-        <small>${pipelineLabel(t.pipeline_type)} · ${t.evidence_state.replaceAll('_', ' ')}</small><br>
         <small>Check: $${t.check_size_k}K · CoC: ${'⭐'.repeat(t.cash_on_cash_potential)}</small><br><br>
         <small>${(t.story||'').substring(0,150)}</small>
       </div>
@@ -8680,7 +8227,6 @@ function updateMap() {
 }
 
 // Init
-updateDashboardSummary();
 applyFilters();
 </script>
 </body>
