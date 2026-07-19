@@ -128,7 +128,7 @@ header .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
 
 <header>
   <h1>🎯 Situation Room — Consumer Target Map</h1>
-  <div class="subtitle" id="subtitleLine">Loading audited pipeline…</div>
+  <div class="subtitle" id="subtitleLine">V3 — Operator-grade pipeline · 176 entries across 27 categories · Evidence audited 2026-07-19</div>
 </header>
 
 <!-- Summary Cards -->
@@ -200,7 +200,9 @@ header .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
 </div>
 
 <!-- Category Legend -->
-<div class="legend" id="categoryLegend"></div>
+<div class="legend" id="categoryLegend">
+<span class="legend-item" style="border-color:#50C878">Youth Sports & Kids <b>(48)</b></span><span class="legend-item" style="border-color:#4A90D9">Pet Services <b>(24)</b></span><span class="legend-item" style="border-color:#6B6B6B">Auto Services <b>(16)</b></span><span class="legend-item" style="border-color:#D4A574">Bakery <b>(5)</b></span><span class="legend-item" style="border-color:#FF6B9D">Swedish Candy <b>(5)</b></span><span class="legend-item" style="border-color:#20B2AA">Social Bathhouse <b>(5)</b></span><span class="legend-item" style="border-color:#DAA520">Luxury Repair & Circular Care <b>(5)</b></span><span class="legend-item" style="border-color:#FF1493">GLP-1 & Weight-Loss Services <b>(5)</b></span><span class="legend-item" style="border-color:#8B4513">Drive-Thru Coffee <b>(5)</b></span><span class="legend-item" style="border-color:#00BFFF">IV Hydration & Recovery <b>(5)</b></span><span class="legend-item" style="border-color:#8B6914">Bagels <b>(4)</b></span><span class="legend-item" style="border-color:#A8D8EA">Frozen Dessert <b>(4)</b></span><span class="legend-item" style="border-color:#FF8C42">Food & Beverage <b>(4)</b></span><span class="legend-item" style="border-color:#00CED1">Padel & Racquet Social <b>(4)</b></span><span class="legend-item" style="border-color:#8B4513">Tabletop & Hobby Social <b>(4)</b></span><span class="legend-item" style="border-color:#FFB347">Kids Haircuts & Family Grooming <b>(4)</b></span><span class="legend-item" style="border-color:#7B68EE">Non-Alcoholic & Sober Social <b>(4)</b></span><span class="legend-item" style="border-color:#C71585">Pilates Reformer & Boutique <b>(4)</b></span><span class="legend-item" style="border-color:#DDA0DD">Med Spa & Wellness <b>(3)</b></span><span class="legend-item" style="border-color:#FF6347">Boutique Fitness <b>(3)</b></span><span class="legend-item" style="border-color:#228B22">Plant Workshop & Retail <b>(3)</b></span><span class="legend-item" style="border-color:#B0C4DE">Aging-in-Place & Mobility <b>(3)</b></span><span class="legend-item" style="border-color:#E8743B">Fast Casual <b>(2)</b></span><span class="legend-item" style="border-color:#9370DB">Experiential Entertainment <b>(2)</b></span><span class="legend-item" style="border-color:#FF69B4">Beauty & Aesthetics <b>(2)</b></span><span class="legend-item" style="border-color:#6B8E23">Beverage <b>(1)</b></span><span class="legend-item" style="border-color:#708090">Home Technology Services <b>(1)</b></span>
+</div>
 
 <!-- Table View -->
 <div id="tableView" class="content active">
@@ -232,17 +234,18 @@ header .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
 <div id="mapView" class="content">
 <div id="map"></div>
 
-<!-- Live decision queue (single source: TARGETS) -->
+<!-- Consumer Brand Ranked Table -->
 <div id="brandRankingSection" style="margin-top:24px;padding:0;background:rgba(15,17,23,0.6);border-radius:12px;border:1px solid rgba(255,255,255,0.08);overflow:hidden">
   <div style="padding:16px 20px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.08)">
-    <h2 style="margin:0 0 4px;font-size:18px">🎯 Consumer Brand Rankings — Live from TARGETS</h2>
-    <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.5)">Auto-generated from the audited dataset. Shows on-thesis consumer food brands (1-10 units) sorted by conviction. Off-thesis categories, comps, and killed targets are excluded from the default view.</p>
+    <h2 style="margin:0 0 4px;font-size:18px">🎯 Consumer Brand Target Rankings</h2>
+    <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.5)">The original ranked list — 1-10 unit founder-led consumer brands across bagels, candy, gelato, bakery, frozen dessert. Sorted by UW + vibe blended score. Source: index.html CORPUS + emerging-multi-unit-pipeline.html.</p>
   </div>
   <div style="padding:12px 20px;display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.05)">
-    <button class="brand-filter-btn active" data-mode="actionable" style="padding:4px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:#fff;font-size:12px;cursor:pointer">On-thesis (1-10 units)</button>
-    <button class="brand-filter-btn" data-mode="targets" style="padding:4px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:rgba(255,255,255,0.6);font-size:12px;cursor:pointer">All targets</button>
-    <button class="brand-filter-btn" data-mode="watch" style="padding:4px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:rgba(255,255,255,0.6);font-size:12px;cursor:pointer">Watchlist</button>
-    <button class="brand-filter-btn" data-mode="killed" style="padding:4px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:rgba(255,255,255,0.6);font-size:12px;cursor:pointer">Killed</button>
+    <button class="brand-filter-btn active" data-cat="All" style="padding:4px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:#fff;font-size:12px;cursor:pointer">All</button>
+    <button class="brand-filter-btn" data-cat="Bagels" style="padding:4px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:rgba(255,255,255,0.6);font-size:12px;cursor:pointer">🥯 Bagels</button>
+    <button class="brand-filter-btn" data-cat="Swedish Candy" style="padding:4px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:rgba(255,255,255,0.6);font-size:12px;cursor:pointer">🍬 Swedish Candy</button>
+    <button class="brand-filter-btn" data-cat="Frozen Dessert" style="padding:4px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:rgba(255,255,255,0.6);font-size:12px;cursor:pointer">🍨 Frozen Dessert</button>
+    <button class="brand-filter-btn" data-cat="Bakery" style="padding:4px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:rgba(255,255,255,0.6);font-size:12px;cursor:pointer">🥐 Bakery</button>
   </div>
   <div style="overflow-x:auto">
     <table id="brandRankTable" style="width:100%;border-collapse:collapse;font-size:13px">
@@ -251,12 +254,12 @@ header .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
           <th style="padding:8px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1);cursor:pointer" onclick="sortBrandTable('rank')">Rank</th>
           <th style="padding:8px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1);cursor:pointer" onclick="sortBrandTable('name')">Brand</th>
           <th style="padding:8px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)">Category</th>
-          <th style="padding:8px 12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.1);cursor:pointer" onclick="sortBrandTable('conviction_score')">Conviction</th>
-          <th style="padding:8px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)">Entry path</th>
-          <th style="padding:8px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)">Market</th>
+          <th style="padding:8px 12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.1);cursor:pointer" onclick="sortBrandTable('score')" title="Blended UW + vibe score">Score</th>
+          <th style="padding:8px 12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.1);cursor:pointer" onclick="sortBrandTable('uw')" title="Underwriting score">UW</th>
+          <th style="padding:8px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)">Markets</th>
           <th style="padding:8px 12px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.1)">Units</th>
-          <th style="padding:8px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)">Status / evidence</th>
-          <th style="padding:8px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)">Next action</th>
+          <th style="padding:8px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)">Status</th>
+          <th style="padding:8px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.1)">Thesis</th>
         </tr>
       </thead>
       <tbody id="brandRankBody"></tbody>
@@ -268,7 +271,7 @@ header .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
 <!-- Rankings View -->
 <div id="rankView" class="content">
 <div class="rank-section">
-  <h2>🏆 Top 20 Actionable Targets</h2>
+  <h2>🏆 Top 20 by Conviction</h2>
   <div class="rank-card">
   <table>
   <thead><tr><th>#</th><th>Target</th><th>Category</th><th>Conviction</th><th>CoC</th><th>Check</th><th>Urgency</th></tr></thead>
@@ -276,10 +279,10 @@ header .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
   </table>
   </div>
 
-  <h2>🧾 Top 10 Evidence Gaps</h2>
+  <h2>⚡ Top 10 Fastest Money (CoC × Speed)</h2>
   <div class="rank-card">
   <table>
-  <thead><tr><th>#</th><th>Candidate</th><th>Category</th><th>Conviction</th><th>Gate</th><th>Next action</th></tr></thead>
+  <thead><tr><th>#</th><th>Target</th><th>Category</th><th>CoC</th><th>Time to Rev</th><th>Payback</th></tr></thead>
   <tbody id="rankFast"></tbody>
   </table>
   </div>
@@ -292,7 +295,7 @@ header .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
   </table>
   </div>
 
-  <h2>💀 Explicit Kills / Comps</h2>
+  <h2>💀 Kill List (Bottom 20)</h2>
   <div class="rank-card">
   <table>
   <thead><tr><th>#</th><th>Target</th><th>Category</th><th>Score</th><th>Status</th></tr></thead>
@@ -310,7 +313,7 @@ const TARGETS = [
     "category": "Bagels",
     "subcategory": "",
     "units": 3,
-    "units_text": "3 DFW locations: Downtown Dallas, Lewisville, North Dallas",
+    "units_text": "3 active DFW locations",
     "hq_city": "Dallas-Fort Worth",
     "hq_state": "",
     "lat": 32.75,
@@ -349,8 +352,8 @@ const TARGETS = [
     "name": "Wanderlust Creamery",
     "category": "Frozen Dessert",
     "subcategory": "",
-    "units": 10,
-    "units_text": "~10 LA/OC locations including Atwater Village, Torrance (Rolling Hills Plaza). Adrienne Borlongan. Actively seeking investor.",
+    "units": 7,
+    "units_text": "7-8 active LA/OC locations; 9-10 if pipeline/food hall counted",
     "hq_city": "LA/OC",
     "hq_state": "",
     "lat": 33.69,
@@ -393,7 +396,7 @@ const TARGETS = [
     "category": "Bakery",
     "subcategory": "",
     "units": 5,
-    "units_text": "5 DFW locations: Frisco (9320 Dallas Pkwy #160), Prosper, Southlake, Addison, Mansfield. Marissa + Jeff Allen (former NFL). Largest black-owned cookie brand in TX.",
+    "units_text": "5 active DFW stores",
     "hq_city": "DFW",
     "hq_state": "",
     "lat": 32.97,
@@ -435,8 +438,8 @@ const TARGETS = [
     "name": "Botolino Gelato",
     "category": "Frozen Dessert",
     "subcategory": "",
-    "units": 2,
-    "units_text": "2 DFW locations: Lower Greenville (2116 Greenville Ave) + Inwood Village (5959 Royal Ln, Ste 622 / 12300 Inwood Rd)",
+    "units": 4,
+    "units_text": "4 DFW locations",
     "hq_city": "DFW",
     "hq_state": "",
     "lat": 32.75,
@@ -458,7 +461,7 @@ const TARGETS = [
     "last_updated": "2026-07-19",
     "added_date": "2026-07-18",
     "source_file": "top20",
-    "conviction_score": 7,
+    "conviction_score": 6,
     "cash_on_cash_potential": 3,
     "time_to_revenue_months": 10,
     "entry_difficulty": 3,
@@ -479,7 +482,7 @@ const TARGETS = [
     "category": "Swedish Candy",
     "subcategory": "",
     "units": 4,
-    "units_text": "4 locations: Coral Gables (241 Miracle Mile), Coconut Grove (3119 Commodore Plaza), Palm Beach (150 Royal Poinciana Way), Sarasota UTC (opening July 2026)",
+    "units_text": "4 locations: Coconut Grove, Coral Gables, Palm Beach, Sarasota (opening Jul 2026)",
     "hq_city": "South Florida",
     "hq_state": "",
     "lat": 25.72,
@@ -519,7 +522,7 @@ const TARGETS = [
     "category": "Bagels",
     "subcategory": "",
     "units": 4,
-    "units_text": "4 locations: Queens (original), expanding to Midtown",
+    "units_text": "4 NYC-area locations",
     "hq_city": "Queens NYC",
     "hq_state": "",
     "lat": 40.73,
@@ -558,8 +561,8 @@ const TARGETS = [
     "name": "Layla Bagels",
     "category": "Bagels",
     "subcategory": "",
-    "units": 3,
-    "units_text": "3 LA locations: Santa Monica (1614 Ocean Park Blvd), Beverly Hills (233 S Beverly Dr), Barrington (900 S Barrington Ave, weekend)",
+    "units": 2,
+    "units_text": "2 open LA locations plus Brentwood pipeline",
     "hq_city": "Los Angeles",
     "hq_state": "",
     "lat": 34.05,
@@ -725,7 +728,7 @@ const TARGETS = [
     "category": "Swedish Candy",
     "subcategory": "",
     "units": 7,
-    "units_text": "7 locations: Manhattan (Mulberry, Bleecker, UWS, UES), Brooklyn, Sag Harbor, Greenwich CT",
+    "units_text": "7 locations: LES, Red Hook, Sag Harbor, UES, West Village, Williamsburg + Greenwich CT (summer 2026)",
     "hq_city": "NYC",
     "hq_state": "",
     "lat": 40.78,
@@ -884,8 +887,8 @@ const TARGETS = [
     "name": "Third Culture Bakery",
     "category": "Bakery",
     "subcategory": "",
-    "units": 1,
-    "units_text": "1 location: Berkeley only. Denver location CLOSED per Yelp. Inventor of mochi muffin. Sam Butarbutar.",
+    "units": 2,
+    "units_text": "2 Bay Area retail/wholesale base after multiple expansion closures",
     "hq_city": "Bay Area",
     "hq_state": "",
     "lat": 37.6,
@@ -904,7 +907,7 @@ const TARGETS = [
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
     "source_file": "top20",
-    "conviction_score": 4,
+    "conviction_score": 6,
     "cash_on_cash_potential": 3,
     "time_to_revenue_months": 8,
     "entry_difficulty": 3,
@@ -925,7 +928,7 @@ const TARGETS = [
     "category": "Swedish Candy",
     "subcategory": "",
     "units": 3,
-    "units_text": "3 Long Island locations: Stony Brook (73 Main St), Sayville (12 Gillette Ave), Westhampton Beach (1 Moniebogue Ln, opened June 2026)",
+    "units_text": "3 Long Island locations: Sayville, Stony Brook, Westhampton Beach (opening)",
     "hq_city": "Long Island",
     "hq_state": "",
     "lat": 40.78,
@@ -944,7 +947,7 @@ const TARGETS = [
     "last_updated": "2026-07-18",
     "added_date": "2026-07-18",
     "source_file": "top20",
-    "conviction_score": 5,
+    "conviction_score": 3,
     "cash_on_cash_potential": 2,
     "time_to_revenue_months": 6,
     "entry_difficulty": 3,
@@ -964,8 +967,8 @@ const TARGETS = [
     "name": "Sockerbit",
     "category": "Swedish Candy",
     "subcategory": "",
-    "units": 2,
-    "units_text": "1 LA store open (456 Sunset Blvd) + Pasadena opening Spring 2026. Previous 2nd location at 7922 W 3rd St status TBD. National CPG in 3000+ stores including Target.",
+    "units": 3,
+    "units_text": "2 active (LA, Pasadena opening) + 1 CLOSED (NYC Christopher St)",
     "hq_city": "Los Angeles",
     "hq_state": "",
     "lat": 34.05,
@@ -1897,8 +1900,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "lowcountry-swim-school",
@@ -1944,8 +1946,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "swimkids-swim-school",
@@ -1991,8 +1992,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "aquakids-swim-school",
@@ -2038,8 +2038,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "hubbard-family-swim-school",
@@ -2085,8 +2084,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "little-fins-swim-school",
@@ -2128,8 +2126,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "south-kic-group-goldfish-wisconsin",
@@ -2171,8 +2168,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "wally-wombats",
@@ -2215,8 +2211,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "hyper-kidz",
@@ -2262,8 +2257,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "scramble",
@@ -2309,8 +2303,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "play-street-museum",
@@ -2356,8 +2349,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "kidstrong-dfw-multi-unit-operators",
@@ -2400,8 +2392,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "soccer-shots-north-carolina-operators",
@@ -2447,8 +2438,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "i9-sports-local-multi-territory-franchisees",
@@ -2491,8 +2481,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "foss-swim-school",
@@ -2538,8 +2527,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "swimright-academy",
@@ -2585,8 +2573,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "motor-city-autospa-paint-protection-solutions",
@@ -2632,8 +2619,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "auto-film-specialists",
@@ -2679,8 +2665,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "midwest-tinting",
@@ -2725,8 +2710,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "dynamic-tint",
@@ -2772,8 +2756,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "exclusive-paint-protection",
@@ -2819,8 +2802,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "finishing-touch-auto-spa",
@@ -2866,8 +2848,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "chicago-auto-pros",
@@ -2913,8 +2894,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "clean-wraps",
@@ -2960,8 +2940,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "the-art-of-tint",
@@ -3007,8 +2986,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "oasis-auto-spa",
@@ -3054,8 +3032,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "doubletake-auto-spa",
@@ -3101,8 +3078,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "elite-window-tinting",
@@ -3148,8 +3124,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "ghost-shield-film",
@@ -3195,8 +3170,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "supreme-auto-spa-nj",
@@ -3242,8 +3216,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "firehouse-auto-spa",
@@ -3289,8 +3262,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "tint-world-local-multi-unit-operators",
@@ -3336,8 +3308,7 @@ const TARGETS = [
     "est_sde_high_k": 300,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "boston-gymnastics-academy-gymnastic-academy-of-boston-medford",
@@ -3425,8 +3396,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "planet-gym-little-flippers-swim-school",
@@ -3514,8 +3484,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "goldfish-swim-school-brookline-boston-suburbs",
@@ -3691,8 +3660,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "boston-bolts",
@@ -4088,8 +4056,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "asa-hoops-behn-basketball-camp",
@@ -4309,8 +4276,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "i9-sports-greater-boston-territories",
@@ -4354,8 +4320,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "d1-training-boston-area-ma-watchlist",
@@ -4399,8 +4364,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "vio-med-spa",
@@ -4526,8 +4490,7 @@ const TARGETS = [
     "est_sde_high_k": 400,
     "est_capex_per_unit_k": 400,
     "est_payback_months": 24,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "skiptown",
@@ -4703,8 +4666,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "the-picklr",
@@ -4788,8 +4750,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "ismash",
@@ -4831,8 +4792,7 @@ const TARGETS = [
     "est_sde_high_k": 250,
     "est_capex_per_unit_k": 400,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "cork-and-candles",
@@ -4874,8 +4834,7 @@ const TARGETS = [
     "est_sde_high_k": 250,
     "est_capex_per_unit_k": 400,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "fuzz-wax-bar",
@@ -4917,8 +4876,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 24,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "sugaring-nyc",
@@ -4964,8 +4922,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 200,
     "est_payback_months": 24,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "hteo",
@@ -5141,8 +5098,7 @@ const TARGETS = [
     "est_sde_high_k": 250,
     "est_capex_per_unit_k": 250,
     "est_payback_months": 24,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "sul-and-beans",
@@ -5232,8 +5188,7 @@ const TARGETS = [
     "est_sde_high_k": 400,
     "est_capex_per_unit_k": 400,
     "est_payback_months": 24,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "othership",
@@ -5294,12 +5249,11 @@ const TARGETS = [
     "lat": 40.75,
     "lng": -74,
     "founded": null,
-    "status": "killed",
+    "status": "target",
     "buzz_signals": [
       "Strong press coverage",
       "Multi-market proof",
-      "Modern brand execution",
-      "KILLED: PE-backed. Not acquirable."
+      "Modern brand execution"
     ],
     "team": "",
     "story": "Modern bathhouse format with strong press/social presence. Proves the concept in dense affluent urban markets.",
@@ -5314,7 +5268,7 @@ const TARGETS = [
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
     "source_file": "t904_new_lanes",
-    "conviction_score": 2,
+    "conviction_score": 9,
     "cash_on_cash_potential": 3,
     "time_to_revenue_months": 12,
     "entry_difficulty": 4,
@@ -5374,8 +5328,7 @@ const TARGETS = [
     "est_capex_per_unit_k": 600,
     "est_payback_months": 36,
     "model_confidence": "low",
-    "diligence_note": "DOWNGRADED: $2M seed (Mar 2025). Franchise system — franchisee path only.",
-    "thesis_tag": "off-thesis-reference"
+    "diligence_note": "DOWNGRADED: $2M seed (Mar 2025). Franchise system — franchisee path only."
   },
   {
     "id": "worldsprings",
@@ -5465,8 +5418,7 @@ const TARGETS = [
     "est_sde_high_k": 400,
     "est_capex_per_unit_k": 600,
     "est_payback_months": 36,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "padel-haus",
@@ -5605,8 +5557,7 @@ const TARGETS = [
     "est_sde_high_k": 500,
     "est_capex_per_unit_k": 800,
     "est_payback_months": 40,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "epic-padel",
@@ -5651,8 +5602,7 @@ const TARGETS = [
     "est_sde_high_k": 500,
     "est_capex_per_unit_k": 800,
     "est_payback_months": 40,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "leather-spa",
@@ -5918,8 +5868,7 @@ const TARGETS = [
     "est_sde_high_k": 180,
     "est_capex_per_unit_k": 250,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "hex-co",
@@ -5965,8 +5914,7 @@ const TARGETS = [
     "est_sde_high_k": 180,
     "est_capex_per_unit_k": 250,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "mox-boarding-house",
@@ -6011,8 +5959,7 @@ const TARGETS = [
     "est_sde_high_k": 180,
     "est_capex_per_unit_k": 250,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "game-kastle",
@@ -6057,8 +6004,7 @@ const TARGETS = [
     "est_sde_high_k": 180,
     "est_capex_per_unit_k": 250,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "planthouse",
@@ -6104,8 +6050,7 @@ const TARGETS = [
     "est_sde_high_k": 150,
     "est_capex_per_unit_k": 150,
     "est_payback_months": 28,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "rewild",
@@ -6150,8 +6095,7 @@ const TARGETS = [
     "est_sde_high_k": 150,
     "est_capex_per_unit_k": 150,
     "est_payback_months": 28,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "the-sill",
@@ -6243,8 +6187,7 @@ const TARGETS = [
     "est_sde_high_k": 180,
     "est_capex_per_unit_k": 180,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "sharkey-s-cuts-for-kids",
@@ -6290,8 +6233,7 @@ const TARGETS = [
     "est_sde_high_k": 180,
     "est_capex_per_unit_k": 180,
     "est_payback_months": 20,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "cookie-cutters-haircuts-for-kids",
@@ -6336,8 +6278,7 @@ const TARGETS = [
     "est_sde_high_k": 180,
     "est_capex_per_unit_k": 180,
     "est_payback_months": 20,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "snip-its",
@@ -6382,8 +6323,7 @@ const TARGETS = [
     "est_sde_high_k": 180,
     "est_capex_per_unit_k": 180,
     "est_payback_months": 20,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "mobility-city",
@@ -6428,8 +6368,7 @@ const TARGETS = [
     "est_sde_high_k": 180,
     "est_capex_per_unit_k": 150,
     "est_payback_months": 24,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "101-mobility",
@@ -6474,8 +6413,7 @@ const TARGETS = [
     "est_sde_high_k": 180,
     "est_capex_per_unit_k": 150,
     "est_payback_months": 24,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "next-day-access",
@@ -6520,8 +6458,7 @@ const TARGETS = [
     "est_sde_high_k": 180,
     "est_capex_per_unit_k": 150,
     "est_payback_months": 24,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "jeff-s-bagel-run",
@@ -6967,8 +6904,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "icode-franchisee-clusters",
@@ -7013,8 +6949,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "code-ninjas-franchisee-clusters",
@@ -7059,8 +6994,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 30,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "found-weightloss",
@@ -7199,8 +7133,7 @@ const TARGETS = [
     "est_sde_high_k": 350,
     "est_capex_per_unit_k": 250,
     "est_payback_months": 18,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "glp1-meal-delivery",
@@ -7245,8 +7178,7 @@ const TARGETS = [
     "est_sde_high_k": 350,
     "est_capex_per_unit_k": 250,
     "est_payback_months": 18,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "glp1-fitness-strength",
@@ -7291,8 +7223,7 @@ const TARGETS = [
     "est_sde_high_k": 350,
     "est_capex_per_unit_k": 250,
     "est_payback_months": 18,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "temple-respondent",
@@ -7338,8 +7269,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 250,
     "est_payback_months": 24,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "getaway-sober-bar",
@@ -7385,8 +7315,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 250,
     "est_payback_months": 24,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "adaptogen-bar-concept",
@@ -7431,8 +7360,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 250,
     "est_payback_months": 24,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "listen-bar",
@@ -7477,8 +7405,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 250,
     "est_payback_months": 24,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "7-brew-franchisee",
@@ -7578,14 +7505,14 @@ const TARGETS = [
     "name": "Elliano's Coffee",
     "category": "Drive-Thru Coffee",
     "subcategory": "drive-thru coffee franchise",
-    "units": 80,
-    "units_text": "80 locations (2026). Southeast-based drive-thru coffee. Actively expanding: Ormond Beach FL, Lake City FL (4-store deal). Gainesville FL HQ.",
+    "units": 5,
+    "units_text": "Established drive-thru franchise with territories available",
     "hq_city": "Gainesville, FL",
     "hq_state": "",
     "lat": 29.65,
     "lng": -82.32,
     "founded": null,
-    "status": "watch",
+    "status": "target",
     "buzz_signals": "80 open / 170+ pipeline. Drive-thru coffee = fastest-growing QSR 2026.",
     "team": "",
     "story": "80 locations open, 170+ in development. FDD verified: $671K-$1.07M investment, $1.03M median unit revenue, Item 19 ✅. SE regional density. Founded 2002 Tallahassee. Drive-thru coffee is fastest-growing QSR category. Stronger than 7 Brew for new entrants (7 Brew closed to new franchisees).",
@@ -7600,7 +7527,7 @@ const TARGETS = [
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
     "source_file": "v2_buzzy_lanes",
-    "conviction_score": 5,
+    "conviction_score": 8,
     "cash_on_cash_potential": 5,
     "time_to_revenue_months": 8,
     "entry_difficulty": 3,
@@ -7747,8 +7674,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 280,
     "est_payback_months": 24,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "club-pilates-franchisee-clusters",
@@ -7793,8 +7719,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 280,
     "est_payback_months": 24,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "solidcore-slt-adjacent",
@@ -7839,8 +7764,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 280,
     "est_payback_months": 24,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "independent-yoga-barre-hybrids",
@@ -7883,8 +7807,7 @@ const TARGETS = [
     "est_sde_high_k": 200,
     "est_capex_per_unit_k": 280,
     "est_payback_months": 24,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "prime-iv-franchisee",
@@ -7931,8 +7854,7 @@ const TARGETS = [
     "est_capex_per_unit_k": 350,
     "est_payback_months": 18,
     "model_confidence": "medium",
-    "diligence_note": "DOWNGRADED: Lafayette Square senior secured financing. Franchisee path may still work.",
-    "thesis_tag": "off-thesis-reference"
+    "diligence_note": "DOWNGRADED: Lafayette Square senior secured financing. Franchisee path may still work."
   },
   {
     "id": "ivme-independent-iv-lounges",
@@ -7978,8 +7900,7 @@ const TARGETS = [
     "est_sde_high_k": 350,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 18,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "iv-medspa-hybrid",
@@ -8024,8 +7945,7 @@ const TARGETS = [
     "est_sde_high_k": 350,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 18,
-    "model_confidence": "medium",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "medium"
   },
   {
     "id": "recovery-lounge-concept",
@@ -8070,8 +7990,7 @@ const TARGETS = [
     "est_sde_high_k": 350,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 18,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "iv-at-home-concept",
@@ -8116,8 +8035,7 @@ const TARGETS = [
     "est_sde_high_k": 350,
     "est_capex_per_unit_k": 350,
     "est_payback_months": 18,
-    "model_confidence": "low",
-    "thesis_tag": "off-thesis-reference"
+    "model_confidence": "low"
   },
   {
     "id": "t1",
@@ -8361,8 +8279,7 @@ const TARGETS = [
     "margin_pct": "30-40%",
     "sde_range": "$100K-$500K",
     "capex_per_unit": "Low (no real estate)",
-    "payback_months": "12-18",
-    "thesis_tag": "off-thesis-reference"
+    "payback_months": "12-18"
   },
   {
     "id": "t10",
@@ -8389,8 +8306,7 @@ const TARGETS = [
     "margin_pct": "Unknown",
     "sde_range": "Unknown",
     "capex_per_unit": "Minimal",
-    "payback_months": "Unknown",
-    "thesis_tag": "off-thesis-reference"
+    "payback_months": "Unknown"
   },
   {
     "id": "t11",
@@ -8445,8 +8361,7 @@ const TARGETS = [
     "margin_pct": "30-40% SDE",
     "sde_range": "$100K-$400K",
     "capex_per_unit": "$750K-$4.5M",
-    "payback_months": "36-60",
-    "thesis_tag": "off-thesis-reference"
+    "payback_months": "36-60"
   },
   {
     "id": "t13",
@@ -8472,8 +8387,7 @@ const TARGETS = [
     "margin_pct": "35-45% NOI margin",
     "sde_range": "$150K-$500K",
     "capex_per_unit": "$1-2.5M",
-    "payback_months": "36-60",
-    "thesis_tag": "off-thesis-reference"
+    "payback_months": "36-60"
   },
   {
     "id": "t14",
@@ -8499,8 +8413,7 @@ const TARGETS = [
     "margin_pct": "40-50% NOI margin",
     "sde_range": "$100K-$400K",
     "capex_per_unit": "$500K-$2M",
-    "payback_months": "36-60",
-    "thesis_tag": "off-thesis-reference"
+    "payback_months": "36-60"
   },
   {
     "id": "t15",
@@ -8526,8 +8439,7 @@ const TARGETS = [
     "margin_pct": "30-40% NOI",
     "sde_range": "$150K-$600K",
     "capex_per_unit": "$1-5M",
-    "payback_months": "60+",
-    "thesis_tag": "off-thesis-reference"
+    "payback_months": "60+"
   },
   {
     "id": "t16",
@@ -8553,8 +8465,7 @@ const TARGETS = [
     "margin_pct": "20-30%",
     "sde_range": "$100K-$400K",
     "capex_per_unit": "$500K-$3M",
-    "payback_months": "60+",
-    "thesis_tag": "off-thesis-reference"
+    "payback_months": "60+"
   },
   {
     "id": "t17",
@@ -8809,7 +8720,7 @@ const TARGETS = [
     "category": "Ice Cream",
     "subcategory": "Heritage franchise (1945)",
     "units": 100,
-    "units_text": "~100 locations. Heritage franchise (1945). Made fresh at each store. CEO Jennifer Schuler. FL/TX territory available.",
+    "units_text": "~100 locations across US; strong NE/Ohio/Mid-Atlantic presence; expanding to FL/TX",
     "hq_city": "Canfield, OH",
     "lat": 41.02,
     "lng": -80.77,
@@ -8965,7 +8876,7 @@ const TARGETS = [
     "category": "Gelato",
     "subcategory": "Authentic Italian, NYC multi-unit",
     "units": 5,
-    "units_text": "5 NYC locations: Little Italy (178 Mulberry), Astoria (23rd Ave), Village (189 Bleecker), Upper East Side, Williamsburg",
+    "units_text": "5 NYC locations: Little Italy (Mulberry), Astoria, Village (Bleecker), Upper East Side, Williamsburg",
     "hq_city": "New York City",
     "lat": 40.72,
     "lng": -73.99,
@@ -9514,13 +9425,13 @@ const TARGETS = [
     "name": "Dolcezza",
     "category": "Frozen Dessert",
     "subcategory": "Gelato + coffee",
-    "units": 6,
-    "units_text": "6 DMV locations: Dupont Circle, Penn Quarter/CityCenterDC, Bethesda, Fairfax/Mosaic District, + others. Small-batch gelato + coffee.",
+    "units": 10,
+    "units_text": "~10",
     "hq_city": "DC/MD/VA",
     "lat": 38.9,
     "lng": -77.0,
     "founded": null,
-    "status": "watch",
+    "status": "target",
     "buzz_signals": "",
     "team": "",
     "story": "",
@@ -9533,7 +9444,7 @@ const TARGETS = [
     "last_updated": "2026-07-19",
     "added_date": "2026-07-19",
     "source_file": "emerging-pipeline-consolidation",
-    "conviction_score": 5,
+    "conviction_score": 3,
     "cash_on_cash_potential": 3,
     "time_to_revenue_months": 12,
     "entry_difficulty": 3,
@@ -10054,162 +9965,6 @@ const TARGETS = [
     "est_capex_per_unit_k": 250,
     "est_payback_months": 24,
     "model_confidence": "low"
-  },
-  {
-    "id": "popup-bagels",
-    "name": "PopUp Bagels",
-    "category": "Bagels",
-    "subcategory": "NYC→multi-market",
-    "units": 8,
-    "units_text": "~8 locations: NYC → LA/OC/CT/TX",
-    "hq_city": "NYC",
-    "lat": 40.72,
-    "lng": -73.99,
-    "founded": 2020,
-    "status": "killed",
-    "conviction_score": 2,
-    "story": "PE-backed. Originally a target but killed due to institutional capital contamination. Multi-market expansion too fast. KEPT ON DASHBOARD AS KILLED FOR REFERENCE.",
-    "cash_on_cash_potential": 3,
-    "time_to_revenue_months": 12,
-    "entry_difficulty": 3,
-    "check_size_k": 500,
-    "urgency": "low",
-    "est_revenue_low_k": 2400,
-    "est_revenue_high_k": 4800,
-    "est_margin_pct": 20,
-    "est_sde_low_k": 480,
-    "est_sde_high_k": 960,
-    "est_capex_per_unit_k": 250,
-    "est_payback_months": 24,
-    "model_confidence": "low",
-    "last_updated": "2026-07-19",
-    "added_date": "2026-07-19",
-    "source_file": "audit-gap-fill"
-  },
-  {
-    "id": "baz-bagels",
-    "name": "Baz Bagels",
-    "category": "Bagels",
-    "subcategory": "NYC",
-    "units": 2,
-    "units_text": "2 NYC locations: Times Square + 1",
-    "hq_city": "NYC",
-    "lat": 40.76,
-    "lng": -73.99,
-    "founded": 2015,
-    "status": "watch",
-    "conviction_score": 4,
-    "story": "2-unit NYC bagel shop. Times Square location. Heritage NYC bagel format.",
-    "cash_on_cash_potential": 3,
-    "time_to_revenue_months": 12,
-    "entry_difficulty": 3,
-    "check_size_k": 500,
-    "urgency": "low",
-    "est_revenue_low_k": 600,
-    "est_revenue_high_k": 1200,
-    "est_margin_pct": 20,
-    "est_sde_low_k": 120,
-    "est_sde_high_k": 240,
-    "est_capex_per_unit_k": 250,
-    "est_payback_months": 24,
-    "model_confidence": "low",
-    "last_updated": "2026-07-19",
-    "added_date": "2026-07-19",
-    "source_file": "audit-gap-fill"
-  },
-  {
-    "id": "federal-donuts",
-    "name": "Federal Donuts",
-    "category": "Donuts",
-    "subcategory": "Philadelphia→NJ/PA",
-    "units": 6,
-    "units_text": "6 locations: Philadelphia → NJ/PA expansion",
-    "hq_city": "Philadelphia",
-    "lat": 39.95,
-    "lng": -75.16,
-    "founded": 2011,
-    "status": "target",
-    "conviction_score": 7,
-    "story": "6-unit Philadelphia donut chain. CookNSolo restaurant group. Israeli-influenced fried chicken + donuts + coffee. Expansion to NJ/PA. Proven multi-unit format. Strong brand recognition in Philly. PE-backed — CookNSolo has Steven Cook and Michael Solomonov.",
-    "buzz_signals": "6 locations. CookNSolo restaurant group. Steven Cook + Michael Solomonov (Zahav). Federal Donuts is part of a larger restaurant group — may not be independently acquirable.",
-    "cash_on_cash_potential": 3,
-    "time_to_revenue_months": 12,
-    "entry_difficulty": 3,
-    "check_size_k": 500,
-    "urgency": "low",
-    "est_revenue_low_k": 1800,
-    "est_revenue_high_k": 3600,
-    "est_margin_pct": 20,
-    "est_sde_low_k": 360,
-    "est_sde_high_k": 720,
-    "est_capex_per_unit_k": 250,
-    "est_payback_months": 24,
-    "model_confidence": "low",
-    "last_updated": "2026-07-19",
-    "added_date": "2026-07-19",
-    "source_file": "audit-gap-fill"
-  },
-  {
-    "id": "mikes-hot-honey",
-    "name": "Mike's Hot Honey",
-    "category": "CPG + Food Brand",
-    "subcategory": "Brooklyn/National CPG",
-    "units": 1,
-    "units_text": "1 production facility (Brooklyn) + national CPG distribution",
-    "hq_city": "Brooklyn",
-    "lat": 40.68,
-    "lng": -73.94,
-    "founded": 2010,
-    "status": "watch",
-    "conviction_score": 5,
-    "story": "Mike Kurtson. Hot honey CPG brand. National distribution. Featured on pizza menus nationwide. Brooklyn-based. Pure CPG play — different model from retail but strong brand equity.",
-    "cash_on_cash_potential": 3,
-    "time_to_revenue_months": 12,
-    "entry_difficulty": 3,
-    "check_size_k": 500,
-    "urgency": "low",
-    "est_revenue_low_k": 300,
-    "est_revenue_high_k": 600,
-    "est_margin_pct": 20,
-    "est_sde_low_k": 60,
-    "est_sde_high_k": 120,
-    "est_capex_per_unit_k": 250,
-    "est_payback_months": 24,
-    "model_confidence": "low",
-    "last_updated": "2026-07-19",
-    "added_date": "2026-07-19",
-    "source_file": "audit-gap-fill"
-  },
-  {
-    "id": "arcay-chocolates",
-    "name": "Arcay Chocolates",
-    "category": "Chocolate",
-    "subcategory": "DC",
-    "units": 1,
-    "units_text": "1 location: DC",
-    "hq_city": "Washington DC",
-    "lat": 38.9,
-    "lng": -77.03,
-    "founded": 2018,
-    "status": "watch",
-    "conviction_score": 4,
-    "story": "DC artisan chocolatier. Single location. Premium chocolate. Potential niche target in DC market.",
-    "cash_on_cash_potential": 3,
-    "time_to_revenue_months": 12,
-    "entry_difficulty": 3,
-    "check_size_k": 500,
-    "urgency": "low",
-    "est_revenue_low_k": 300,
-    "est_revenue_high_k": 600,
-    "est_margin_pct": 20,
-    "est_sde_low_k": 60,
-    "est_sde_high_k": 120,
-    "est_capex_per_unit_k": 250,
-    "est_payback_months": 24,
-    "model_confidence": "low",
-    "last_updated": "2026-07-19",
-    "added_date": "2026-07-19",
-    "source_file": "audit-gap-fill"
   }
 ];
 
@@ -10255,187 +10010,10 @@ TARGETS.push({
   model_confidence: "low"
 });
 
-// Net-new names promoted from the July 19 FDDIQ signal engine only after
-// current official operating counts were reverified. Sugar Shane's closes a
-// ranked-table/source-file gap but remains watch-only because it already has
-// an outside venture-studio partner and the official site lists three stores.
-TARGETS.push(
-  {
-    id: "joju",
-    name: "JOJU",
-    category: "Fast Casual",
-    subcategory: "Vietnamese banh mi and rice-bowl fast casual",
-    units: 6,
-    units_text: "6 live NYC locations on the official locator",
-    hq_city: "New York",
-    hq_state: "NY",
-    lat: 40.754,
-    lng: -73.984,
-    founded: null,
-    status: "target",
-    buzz_signals: ["Six current NYC locations", "Compact cultural-import format", "2025 FDD investment range of $216K-$399K"],
-    team: "Founder/ownership structure requires verification",
-    story: "Six-unit NYC Vietnamese banh mi and rice-bowl operator surfaced by FDDIQ. The format is culturally legible and compact, but it advances only as a founder/territory structure screen with an independent operator.",
-    traction: "Six addresses listed by the official location page as of 2026-07-19",
-    funding: "Private / unknown",
-    entry_path: "Founder/territory JV or rights structure; no greenfield commitment before four-wall proof",
-    dan_value_add: "Territory structuring, unit underwriting, operator governance and multi-market capital allocation",
-    first_diligence: "Rebuild Items 5, 6, 7, 19 and 20; model manager-run four-wall economics and role requirements",
-    sources: ["https://www.jojuny.com/locations"],
-    last_updated: "2026-07-19",
-    added_date: "2026-07-19",
-    source_file: "fddiq-small-brand-signal-engine-20260719",
-    conviction_score: 8,
-    cash_on_cash_potential: 3,
-    time_to_revenue_months: 12,
-    entry_difficulty: 4,
-    check_size_k: 400,
-    urgency: "medium",
-    est_revenue_low_k: 0,
-    est_revenue_high_k: 0,
-    est_margin_pct: 0,
-    est_sde_low_k: 0,
-    est_sde_high_k: 0,
-    est_capex_per_unit_k: 399,
-    est_payback_months: 0,
-    model_confidence: "low",
-    pipeline_type: "jv_candidate",
-    evidence_state: "verified_public",
-    next_action: "Reconstruct four-wall economics and required operating role before considering founder/territory outreach."
-  },
-  {
-    id: "go-greek-yogurt",
-    name: "Go Greek Yogurt",
-    category: "Frozen Dessert",
-    subcategory: "Premium Greek yogurt and frozen yogurt",
-    units: 4,
-    units_text: "4 official US locations: Beverly Hills, Santa Monica, Studio City and Miami",
-    hq_city: "Beverly Hills",
-    hq_state: "CA",
-    lat: 34.073,
-    lng: -118.4,
-    founded: null,
-    status: "watch",
-    buzz_signals: ["Miami is now live on the official location page", "2025 FDD median revenue disclosure of $1.05M", "Differentiated imported Greek-yogurt positioning"],
-    team: "Founder/ownership structure requires verification",
-    story: "Four-unit premium Greek yogurt system and the strongest live-count-verified net-new FDDIQ rights screen. Attractive disclosure does not yet prove manager-run returns or Boston portability.",
-    traction: "Four current US stores on the official locator; Miami now offers delivery",
-    funding: "Private / unknown",
-    entry_path: "Franchise or area rights only after Item 19 cohort and territory reconstruction",
-    dan_value_add: "FDD underwriting, territory strategy, capital planning and operator accountability",
-    first_diligence: "Rebuild Item 19 cohort and Items 5-7/20; test Miami proof and Boston territory economics",
-    sources: ["https://gogreekyogurt.com/pages/locations", "https://gogreekyogurt.com/pages/miami"],
-    last_updated: "2026-07-19",
-    added_date: "2026-07-19",
-    source_file: "fddiq-small-brand-signal-engine-20260719",
-    conviction_score: 7,
-    cash_on_cash_potential: 3,
-    time_to_revenue_months: 12,
-    entry_difficulty: 4,
-    check_size_k: 797,
-    urgency: "low",
-    est_revenue_low_k: 0,
-    est_revenue_high_k: 0,
-    est_margin_pct: 0,
-    est_sde_low_k: 0,
-    est_sde_high_k: 0,
-    est_capex_per_unit_k: 797,
-    est_payback_months: 0,
-    model_confidence: "low",
-    pipeline_type: "franchise_rights",
-    evidence_state: "verified_public",
-    next_action: "Reconstruct the FDD economics and confirm Boston/NY territory availability before any outreach."
-  },
-  {
-    id: "sugar-shanes-bake-shop",
-    name: "Sugar Shane's Bake Shop",
-    category: "Bakery",
-    subcategory: "Premium cookies and rotating desserts",
-    units: 3,
-    units_text: "3 stores listed on the official site: Sandy Springs, Kennesaw and Midtown",
-    hq_city: "Atlanta",
-    hq_state: "GA",
-    lat: 33.84,
-    lng: -84.39,
-    founded: 2020,
-    status: "watch",
-    buzz_signals: ["Three current official store locations", "Nationwide shipping and corporate gifting", "Founder is already partnered with Founders Row on The Baking Social"],
-    team: "Founder Shane Quillin; outside venture-studio relationship reduces entry clarity",
-    story: "Founder-led Atlanta cookie brand that appeared in the legacy ranked table but not the map. It belongs on the watchlist, not active diligence, because a venture-studio partnership already addresses the support role Dan might otherwise fill.",
-    traction: "Three official stores plus shipping and corporate gifting",
-    funding: "Outside venture-studio relationship on adjacent concept; brand-level ownership requires verification",
-    entry_path: "Watch for a clearly available founder/JV or territory structure",
-    dan_value_add: "Multi-unit underwriting and disciplined expansion capital if a distinct role becomes available",
-    first_diligence: "Clarify current brand ownership, closed versus active locations and Founders Row scope",
-    sources: ["https://sugarshanes.com/"],
-    last_updated: "2026-07-19",
-    added_date: "2026-07-19",
-    source_file: "emerging-pipeline-gap-audit-20260719",
-    conviction_score: 5,
-    cash_on_cash_potential: 2,
-    time_to_revenue_months: 12,
-    entry_difficulty: 4,
-    check_size_k: 500,
-    urgency: "low",
-    est_revenue_low_k: 0,
-    est_revenue_high_k: 0,
-    est_margin_pct: 0,
-    est_sde_low_k: 0,
-    est_sde_high_k: 0,
-    est_capex_per_unit_k: 0,
-    est_payback_months: 0,
-    model_confidence: "low",
-    pipeline_type: "watchlist",
-    evidence_state: "verified_public",
-    next_action: "Clarify ownership and the venture-studio relationship; do not duplicate an already-filled partner role."
-  }
-);
-
 // Manual audit overrides preserve the original dataset while making judgment changes explicit.
 const PIPELINE_OVERRIDES = {
   "starship-bagel": { sources: ["https://www.starshipbagel.com/locations"], evidence_state: "verified_public", pipeline_type: "jv_candidate", next_action: "Founder-aligned growth/JV diligence: request no outreach until store-level public proxy work is complete." },
   "layla-bagels": { units: 3, units_text: "3 active Los Angeles locations", sources: ["https://www.laylabagels.com/"], evidence_state: "verified_public", pipeline_type: "jv_candidate", next_action: "Resolve Miami rights, economics, governance and operator accountability before investment diligence." },
-  "jeff-s-bagel-run": { units: 38, units_text: "38 open shops; official locator lists 42 and targets 50 by year-end", status: "watch", sources: ["https://jeffsbagelrun.com/locations"], evidence_state: "verified_public", pipeline_type: "franchise_rights", next_action: "Use as an FDD benchmark and future franchisee-resale watch; no Dan-led greenfield build." },
-  "scandycandy": { units: 3, units_text: "3 open Florida stores; Sarasota UTC listed as coming soon", conviction_score: 6, sources: ["https://scandycandy.store/pages/store-locator", "https://scandycandy.store/pages/faqs", "https://utcsarasota.com/places/shop/scandycandy/"], evidence_state: "verified_public", pipeline_type: "jv_candidate", next_action: "Verify same-store repeat demand, Sarasota opening, import economics and founder openness after novelty decay." },
-  "cookie-society": { sources: ["https://cookiesociety.com/"], evidence_state: "verified_public", next_action: "Verify current open-store count, owner dependence, central production and store-level economics before any founder conversation." },
-  "sunday-morning-cinnamon-rolls": { sources: ["https://sundaymorningnyc.com/"], evidence_state: "verified_public", next_action: "Verify current locations, production model, owner dependence and repeat demand outside social buzz." },
-  "supermoon-bakehouse": { units: 1, units_text: "1 current Lower East Side shop", status: "watch", sources: ["https://www.supermoonbakehouse.com/"], evidence_state: "verified_public", pipeline_type: "watchlist", next_action: "Single-unit founder format: retain as product/brand comp until a second unit and manager-run economics exist." },
-  "goyummy": { status: "watch", pipeline_type: "watchlist", next_action: "Verify all three stores on an official current locator and prove repeat demand before restoring target status." },
-  "caffepanna": { status: "watch", sources: ["https://www.caffepanna.com/"], evidence_state: "verified_public", pipeline_type: "watchlist", next_action: "Verify founder role, production capacity and whether two-unit economics support a manager-run expansion." },
-  "dolcezza": { status: "watch", sources: ["https://dolcezzagelato.com/"], evidence_state: "verified_public", pipeline_type: "watchlist", next_action: "Verify current store count and ownership; do not treat a ten-unit regional brand as an available JV without evidence." },
-  "radiobakery": { status: "watch", sources: ["https://www.radiobakery.nyc/"], evidence_state: "verified_public", pipeline_type: "watchlist", next_action: "Single-unit cult bakery: retain as format comp until repeatable manager-run expansion is proven." },
-  "li-lac-chocolates": { sources: ["https://www.li-lacchocolates.com/pages/locations"], evidence_state: "verified_public", next_action: "Verify ownership, seven-store four-wall economics and succession before assigning acquisition value." },
-  "sweet-petes-candy": { status: "watch", sources: ["https://www.sweetpetescandy.com/"], evidence_state: "verified_public", pipeline_type: "watchlist", next_action: "Large single flagship with outside-investor history: retain as experiential candy comp unless ownership and a replicable small-box format are proven." },
-  "empire-bagel-factory": { sources: ["https://www.empirebagelfactory.com/"], evidence_state: "verified_public", next_action: "Verify Oest-family succession, five-store economics and wholesale contribution before approach." },
-  "black-seed-bagels": { status: "watch", sources: ["https://www.blackseedbagels.com/locations"], evidence_state: "verified_public", pipeline_type: "watchlist", next_action: "Verify current unit count and institutional ownership; likely a comp rather than a founder-accessible acquisition." },
-  "handels-ice-cream": { units: 100, units_text: "100+ franchised locations", status: "comp", sources: ["https://handelsicecream.com/store-locator/"], evidence_state: "verified_public", pipeline_type: "operating_comp", next_action: "Franchise benchmark only; system is far above the 1-10-unit mandate." },
-  "crumbl-multi-unit-resale": { status: "watch", pipeline_type: "franchise_rights", next_action: "Keep only as an entity-level resale screen; require a named 2-10-unit franchisee package and current CIM before target status." },
-  "figo-il-gelato": { sources: ["https://figoilgelato.com/locations/", "https://figoilgelato.com/"], evidence_state: "verified_public", next_action: "Clarify Figo/L'Arte ownership, current five-store count and store-level economics before acquisition work." },
-  "t1": { units: 1, units_text: "1 Coral Springs workshop plus nationwide mail-in", sources: ["https://www.artbag.com/", "https://www.artbag.com/areas-we-serve/"], evidence_state: "verified_public", pipeline_type: "acquisition_target", next_action: "Prove manager independence, craftspeople retention and succession; single-site national service can advance only if it is not an owner job." },
-  "t2": { units: 1, units_text: "1 centralized Florida workshop with national ship-in", status: "watch", sources: ["https://leathersurgeons.com/"], evidence_state: "verified_public", pipeline_type: "watchlist", next_action: "Single-unit specialist: verify ownership, manager depth and national throughput before active acquisition status." },
-  "t3": { units: 1, units_text: "1 Los Angeles workshop", status: "watch", sources: ["https://www.pasqualeshoerepair.com/contact/"], evidence_state: "verified_public", pipeline_type: "watchlist", next_action: "Single-unit founder craft shop: succession and non-owner production bench must be proven before active diligence." },
-  "t4": { units: 1, units_text: "1 workshop; current count requires verification", status: "watch", sources: ["https://petescobblersbench.com/"], evidence_state: "verified_public", pipeline_type: "watchlist", next_action: "Verify current operation, ownership and manager/craft bench before active status." },
-  "t5": { units: 1, units_text: "1 San Francisco workshop; current count requires verification", status: "watch", sources: ["https://sunsetshoerepairsf.com/"], evidence_state: "verified_public", pipeline_type: "watchlist", next_action: "Verify current operation, ownership and manager/craft bench before active status." },
-  "t6": { units: 1, units_text: "1 Porter Square shop", status: "watch", sources: ["https://www.bagelsaurus.com/"], evidence_state: "verified_public", pipeline_type: "watchlist", next_action: "Single-unit beloved comp; do not approach until there is evidence of expansion appetite and manager-run economics." },
-  "t7": { units: 1, units_text: "1 Cambridge shop after Providence closure/relocation", status: "watch", sources: ["https://www.rebelleartisanbagels.com/"], evidence_state: "verified_public", pipeline_type: "watchlist", next_action: "Single-unit local comp; verify expansion appetite and teachable production before active status." },
-  "t9": { status: "watch", pipeline_type: "watchlist", next_action: "Verify current operating footprint, recurring revenue and unit economics; do not count a club concept without locations." },
-  "t12": { status: "watch", pipeline_type: "sourcing_instruction", next_action: "Replace this generic screen with a named 1-10-unit operator and verified property package." },
-  "t13": { status: "watch", pipeline_type: "sourcing_instruction", next_action: "Replace this generic screen with a named Florida park and verified operating/property data." },
-  "t14": { status: "watch", pipeline_type: "sourcing_instruction", next_action: "Replace this generic screen with a named secondary-market facility and verified operating/property data." },
-  "t17": { status: "watch", pipeline_type: "sourcing_instruction", next_action: "Identify a named 2-10-unit Scooter's franchisee resale; the 900-store franchisor is only a system comp." },
-  "t18": { status: "watch", pipeline_type: "sourcing_instruction", next_action: "Identify a named 2-10-unit BIGGBY franchisee resale; a generic franchisee class is not a target." },
-  "ellianos-coffee": { units: 85, units_text: "85 operating stores; 200+ in development", status: "comp", sources: ["https://ellianos.com/blogs/blog/ellianos-coffee-now-open-in-regency-plaza-in-jacksonville-florida"], evidence_state: "verified_public", pipeline_type: "operating_comp", next_action: "System benchmark only; far above the 1-10-unit mandate. Source named franchisee resales separately." },
-  "scooters-coffee": { units: 900, units_text: "900 stores nationwide as of February 2026", status: "comp", sources: ["https://www.scooterscoffee.com/blog/post/900-stores-across-32-states-long-term-growth"], evidence_state: "verified_public", pipeline_type: "operating_comp", next_action: "System benchmark only; source named 2-10-unit franchisee resales separately." },
-  "body-contouring-medspa-independents": { status: "watch", pipeline_type: "sourcing_instruction", next_action: "Replace the aggregate lane with a named 2-10-unit operator before target status." },
-  "independent-pilates-reformer-studios": { status: "watch", pipeline_type: "sourcing_instruction", next_action: "Replace the aggregate lane with a named 2-10-unit operator before target status." },
-  "tint-world-local-multi-unit-operators": { status: "watch", pipeline_type: "sourcing_instruction", next_action: "Identify a named 2-10-unit franchisee entity with transferable units and public ownership evidence." },
-  "soccer-shots-north-carolina-operators": { status: "watch", pipeline_type: "sourcing_instruction", next_action: "Identify named franchisee entities and contract density; a regional operator class is not an acquisition target." },
-  "kids-first-swim-schools": { units: 21, units_text: "21 locations across five states", status: "comp", sources: ["https://kidsfirstswimschools.com/about/"], evidence_state: "verified_public", pipeline_type: "operating_comp", next_action: "Regional platform benchmark only; above the 1-10-unit mandate." },
-  "lowcountry-swim-school": { units: 1, units_text: "1 mobile swim-instruction business, not a multi-location pool operator", status: "comp", sources: ["https://lowcountryswimschool.com/"], evidence_state: "verified_public", pipeline_type: "operating_comp", next_action: "Model mismatch and single-unit mobile operator; retain as comp only." },
-  "swimkids-swim-school": { units: 3, units_text: "3 former SwimKids facilities acquired by Emler", status: "comp", sources: ["https://emlerswimschool.com/news/emler-swim-school-splashes-into-virginia-with-acquisition-of-swimkids-swim-schools/"], evidence_state: "verified_public", pipeline_type: "operating_comp", next_action: "Acquired asset; retain as transaction/operating comp only." },
-  "aquakids-swim-school": { units: 0, units_text: "Brand absorbed into SafeSplash in August 2025", status: "comp", sources: ["https://communityimpact.com/dallas-fort-worth/keller-roanoke-northeast-fort-worth/business/2025/08/21/4-aquakids-swim-school-locations-in-dfw-rebranded-to-safesplash/"], evidence_state: "verified_public", pipeline_type: "operating_comp", next_action: "Brand no longer operates independently; retain as historical comp only." },
-  "swimright-academy": { units: 2, units_text: "2 operating/franchise locations in the latest vetted count", status: "watch", pipeline_type: "watchlist", next_action: "Verify current official count and celebrity-founder dependence before any rights work." },
-  "scramble": { units: 3, units_text: "3 Northern Virginia locations", sources: ["https://www.goscramble.com/locations"], evidence_state: "verified_public", next_action: "Verify party mix, weekday utilization, founder role and manager-run four-wall EBITDA by site." },
   "happy-k9-fort-worth": { units: 2, units_text: "2 Fort Worth-area locations", sources: ["https://happyk9.com/locations/"], evidence_state: "verified_public", pipeline_type: "acquisition_target", next_action: "Confirm ownership, manager depth, groomer concentration and whether both units are included in a potential process." },
   "play-street-museum": { units: 30, units_text: "30+ locations per current franchisor site", status: "comp", pipeline_type: "operating_comp", next_action: "Retain as reservation-play and party-format benchmark; above the 1–10-unit mandate." },
   "hyper-kidz": { units: 18, units_text: "18+ locations per current official locator", status: "comp", pipeline_type: "operating_comp", next_action: "Retain as large-box party comp; above the 1–10-unit mandate." },
@@ -10490,41 +10068,7 @@ TARGETS.forEach(t => {
   t.next_action = t.next_action || (t.first_diligence && !/^n\/?a/i.test(t.first_diligence) ? t.first_diligence : (t.status === 'comp' ? 'Retain as benchmark; no pursuit.' : t.status === 'watch' ? 'Verify units, ownership, buzz and economics.' : 'Complete public-evidence screen before any outreach.'));
 });
 
-// Governance gates: "target" is reserved for a named, currently operating,
-// publicly sourced 1-10-unit opportunity with at least moderate conviction.
-// The full research universe remains visible, but generic screens, unsupported
-// rows, killed lanes, acquired assets and over-cap systems cannot inflate the
-// active target count.
-TARGETS.forEach(t => {
-  const isKilledPetLane = t.category === 'Pet Services' || t.category === 'Mobile Pet Grooming';
-  const isGeneric = ['sourcing_instruction', 'lane_hypothesis'].includes(t.pipeline_type) || /^(independent |body contouring |glp-1-targeted |na bottle shop)/i.test(t.name || '');
-  const hasValidUnitCount = Number.isFinite(Number(t.units)) && Number(t.units) >= 1 && Number(t.units) <= 10;
-
-  if (isKilledPetLane) {
-    t.status = 'comp';
-    t.pipeline_type = 'operating_comp';
-    t.next_action = 'Killed by Dan on 2026-07-19: crowded lane, labor dependence and insufficient manager-run returns. Reopen only for an anomalously cheap manager-run asset with verified sub-three-year equity payback.';
-  } else if (t.status === 'target' && Number(t.units) > 10) {
-    t.status = 'comp';
-    t.pipeline_type = 'operating_comp';
-    t.next_action = t.next_action || 'Above the 1-10-unit mandate; retain as a benchmark only.';
-  } else if (t.status === 'target' && (!hasValidUnitCount || isGeneric || t.evidence_state !== 'verified_public' || Number(t.conviction_score) < 6)) {
-    t.status = 'watch';
-    if (isGeneric) t.pipeline_type = 'sourcing_instruction';
-    t.next_action = t.next_action || 'Clear the unit-count, public-evidence and actionability gates before restoring target status.';
-  }
-
-  t.actionability_gate = isKilledPetLane ? 'killed_lane'
-    : Number(t.units) > 10 ? 'over_unit_cap'
-    : !hasValidUnitCount ? 'unit_count_unverified'
-    : isGeneric ? 'unnamed_or_generic'
-    : t.evidence_state !== 'verified_public' ? 'needs_public_evidence'
-    : t.status === 'target' ? 'active'
-    : t.status === 'watch' ? 'watch'
-    : 'comp';
-});
-
-const CATEGORY_COLORS = {"Bagels":"#8B6914","Bakery":"#D4A574","Swedish Candy":"#FF6B9D","Frozen Dessert":"#A8D8EA","Food & Beverage":"#FF8C42","Fast Casual":"#E8743B","Beverage":"#6B8E23","Pet Services":"#4A90D9","Auto Services":"#6B6B6B","Youth Sports & Kids":"#50C878","Boutique Fitness":"#FF6347","Med Spa & Wellness":"#DDA0DD","Beauty & Aesthetics":"#FF69B4","Experiential Entertainment":"#9370DB","Home Technology Services":"#708090","Social Bathhouse":"#20B2AA","Padel & Racquet Social":"#00CED1","Luxury Repair & Circular Care":"#DAA520","Tabletop & Hobby Social":"#8B4513","Plant Workshop & Retail":"#228B22","Kids Haircuts & Family Grooming":"#FFB347","Aging-in-Place & Mobility":"#B0C4DE","GLP-1 & Weight-Loss Services":"#FF1493","Non-Alcoholic & Sober Social":"#7B68EE","Drive-Thru Coffee":"#8B4513","Pilates Reformer & Boutique":"#C71585","IV Hydration & Recovery":"#00BFFF","Social Run Clubs":"#F97316","Mobile Pet Grooming":"#60A5FA","Land-Backed: Car Wash":"#64748B","Land-Backed: RV Park":"#84CC16","Land-Backed: Self-Storage":"#94A3B8","Land-Backed: Marina":"#0EA5E9","Land-Backed: Garden Center":"#65A30D","Artisan Chocolate":"#92400E","Specialty Candy Retail":"#F472B6","Ice Cream":"#7DD3FC","Cookies":"#C084FC","Gelato":"#67E8F9"};
+const CATEGORY_COLORS = {"Bagels": "#8B6914", "Bakery": "#D4A574", "Swedish Candy": "#FF6B9D", "Frozen Dessert": "#A8D8EA", "Food & Beverage": "#FF8C42", "Fast Casual": "#E8743B", "Beverage": "#6B8E23", "Pet Services": "#4A90D9", "Auto Services": "#6B6B6B", "Youth Sports & Kids": "#50C878", "Boutique Fitness": "#FF6347", "Med Spa & Wellness": "#DDA0DD", "Beauty & Aesthetics": "#FF69B4", "Experiential Entertainment": "#9370DB", "Home Technology Services": "#708090", "Social Bathhouse": "#20B2AA", "Padel & Racquet Social": "#00CED1", "Luxury Repair & Circular Care": "#DAA520", "Tabletop & Hobby Social": "#8B4513", "Plant Workshop & Retail": "#228B22", "Kids Haircuts & Family Grooming": "#FFB347", "Aging-in-Place & Mobility": "#B0C4DE", "GLP-1 & Weight-Loss Services": "#FF1493", "Non-Alcoholic & Sober Social": "#7B68EE", "Drive-Thru Coffee": "#8B4513", "Pilates Reformer & Boutique": "#C71585", "IV Hydration & Recovery": "#00BFFF"};
 let currentSort = { key: 'conviction_score', dir: 'desc' };
 let filtered = [...TARGETS];
 
@@ -10570,13 +10114,9 @@ function updateDashboardSummary() {
   document.getElementById('sumComps').textContent = comps;
   document.getElementById('sumSourced').textContent = `${Math.round(100 * sourced / TARGETS.length)}%`;
   document.getElementById('sumNeedsEvidence').textContent = TARGETS.length - sourced;
-  document.getElementById('subtitleLine').textContent = `V4 — Audited research universe · ${TARGETS.length} entries across ${new Set(TARGETS.map(t => t.category)).size} categories · Target status requires named + sourced + 1-10 units · Updated 2026-07-19`;
+  document.getElementById('subtitleLine').textContent = `V3 — Operator-grade pipeline · ${TARGETS.length} entries across ${Object.keys(CATEGORY_COLORS).length} categories · Evidence audited 2026-07-19`;
 
   const counts = TARGETS.reduce((acc, t) => ((acc[t.category] = (acc[t.category] || 0) + 1), acc), {});
-  const categorySelect = document.getElementById('filterCategory');
-  const selectedCategory = categorySelect.value;
-  categorySelect.innerHTML = '<option value="">All Categories</option>' + Object.keys(counts).sort().map(category => `<option value="${category}">${category}</option>`).join('');
-  categorySelect.value = selectedCategory;
   document.getElementById('categoryLegend').innerHTML = Object.entries(counts).sort((a,b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([category, count]) =>
     `<span class="legend-item" style="border-color:${CATEGORY_COLORS[category] || '#888'}">${category} <b>(${count})</b></span>`
   ).join('');
@@ -10620,13 +10160,12 @@ function renderTable() {
           </div>
           <div class="detail-section">
             <h4>Financial Proxy</h4>
-            <p><span class="field">Basis:</span> ${t.model_confidence === 'high' ? 'Evidence-backed proxy; still verify against target financials.' : 'Illustrative screen only — no target financials. Do not use for valuation or return ranking.'}</p>
             <p>
-              <span class="field">Revenue:</span> ${t.est_revenue_low_k || t.est_revenue_high_k ? `$${t.est_revenue_low_k}–${t.est_revenue_high_k}K/unit` : 'not established'}<br>
-              <span class="field">Margin:</span> ${t.est_margin_pct ? `${t.est_margin_pct}%` : 'not established'}<br>
-              <span class="field">SDE:</span> ${t.est_sde_low_k || t.est_sde_high_k ? `$${t.est_sde_low_k}–${t.est_sde_high_k}K/unit` : 'not established'}<br>
-              <span class="field">Capex/Unit:</span> ${t.est_capex_per_unit_k ? `$${t.est_capex_per_unit_k}K` : 'not established'}<br>
-              <span class="field">Payback:</span> ${t.est_payback_months ? `${t.est_payback_months}mo` : 'not established'}<br>
+              <span class="field">Revenue:</span> $${t.est_revenue_low_k}–${t.est_revenue_high_k}K/unit<br>
+              <span class="field">Margin:</span> ${t.est_margin_pct}%<br>
+              <span class="field">SDE:</span> $${t.est_sde_low_k}–${t.est_sde_high_k}K/unit<br>
+              <span class="field">Capex/Unit:</span> $${t.est_capex_per_unit_k}K<br>
+              <span class="field">Payback:</span> ${t.est_payback_months}mo<br>
               <span class="field">Confidence:</span> ${confidenceBadge(t.model_confidence)}
             </p>
             <h4>First Diligence</h4>
@@ -10716,32 +10255,28 @@ function showView(view) {
 
 // ===== RANKINGS =====
 function renderRankings() {
-  const targets = TARGETS.filter(isActionable);
+  const targets = TARGETS.filter(t => t.status === 'target');
 
-  // Top 20 named, sourced, unit-fit diligence candidates.
-  const byConviction = [...targets].sort(actionabilitySort);
+  // Top 20 by conviction
+  const byConviction = [...targets].sort((a,b) => b.conviction_score - a.conviction_score);
   document.getElementById('rankConviction').innerHTML = byConviction.slice(0,20).map((t,i) =>
     `<tr><td class="rank-num">${i+1}</td><td><b>${t.name}</b></td><td>${t.category}</td><td style="color:${convictionColor(t.conviction_score)};font-weight:700;text-align:center">${t.conviction_score}</td><td>${'⭐'.repeat(t.cash_on_cash_potential)}</td><td>$${t.check_size_k}K</td><td>${urgencyBadge(t.urgency)}</td></tr>`
   ).join('');
 
-  // Evidence gaps replace the old "fastest money" ranking, which improperly
-  // ranked placeholder assumptions as though they were actual target returns.
-  const byGap = TARGETS.filter(t => t.status !== 'comp' && t.evidence_state !== 'verified_public').sort((a,b) => b.conviction_score - a.conviction_score || a.name.localeCompare(b.name));
-  document.getElementById('rankFast').innerHTML = byGap.slice(0,10).map((t,i) =>
-    `<tr><td class="rank-num">${i+1}</td><td><b>${t.name}</b></td><td>${t.category}</td><td>${t.conviction_score}</td><td>${t.actionability_gate.replaceAll('_',' ')}</td><td>${t.next_action}</td></tr>`
+  // Top 10 fast money (CoC / time_to_revenue)
+  const byFast = [...targets].sort((a,b) => (b.cash_on_cash_potential/a.time_to_revenue_months) - (a.cash_on_cash_potential/a.time_to_revenue_months));
+  document.getElementById('rankFast').innerHTML = byFast.slice(0,10).map((t,i) =>
+    `<tr><td class="rank-num">${i+1}</td><td><b>${t.name}</b></td><td>${t.category}</td><td>${'⭐'.repeat(t.cash_on_cash_potential)}</td><td>${t.time_to_revenue_months}mo</td><td>${t.est_payback_months}mo</td></tr>`
   ).join('');
 
   // Top 10 urgent
-  const byUrgent = [...targets].filter(t => t.urgency === 'high').sort(actionabilitySort);
+  const byUrgent = [...targets].filter(t => t.urgency === 'high').sort((a,b) => b.conviction_score - a.conviction_score);
   document.getElementById('rankUrgent').innerHTML = byUrgent.slice(0,10).map((t,i) =>
     `<tr><td class="rank-num">${i+1}</td><td><b>${t.name}</b></td><td>${t.category}</td><td style="color:${convictionColor(t.conviction_score)};font-weight:700;text-align:center">${t.conviction_score}</td><td>${(t.story||'').substring(0,100)}...</td></tr>`
   ).join('');
 
-  // Explicit comps/kills, prioritizing terminal and acquired/over-cap rows.
-  const byKill = TARGETS.filter(t => t.status === 'comp').sort((a,b) => {
-    const terminal = x => ['killed_lane','over_unit_cap'].includes(x.actionability_gate) ? 1 : 0;
-    return terminal(b) - terminal(a) || a.conviction_score - b.conviction_score || a.name.localeCompare(b.name);
-  });
+  // Bottom 20 kill list
+  const byKill = [...TARGETS].sort((a,b) => a.conviction_score - b.conviction_score);
   document.getElementById('rankKill').innerHTML = byKill.slice(0,20).map((t,i) =>
     `<tr><td class="rank-num">${i+1}</td><td>${t.name}</td><td>${t.category}</td><td style="color:${convictionColor(t.conviction_score)};font-weight:700;text-align:center">${t.conviction_score}</td><td><span class="status-badge status-${t.status}">${t.status}</span></td></tr>`
   ).join('');
@@ -10785,61 +10320,67 @@ function updateMap() {
 // ============================================
 // CONSUMER BRAND RANKED TABLE
 // ============================================
-const ON_THESIS_CATS = new Set([
-  'Bagels','Swedish Candy','Frozen Dessert','Gelato','Ice Cream',
-  'Bakery','Cookies','Donuts','Coffee','Drive-Thru Coffee',
-  'Chocolate','Artisan Chocolate','CPG + Food Brand','Consumer Food Brand',
-  'Consumer Food','Luxury Repair & Circular Care','Specialty Candy Retail',
-  'Beverage','Food & Beverage','Fast Casual','Dessert Hybrid'
-]);
-function isActionable(t) {
-  // On-thesis consumer food brand, not killed or comp, 1-10 units (or unknown)
-  if (t.status === 'killed' || t.status === 'comp') return false;
-  if (t.thesis_tag === 'off-thesis-reference') return false;
-  const cat = t.category || '';
-  if (!ON_THESIS_CATS.has(cat)) return false;
-  const u = Number(t.units);
-  if (isNaN(u)) return true; // unknown units — include
-  return u >= 1 && u <= 10;
-}
-function actionabilitySort(a, b) {
-  const statusDelta = (b.status === 'target') - (a.status === 'target');
-  if (statusDelta) return statusDelta;
-  // Sort by conviction score descending
-  return Number(b.conviction_score || 0) - Number(a.conviction_score || 0) || a.name.localeCompare(b.name);
-}
+const BRAND_DATA = [
+  {rank:1,name:"ScandyCandy",cat:"Swedish Candy",score:4.3,uw:4.0,markets:"Miami/SFL",units:"3-4",status:"target",thesis:"3-unit SFL Swedish candy. Founder-led. Viral Instagram. Zero institutional capital. Best pure actionability in the candy lane."},
+  {rank:2,name:"Starship Bagel",cat:"Bagels",score:4.1,uw:4.1,markets:"DFW",units:"3",status:"target",thesis:"3-unit DFW bagel shop. Won Best Bagel in America twice (2023, 2025). Brooklyn-born founder Oren Salomon. Self-funded."},
+  {rank:3,name:"Go Yummy",cat:"Swedish Candy",score:4.05,uw:3.9,markets:"Miami/SFL",units:"3",status:"target",thesis:"3-unit SFL Swedish candy. Claims largest Swedish candy store in US. Ecommerce + nationwide shipping. Direct SFL competitor to ScandyCandy."},
+  {rank:4,name:"BonBon",cat:"Swedish Candy",score:4.2,uw:3.7,markets:"NYC",units:"6-7",status:"watch",thesis:"5-unit NYC Swedish candy leader. ~$10.3M revenue, 55 employees. Founded 2017 by three Swedish friends. Mega viral TikTok."},
+  {rank:5,name:"Botolino Gelato",cat:"Frozen Dessert",score:3.8,uw:3.7,markets:"DFW",units:"4",status:"target",thesis:"4-unit DFW gelato. Carlo Gattini, 3rd-generation gelatiere. Best gelato DFW per Yelp. No capital. Organic growth."},
+  {rank:6,name:"Cookie Society",cat:"Bakery",score:3.8,uw:3.6,markets:"DFW",units:"5",status:"target",thesis:"5-unit DFW cookie brand in premium submarkets. Marissa Allen + Jeff Allen (former NFL). Largest black-owned cookie brand in TX."},
+  {rank:7,name:"Sunday Morning Cinnamon Rolls",cat:"Bakery",score:3.75,uw:3.5,markets:"NYC",units:"2",status:"target",thesis:"2-unit NYC cinnamon roll shop. Viral TikTok. Flatiron expansion 2026. Simple ops + low capex."},
+  {rank:8,name:"Jeff's Bagel Run",cat:"Bagels",score:3.75,uw:3.6,markets:"Houston TX",units:"4",status:"target",thesis:"4-unit Houston bagel chain. FL-origin, expanding aggressively in TX. Heights location opens Sept 2026."},
+  {rank:9,name:"Birria-Landia",cat:"Consumer Food",score:3.7,uw:3.4,markets:"NYC",units:"4",status:"target",thesis:"4-unit NYC birria taco operator. Food truck origins → brick-and-mortar. Popularized birria in NYC. Jose Moreno co-founder."},
+  {rank:10,name:"Layla Bagels",cat:"Bagels",score:3.65,uw:3.5,markets:"LA",units:"2",status:"target",thesis:"2-unit LA sourdough bagel shop. Chef-driven. Expanded Santa Monica → Beverly Hills 2024. Bon Appétit best-in-US."},
+  {rank:11,name:"Sweet Hut Bakery",cat:"Bakery",score:3.5,uw:3.3,markets:"Atlanta, SFL",units:"7-8",status:"watch",thesis:"3-unit Chinese Malaysian bakery. Ewe family founders. Expanded ATL → FL 2025. Differentiated format."},
+  {rank:12,name:"Figo Il Gelato",cat:"Frozen Dessert",score:3.5,uw:3.4,markets:"NYC",units:"5",status:"target",thesis:"5-unit NYC gelato chain growing. L'Arte del Gelato creator. Authentic Italian. Founder Federico. Figo/L'Arte relationship unclear."},
+  {rank:13,name:"Third Culture Bakery",cat:"Bakery",score:3.5,uw:3.3,markets:"Bay Area, Denver",units:"4-5",status:"target",thesis:"4-unit Bay Area mochi donut shop. Inventor of mochi muffin. Sam Butarbutar co-founder. Brand equity in product category."},
+  {rank:14,name:"Sweetish Candy",cat:"Swedish Candy",score:3.55,uw:3.4,markets:"Lancaster PA",units:"2",status:"watch",thesis:"2-unit Lancaster PA Swedish candy shop. Founder-led. Secondary market operator. Low capex, high margin."},
+  {rank:15,name:"Utopia Bagels",cat:"Bagels",score:3.6,uw:3.5,markets:"NYC (Queens)",units:"4",status:"watch",thesis:"4-unit established Queens bagel brand expanding to Midtown. Proven NYC bagel credibility."},
+  {rank:16,name:"Sockerbit",cat:"Swedish Candy",score:3.35,uw:3.2,markets:"LA, National CPG",units:"2-3",status:"watch",thesis:"2-unit LA Swedish candy + massive CPG. 3000+ stores including 1600 Target. CPG may be primary revenue."},
+  {rank:17,name:"Wanderlust Creamery",cat:"Frozen Dessert",score:3.35,uw:3.2,markets:"LA/OC",units:"10",status:"target",thesis:"10-unit LA/OC ice cream. Adrienne Borlongan. Cookbook published. ACTIVELY SEEKING INVESTOR per Facebook post."},
+  {rank:18,name:"Saturday Candy Co.",cat:"Swedish Candy",score:3.55,uw:3.3,markets:"Long Island NY",units:"2-3",status:"watch",thesis:"2-unit Long Island Swedish candy shop. Opening Sayville April 2026. Ecommerce present. No capital."},
+  {rank:19,name:"Supermoon Bakehouse",cat:"Bakery",score:3.4,uw:3.1,markets:"NYC",units:"1-2",status:"watch",thesis:"1-unit NYC viral pastry shop. Scott Cioe founder. Massive Instagram brand for its size. IF founder wants to scale."},
+  // Additional from emerging pipeline - strong 1-10 unit consumer targets
+  {rank:20,name:"Dolcezza",cat:"Frozen Dessert",score:3.4,uw:3.3,markets:"DC/MD/VA",units:"10",status:"target",thesis:"~10-unit DC area gelato + coffee. Artisanal production facility. Established brand in affluent DMV corridor."},
+  {rank:21,name:"Radio Bakery",cat:"Bakery",score:3.3,uw:3.2,markets:"Brooklyn",units:"1-2",status:"target",thesis:"Greenpoint bakery with cult following. Viral pastries. Strong NYC word-of-mouth."},
+  {rank:22,name:"Caffe Panna",cat:"Frozen Dessert",score:3.3,uw:3.2,markets:"NYC",units:"2",status:"target",thesis:"Gramercy + Greenpoint soft-serve + gelato. Italian-style. NYC priority market. Growing."},
+  {rank:23,name:"Sugar Shane's Bake Shop",cat:"Bakery",score:3.3,uw:3.1,markets:"Atlanta",units:"4",status:"target",thesis:"4-unit Atlanta bakery. Founder-led. Growing. SE metro expandable."},
+  {rank:24,name:"Anita Gelato",cat:"Frozen Dessert",score:3.2,uw:3.0,markets:"NYC/NJ",units:"5",status:"watch",thesis:"~5-unit NYC/NJ gelato chain. Authentic Italian. Multi-market presence already."},
+  {rank:25,name:"Ess-a-Bagel",cat:"Bagels",score:3.2,uw:3.0,markets:"NYC",units:"3",status:"watch",thesis:"3-unit NYC institution bagel shop. Heritage credibility. Established brand."},
+  {rank:26,name:"Mah-Ze-Dahr",cat:"Bakery",score:3.2,uw:3.0,markets:"NYC",units:"2-3",status:"watch",thesis:"Manhattan bakery. Elevated format. Brand recognition. Founder-led."},
+  {rank:27,name:"La Cabra",cat:"Bakery",score:3.2,uw:3.0,markets:"NYC",units:"2",status:"watch",thesis:"East Village + NoMad. Danish-influenced bakery. High-end. Viral pastries."},
+  {rank:28,name:"Win Son Bakery",cat:"Bakery",score:3.1,uw:2.9,markets:"NYC",units:"2",status:"watch",thesis:"Williamsburg + East Village. Taiwanese-American bakery. Growing in NYC."},
+  {rank:29,name:"Kirch Bagels",cat:"Bagels",score:3.1,uw:2.9,markets:"LA",units:"2",status:"watch",thesis:"2-unit LA bagel shop. LA market comp."},
+  {rank:30,name:"Dan's Bagels",cat:"Bagels",score:3.1,uw:2.9,markets:"DFW",units:"2",status:"watch",thesis:"2-unit DFW bagel. DFW market comp alongside Starship."}
+];
 
-let brandFilter = 'actionable';
+let brandFilter = 'All';
 let brandSortCol = 'rank';
 let brandSortDir = 'asc';
 
 function renderBrandTable() {
   const tbody = document.getElementById('brandRankBody');
   if (!tbody) return;
-  let rows = TARGETS.filter(t => {
-    if (brandFilter === 'actionable') return isActionable(t);
-    if (brandFilter === 'targets') return t.status === 'target';
-    if (brandFilter === 'watch') return t.status === 'watch';
-    if (brandFilter === 'killed') return t.status === 'killed';
-    return false;
-  }).sort(actionabilitySort).map((t, i) => ({...t, rank: i + 1}));
+  let rows = BRAND_DATA.filter(r => brandFilter === 'All' || r.cat === brandFilter);
   rows.sort((a,b) => {
     let va = a[brandSortCol], vb = b[brandSortCol];
     if (typeof va === 'string') { va = va.toLowerCase(); vb = vb.toLowerCase(); }
     if (brandSortDir === 'asc') return va < vb ? -1 : va > vb ? 1 : 0;
     return va > vb ? -1 : va < vb ? 1 : 0;
   });
+  const scoreColor = s => `hsl(${Math.round((s-2.5)/2*100)}, ${50+s*5}%, ${55+s*3}%)`;
+  const statusBadge = s => s === 'target' ? '<span style="color:#4ade80;font-weight:600">🎯 target</span>' : '<span style="color:#fbbf24">👀 watch</span>';
   tbody.innerHTML = rows.map(r => `
     <tr style="border-bottom:1px solid rgba(255,255,255,0.04)" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background=''">
       <td style="padding:6px 12px;color:rgba(255,255,255,0.5)">#${r.rank}</td>
       <td style="padding:6px 12px;font-weight:600">${r.name}</td>
-      <td style="padding:6px 12px;color:rgba(255,255,255,0.7);font-size:12px">${r.category || '—'}</td>
-      <td style="padding:6px 12px;text-align:center;color:${convictionColor(r.conviction_score)};font-weight:700">${r.conviction_score || '—'}</td>
-      <td style="padding:6px 12px;font-size:12px">${r.pipeline_type ? pipelineLabel(r.pipeline_type) : '—'}</td>
-      <td style="padding:6px 12px;font-size:12px;color:rgba(255,255,255,0.7)">${[r.hq_city,r.hq_state].filter(Boolean).join(', ') || '—'}</td>
-      <td style="padding:6px 12px;text-align:center;font-weight:600">${r.units ?? '—'}</td>
-      <td style="padding:6px 12px;font-size:12px"><span class="status-badge status-${r.status}">${r.status}</span> ${r.evidence_state ? evidenceBadge(r.evidence_state) : ''}</td>
-      <td style="padding:6px 12px;font-size:11px;color:rgba(255,255,255,0.55);max-width:420px">${r.next_action || (r.story || '').substring(0,120) || '—'}</td>
+      <td style="padding:6px 12px;color:rgba(255,255,255,0.7);font-size:12px">${r.cat}</td>
+      <td style="padding:6px 12px;text-align:center;color:${scoreColor(r.score)};font-weight:700">${r.score.toFixed(1)}</td>
+      <td style="padding:6px 12px;text-align:center;color:${scoreColor(r.uw)}">${r.uw.toFixed(1)}</td>
+      <td style="padding:6px 12px;font-size:12px;color:rgba(255,255,255,0.7)">${r.markets}</td>
+      <td style="padding:6px 12px;text-align:center;font-weight:600">${r.units}</td>
+      <td style="padding:6px 12px;font-size:12px">${statusBadge(r.status)}</td>
+      <td style="padding:6px 12px;font-size:11px;color:rgba(255,255,255,0.55);max-width:400px">${r.thesis}</td>
     </tr>
   `).join('');
 }
@@ -10862,7 +10403,7 @@ document.querySelectorAll('.brand-filter-btn').forEach(btn => {
     btn.style.background = 'rgba(255,255,255,0.08)';
     btn.style.color = '#fff';
     btn.style.borderColor = 'rgba(255,255,255,0.15)';
-    brandFilter = btn.dataset.mode;
+    brandFilter = btn.dataset.cat;
     renderBrandTable();
   };
 });
