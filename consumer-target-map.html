@@ -10256,9 +10256,8 @@ TARGETS.push({
 });
 
 // Net-new names promoted from the July 19 FDDIQ signal engine only after
-// current official operating counts were reverified. Sugar Shane's closes a
-// ranked-table/source-file gap but remains watch-only because it already has
-// an outside venture-studio partner and the official site lists three stores.
+// current official operating counts were reverified. Sugar Shane's already
+// exists in the base dataset and is corrected through the override layer.
 TARGETS.push(
   {
     id: "joju",
@@ -10345,49 +10344,6 @@ TARGETS.push(
     pipeline_type: "franchise_rights",
     evidence_state: "verified_public",
     next_action: "Reconstruct the FDD economics and confirm Boston/NY territory availability before any outreach."
-  },
-  {
-    id: "sugar-shanes-bake-shop",
-    name: "Sugar Shane's Bake Shop",
-    category: "Bakery",
-    subcategory: "Premium cookies and rotating desserts",
-    units: 3,
-    units_text: "3 stores listed on the official site: Sandy Springs, Kennesaw and Midtown",
-    hq_city: "Atlanta",
-    hq_state: "GA",
-    lat: 33.84,
-    lng: -84.39,
-    founded: 2020,
-    status: "watch",
-    buzz_signals: ["Three current official store locations", "Nationwide shipping and corporate gifting", "Founder is already partnered with Founders Row on The Baking Social"],
-    team: "Founder Shane Quillin; outside venture-studio relationship reduces entry clarity",
-    story: "Founder-led Atlanta cookie brand that appeared in the legacy ranked table but not the map. It belongs on the watchlist, not active diligence, because a venture-studio partnership already addresses the support role Dan might otherwise fill.",
-    traction: "Three official stores plus shipping and corporate gifting",
-    funding: "Outside venture-studio relationship on adjacent concept; brand-level ownership requires verification",
-    entry_path: "Watch for a clearly available founder/JV or territory structure",
-    dan_value_add: "Multi-unit underwriting and disciplined expansion capital if a distinct role becomes available",
-    first_diligence: "Clarify current brand ownership, closed versus active locations and Founders Row scope",
-    sources: ["https://sugarshanes.com/"],
-    last_updated: "2026-07-19",
-    added_date: "2026-07-19",
-    source_file: "emerging-pipeline-gap-audit-20260719",
-    conviction_score: 5,
-    cash_on_cash_potential: 2,
-    time_to_revenue_months: 12,
-    entry_difficulty: 4,
-    check_size_k: 500,
-    urgency: "low",
-    est_revenue_low_k: 0,
-    est_revenue_high_k: 0,
-    est_margin_pct: 0,
-    est_sde_low_k: 0,
-    est_sde_high_k: 0,
-    est_capex_per_unit_k: 0,
-    est_payback_months: 0,
-    model_confidence: "low",
-    pipeline_type: "watchlist",
-    evidence_state: "verified_public",
-    next_action: "Clarify ownership and the venture-studio relationship; do not duplicate an already-filled partner role."
   }
 );
 
@@ -10397,6 +10353,7 @@ const PIPELINE_OVERRIDES = {
   "layla-bagels": { units: 3, units_text: "3 active Los Angeles locations", sources: ["https://www.laylabagels.com/"], evidence_state: "verified_public", pipeline_type: "jv_candidate", next_action: "Resolve Miami rights, economics, governance and operator accountability before investment diligence." },
   "jeff-s-bagel-run": { units: 38, units_text: "38 open shops; official locator lists 42 and targets 50 by year-end", status: "watch", sources: ["https://jeffsbagelrun.com/locations"], evidence_state: "verified_public", pipeline_type: "franchise_rights", next_action: "Use as an FDD benchmark and future franchisee-resale watch; no Dan-led greenfield build." },
   "scandycandy": { units: 3, units_text: "3 open Florida stores; Sarasota UTC listed as coming soon", conviction_score: 6, sources: ["https://scandycandy.store/pages/store-locator", "https://scandycandy.store/pages/faqs", "https://utcsarasota.com/places/shop/scandycandy/"], evidence_state: "verified_public", pipeline_type: "jv_candidate", next_action: "Verify same-store repeat demand, Sarasota opening, import economics and founder openness after novelty decay." },
+  "sugar-shane-s": { units: 3, units_text: "3 stores listed on the official site: Sandy Springs, Kennesaw and Midtown", status: "watch", sources: ["https://sugarshanes.com/"], evidence_state: "verified_public", pipeline_type: "watchlist", next_action: "Clarify brand ownership and the Founders Row venture-studio relationship; do not duplicate an already-filled partner role." },
   "cookie-society": { sources: ["https://cookiesociety.com/"], evidence_state: "verified_public", next_action: "Verify current open-store count, owner dependence, central production and store-level economics before any founder conversation." },
   "sunday-morning-cinnamon-rolls": { sources: ["https://sundaymorningnyc.com/"], evidence_state: "verified_public", next_action: "Verify current locations, production model, owner dependence and repeat demand outside social buzz." },
   "supermoon-bakehouse": { units: 1, units_text: "1 current Lower East Side shop", status: "watch", sources: ["https://www.supermoonbakehouse.com/"], evidence_state: "verified_public", pipeline_type: "watchlist", next_action: "Single-unit founder format: retain as product/brand comp until a second unit and manager-run economics exist." },
@@ -10504,6 +10461,10 @@ TARGETS.forEach(t => {
     t.status = 'comp';
     t.pipeline_type = 'operating_comp';
     t.next_action = 'Killed by Dan on 2026-07-19: crowded lane, labor dependence and insufficient manager-run returns. Reopen only for an anomalously cheap manager-run asset with verified sub-three-year equity payback.';
+  } else if (t.status === 'killed') {
+    t.status = 'comp';
+    t.pipeline_type = 'operating_comp';
+    t.next_action = t.next_action || 'Terminally rejected; retain only as a reference comp.';
   } else if (t.status === 'target' && Number(t.units) > 10) {
     t.status = 'comp';
     t.pipeline_type = 'operating_comp';
@@ -10515,6 +10476,7 @@ TARGETS.forEach(t => {
   }
 
   t.actionability_gate = isKilledPetLane ? 'killed_lane'
+    : t.status === 'killed' ? 'terminal_kill'
     : Number(t.units) > 10 ? 'over_unit_cap'
     : !hasValidUnitCount ? 'unit_count_unverified'
     : isGeneric ? 'unnamed_or_generic'
@@ -10524,7 +10486,7 @@ TARGETS.forEach(t => {
     : 'comp';
 });
 
-const CATEGORY_COLORS = {"Bagels":"#8B6914","Bakery":"#D4A574","Swedish Candy":"#FF6B9D","Frozen Dessert":"#A8D8EA","Food & Beverage":"#FF8C42","Fast Casual":"#E8743B","Beverage":"#6B8E23","Pet Services":"#4A90D9","Auto Services":"#6B6B6B","Youth Sports & Kids":"#50C878","Boutique Fitness":"#FF6347","Med Spa & Wellness":"#DDA0DD","Beauty & Aesthetics":"#FF69B4","Experiential Entertainment":"#9370DB","Home Technology Services":"#708090","Social Bathhouse":"#20B2AA","Padel & Racquet Social":"#00CED1","Luxury Repair & Circular Care":"#DAA520","Tabletop & Hobby Social":"#8B4513","Plant Workshop & Retail":"#228B22","Kids Haircuts & Family Grooming":"#FFB347","Aging-in-Place & Mobility":"#B0C4DE","GLP-1 & Weight-Loss Services":"#FF1493","Non-Alcoholic & Sober Social":"#7B68EE","Drive-Thru Coffee":"#8B4513","Pilates Reformer & Boutique":"#C71585","IV Hydration & Recovery":"#00BFFF","Social Run Clubs":"#F97316","Mobile Pet Grooming":"#60A5FA","Land-Backed: Car Wash":"#64748B","Land-Backed: RV Park":"#84CC16","Land-Backed: Self-Storage":"#94A3B8","Land-Backed: Marina":"#0EA5E9","Land-Backed: Garden Center":"#65A30D","Artisan Chocolate":"#92400E","Specialty Candy Retail":"#F472B6","Ice Cream":"#7DD3FC","Cookies":"#C084FC","Gelato":"#67E8F9"};
+const CATEGORY_COLORS = {"Bagels":"#8B6914","Bakery":"#D4A574","Swedish Candy":"#FF6B9D","Frozen Dessert":"#A8D8EA","Food & Beverage":"#FF8C42","Fast Casual":"#E8743B","Beverage":"#6B8E23","Pet Services":"#4A90D9","Auto Services":"#6B6B6B","Youth Sports & Kids":"#50C878","Boutique Fitness":"#FF6347","Med Spa & Wellness":"#DDA0DD","Beauty & Aesthetics":"#FF69B4","Experiential Entertainment":"#9370DB","Home Technology Services":"#708090","Social Bathhouse":"#20B2AA","Padel & Racquet Social":"#00CED1","Luxury Repair & Circular Care":"#DAA520","Tabletop & Hobby Social":"#8B4513","Plant Workshop & Retail":"#228B22","Kids Haircuts & Family Grooming":"#FFB347","Aging-in-Place & Mobility":"#B0C4DE","GLP-1 & Weight-Loss Services":"#FF1493","Non-Alcoholic & Sober Social":"#7B68EE","Drive-Thru Coffee":"#8B4513","Pilates Reformer & Boutique":"#C71585","IV Hydration & Recovery":"#00BFFF","Social Run Clubs":"#F97316","Mobile Pet Grooming":"#60A5FA","Land-Backed: Car Wash":"#64748B","Land-Backed: RV Park":"#84CC16","Land-Backed: Self-Storage":"#94A3B8","Land-Backed: Marina":"#0EA5E9","Land-Backed: Garden Center":"#65A30D","Artisan Chocolate":"#92400E","Specialty Candy Retail":"#F472B6","Ice Cream":"#7DD3FC","Cookies":"#C084FC","Gelato":"#67E8F9","Donuts":"#F59E0B","CPG + Food Brand":"#EA580C","Chocolate":"#7C2D12"};
 let currentSort = { key: 'conviction_score', dir: 'desc' };
 let filtered = [...TARGETS];
 
@@ -10541,8 +10503,9 @@ function urgencyBadge(u) {
 }
 
 function confidenceBadge(c) {
-  const cls = c === 'high' ? 'confidence-high' : c === 'medium' ? 'confidence-medium' : 'confidence-low';
-  return `<span class="confidence-badge ${cls}">${c}</span>`;
+  const value = c || 'not established';
+  const cls = value === 'high' ? 'confidence-high' : value === 'medium' ? 'confidence-medium' : 'confidence-low';
+  return `<span class="confidence-badge ${cls}">${value}</span>`;
 }
 
 function evidenceBadge(state) {
@@ -10594,10 +10557,10 @@ function renderTable() {
       <td><span class="pipeline-badge">${pipelineLabel(t.pipeline_type)}</span></td>
       <td>${evidenceBadge(t.evidence_state)}</td>
       <td>${t.units || '—'}</td>
-      <td class="financial">$${t.check_size_k}K</td>
-      <td style="text-align:center">${'⭐'.repeat(t.cash_on_cash_potential)}</td>
-      <td>${t.time_to_revenue_months}mo</td>
-      <td>${t.est_payback_months}mo</td>
+      <td class="financial">${Number.isFinite(Number(t.check_size_k)) ? `$${t.check_size_k}K` : '—'}</td>
+      <td style="text-align:center">${Number.isFinite(Number(t.cash_on_cash_potential)) ? '⭐'.repeat(t.cash_on_cash_potential) : '—'}</td>
+      <td>${Number.isFinite(Number(t.time_to_revenue_months)) ? `${t.time_to_revenue_months}mo` : '—'}</td>
+      <td>${Number.isFinite(Number(t.est_payback_months)) && Number(t.est_payback_months) > 0 ? `${t.est_payback_months}mo` : '—'}</td>
       <td>${urgencyBadge(t.urgency)}</td>
       <td>${t.hq_city || '—'}</td>
     </tr>
@@ -10721,7 +10684,7 @@ function renderRankings() {
   // Top 20 named, sourced, unit-fit diligence candidates.
   const byConviction = [...targets].sort(actionabilitySort);
   document.getElementById('rankConviction').innerHTML = byConviction.slice(0,20).map((t,i) =>
-    `<tr><td class="rank-num">${i+1}</td><td><b>${t.name}</b></td><td>${t.category}</td><td style="color:${convictionColor(t.conviction_score)};font-weight:700;text-align:center">${t.conviction_score}</td><td>${'⭐'.repeat(t.cash_on_cash_potential)}</td><td>$${t.check_size_k}K</td><td>${urgencyBadge(t.urgency)}</td></tr>`
+    `<tr><td class="rank-num">${i+1}</td><td><b>${t.name}</b></td><td>${t.category}</td><td style="color:${convictionColor(t.conviction_score)};font-weight:700;text-align:center">${t.conviction_score}</td><td>${Number.isFinite(Number(t.cash_on_cash_potential)) ? '⭐'.repeat(t.cash_on_cash_potential) : '—'}</td><td>${Number.isFinite(Number(t.check_size_k)) ? `$${t.check_size_k}K` : '—'}</td><td>${urgencyBadge(t.urgency)}</td></tr>`
   ).join('');
 
   // Evidence gaps replace the old "fastest money" ranking, which improperly
@@ -10774,7 +10737,7 @@ function updateMap() {
         <span style="color:${color}">${t.status} · Conviction ${t.conviction_score}</span><br>
         <small>${t.category}</small><br>
         <small>${pipelineLabel(t.pipeline_type)} · ${t.evidence_state.replaceAll('_', ' ')}</small><br>
-        <small>Check: $${t.check_size_k}K · CoC: ${'⭐'.repeat(t.cash_on_cash_potential)}</small><br><br>
+        <small>Check: ${Number.isFinite(Number(t.check_size_k)) ? `$${t.check_size_k}K` : 'not established'} · CoC: ${Number.isFinite(Number(t.cash_on_cash_potential)) ? '⭐'.repeat(t.cash_on_cash_potential) : 'not established'}</small><br><br>
         <small>${(t.story||'').substring(0,150)}</small>
       </div>
     `);
