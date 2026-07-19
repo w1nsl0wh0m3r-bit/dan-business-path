@@ -138,7 +138,7 @@ const html = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Emerging Multi-Unit Pipeline | Dan's Business Path</title>
-<meta name="description" content="Dan's source-of-truth emerging multi-unit and consumer brand pipeline, updated with the June 19 rerating.">
+<meta name="description" content="Dan's source-of-truth emerging multi-unit and consumer brand pipeline, updated through the July 19 Situation Room review.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -152,13 +152,13 @@ const html = `<!doctype html>
 </head>
 <body>
 <main class="shell">
-<nav><b>Dan's source-of-truth pipeline</b><div class="links"><a href="./index.html">Dashboard</a><a href="#corpus">Full List</a><a href="#operators">Operators</a><a href="./operating.html">Operating</a></div></nav>
+<nav><b>Dan's source-of-truth pipeline</b><div class="links"><a href="./index.html">Dashboard</a><a href="./consumer-target-map.html">Situation Room</a><a href="#corpus">Full List</a><a href="#operators">Operators</a><a href="./operating.html">Operating</a></div></nav>
 
 <section class="hero-card">
-<span class="kicker">Source of truth - updated 2026-06-19</span>
+<span class="kicker">Source of truth - updated 2026-07-19</span>
 <h1>Emerging multi-unit and consumer brand pipeline.</h1>
-<p class="lede">This page supersedes the stale June 12 45-candidate view. It now opens directly into the full consumer-brand sourcing universe, with source links, map links, Instagram links, corrected named-operator context, proof sprint re-rating, Swedish candy validation, and frozen-yogurt chain additions.</p>
-<span class="tag">${corpus.length} consumer brand corpus rows</span><span class="tag">45 scored ranking candidates retained in source files</span><span class="tag">${operators.length} corrected named-operator rows</span><span class="tag">${proof.length} proof-sprint rows</span><span class="tag">No outreach / no spend</span>
+<p class="lede">This page supersedes the stale June 12 45-candidate view. It now opens directly into the full consumer-brand sourcing universe, with corrected operator context, proof-sprint rerating, July 4 lane validation, and the July 19 Situation Room cleanup and expansion.</p>
+<span class="tag">${corpus.length} consumer brand corpus rows</span><span class="tag">45 scored ranking candidates retained in source files</span><span class="tag">${operators.length} corrected named-operator rows</span><span class="tag">${proof.length} proof-sprint rows</span><span class="tag">152 Situation Room entries</span><span class="tag">No outreach / no spend</span>
 </section>
 
 <section>
@@ -194,16 +194,40 @@ const html = `<!doctype html>
 </section>
 
 <section>
+<h2>July 19 Situation Room: cleanup, expansion, and sharper queues.</h2>
+<div class="note" style="margin-bottom:24px"><b>Posted 2026-07-19.</b> A senior-operator scrub separated actual acquisition/JV targets from comps, franchise systems, acquired businesses, nonprofits, and over-scaled platforms. The dedicated map was expanded from 112 audited entries to 152 tracked entries, and its stale hard-coded headline was replaced with live counts.</div>
+<div class="grid3">
+<div class="card"><h3>Bagels stay #1</h3><p>Prioritize Layla rights/JV diligence, Starship proof-unit economics, and Jeff's Bagel Run franchisee/area-development returns. Treat Utopia as a quality comp, not a near-term control target.</p></div>
+<div class="card"><h3>Pet gets narrower</h3><p>Bias to grooming, hygiene, self-wash, memberships, and micro-acquisition density. Facility-heavy boarding/daycare assets remain selective-buy resale cases, not the lead thesis.</p></div>
+<div class="card"><h3>Kids gets smaller-box</h3><p>Party-first play, STEM/maker birthdays, and venue-light programming outrank generic activity or dedicated swim greenfield. Mature hosted or resale swim remains selective.</p></div>
+</div>
+<div class="grid2" style="margin-top:18px">
+<div class="card"><h3>New-lane sprint</h3><p>Ranked discovery lanes are social bathhouse / sauna-cold plunge clubs, padel, and luxury repair / restoration. These are research queues, not approach-now recommendations.</p></div>
+<div class="card"><h3>Live map and evidence</h3><p><a href="./consumer-target-map.html">Open the 152-entry Situation Room map</a>. The supporting review is in <code>reports/situation-room-review-2026-07-19.md</code>; the public map was independently verified against the local 70 target / 49 watch / 33 comp distribution.</p></div>
+</div>
+</section>
+
+<section>
+<h2>July 4 Sprint: Lane Re-Rating & New Target Maps</h2>
+<div class="note" style="margin-bottom:24px"><b>Posted 2026-07-05.</b> Four lanes were validated against current sources, lane verdicts were issued, and three new target-map artifacts were produced. The underlying corpus/operator tables remain the June source data; the sprint adds directional verdicts and bounded validation maps.</div>
+<div class="grid2">
+<div class="card"><h3>Lane verdicts</h3><p><span class="pill advance">ADVANCE</span> youth sports / kids enrichment &nbsp; <span class="pill watch">WATCH</span> pet wellness &nbsp; <span class="pill watch">COMPLIANCE WEDGE</span> BERDO &nbsp; <span class="pill kill">KILL</span> GLP-1 local operators for a first sprint.</p></div>
+<div class="card"><h3>Artifacts</h3><p>40-target multi-lane map, 25-operator youth-sports map, 150-record BERDO list with 40 enriched records, and a BERDO exposure-scan / rescue-offer packet.</p></div>
+</div>
+<div class="card" style="margin-top:18px"><h3>Source files</h3><p><code>research/2026-07-04-consumer-proof-sprint-final-recommendation.md</code> · <code>research/2026-07-04-consumer-proof-sprint-target-map.md</code> · <code>research/2026-07-04-youth-sports-operator-map.csv</code> · <code>research/2026-07-04-berdo-validation-target-list.csv</code></p></div>
+</section>
+
+<section>
 <h2>Update discipline.</h2>
 <div class="card source">
 <p><b>Canonical public URL:</b> https://w1nsl0wh0m3r-bit.github.io/dan-business-path/emerging-multi-unit-pipeline.html</p>
 <p><b>Update rule:</b> after every material proof sprint, deep dive batch, or action-plan rerating, update this page first. Scratch files in the OpenClaw workspace are not the dashboard of record.</p>
-<p><b>Data sources:</b> consumer corpus, top-20 ranking/action-plan files used for posture context, v2 named-operator universe, named-operator proof sprint 25, Swedish candy commoditization review, and June 19 frozen-yogurt chain addendum.</p>
+<p><b>Data sources:</b> consumer corpus, top-20 ranking/action-plan files used for posture context, v2 named-operator universe, named-operator proof sprint 25, Swedish candy commoditization review, June 19 frozen-yogurt chain addendum, July 4 consumer proof sprint, and July 19 Situation Room review/map.</p>
 <p><b>Repeatable build:</b> run <code>node scripts/update_pipeline_source_of_truth.mjs</code> from the repo root.</p>
 </div>
 </section>
 
-<footer>Private working page. Source-of-truth dashboard generated from workspace research artifacts on 2026-06-19.</footer>
+<footer>Private working page. Source-of-truth dashboard generated from workspace research artifacts on 2026-07-19.</footer>
 </main>
 
 <script>
