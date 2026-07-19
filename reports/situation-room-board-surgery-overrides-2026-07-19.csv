@@ -1,4 +1,7 @@
 id,name,prior_status,new_status,manual_change,reason
+jam-time,Jam Time,missing,target,Imported four-unit Greater Boston operator from prior research,Best current party-first acquisition/JV diligence target
+play-street-museum,Play Street Museum,target,comp,Units corrected to 30+ and demoted,Above 1-10 unit mandate
+hyper-kidz,Hyper Kidz,target,comp,Units corrected to 18+ and demoted,Above 1-10 unit mandate
 starship-bagel,Starship Bagel,target,target,Added official source; classified JV candidate,Founder-aligned growth path
 layla-bagels,Layla Bagels,target,target,Units 2 to 3; official source; JV gate,Current operating footprint and Miami structure
 happy-k9-fort-worth,Happy K9 Fort Worth,target,target,Units 1 to 2; official source; acquisition target,Corrected public footprint

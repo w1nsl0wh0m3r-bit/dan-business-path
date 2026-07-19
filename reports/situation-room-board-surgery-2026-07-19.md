@@ -12,9 +12,9 @@ tags:
 
 ## Decision
 
-The board is now an operator pipeline rather than a flat list of things that look interesting. The underlying universe remains 175 entries across 27 categories, but the live dashboard now distinguishes 61 active targets, 73 watch items and 41 operating comps. The prior hardcoded cards incorrectly showed 85 / 56 / 34 even though the embedded dataset actually contained 77 / 58 / 40 before this review.
+The board is now an operator pipeline rather than a flat list of things that look interesting. The original embedded universe contained 175 entries across 27 categories; the party-first kids sprint subsequently imported Jam Time from prior research, bringing the live board to 176 entries: 60 active targets, 73 watch items and 43 operating comps. The prior hardcoded cards incorrectly showed 85 / 56 / 34 even though the embedded dataset actually contained 77 / 58 / 40 before this review.
 
-The reduction to 61 active targets is intentional. Generic lane hypotheses, unnamed franchisee clusters and stale internal-only pet names no longer count as actionable companies. The strongest current lanes remain visible, but category evidence is no longer confused with something Dan can pursue.
+The reduction to 60 active targets is intentional. Generic lane hypotheses, unnamed franchisee clusters, over-cap chains and stale internal-only pet names no longer count as actionable companies. The strongest current lanes remain visible, but category evidence is no longer confused with something Dan can pursue.
 
 Dashboard: `/Users/winslow/Projects/dan-business-path/consumer-target-map.html`
 
@@ -24,11 +24,11 @@ Rollback copy: `/Users/winslow/Projects/dan-business-path/consumer-target-map.ht
 
 | Change | Before | After | Operator implication |
 |---|---:|---:|---|
-| Total universe | 175 embedded records | 175 pipeline entries | No records silently deleted |
-| Active targets | 77 actual / 85 displayed | 61 actual and displayed | Sixteen weak or generic entries removed from active count |
+| Total universe | 175 embedded records | 176 pipeline entries | No records silently deleted; Jam Time imported from prior research |
+| Active targets | 77 actual / 85 displayed | 60 actual and displayed | Generic, weak and over-cap entries removed from active count; Jam Time added |
 | Watch | 58 actual / 56 displayed | 73 actual and displayed | Hypotheses and unverified names stay visible without masquerading as deals |
-| Comps | 40 actual / 34 displayed | 41 actual and displayed | Bathhouse moved to benchmark, not pursuit |
-| Publicly sourced | Not displayed | 144 / 175 (82%) | Evidence gap is now explicit |
+| Comps | 40 actual / 34 displayed | 43 actual and displayed | Bathhouse, Play Street Museum and Hyper Kidz moved to benchmark status |
+| Publicly sourced | Not displayed | 145 / 176 (82%) | Evidence gap is now explicit |
 | Needs public evidence | Not displayed | 31 | 20 unsupported plus 11 internal-only records |
 | Pipeline classification | None | Eight explicit types | Separates acquisitions, JVs, rights, comps, watches and sourcing instructions |
 | Next action | Inconsistent | Present on all 175 entries | Every live row has a concrete gate or sourcing instruction |
@@ -41,6 +41,7 @@ Rollback copy: `/Users/winslow/Projects/dan-business-path/consumer-target-map.ht
 4. **Generic concepts no longer inflate the target count.** GLP-1 meal delivery, bottle-shop/sober-bar concepts, independent drive-through coffee, generic yoga/barre, IV lounges and IV/med-spa hybrids are watch-level sourcing instructions until a named 2–10-unit company is found.
 5. **Internal-only pet names were demoted.** Poochies Dallas, Paws Fur Grooming Mobile, UrbanWagz, Puptown, Woofinwaggle and Brandyapple require current public verification before returning to active status. Happy K-9 was corrected to two locations with a public source and remains an acquisition screen.
 6. **Bagel facts were refreshed.** Layla is now three Los Angeles locations; Starship and Layla have public sources and explicit JV gates.
+7. **Party-first kids was corrected after the dedicated sprint.** Jam Time was imported as a four-unit Greater Boston acquisition/JV screen. Play Street Museum (30+) and Hyper Kidz (18+) were corrected and moved to comps because they violate the 1–10-unit mandate.
 
 ## Classification rules
 
@@ -64,11 +65,11 @@ This distinction matters: the 82% sourced score is a coverage measure, not a cla
 
 | Test | Result | Evidence |
 |---|---|---|
-| Embedded dataset parses | Pass | 175 unique records; no duplicate IDs or names |
+| Runtime dataset reconciles | Pass | 176 unique records after one audited import; no duplicate IDs or names |
 | Inline JavaScript syntax | Pass | `new Function()` compile test |
-| Dynamic status reconciliation | Pass | 61 target / 73 watch / 41 comp = 175 |
-| Evidence reconciliation | Pass | 144 public / 11 internal / 20 unsupported = 175 |
-| Browser render | Pass | 175 table rows rendered in Chrome from local file |
+| Dynamic status reconciliation | Pass | 60 target / 73 watch / 43 comp = 176 |
+| Evidence reconciliation | Pass | 145 public / 11 internal / 20 unsupported = 176 |
+| Browser render | Pass | 176 table rows rendered in Chrome from local file |
 | Evidence filter | Pass | Unsupported filter returns 20 rows |
 | Target filter | Pass | Target filter returns 61 rows |
 | Corrected facts | Pass | Browser shows Layla 3, Happy K-9 2 and Leather Spa 7 footprint points |
@@ -85,4 +86,3 @@ This distinction matters: the 82% sourced score is a coverage measure, not a cla
 ## Next action
 
 Use the evidence filter as the cleanup queue. Do not add any new “target” unless it is a named company with public evidence, an explicit pipeline type and a concrete next action. The next business sprint should use this stricter standard when screening party-first kids/family operators.
-

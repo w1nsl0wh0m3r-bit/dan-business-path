@@ -128,7 +128,7 @@ header .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
 
 <header>
   <h1>🎯 Situation Room — Consumer Target Map</h1>
-  <div class="subtitle">V3 — Operator-grade pipeline · 175 entries across 27 categories · Evidence audited 2026-07-19</div>
+  <div class="subtitle" id="subtitleLine">V3 — Operator-grade pipeline · 176 entries across 27 categories · Evidence audited 2026-07-19</div>
 </header>
 
 <!-- Summary Cards -->
@@ -8032,11 +8032,55 @@ const TARGETS = [
   }
 ];
 
+// Imported from the pre-map kids/family research after current operating proof was reverified.
+TARGETS.push({
+  id: "jam-time",
+  name: "Jam Time",
+  category: "Youth Sports & Kids",
+  subcategory: "Party-first indoor play and enrichment",
+  units: 4,
+  units_text: "4 Greater Boston locations",
+  hq_city: "Greater Boston",
+  hq_state: "MA",
+  lat: 42.28,
+  lng: -71.35,
+  founded: null,
+  status: "target",
+  buzz_signals: ["Four current Boston-area addresses", "$450/$550/$800 party ladder", "Public calendar exposes current booked and available party slots"],
+  team: "Founder/operator ownership requires verification",
+  story: "Four-site local indoor play and enrichment operator with open play, classes, parties, events and space rental. Best current party-first acquisition/JV diligence target.",
+  traction: "$18 open play; paid classes; visible current party bookings across a four-site local footprint",
+  funding: "Private / unknown",
+  entry_path: "Acquisition or founder-stays JV after public ownership and store-level economics work",
+  dan_value_add: "Store-level underwriting, governance, booking yield, management bench and multi-unit systems",
+  first_diligence: "Map entities, leases, review velocity, hiring depth and public party-slot utilization by location",
+  sources: ["https://www.jamtime.com/Party.php", "https://jamtime.com/Hours.php", "https://mail.jamtime.com/CalendarMallNatick.php"],
+  last_updated: "2026-07-19",
+  added_date: "2026-07-19",
+  source_file: "party_first_kids_sprint_20260719",
+  conviction_score: 9,
+  cash_on_cash_potential: 4,
+  time_to_revenue_months: 1,
+  entry_difficulty: 4,
+  check_size_k: 750,
+  urgency: "medium",
+  est_revenue_low_k: 300,
+  est_revenue_high_k: 700,
+  est_margin_pct: 15,
+  est_sde_low_k: 0,
+  est_sde_high_k: 180,
+  est_capex_per_unit_k: 350,
+  est_payback_months: 48,
+  model_confidence: "low"
+});
+
 // Manual audit overrides preserve the original dataset while making judgment changes explicit.
 const PIPELINE_OVERRIDES = {
   "starship-bagel": { sources: ["https://www.starshipbagel.com/locations"], evidence_state: "verified_public", pipeline_type: "jv_candidate", next_action: "Founder-aligned growth/JV diligence: request no outreach until store-level public proxy work is complete." },
   "layla-bagels": { units: 3, units_text: "3 active Los Angeles locations", sources: ["https://www.laylabagels.com/"], evidence_state: "verified_public", pipeline_type: "jv_candidate", next_action: "Resolve Miami rights, economics, governance and operator accountability before investment diligence." },
   "happy-k9-fort-worth": { units: 2, units_text: "2 Fort Worth-area locations", sources: ["https://happyk9.com/locations/"], evidence_state: "verified_public", pipeline_type: "acquisition_target", next_action: "Confirm ownership, manager depth, groomer concentration and whether both units are included in a potential process." },
+  "play-street-museum": { units: 30, units_text: "30+ locations per current franchisor site", status: "comp", pipeline_type: "operating_comp", next_action: "Retain as reservation-play and party-format benchmark; above the 1–10-unit mandate." },
+  "hyper-kidz": { units: 18, units_text: "18+ locations per current official locator", status: "comp", pipeline_type: "operating_comp", next_action: "Retain as large-box party comp; above the 1–10-unit mandate." },
   "bathhouse-nyc": { status: "comp", pipeline_type: "operating_comp", next_action: "Retain as category benchmark; do not pursue institutionally capitalized flagship economics." },
   "sauna-house": { pipeline_type: "jv_candidate", next_action: "Watch for experienced-operator JV or discounted second-generation asset; no standalone greenfield build." },
   "urban-sweat": { pipeline_type: "jv_candidate", next_action: "Verify unit economics and operator appetite for a Boston/NY/South Florida JV." },
@@ -8134,6 +8178,7 @@ function updateDashboardSummary() {
   document.getElementById('sumComps').textContent = comps;
   document.getElementById('sumSourced').textContent = `${Math.round(100 * sourced / TARGETS.length)}%`;
   document.getElementById('sumNeedsEvidence').textContent = TARGETS.length - sourced;
+  document.getElementById('subtitleLine').textContent = `V3 — Operator-grade pipeline · ${TARGETS.length} entries across ${Object.keys(CATEGORY_COLORS).length} categories · Evidence audited 2026-07-19`;
 
   const counts = TARGETS.reduce((acc, t) => ((acc[t.category] = (acc[t.category] || 0) + 1), acc), {});
   document.getElementById('categoryLegend').innerHTML = Object.entries(counts).sort((a,b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([category, count]) =>
