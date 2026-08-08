@@ -64,6 +64,11 @@ const top20 = top20Raw.map((r) => {
       posture: "Pass on brand acquisition",
       next: "Only evaluate as franchisee/area-developer path if Dan opts into operator build; use FDD and territory-rights diligence.",
       risk: "PE-backed brand acquisition is unrealistic for Dan."
+    },
+    "Layla Bagels": {
+      posture: "Killed for current thesis",
+      next: "Use only as a quality and brand comp. Do not pursue ownership, rights, or growth capital absent a material ownership/capital change.",
+      risk: "Billionaire-family backing makes Dan's capital strategically irrelevant; public evidence does not support a reachable transaction path."
     }
   };
   const o = overrides[brand] || {};
@@ -138,7 +143,7 @@ const html = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Emerging Multi-Unit Pipeline | Dan's Business Path</title>
-<meta name="description" content="Dan's source-of-truth emerging multi-unit and consumer brand pipeline, updated through the July 25 V7 decision queue and DFW fieldwork execution pack.">
+<meta name="description" content="Dan's source-of-truth emerging multi-unit and consumer brand pipeline, updated through the August 7 Italian caffè screen and the July 25 DFW fieldwork execution pack.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -155,10 +160,10 @@ const html = `<!doctype html>
 <nav><b>Dan's source-of-truth pipeline</b><div class="links"><a href="./index.html">Dashboard</a><a href="./consumer-target-map.html">Situation Room</a><a href="#corpus">Full List</a><a href="#operators">Operators</a><a href="./operating.html">Operating</a></div></nav>
 
 <section class="hero-card">
-<span class="kicker">Source of truth - updated 2026-07-25</span>
+<span class="kicker">Source of truth - updated 2026-08-07</span>
 <h1>Emerging multi-unit and consumer brand pipeline.</h1>
-<p class="lede">This page supersedes the stale June 12 45-candidate view. It now opens directly into the full consumer-brand sourcing universe, with corrected operator context, the July 19 Situation Room cleanup, the July 22 enthusiast-apparel decision, and the July 25 V7 proof queue and DFW fieldwork plan.</p>
-<span class="tag">${corpus.length} consumer brand corpus rows</span><span class="tag">45 scored ranking candidates retained in source files</span><span class="tag">${operators.length} corrected named-operator rows</span><span class="tag">${proof.length} proof-sprint rows</span><span class="tag">152 Situation Room entries</span><span class="tag">No outreach / no spend</span>
+<p class="lede">This page supersedes the stale June 12 45-candidate view. It now opens directly into the full consumer-brand sourcing universe, with corrected operator context, the July 19 Situation Room cleanup, the July 22 enthusiast-apparel decision, the July 25 V7 proof queue, and the August 7 Italian caffè ownership screen.</p>
+<span class="tag">${corpus.length} consumer brand corpus rows</span><span class="tag">45 scored ranking candidates retained in source files</span><span class="tag">${operators.length} corrected named-operator rows</span><span class="tag">${proof.length} proof-sprint rows</span><span class="tag">162 Situation Room entries</span><span class="tag">No outreach / no spend</span>
 </section>
 
 <section>
@@ -194,6 +199,21 @@ const html = `<!doctype html>
 </section>
 
 <section>
+<h2>August 7 Italian caffè screen: three diligence leads, no investable target yet.</h2>
+<div class="note" style="margin-bottom:24px"><b>Posted 2026-08-07.</b> The six-brand ownership, dealability, and market-porting review ranked Rosetta Bakery, Angelina Bakery, and Pappalecco as the best read-only diligence leads. None is investable from public evidence. Employment clearance and current FDD/entity/IP documents remain hard gates before any outreach.</div>
+<div class="grid3">
+<div class="card"><h3>1. Rosetta Bakery</h3><p>Best overall structure fit: minority growth investment, JV, or development partnership around a proven Italian bakery/caffè platform. Verify current ownership, Florida entity/FDD structure, store-level economics, and whether outside capital is actually useful.</p></div>
+<div class="card"><h3>2. Angelina Bakery</h3><p>Strongest franchise-system route, with in-house gelato already operating at five stores. Reconcile conflicting AUV evidence, obtain the current FDD, and separate franchisee economics from any minority investment in the franchisor.</p></div>
+<div class="card"><h3>3. Pappalecco</h3><p>Most plausible small-platform minority-growth candidate, but public evidence is thin. Confirm entity ownership, unit economics, founder goals, production systems, and whether the concept ports beyond its current footprint.</p></div>
+</div>
+<div class="grid2" style="margin-top:18px">
+<div class="card"><h3>FIGO reset</h3><p>The relevant FIGO is the New York Perandin/Nouhi gelato brand, not the Atlanta pasta company. The earlier Florida-territory thesis is superseded; keep FIGO as a watch/comp pending verified franchise and ownership evidence.</p></div>
+<div class="card"><h3>Layla killed for this thesis</h3><p>Layla is backed by Harry and David Wexner. Treat it as a quality/brand comp, not a rights, JV, or growth-capital priority; Dan's capital is not strategically relevant on current evidence.</p></div>
+</div>
+<div class="card" style="margin-top:18px"><h3>Evidence package</h3><p><code>Business Transition Engine/2026-08-06-italian-caffe-ownership-investment-screen.md</code> · independent t908 critic review completed 2026-08-07. No outreach, offer, spend, or transaction action is authorized.</p></div>
+</section>
+
+<section>
 <h2>July 25 execution queue: prove two objects, keep the rest bounded.</h2>
 <div class="note" style="margin-bottom:24px"><b>Posted 2026-07-25.</b> The V7 boundary-push replaced broad company-level enthusiasm with five transaction objects. Only Starship Bagel and Leather Spa remain active 30-day proof tracks. The DFW layer is execution-ready, but no company was rerated and no outreach is authorized.</div>
 <div class="grid3">
@@ -217,15 +237,15 @@ const html = `<!doctype html>
 
 <section>
 <h2>July 19 Situation Room: cleanup, expansion, and sharper queues.</h2>
-<div class="note" style="margin-bottom:24px"><b>Posted 2026-07-19.</b> A senior-operator scrub separated actual acquisition/JV targets from comps, franchise systems, acquired businesses, nonprofits, and over-scaled platforms. The dedicated map was expanded from 112 audited entries to 152 tracked entries, and its stale hard-coded headline was replaced with live counts.</div>
+<div class="note" style="margin-bottom:24px"><b>Posted 2026-07-19; inventory refreshed subsequently.</b> A senior-operator scrub separated actual acquisition/JV targets from comps, franchise systems, acquired businesses, nonprofits, and over-scaled platforms. The dedicated map now tracks 162 entries, and its stale hard-coded headline was replaced with live counts.</div>
 <div class="grid3">
-<div class="card"><h3>Bagels stay #1</h3><p>Prioritize Layla rights/JV diligence, Starship proof-unit economics, and Jeff's Bagel Run franchisee/area-development returns. Treat Utopia as a quality comp, not a near-term control target.</p></div>
+<div class="card"><h3>Bagels narrow to executable paths</h3><p>Prioritize Starship proof-unit economics and evaluate Jeff's Bagel Run only as a franchisee/area-development path. Treat Utopia and Layla as quality comps, not near-term control, rights, or growth-capital targets.</p></div>
 <div class="card"><h3>Pet gets narrower</h3><p>Bias to grooming, hygiene, self-wash, memberships, and micro-acquisition density. Facility-heavy boarding/daycare assets remain selective-buy resale cases, not the lead thesis.</p></div>
 <div class="card"><h3>Kids gets smaller-box</h3><p>Party-first play, STEM/maker birthdays, and venue-light programming outrank generic activity or dedicated swim greenfield. Mature hosted or resale swim remains selective.</p></div>
 </div>
 <div class="grid2" style="margin-top:18px">
 <div class="card"><h3>New-lane sprint</h3><p>Ranked discovery lanes are social bathhouse / sauna-cold plunge clubs, padel, and luxury repair / restoration. These are research queues, not approach-now recommendations.</p></div>
-<div class="card"><h3>Live map and evidence</h3><p><a href="./consumer-target-map.html">Open the 152-entry Situation Room map</a>. The supporting review is in <code>reports/situation-room-review-2026-07-19.md</code>; the public map was independently verified against the local 70 target / 49 watch / 33 comp distribution.</p></div>
+<div class="card"><h3>Live map and evidence</h3><p><a href="./consumer-target-map.html">Open the 162-entry Situation Room map</a>. The supporting review is in <code>reports/situation-room-review-2026-07-19.md</code>; use the live map for the current target/watch/comp distribution.</p></div>
 </div>
 </section>
 
@@ -244,12 +264,12 @@ const html = `<!doctype html>
 <div class="card source">
 <p><b>Canonical public URL:</b> https://w1nsl0wh0m3r-bit.github.io/dan-business-path/emerging-multi-unit-pipeline.html</p>
 <p><b>Update rule:</b> after every material proof sprint, deep dive batch, or action-plan rerating, update this page first. Scratch files in the OpenClaw workspace are not the dashboard of record.</p>
-<p><b>Data sources:</b> consumer corpus, top-20 ranking/action-plan files used for posture context, v2 named-operator universe, named-operator proof sprint 25, Swedish candy commoditization review, June 19 frozen-yogurt chain addendum, July 4 consumer proof sprint, July 19 Situation Room review/map, July 22 enthusiast-apparel IPCo/OpCo screen and evidence addendum, July 24 V7 decision queue, and July 25 DFW fieldwork command sheet and master manifest.</p>
+<p><b>Data sources:</b> consumer corpus, top-20 ranking/action-plan files used for posture context, v2 named-operator universe, named-operator proof sprint 25, Swedish candy commoditization review, June 19 frozen-yogurt chain addendum, July 4 consumer proof sprint, July 19 Situation Room review/map, July 22 enthusiast-apparel IPCo/OpCo screen and evidence addendum, July 24 V7 decision queue, July 25 DFW fieldwork command sheet and master manifest, and the independently reviewed August 7 Italian caffè ownership screen.</p>
 <p><b>Repeatable build:</b> run <code>node scripts/update_pipeline_source_of_truth.mjs</code> from the repo root.</p>
 </div>
 </section>
 
-<footer>Private working page. Source-of-truth dashboard generated from workspace research artifacts on 2026-07-25.</footer>
+<footer>Private working page. Source-of-truth dashboard generated from workspace research artifacts through 2026-08-07.</footer>
 </main>
 
 <script>
