@@ -42,8 +42,8 @@ const top20 = top20Raw.map((r) => {
     },
     "Starship Bagel": {
       posture: "DFW proof sprint",
-      next: "Mystery-shop Lewisville, Downtown Dallas, and North Dallas; test central production quality, traffic, sellout cadence, wholesale/catering, and manager-run economics.",
-      risk: "Founder/product dependence and whether North Dallas performs like the flagship."
+      next: "Mystery-shop Lewisville, Downtown Dallas, and North Dallas; validate the documented par-baking system, traffic, sellout cadence, shipping/wholesale mix, and manager-run economics before modeling a second hub.",
+      risk: "Founder/product dependence, second-hub transferability, and whether North Dallas performs like the flagship."
     },
     "Cookie Society": {
       posture: "DFW proof sprint",
@@ -143,7 +143,7 @@ const html = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Emerging Multi-Unit Pipeline | Dan's Business Path</title>
-<meta name="description" content="Dan's source-of-truth emerging multi-unit and consumer brand pipeline, updated through the August 7 Italian caffè screen and the July 25 DFW fieldwork execution pack.">
+<meta name="description" content="Dan's source-of-truth emerging multi-unit and consumer brand pipeline, updated through the August 11 consumer-brand heat scan and Boston/South Shore market-porting review.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -160,9 +160,9 @@ const html = `<!doctype html>
 <nav><b>Dan's source-of-truth pipeline</b><div class="links"><a href="./index.html">Dashboard</a><a href="./consumer-target-map.html">Situation Room</a><a href="#corpus">Full List</a><a href="#operators">Operators</a><a href="./operating.html">Operating</a></div></nav>
 
 <section class="hero-card">
-<span class="kicker">Source of truth - updated 2026-08-07</span>
+<span class="kicker">Source of truth - updated 2026-08-11</span>
 <h1>Emerging multi-unit and consumer brand pipeline.</h1>
-<p class="lede">This page supersedes the stale June 12 45-candidate view. It now opens directly into the full consumer-brand sourcing universe, with corrected operator context, the July 19 Situation Room cleanup, the July 22 enthusiast-apparel decision, the July 25 V7 proof queue, and the August 7 Italian caffè ownership screen.</p>
+<p class="lede">This page supersedes the stale June 12 45-candidate view. It now opens directly into the full consumer-brand sourcing universe, with corrected operator context, the July 19 Situation Room cleanup, the July 25 V7 proof queue, the August 9 Italian caffè reconciliation, and the August 11 bounded heat scan and Boston/South Shore porting review.</p>
 <span class="tag">${corpus.length} consumer brand corpus rows</span><span class="tag">45 scored ranking candidates retained in source files</span><span class="tag">${operators.length} corrected named-operator rows</span><span class="tag">${proof.length} proof-sprint rows</span><span class="tag">162 Situation Room entries</span><span class="tag">No outreach / no spend</span>
 </section>
 
@@ -196,6 +196,21 @@ const html = `<!doctype html>
 <h3 style="margin-top:34px">Top named-operator universe rows</h3>
 <div class="controls"><input id="operatorSearch" placeholder="Search operator universe..."><select id="operatorStatus"><option value="All">All statuses</option></select></div>
 <div class="table-shell"><table><thead><tr><th>Rank</th><th>Name</th><th>Links</th><th>Category</th><th>Geography</th><th>Units</th><th>Status</th><th>Entry path</th><th>Kill risk</th><th>First diligence question</th></tr></thead><tbody id="operatorBody"></tbody></table></div>
+</section>
+
+<section>
+<h2>August 11 heat scan: two advances, three bounded proofs.</h2>
+<div class="note" style="margin-bottom:24px"><b>Updated 2026-08-11.</b> A reconciled 50-concept screen did not reopen broad discovery or inflate the active queue. Leather Spa and Starship remain the two active proof tracks; Döner Haus earns a desk-proof slot; Jeff's Bagel Run remains conditional on Dan choosing a franchisee/area-developer seat; and venue-light youth sports remains a local operating-model proof. No outreach, spend, or strategic commitment is authorized.</div>
+<div class="grid3">
+<div class="card"><h3>ADVANCE: Leather Spa</h3><p>The licensed-store package makes a Boston intake/channel experiment more concrete and potentially more capital-light than duplicating repair production. The next gate is private license economics, service-level liability, turnaround time, and normalized four-wall EBITDA—not a full repair-facility build.</p></div>
+<div class="card"><h3>ADVANCE: Starship Bagel</h3><p>April 2026 evidence that flagship par-baking supplies three stores plus shipping and wholesale raises portability confidence. The DFW nine-visit sprint still controls; a second-hub thesis must prove transferability, manager autonomy, and support for at least three satellites.</p></div>
+<div class="card"><h3>PROVE: Döner Haus</h3><p>Best fresh Boston porting candidate: compact format, narrow menu, and franchisor-claimed low staffing. Normalize FDD Items 7, 19, and 20 before underwriting; affiliate flagship sales, ventilation, supply, Boston labor, and forced territory obligations are explicit kill gates.</p></div>
+</div>
+<div class="grid2" style="margin-top:18px">
+<div class="card"><h3>CONDITIONAL: Jeff's Bagel Run</h3><p>The evidence is credible, but the available transaction object is franchisee/area developer—not brand ownership. Do no more work until Dan affirmatively chooses that operating seat.</p></div>
+<div class="card"><h3>PROVE: venue-light youth club</h3><p>Test recurring family demand and operator quality using leased school or club capacity before considering a permanent box. Kill if there is no operator, fewer than 150 prequalified families, or the economics require a dedicated high-capex facility.</p></div>
+</div>
+<div class="card" style="margin-top:18px"><h3>Evidence package</h3><p><code>research/2026-08-11-consumer-opportunity-sprint/2026-08-11-consumer-brand-heat-scan.md</code> · <code>research/2026-08-11-consumer-opportunity-sprint/consumer-brand-heat-screen-50.csv</code> · <code>research/2026-08-11-consumer-opportunity-sprint/2026-08-11-boston-south-shore-market-porting-map.md</code> · <code>research/2026-08-11-consumer-opportunity-sprint/2026-08-11-dan-consumer-holdco-blueprint.md</code></p></div>
 </section>
 
 <section>
@@ -264,12 +279,12 @@ const html = `<!doctype html>
 <div class="card source">
 <p><b>Canonical public URL:</b> https://w1nsl0wh0m3r-bit.github.io/dan-business-path/emerging-multi-unit-pipeline.html</p>
 <p><b>Update rule:</b> after every material proof sprint, deep dive batch, or action-plan rerating, update this page first. Scratch files in the OpenClaw workspace are not the dashboard of record.</p>
-<p><b>Data sources:</b> consumer corpus, top-20 ranking/action-plan files used for posture context, v2 named-operator universe, named-operator proof sprint 25, Swedish candy commoditization review, June 19 frozen-yogurt chain addendum, July 4 consumer proof sprint, July 19 Situation Room review/map, July 22 enthusiast-apparel IPCo/OpCo screen and evidence addendum, July 24 V7 decision queue, July 25 DFW fieldwork command sheet and master manifest, the independently reviewed August 7 Italian caffè ownership screen, and the August 9 Angelina 2026-vs-2025 FDD reconciliation.</p>
+<p><b>Data sources:</b> consumer corpus, top-20 ranking/action-plan files used for posture context, v2 named-operator universe, named-operator proof sprint 25, Swedish candy commoditization review, June 19 frozen-yogurt chain addendum, July 4 consumer proof sprint, July 19 Situation Room review/map, July 22 enthusiast-apparel IPCo/OpCo screen and evidence addendum, July 24 V7 decision queue, July 25 DFW fieldwork command sheet and master manifest, the independently reviewed August 7 Italian caffè ownership screen, the August 9 Angelina 2026-vs-2025 FDD reconciliation, and the August 11 50-concept heat scan, Boston/South Shore porting map, and consumer holdco blueprint.</p>
 <p><b>Repeatable build:</b> run <code>node scripts/update_pipeline_source_of_truth.mjs</code> from the repo root.</p>
 </div>
 </section>
 
-<footer>Private working page. Source-of-truth dashboard generated from workspace research artifacts through 2026-08-09.</footer>
+<footer>Private working page. Source-of-truth dashboard generated from workspace research artifacts through 2026-08-11.</footer>
 </main>
 
 <script>
