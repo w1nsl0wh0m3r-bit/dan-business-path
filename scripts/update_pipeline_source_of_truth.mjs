@@ -143,7 +143,7 @@ const html = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Emerging Multi-Unit Pipeline | Dan's Business Path</title>
-<meta name="description" content="Dan's source-of-truth emerging multi-unit and consumer brand pipeline, updated through the August 11 consumer-brand heat scan and Boston/South Shore market-porting review.">
+<meta name="description" content="Dan's source-of-truth emerging multi-unit and consumer brand pipeline, updated through the August 13 fresh consumer-brand discovery sweep.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -160,9 +160,9 @@ const html = `<!doctype html>
 <nav><b>Dan's source-of-truth pipeline</b><div class="links"><a href="./index.html">Dashboard</a><a href="./consumer-target-map.html">Situation Room</a><a href="#corpus">Full List</a><a href="#operators">Operators</a><a href="./operating.html">Operating</a></div></nav>
 
 <section class="hero-card">
-<span class="kicker">Source of truth - updated 2026-08-11</span>
+<span class="kicker">Source of truth - updated 2026-08-13</span>
 <h1>Emerging multi-unit and consumer brand pipeline.</h1>
-<p class="lede">This page supersedes the stale June 12 45-candidate view. It now opens directly into the full consumer-brand sourcing universe, with corrected operator context, the July 19 Situation Room cleanup, the July 25 V7 proof queue, the August 9 Italian caffè reconciliation, and the August 11 bounded heat scan and Boston/South Shore porting review.</p>
+<p class="lede">This page supersedes the stale June 12 45-candidate view. It now opens directly into the full consumer-brand sourcing universe, with corrected operator context, the July 19 Situation Room cleanup, the July 25 V7 proof queue, the August 9 Italian caffè reconciliation, the August 11 bounded heat scan, and the August 13 fresh discovery sweep.</p>
 <span class="tag">${corpus.length} consumer brand corpus rows</span><span class="tag">45 scored ranking candidates retained in source files</span><span class="tag">${operators.length} corrected named-operator rows</span><span class="tag">${proof.length} proof-sprint rows</span><span class="tag">162 Situation Room entries</span><span class="tag">No outreach / no spend</span>
 </section>
 
@@ -196,6 +196,21 @@ const html = `<!doctype html>
 <h3 style="margin-top:34px">Top named-operator universe rows</h3>
 <div class="controls"><input id="operatorSearch" placeholder="Search operator universe..."><select id="operatorStatus"><option value="All">All statuses</option></select></div>
 <div class="table-shell"><table><thead><tr><th>Rank</th><th>Name</th><th>Links</th><th>Category</th><th>Geography</th><th>Units</th><th>Status</th><th>Entry path</th><th>Kill risk</th><th>First diligence question</th></tr></thead><tbody id="operatorBody"></tbody></table></div>
+</section>
+
+<section>
+<h2>August 13 fresh sweep: three bounded proof gates, no investable candidate yet.</h2>
+<div class="note" style="margin-bottom:24px"><b>Updated 2026-08-13.</b> A 51-brand, five-category screen produced seven evidence-backed deep reads without reopening broad pursuit. Flea Style is the best Dan-fit, Game Show Studio is the cleanest directly purchasable format, and Formula Fig is the strongest operating concept—but each advances only to one read-only proof gate. WTHN remains a pattern watch; WagWorks and Rev'd pass; Immersive Gamebox is killed. No outreach, spend, lease, application, purchase, or strategic commitment is authorized.</div>
+<div class="grid3">
+<div class="card"><h3>ADVANCE INTERNALLY: Flea Style</h3><p>Test a capital-light Northeast pop-up/wholesale version of The Original Hat Bar before considering real estate or founder contact. The brand has proprietary product, events, wholesale, tourism and reported seven-figure pop-up revenue, but the format is imitable and the bootstrapped founder may not want outside capital. Kill if repeat purchase, event economics, or a sub-$100K pilot cannot work.</p></div>
+<div class="card"><h3>PROVE: Game Show Studio</h3><p>Recover the raw 2026 FDD and sample six sites for booking utilization. The 600–900 sq. ft. co-location or 1,500–2,000 sq. ft. standalone format, no kitchen, and disclosed $230K–$500.5K investment are attractive; the October 2025 franchisor formation and absence of mature-unit revenue or EBITDA evidence are dispositive risks. No raw FDD and utilization proof, no action.</p></div>
+<div class="card"><h3>PROVE ENTRY: Formula Fig</h3><p>Model public-calendar utilization and test MA/NY/FL medical-operator and JV feasibility only. Seven locations, short treatments, memberships, retail and reported throughput make this the strongest operating format in the set, but there is no franchise offer or obvious East Coast development right. A good business without an ownership path is not an opportunity.</p></div>
+</div>
+<div class="grid2" style="margin-top:18px">
+<div class="card"><h3>WATCH: WTHN</h3><p>Retain as a recurring human-touch wellness analog, not a company target. L Catterton backing, clinical staffing, venture debt and NYC expansion make direct entry weak; lender-sourced four-wall commentary is useful but self-interested.</p></div>
+<div class="card"><h3>PASS / KILL</h3><p>Pass WagWorks under the explicit pet-services filter and Rev'd Fitness on capital intensity, royalty burden and thin franchise proof. Kill Immersive Gamebox because recent administration/recapitalization plus multi-unit capital and vendor dependence overwhelm public sales claims.</p></div>
+</div>
+<div class="card" style="margin-top:18px"><h3>Evidence package</h3><p><code>research/2026-08-13-fresh-surprise-me-consumer-brand-sweep/fresh-surprise-me-consumer-brand-sweep.md</code> · <code>research/2026-08-13-fresh-surprise-me-consumer-brand-sweep/candidate-screen.csv</code> · <code>research/2026-08-13-fresh-surprise-me-consumer-brand-sweep/self-critique.md</code>. The memo explicitly does not establish investability, valuation, or owner returns.</p></div>
 </section>
 
 <section>
@@ -279,7 +294,7 @@ const html = `<!doctype html>
 <div class="card source">
 <p><b>Canonical public URL:</b> https://w1nsl0wh0m3r-bit.github.io/dan-business-path/emerging-multi-unit-pipeline.html</p>
 <p><b>Update rule:</b> after every material proof sprint, deep dive batch, or action-plan rerating, update this page first. Scratch files in the OpenClaw workspace are not the dashboard of record.</p>
-<p><b>Data sources:</b> consumer corpus, top-20 ranking/action-plan files used for posture context, v2 named-operator universe, named-operator proof sprint 25, Swedish candy commoditization review, June 19 frozen-yogurt chain addendum, July 4 consumer proof sprint, July 19 Situation Room review/map, July 22 enthusiast-apparel IPCo/OpCo screen and evidence addendum, July 24 V7 decision queue, July 25 DFW fieldwork command sheet and master manifest, the independently reviewed August 7 Italian caffè ownership screen, the August 9 Angelina 2026-vs-2025 FDD reconciliation, and the August 11 50-concept heat scan, Boston/South Shore porting map, consumer holdco blueprint, and Leather Spa licensed-intake economics proof.</p>
+<p><b>Data sources:</b> consumer corpus, top-20 ranking/action-plan files used for posture context, v2 named-operator universe, named-operator proof sprint 25, Swedish candy commoditization review, June 19 frozen-yogurt chain addendum, July 4 consumer proof sprint, July 19 Situation Room review/map, July 22 enthusiast-apparel IPCo/OpCo screen and evidence addendum, July 24 V7 decision queue, July 25 DFW fieldwork command sheet and master manifest, the independently reviewed August 7 Italian caffè ownership screen, the August 9 Angelina 2026-vs-2025 FDD reconciliation, the August 11 50-concept heat scan, Boston/South Shore porting map, consumer holdco blueprint and Leather Spa licensed-intake economics proof, and the August 13 51-brand fresh discovery screen, seven finalist deep reads and self-critique.</p>
 <p><b>Repeatable build:</b> run <code>node scripts/update_pipeline_source_of_truth.mjs</code> from the repo root.</p>
 </div>
 </section>
