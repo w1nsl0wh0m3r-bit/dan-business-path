@@ -143,7 +143,7 @@ const html = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Emerging Multi-Unit Pipeline | Dan's Business Path</title>
-<meta name="description" content="Dan's source-of-truth emerging multi-unit and consumer brand pipeline, updated through the August 13 fresh consumer-brand discovery sweep.">
+<meta name="description" content="Dan's source-of-truth emerging multi-unit and consumer brand pipeline, updated through the August 14 growth-capital networking ranking.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -160,9 +160,9 @@ const html = `<!doctype html>
 <nav><b>Dan's source-of-truth pipeline</b><div class="links"><a href="./index.html">Dashboard</a><a href="./consumer-target-map.html">Situation Room</a><a href="#corpus">Full List</a><a href="#operators">Operators</a><a href="./operating.html">Operating</a></div></nav>
 
 <section class="hero-card">
-<span class="kicker">Source of truth - updated 2026-08-13</span>
+<span class="kicker">Source of truth - updated 2026-08-14</span>
 <h1>Emerging multi-unit and consumer brand pipeline.</h1>
-<p class="lede">This page supersedes the stale June 12 45-candidate view. It now opens directly into the full consumer-brand sourcing universe, with corrected operator context, the July 19 Situation Room cleanup, the July 25 V7 proof queue, the August 9 Italian caffè reconciliation, the August 11 bounded heat scan, and the August 13 fresh discovery sweep.</p>
+<p class="lede">This page supersedes the stale June 12 45-candidate view. It now opens directly into the full consumer-brand sourcing universe, with corrected operator context, the July 19 Situation Room cleanup, the July 25 V7 proof queue, the August 9 Italian caffè reconciliation, the August 11 bounded heat scan, the August 13 fresh discovery sweep, and the August 14 founder-networking queue.</p>
 <span class="tag">${corpus.length} consumer brand corpus rows</span><span class="tag">45 scored ranking candidates retained in source files</span><span class="tag">${operators.length} corrected named-operator rows</span><span class="tag">${proof.length} proof-sprint rows</span><span class="tag">162 Situation Room entries</span><span class="tag">No outreach / no spend</span>
 </section>
 
@@ -196,6 +196,23 @@ const html = `<!doctype html>
 <h3 style="margin-top:34px">Top named-operator universe rows</h3>
 <div class="controls"><input id="operatorSearch" placeholder="Search operator universe..."><select id="operatorStatus"><option value="All">All statuses</option></select></div>
 <div class="table-shell"><table><thead><tr><th>Rank</th><th>Name</th><th>Links</th><th>Category</th><th>Geography</th><th>Units</th><th>Status</th><th>Entry path</th><th>Kill risk</th><th>First diligence question</th></tr></thead><tbody id="operatorBody"></tbody></table></div>
+</section>
+
+<section>
+<h2>August 14 growth-capital networking queue: eight calls, four learning relationships.</h2>
+<div class="note" style="margin-bottom:24px"><b>Updated 2026-08-14.</b> This ranking is for founder-relationship priority, not a claim that every company is raising. Starship is the best risk-adjusted brand; Wanderlust is the first call because its prior investor/lender signal is the only explicit one; Flea Style is the best founder relationship despite low demonstrated capital receptivity. Until employment/conflicts clearance is confirmed, outreach is learning-only: no check-size pitch, valuation discussion, or private-document request.</div>
+<div class="grid3">
+<div class="card"><h3>1 · Starship Bagel <span class="pill advance">91</span></h3><p><b>Oren Salomon.</b> Best founder-stays second-hub thesis. Ask how par-baking, wholesale, shipping, and three stores change the production bottleneck—and whether capital plus multi-unit systems could preserve craft across 3–5 satellites.</p></div>
+<div class="card"><h3>2 · Wanderlust Creamery <span class="pill advance">89</span></h3><p><b>Adrienne Borlongan + Jon-Patrick Lopez.</b> First call because the prior short-term investor/lender signal may expire. Determine whether the need was bridge capital, working capital, or growth; treat closures and liquidity risk as the first screen.</p></div>
+<div class="card"><h3>3 · Flea Style <span class="pill advance">86</span></h3><p><b>Brittany Cobb.</b> Best non-food founder relationship. Ten-location, self-funded experiential apparel platform with wholesale and seven-figure pop-ups. Do not pitch money; ask when a regional event/wholesale/JV partner would be useful.</p></div>
+<div class="card"><h3>4 · Cookie Society <span class="pill watch">82</span></h3><p><b>Marissa + Jeff Allen.</b> Five stores plus national shipping. Ask whether the next constraint is production, gifting sales, store management, or Texas market density. No equity assumption until the bottleneck and five-store contribution profile are clear.</p></div>
+<div class="card"><h3>5 · A.J. Chocolate House <span class="pill watch">80</span></h3><p><b>Katherine + Edwin Jablonskas.</b> Two U.S. stores, reported 40% growth, wholesale/gifting, and a June franchise launch. Ask whether the real need is U.S. supply/manufacturing scale, franchisor support, or company-owned flagships.</p></div>
+<div class="card"><h3>6 · Botolino Gelato <span class="pill watch">78</span></h3><p><b>Carlo Gattini.</b> Four stores and a centralized production laboratory. Ask what unused capacity exists and whether the next value pool is stores, cakes/pints, wholesale, or a second Texas cluster.</p></div>
+<div class="card"><h3>7 · Small Town Play Café <span class="pill watch">76</span></h3><p><b>Kim Coe.</b> One flagship and five announced franchise locations in development. Ask what the franchisor must build centrally before five openings land—and whether she needs capital, support talent, or only excellent franchisees.</p></div>
+<div class="card"><h3>8 · Hype Haus Fitness <span class="pill watch">74</span></h3><p><b>Sara Habetz.</b> Second, much-larger studio opened in Baton Rouge in March. Ask what the new unit is proving about portability, GM bench, and the conditions for a third city.</p></div>
+<div class="card"><h3>9–12 · Network, do not pitch</h3><p><b>CARVE Pilates (71), Onigilly (70), Sunday Morning (68), Formula Fig (66).</b> Useful pattern-building relationships. Current evidence does not show that a Dan-sized check is either wanted or differentiated.</p></div>
+</div>
+<div class="card" style="margin-top:18px"><h3>Thirty-day order</h3><p><b>Days 1–7:</b> Wanderlust, Starship, Flea Style. <b>Days 8–14:</b> Cookie Society, Botolino. <b>Days 15–21:</b> A.J. Chocolate House, Small Town Play Café, Hype Haus. <b>Days 22–30:</b> CARVE, Onigilly, Sunday Morning, Formula Fig. Full cited memo: <code>reports/2026-08-14-definitive-emerging-multi-unit-growth-capital-ranking.md</code> and Obsidian <code>Business Transition Engine/260814 Definitive Emerging Multi-Unit Growth Capital Networking Ranking.md</code>.</p></div>
 </section>
 
 <section>
@@ -294,12 +311,12 @@ const html = `<!doctype html>
 <div class="card source">
 <p><b>Canonical public URL:</b> https://w1nsl0wh0m3r-bit.github.io/dan-business-path/emerging-multi-unit-pipeline.html</p>
 <p><b>Update rule:</b> after every material proof sprint, deep dive batch, or action-plan rerating, update this page first. Scratch files in the OpenClaw workspace are not the dashboard of record.</p>
-<p><b>Data sources:</b> consumer corpus, top-20 ranking/action-plan files used for posture context, v2 named-operator universe, named-operator proof sprint 25, Swedish candy commoditization review, June 19 frozen-yogurt chain addendum, July 4 consumer proof sprint, July 19 Situation Room review/map, July 22 enthusiast-apparel IPCo/OpCo screen and evidence addendum, July 24 V7 decision queue, July 25 DFW fieldwork command sheet and master manifest, the independently reviewed August 7 Italian caffè ownership screen, the August 9 Angelina 2026-vs-2025 FDD reconciliation, the August 11 50-concept heat scan, Boston/South Shore porting map, consumer holdco blueprint and Leather Spa licensed-intake economics proof, and the August 13 51-brand fresh discovery screen, seven finalist deep reads and self-critique.</p>
+<p><b>Data sources:</b> consumer corpus, top-20 ranking/action-plan files used for posture context, v2 named-operator universe, named-operator proof sprint 25, Swedish candy commoditization review, June 19 frozen-yogurt chain addendum, July 4 consumer proof sprint, July 19 Situation Room review/map, July 22 enthusiast-apparel IPCo/OpCo screen and evidence addendum, July 24 V7 decision queue, July 25 DFW fieldwork command sheet and master manifest, the independently reviewed August 7 Italian caffè ownership screen, the August 9 Angelina 2026-vs-2025 FDD reconciliation, the August 11 50-concept heat scan, Boston/South Shore porting map, consumer holdco blueprint and Leather Spa licensed-intake economics proof, the August 13 51-brand fresh discovery screen, seven finalist deep reads and self-critique, and the August 14 cited growth-capital networking ranking.</p>
 <p><b>Repeatable build:</b> run <code>node scripts/update_pipeline_source_of_truth.mjs</code> from the repo root.</p>
 </div>
 </section>
 
-<footer>Private working page. Source-of-truth dashboard generated from workspace research artifacts through 2026-08-11.</footer>
+<footer>Private working page. Source-of-truth dashboard generated from workspace research artifacts through 2026-08-14.</footer>
 </main>
 
 <script>
